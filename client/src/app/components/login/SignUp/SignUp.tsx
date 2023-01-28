@@ -1,3 +1,5 @@
-const SignUp = () => {
-  return <div className="sign-up">Sign Up</div>;
-};
+import './SignUp.scss';
+
+export default function SignUp() {
+  return <div>Sign Up</div>;
+}
