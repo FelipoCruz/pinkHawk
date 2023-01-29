@@ -2,16 +2,18 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { activeUser } from '../../../../store/slices/user.slice';
 import { useAppDispatch } from '../../../hooks/hooks';
+// TESTING
+// import { useSelector, type TypedUseSelectorHook, useDispatch } from 'react-redux';
 
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, dispatch) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // set the information we are going to receive from the form
     const formData = new FormData(event.currentTarget);
-    // to be used in the API call
+    // data that we will use in the API call
     const user = {
       email: formData.get('email'),
       password: formData.get('password'),
@@ -32,8 +34,8 @@ const Login = () => {
       console.log('file: SignIn.tsx:24 ~~> handleSubmit ~~> userData', userData)
       // creating the user in local storage with the information we receive from the API call
       localStorage.setItem('user', JSON.stringify({ userData }));
-      // send active user to redux state. At this point, sending the user to the store might not be  totally
-      // necessary since we are storing the user in local storage. To be discussed.
+      // send active user to redux state. At this point, sending the user to the store might not be totally
+      // necessary since we are storing the user in localStorage. To be discussed.
       dispatch(activeUser(userData));
       // using local storage as a way to keep the user logged in.
       // const userLogged = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
@@ -48,7 +50,7 @@ const Login = () => {
   // TODO: sign up
   return (
     <div className='login-in-form'>
-      <form className='user-login' onSubmit={event => handleSubmit(event, dispatch)}>
+      <form className='user-login' onSubmit={event => handleSubmit(event)}>
         <div className='form-information'>
           <h1 id='login-header'>Login</h1>
           <div className='email-input'>
