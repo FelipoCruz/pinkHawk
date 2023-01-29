@@ -17,11 +17,11 @@ const Login = () => {
     const user = {
       email: formData.get('email'),
       password: formData.get('password'),
-    }
+    };
     try {
       // TODO: API call to login and retrieve user from DB using email
       // we could do it this way since these are the only two fields in the sign in form
-      const response = await getUserFromAPI(user.email); // this is a mock function.
+      const response = { ok: '', json: async () => '', status: '' }; //await getUserFromAPI(user.email); // this is a mock function.
       if (!response.ok) {
         throw new Error(`Request failed with status code : ${response.status}`);
       }
@@ -31,7 +31,10 @@ const Login = () => {
         throw new Error('User not found');
       }
       // check what is the type of content we are receiving from the API call
-      console.log('file: SignIn.tsx:24 ~~> handleSubmit ~~> userData', userData)
+      console.log(
+        'file: SignIn.tsx:24 ~~> handleSubmit ~~> userData',
+        userData
+      );
       // creating the user in local storage with the information we receive from the API call
       localStorage.setItem('user', JSON.stringify({ userData }));
       // send active user to redux state. At this point, sending the user to the store might not be totally
@@ -49,33 +52,35 @@ const Login = () => {
   };
   // TODO: sign up
   return (
-    <div className='login-in-form'>
-      <form className='user-login' onSubmit={event => handleSubmit(event)}>
-        <div className='form-information'>
-          <h1 id='login-header'>Login</h1>
-          <div className='email-input'>
+    <div className="login-in-form">
+      <form className="user-login" onSubmit={(event) => handleSubmit(event)}>
+        <div className="form-information">
+          <h1 id="login-header">Login</h1>
+          <div className="email-input">
             <input
-              type='text'
-              name='email'
-              id='email'
-              className='inputEmail'
+              type="text"
+              name="email"
+              id="email"
+              className="inputEmail"
               required
             />
-            <span className='floating-label-email'>Email Address</span>
+            <span className="floating-label-email">Email Address</span>
           </div>
-          <div className='password-input'>
+          <div className="password-input">
             <input
-              type='password'
-              name='password'
-              id='password'
-              className='inputPassword'
+              type="password"
+              name="password"
+              id="password"
+              className="inputPassword"
               required
             />
-            <span className='floating-label-password'>Password</span>
+            <span className="floating-label-password">Password</span>
           </div>
-          <button className='send-button' type='submit'>Send</button>
+          <button className="send-button" type="submit">
+            Send
+          </button>
         </div>
-        <div className='buttons'>
+        <div className="buttons">
           {/* <input type='submit' id='register-btn' value='Register' className='register' /> */}
           {/* TODO?? */}
           {/* <input type='submit' id='forgot-btn' value='Forgot password?' className='forgot' /> */}
@@ -83,6 +88,6 @@ const Login = () => {
       </form>
     </div>
   );
-}
+};
 
 export default Login;
