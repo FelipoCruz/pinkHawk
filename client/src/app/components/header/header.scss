@@ -4,27 +4,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: v.$Soft-red;
-}
+  background-color: v.$color-primary;
 
-.header_items {
-  display: flex;
-  gap: 2rem;
-}
+  .header_items {
+    display: flex;
+    gap: 2rem;
 
-.header_item {
-  color: v.$Dark-grayish-blue;
-  transition: 0.3s ease;
-
-  &:hover {
-    color: v.$Soft-red;
+    .header_item {
+      color: v.$color-light-black;
+      transition: 0.3s ease;
+    
+      &:hover {
+        color: v.$color-primary;
+      }
+    }
   }
-}
-.nav {
-  z-index: 999;
+
+  .nav {
+    z-index: 999;
+  }
+  
+  .menu,
+  .close {
+    display: none;
+  }
+  
 }
 
-.menu,
-.close {
-  display: none;
-}
+
+
+

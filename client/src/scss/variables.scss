@@ -1,11 +1,18 @@
-$Soft-orange: hsl(35, 77%, 62%);
-$Soft-red: hsl(5, 85%, 63%);
+$color-primary: hsl(5, 85%, 63%);
+$color-secondary: rgb(68, 68, 68);
+
+
+$black: #000;
+$white: #fff;
+
+
+$color-Off-white: hsl(36, 100%, 99%);
+$color-light-gray: hsl(233, 8%, 79%);
+$color-dark-gray: hsl(236, 13%, 42%);
+$color-light-black: hsl(240, 100%, 5%);
 
 
 
+/*  Do not change   */
 
-
-$Off-white: hsl(36, 100%, 99%);
-$Grayish-blue: hsl(233, 8%, 79%);
-$Dark-grayish-blue: hsl(236, 13%, 42%);
-$Very-dark-blue: hsl(240, 100%, 5%);
+$color-primary-light: lighten( $color-primary, 15% );

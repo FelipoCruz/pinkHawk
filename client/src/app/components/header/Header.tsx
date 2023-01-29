@@ -1,3 +1,4 @@
+import Button from '../button/Button';
 import './header.scss';
 
 function Header() {
@@ -6,11 +7,14 @@ function Header() {
       <a href="./">
         <img alt="home logo" className="logo" />
       </a>
-      <nav>
-        <ul className="header_items">
-          <button className="btn">Signup</button>
-          <button className="btn">Login</button>
-        </ul>
+      <nav className="header_items">
+        <Button
+          isLoading={false}
+          text={'Logout'}
+          type={'btn-inverted btn-hidden'}
+        />
+        <Button text={'Sign up'} />
+        <Button text={'Sign in'} type={'btn-inverted'} />
       </nav>
       <button className="menu">
         <img alt="icon menu" />
