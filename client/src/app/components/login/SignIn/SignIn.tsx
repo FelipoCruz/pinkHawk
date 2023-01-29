@@ -35,8 +35,6 @@ const Login = () => {
       // send active user to redux state. At this point, sending the user to the store might not be  totally
       // necessary since we are storing the user in local storage. To be discussed.
       dispatch(activeUser(userData));
-      // TODO: define how are we going to navigate to the dashboard
-      // this function would be used in order to navigate to the dashboard if the user is already logged in
       // using local storage as a way to keep the user logged in.
       // const userLogged = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
       // if (userLogged) {
