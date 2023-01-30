@@ -1,20 +1,20 @@
 import Button from '../button/Button';
 import './header.scss';
+import { NavLink } from 'react-router-dom';
 
 function Header() {
   return (
-    <header className="container header">
-      <a href="./">
+    <header className="header">
+      <NavLink to="/">
         <img alt="home logo" className="logo" />
-      </a>
+      </NavLink>
       <nav className="header_items">
-        <Button
-          isLoading={false}
-          text={'Logout'}
-          type={'btn-inverted btn-hidden'}
-        />
-        <Button text={'Sign up'} />
-        <Button text={'Sign in'} type={'btn-inverted'} />
+        <NavLink to="/signup">
+          <Button text={'Sign up'} />
+        </NavLink>
+        <NavLink to="/login">
+          <Button text={'Sign in'} type={'btn-inverted'} />
+        </NavLink>
       </nav>
       <button className="menu">
         <img alt="icon menu" />

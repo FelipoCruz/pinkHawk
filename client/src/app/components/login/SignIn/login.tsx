@@ -1,7 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { login, register } from '../../../../services/api.service';
 import { activeUser } from '../../../../store/slices/user.slice';
 import { useAppDispatch } from '../../../hooks/hooks';
+import Button from '../../button/Button';
+import './login.scss';
 // TESTING
 // import { useSelector, type TypedUseSelectorHook, useDispatch } from 'react-redux';
 
@@ -19,9 +22,15 @@ const Login = () => {
       password: formData.get('password'),
     };
     try {
+      console.log(user);
+
+      const response = await register({
+        email: formData.get('email'),
+        password: formData.get('password'),
+      });
       // TODO: API call to login and retrieve user from DB using email
       // we could do it this way since these are the only two fields in the sign in form
-      const response = { ok: '', json: async () => '', status: '' }; //await getUserFromAPI(user.email); // this is a mock function.
+      // const response = { ok: '', json: async () => '', status: '' }; //await getUserFromAPI(user.email); // this is a mock function.
       if (!response.ok) {
         throw new Error(`Request failed with status code : ${response.status}`);
       }
@@ -52,11 +61,12 @@ const Login = () => {
   };
   // TODO: sign up
   return (
-    <div className="login-in-form">
-      <form className="user-login" onSubmit={(event) => handleSubmit(event)}>
-        <div className="form-information">
+    <div className="login-container">
+      <div className="form-container">
+        <form className="form" onSubmit={(event) => handleSubmit(event)}>
           <h1 id="login-header">Login</h1>
-          <div className="email-input">
+          <div className="form-input">
+            <label className="floating-label-email">Email Address</label>
             <input
               type="text"
               name="email"
@@ -64,9 +74,9 @@ const Login = () => {
               className="inputEmail"
               required
             />
-            <span className="floating-label-email">Email Address</span>
           </div>
-          <div className="password-input">
+          <div className="form-input">
+            <label className="floating-label-password">Password</label>
             <input
               type="password"
               name="password"
@@ -74,18 +84,13 @@ const Login = () => {
               className="inputPassword"
               required
             />
-            <span className="floating-label-password">Password</span>
           </div>
-          <button className="send-button" type="submit">
-            Send
-          </button>
-        </div>
-        <div className="buttons">
-          {/* <input type='submit' id='register-btn' value='Register' className='register' /> */}
-          {/* TODO?? */}
-          {/* <input type='submit' id='forgot-btn' value='Forgot password?' className='forgot' /> */}
-        </div>
-      </form>
+          <div className="submit">
+            <Button text="Sign in" type="submit" />
+          </div>
+        </form>
+      </div>
+      <div className="graphic"></div>
     </div>
   );
 };
