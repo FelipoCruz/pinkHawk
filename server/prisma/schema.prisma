@@ -14,5 +14,17 @@ model User {
   email       String   @unique
   password    String
   twitterInfo String?
-  topics      String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tweets      Tweet[]
+}
+
+model Tweet {
+  id        Int      @id @default(autoincrement())
+  twitterId String?  @unique
+  text      String
+  User      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
