@@ -1,6 +1,16 @@
 import React from "react";
+import { getSelectionTweets } from "../../../../../services/api.tweets";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/hooks";
 
 const Selection = async () => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(({ user }) => user);
+
+  const fetchSelectionTweets = async () => {
+    const response = await getSelectionTweets();
+    dispatch(selectionTweets(response));
+
+  }
 
   return (
     <div>
