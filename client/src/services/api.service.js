@@ -2,7 +2,7 @@
 
 const BASE_URL = 'http://localhost:5000/';
 
-export const register = async (email, password) => {
+export const register = async (firstname, lastname, email, password) => {
   try {
     const url = BASE_URL + 'user/signup';
     const response = await fetch(url, {
@@ -11,8 +11,8 @@ export const register = async (email, password) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        firstName: '',
-        familyName: '',
+        firstName: firstname,
+        familyName: lastname,
         email,
         password,
         twitterInfo: '',
