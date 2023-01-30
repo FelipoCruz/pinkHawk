@@ -1,16 +1,16 @@
-import Button from '../button/Button';
+import { useState } from 'react';
+import Button from '../../button/Button';
 import { NavLink } from 'react-router-dom';
-import './header.scss';
-import { useAppSelector } from '../../hooks/hooks';
+import './LoginNavBar.scss';
+import { useAppSelector } from '../../../hooks/hooks';
 
-
-function HeaderUser() {
-
+function NavBarUser() {
+  const [selectedComponent, setSelectedComponent] = useState();
   const user = useAppSelector((state) => state.user);
   console.log('user in state', user);
 
   return (
-    <header className='header-user'>
+    <header className='navbar-user'>
       {/* <Button onClick={() => {}} text={'Home'} /> */}
       <img alt='pinkhawk logo' className='logo' />
       <nav className='navbar-items'>
@@ -27,4 +27,4 @@ function HeaderUser() {
   );
 }
 
-export default HeaderUser;
+export default NavBarUser;
