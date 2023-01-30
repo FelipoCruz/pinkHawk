@@ -3,6 +3,7 @@ import Button from '../../button/Button';
 import { NavLink } from 'react-router-dom';
 import './LoginNavBar.scss';
 import { useAppSelector } from '../../../hooks/hooks';
+import CopilotMenu from '../copilotmenu/CopilotMenu';
 
 function NavBarUser() {
   const [selectedComponent, setSelectedComponent] = useState();
@@ -11,11 +12,9 @@ function NavBarUser() {
 
   return (
     <header className='navbar-user'>
-      {/* <Button onClick={() => {}} text={'Home'} /> */}
       <img alt='pinkhawk logo' className='logo' />
+      <Button onClick={() => setSelectedComponent(<CopilotMenu />)} text={'Copilot'} />
       <nav className='navbar-items'>
-        <Button text={'Copilot'} />
-        <Button text={'Growth'} />
         <NavLink to='/'>
           <Button text={'Logout'} type={'btn-inverted'} />
         </NavLink>
