@@ -1,15 +1,16 @@
 import React from "react";
 import { getSelectionTweets } from "../../../../../services/api.tweets";
+import { selectionTweets } from "../../../../../store/slices/tweets.slice";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/hooks";
 
 const Selection = async () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
+  console.log('active user', user);
 
   const fetchSelectionTweets = async () => {
     const response = await getSelectionTweets();
     dispatch(selectionTweets(response));
-
   }
 
   return (

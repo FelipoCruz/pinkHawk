@@ -1,38 +1,40 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface TweetState {
+interface Tweet {
   id: string;
   status: boolean;
   content: string;
 }
 
+interface TweetState {
+  tweets: Tweet[];
+};
+
 const initialState: TweetState = {
-  id: '',
-  status: false,
-  content: ''
+  tweets: []
 };
 
 export const tweetSlice = createSlice({
-  name: 'tweets',
+  name: 'tweet',
   initialState,
   reducers: {
     selectionTweets: (state, action) => {
-      state = action.payload;
+      state.tweets = action.payload;
       return state;
     },
 
     queueTweets: (state, action) => {
-      const specificTweet = state.findIndex(tweet => tweet.id === action.payload.id);
-      if (specificTweet.status === false) {
-        specificTweet.status = true;
+      const specificTweet = state.tweets.findIndex(tweet => tweet.id === action.payload.id);
+      if (state.tweets[specificTweet].status === false) {
+        state.tweets[specificTweet].status = true;
       }
       return state;
     },
 
     deleteTweet: (state, action) => {
-      return state.filter(tweet => tweet.id !== action.payload.id);
+      state.tweets.filter(tweet => tweet.id !== action.payload.id);
     },
-  },
+  }
 });
 
 export const { selectionTweets, queueTweets, deleteTweet } = tweetSlice.actions;
