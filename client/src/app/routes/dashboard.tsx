@@ -6,8 +6,11 @@ const Dashboard = () => {
   console.log("user in state", user);
   return (
     <div>
-      <NavBarUser />
       <h1>Dashboard</h1>
+      <NavBarUser />
+      <>
+        <h1>Body dashBoard</h1>
+      </>
     </div>
   );
 };

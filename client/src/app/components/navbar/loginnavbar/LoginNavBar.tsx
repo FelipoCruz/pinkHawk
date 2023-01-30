@@ -14,6 +14,8 @@ function NavBarUser() {
     <header className='navbar-user'>
       <img alt='pinkhawk logo' className='logo' />
       <Button onClick={() => setSelectedComponent(<CopilotMenu />)} text={'Copilot'} />
+        Copilot
+      <Button />
       <nav className='navbar-items'>
         <NavLink to='/'>
           <Button text={'Logout'} type={'btn-inverted'} />
@@ -22,6 +24,7 @@ function NavBarUser() {
       <button className='menu'>
         <img alt='icon menu' />
       </button>
+      {selectedComponent}
     </header>
   );
 }
