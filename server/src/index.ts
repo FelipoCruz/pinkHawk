@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(router);
 
-const server = app.listen(port, () =>
+app.listen(port, () =>
   console.log(`
 🚀 Server ready at: http://localhost:${port}`)
 );
