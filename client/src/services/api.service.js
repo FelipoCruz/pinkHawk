@@ -40,6 +40,7 @@ export const login = async (email, password) => {
   }
 };
 
+<<<<<<< HEAD
 export const saveTopics = async (topics, userEmail) => {
   try {
     const url = BASE_URL + 'topic/set-topics';
@@ -65,6 +66,16 @@ export const generateTweetServiceClient = async (user) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(user),
+=======
+export const getUserById = async (id) => {
+  try {
+    const url = BASE_URL + 'user/' + id;
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+>>>>>>> 9f36b5a71c85d1d87734372d9543b2b2bc0032af
     });
     return response.json();
   } catch (err) {

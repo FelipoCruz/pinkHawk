@@ -28,7 +28,7 @@ const Login = () => {
       dispatch(activeUser(userData));
 
       // creating the user in local storage with the information we receive from the API call
-      localStorage.setItem('user', JSON.stringify({ userData }));
+      localStorage.setItem('user', JSON.stringify(userData));
       navigate('/dashboard');
     } catch (err) {
       console.error(err);
