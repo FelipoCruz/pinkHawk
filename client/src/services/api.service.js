@@ -10,7 +10,13 @@ export const register = async (email, password) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({
+        firstName: '',
+        familyName: '',
+        email,
+        password,
+        twitterInfo: '',
+      }),
     });
     return response.json();
   } catch (err) {
