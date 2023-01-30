@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './LoginNavBar.scss';
 import { useAppSelector } from '../../../hooks/hooks';
-import CopilotMenu from '../copilotmenu/CopilotMenu';
+import CopilotMenu from '../copilotmenubutton/CopilotMenu/CopilotMenu';
 import GrowthMenu from '../growthmenu/GrowthMenu';
 
 const NavBarUser: React.FC = () => {
