@@ -5,8 +5,8 @@ const CopilotMenu = () => {
     <div>
       <h1>copilot menu</h1>
       <button className='preferences'>Preferences</button>
-      <button className='preferences'>Selection</button>
-      <button className='preferences'>Queu</button>
+      <button className='selection'>Selection</button>
+      <button className='queu'>Queu</button>
     </div>
   );
 };

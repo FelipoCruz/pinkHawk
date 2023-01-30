@@ -1,14 +1,14 @@
 import React from "react";
 
-const CopilotMenu = () => {
+const GrowthMenu = () => {
   return (
     <div>
-      <h1>copilot menu</h1>
-      <button className='preferences'>Preferences</button>
-      <button className='preferences'>Selection</button>
-      <button className='preferences'>Queu</button>
+      <h1>growth menu</h1>
+      <button className='followers'>Followers</button>
+      <button className='projection'>Projection</button>
+      <button className='retweets'>Retweets</button>
     </div>
   );
 };
 
-export default CopilotMenu;
+export default GrowthMenu;

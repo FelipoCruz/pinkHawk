@@ -6,10 +6,10 @@ const Dashboard = () => {
   console.log("user in state", user);
   return (
     <div>
-      <h1>Dashboard</h1>
+      {/* <h1>Dashboard</h1> */}
       <NavBarUser />
       <>
-        <h1>Body dashBoard</h1>
+        {/* <h1>Body dashBoard</h1> */}
       </>
     </div>
   );
