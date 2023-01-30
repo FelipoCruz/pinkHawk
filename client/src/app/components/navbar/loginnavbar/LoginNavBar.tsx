@@ -11,10 +11,20 @@ const NavBarUser: React.FC = () => {
   console.log('user in state', user);
 
   return (
-    <header className='navbar-user'>
+    <header className='user-navbar'>
       <img alt='pinkhawk logo' className='logo' />
-      <button onClick={() => setSelectedComponent(<CopilotMenu />)} >Copilot</button>
-      <button onClick={() => setSelectedComponent(<GrowthMenu />)} >Growth</button>
+      <nav className='user-navbar-buttons'>
+        <button
+          onClick={() => setSelectedComponent(<CopilotMenu />)}
+        >
+          Copilot
+        </button>
+        <button
+          onClick={() => setSelectedComponent(<GrowthMenu />)}
+        >
+          Growth
+        </button>
+      </nav>
       {/* <nav className='navbar-items'>
         <NavLink to='/'>
           <Button text={'Logout'} type={'btn-inverted'} />
