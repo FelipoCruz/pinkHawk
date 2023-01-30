@@ -14,4 +14,7 @@ model User {
   email       String  @unique
   password    String
   twitterInfo String?
+  topics String[]
 }
+
+

@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 import { TagsInput } from "react-tag-input-component";
+import { saveTopics } from "../../../services/api.service";
+import { useAppSelector } from "../../hooks/hooks";
+import Button from "../button/Button";
 
 const TopicsInput = () => {
+  const user = useAppSelector((state) => state.user)
+  console.log('user id us :', user)
   const [selectedTopics, setSelectedTopics] = useState([""]);
+
+  const setTopics = () => {
+    console.log('selected topics are:', selectedTopics)
+    saveTopics(selectedTopics, user.email)
+  }
+
+
+
 
   return (
     <div className='topics-input-container'>
@@ -16,6 +29,7 @@ const TopicsInput = () => {
         placeHolder="enter here the topics you want to tweet about"
       />
       <em>press enter or comma to add new tag</em>
+      <button onClick={setTopics}>submit topics</button>
     </div>
   );
 };
