@@ -21,33 +21,14 @@ const Login = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await login(email, password);
-      // TODO: API call to login and retrieve user from DB using email
-      // we could do it this way since these are the only two fields in the sign in form
-      // const response = { ok: '', json: async () => '', status: '' }; //await getUserFromAPI(user.email); // this is a mock function.
-      if (!response.ok) {
-        throw new Error(`Request failed with status code : ${response.status}`);
-      }
-
-      const userData = await response.json();
+      const userData = await login(email, password);
       if (!userData) {
         throw new Error('User not found');
       }
-      // check what is the type of content we are receiving from the API call
-      console.log(
-        'file: SignIn.tsx:24 ~~> handleSubmit ~~> userData',
-        userData
-      );
-      // creating the user in local storage with the information we receive from the API call
-      localStorage.setItem('user', JSON.stringify({ userData }));
-      // send active user to redux state. At this point, sending the user to the store might not be totally
-      // necessary since we are storing the user in localStorage. To be discussed.
       dispatch(activeUser(userData));
-      // using local storage as a way to keep the user logged in.
-      // const userLogged = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-      // if (userLogged) {
-      //   navigate('/dashboard');
-      // }
+
+      // creating the user in local storage with the information we receive from the API call
+      localStorage.setItem('user', JSON.stringify(userData));
       navigate('/dashboard');
     } catch (err) {
       console.error(err);

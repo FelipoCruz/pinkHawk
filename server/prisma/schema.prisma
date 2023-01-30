@@ -8,10 +8,11 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  firstName String
-  familyName String
-  email String  @unique
-  password String
-  twitterInfo String
+  id          Int      @id @default(autoincrement())
+  firstName   String
+  familyName  String
+  email       String   @unique
+  password    String
+  twitterInfo String?
+  topics      String[]
 }
