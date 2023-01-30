@@ -11,7 +11,7 @@ interface TweetState {
 };
 
 const initialState: TweetState = {
-  tweets: []
+  tweets: [],
 };
 
 export const tweetSlice = createSlice({

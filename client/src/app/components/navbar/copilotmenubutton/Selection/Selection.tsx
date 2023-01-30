@@ -1,44 +1,62 @@
 import React, { useEffect } from 'react';
+import { selectionTweets } from '../../../../../store/slices/tweet.slice';
 // import { getSelectionTweets } from '../../../../../services/api.tweets';
-// import { selectionTweets } from '../../../../../store/slices/tweets.slice';
 import { getTweets } from '../../../../helpers/mocks';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 
 const Selection: React.FC = () => {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
-  // const tweets = useAppSelector(({ tweets }) => tweets);
-  const [tweets, setTweets] = React.useState<any>([]);
-  console.log('active user', user);
+  const tweets = useAppSelector(({ tweets }) => tweets);
+  // const [tweets, setTweets] = React.useState<any>([]);
+  console.log('user in state', user);
+  console.log('tweets in state', tweets);
+
+  const handleMoveToQueu = (id: number) => {
+    console.log('moved to queu', id);
+  }
+
+  // useEffect(() => {
+  //   const doGetTweets = async () => {
+  //     const result = await getTweets();
+  //     setTweets(result);
+  //   };
+  //   doGetTweets();
+  // }, []);
+
+  const fetchSelectionTweets = async () => {
+    const response = await getTweets();
+    dispatch(selectionTweets(response));
+  };
 
   useEffect(() => {
-    const doGetTweets = async () => {
-      const result = await getTweets();
-      setTweets(result);
-    };
-    doGetTweets();
+    fetchSelectionTweets();
   }, []);
 
-  // const fetchSelectionTweets = async () => {
-  //   const response = await getSelectionTweets();
-  //   dispatch(selectionTweets(response));
-  // }
   // we first check if there are tweets in the store
   if (!tweets) return null;
 
   return (
-    <div>
-      <h1>selection of tweets</h1>
-      <ul>
-        {tweets.map((tweet: any) => {
-          return (
-            <li key={tweet.id}>
-              <p>{tweet.content}</p>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <>
+      <div>
+        <h1>selection of tweets</h1>
+        <ul>
+          {tweets.tweets.map((tweet: any) => {
+            return (
+              <li key={tweet.id}>
+                <p>{tweet.content}</p>
+                <button
+                  type='button'
+                  onClick={() => handleMoveToQueu(tweet.id)}
+                >
+                  +
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </>
   );
 };
 
