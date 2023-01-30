@@ -4,7 +4,9 @@ import { Outlet } from 'react-router-dom';
 const HomePage = () => {
   return (
     <>
+      <Header />
       <div className="container">Home Page</div>
+      <Outlet />
     </>
   );
 };

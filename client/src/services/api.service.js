@@ -39,3 +39,18 @@ export const login = async (email, password) => {
     console.log(err);
   }
 };
+
+export const getUserById = async (id) => {
+  try {
+    const url = BASE_URL + 'user/' + id;
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
