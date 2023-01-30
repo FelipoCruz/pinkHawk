@@ -16,6 +16,17 @@ export const getAllUsers = async (req: Request, res: Response) => {
   }
 };
 
+export const getUserById = async (req: Request, res: Response) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: Number(req.params.id) },
+    });
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const createUser = async (req: Request, res: Response) => {
   try {
     const hash = await bcrypt.hash(req.body.password, 10);
