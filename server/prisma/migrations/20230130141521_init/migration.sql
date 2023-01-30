@@ -5,7 +5,8 @@ CREATE TABLE "User" (
     "familyName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "twitterInfo" TEXT NOT NULL,
+    "twitterInfo" TEXT,
+    "topics" TEXT[],
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
