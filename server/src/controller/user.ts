@@ -18,9 +18,6 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
-    console.log(req.body);
-
     const hash = await bcrypt.hash(req.body.password, 10);
     const newUser = await prisma.user.create({
       data: {
@@ -30,7 +27,8 @@ export const createUser = async (req: Request, res: Response) => {
     });
     const accessToken = jwt.sign({ id: newUser.id }, SECRET_KEY);
     res.cookie('token', accessToken, { httpOnly: true });
-    res.status(201).json('User Created!');
+    const { password, ...userNoPassword } = newUser;
+    res.status(201).json(userNoPassword);
   } catch (error) {
     console.log('error in CreateUser:' + error);
   }
