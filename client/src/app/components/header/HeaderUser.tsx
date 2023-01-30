@@ -1,16 +1,21 @@
 import Button from '../button/Button';
-import './header.scss';
 import { NavLink } from 'react-router-dom';
+import './header.scss';
+import { useAppSelector } from '../../hooks/hooks';
+
 
 function HeaderUser() {
+
+  const user = useAppSelector((state) => state.user);
+  console.log('user in state', user);
+
   return (
     <header className='header-user'>
       {/* <Button onClick={() => {}} text={'Home'} /> */}
-      <img alt='home logo' className='logo' />
-      <nav className='header_items'>
-        <NavLink to='/signup'>
-          <Button text={'Sign up'} />
-        </NavLink>
+      <img alt='pinkhawk logo' className='logo' />
+      <nav className='navbar-items'>
+        <Button text={'Copilot'} />
+        <Button text={'Growth'} />
         <NavLink to='/'>
           <Button text={'Logout'} type={'btn-inverted'} />
         </NavLink>
