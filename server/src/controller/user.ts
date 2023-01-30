@@ -38,21 +38,24 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const signInUser = async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
+    const loginEmail = req.body.email;
+    const loginPassword = req.body.password;
     // user exists?
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({ where: { email: loginEmail } });
     if (!user) {
       return res.status(400).send('Invalid email or password');
     }
     // password is OK?
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(loginPassword, user.password);
     if (!isPasswordValid) {
       return res.status(400).send('Invalid email or password');
     }
     // If password OK => return response wiht OK
     const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
     res.cookie('token', accessToken, { httpOnly: true });
-    res.status(200).json('User Signed In!');
+
+    const { password, ...userNoPassword } = user;
+    res.status(200).json(userNoPassword);
   } catch (error) {
     console.log('error in CreateUser:' + error);
   }

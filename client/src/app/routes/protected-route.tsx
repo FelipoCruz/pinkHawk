@@ -1,8 +1,8 @@
 import { useAppSelector } from '../hooks/hooks';
 import { Navigate, useLocation } from 'react-router-dom';
 
-const ProtectedRoute = ({ children, ...rest }: any) => {
-  const loggeIn = useAppSelector((state) => state.auth.isLoggedIn);
+const ProtectedRoute = ({ children }: any) => {
+  const loggeIn = useAppSelector((state) => state.user.isLoggedIn);
   const location = useLocation();
 
   if (!loggeIn) {
