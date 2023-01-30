@@ -24,7 +24,7 @@ const Login = () => {
     try {
       console.log(user);
 
-      const response = await register({
+      const response = await login({
         email: formData.get('email'),
         password: formData.get('password'),
       });
@@ -61,36 +61,36 @@ const Login = () => {
   };
   // TODO: sign up
   return (
-    <div className="login-container">
-      <div className="form-container">
-        <form className="form" onSubmit={(event) => handleSubmit(event)}>
-          <h1 id="login-header">Login</h1>
-          <div className="form-input">
-            <label className="floating-label-email">Email Address</label>
+    <div className='login-container'>
+      <div className='form-container'>
+        <form className='form' onSubmit={(event) => handleSubmit(event)}>
+          <h1 id='login-header'>Login</h1>
+          <div className='form-input'>
+            <label className='floating-label-email'>Email Address</label>
             <input
-              type="text"
-              name="email"
-              id="email"
-              className="inputEmail"
+              type='text'
+              name='email'
+              id='email'
+              className='inputEmail'
               required
             />
           </div>
-          <div className="form-input">
-            <label className="floating-label-password">Password</label>
+          <div className='form-input'>
+            <label className='floating-label-password'>Password</label>
             <input
-              type="password"
-              name="password"
-              id="password"
-              className="inputPassword"
+              type='password'
+              name='password'
+              id='password'
+              className='inputPassword'
               required
             />
           </div>
-          <div className="submit">
-            <Button text="Sign in" type="submit" />
+          <div className='submit'>
+            <Button text='Sign in' type='submit' />
           </div>
         </form>
       </div>
-      <div className="graphic"></div>
+      <div className='graphic'></div>
     </div>
   );
 };
