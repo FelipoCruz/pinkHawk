@@ -1,27 +1,32 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../../../../services/api.service';
+import { activeUser } from '../../../../store/slices/user.slice';
 import { useAppDispatch } from '../../../hooks/hooks';
 import Button from '../../button/Button';
 import './sign-up.scss';
 
 const defaultFormFields = {
+  firstname: '',
+  lastname: '',
   email: '',
   password: '',
 };
 
 export default function SignUp() {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { email, password } = formFields;
+  const { firstname, lastname, email, password } = formFields;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const userData = await register(email, password);
+      const userData = await register(firstname, lastname, email, password);
+      dispatch(activeUser(userData));
 
       localStorage.setItem('user', JSON.stringify({ userData }));
+      navigate('/dashboard');
     } catch (err) {
       console.error(err);
     }
@@ -39,7 +44,27 @@ export default function SignUp() {
         <form className="form" onSubmit={(event) => handleSubmit(event)}>
           <h1 id="login-header">Sign Up</h1>
           <div className="form-input">
-            <label className="floating-label-email">Email Address</label>
+            <label className="form-input-label">First Name</label>
+            <input
+              type="text"
+              name="firstname"
+              onChange={handleChange}
+              value={firstname}
+              required
+            />
+          </div>
+          <div className="form-input">
+            <label className="form-input-label">Last Name</label>
+            <input
+              type="text"
+              name="lastname"
+              onChange={handleChange}
+              value={lastname}
+              required
+            />
+          </div>
+          <div className="form-input">
+            <label className="form-input-label">Email Address</label>
             <input
               type="email"
               name="email"
@@ -49,7 +74,7 @@ export default function SignUp() {
             />
           </div>
           <div className="form-input">
-            <label className="floating-label-password">Password</label>
+            <label className="form-input-label">Password</label>
             <input
               type="password"
               name="password"
