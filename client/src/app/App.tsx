@@ -6,12 +6,8 @@ import './App.scss';
 import Header from './components/header/Header';
 import Login from './components/login/SignIn/login';
 import SignUp from './components/login/SignUp/sign-up';
-<<<<<<< HEAD
-import { useAppSelector } from './hooks/hooks';
 import CoPilot from './routes/co-pilot';
-=======
 import { useAppDispatch, useAppSelector } from './hooks/hooks';
->>>>>>> 9f36b5a71c85d1d87734372d9543b2b2bc0032af
 import Dashboard from './routes/dashboard';
 import HomePage from './routes/home-page';
 import ProtectedRoute from './routes/protected-route';
@@ -58,7 +54,6 @@ const App: React.FC = (): JSX.Element => {
               <ProtectedRoute>
                 <TopicsDefinition />
               </ProtectedRoute>
-
             }
           />
           <Route
@@ -67,7 +62,6 @@ const App: React.FC = (): JSX.Element => {
               <ProtectedRoute>
                 <CoPilot />
               </ProtectedRoute>
-
             }
           />
           <Route path="/login" element={<Login />} />
