@@ -1,0 +1,18 @@
+$color-primary: hsl(5, 85%, 63%);
+$color-secondary: rgb(68, 68, 68);
+
+
+$black: #000;
+$white: #fff;
+
+
+$color-Off-white: hsl(36, 100%, 99%);
+$color-light-gray: hsl(233, 8%, 79%);
+$color-dark-gray: hsl(236, 13%, 42%);
+$color-light-black: hsl(240, 100%, 5%);
+
+
+
+/*  Do not change   */
+
+$color-primary-light: lighten( $color-primary, 15% );

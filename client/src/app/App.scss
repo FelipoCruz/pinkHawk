@@ -1,0 +1,10 @@
+@use "../scss/reset.scss";
+@use "../scss/mediaquery";
+@use "../scss/spinner";
+
+
+.container {
+  margin: 0 auto;
+  max-width: 100%;
+  height: 90vh;
+}
