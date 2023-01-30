@@ -30,7 +30,7 @@ export const createUser = async (req: Request, res: Response) => {
     });
     const accessToken = jwt.sign({ id: newUser.id }, SECRET_KEY);
     res.cookie('token', accessToken, { httpOnly: true });
-    res.status(200).json('User Created!');
+    res.status(201).json('User Created!');
   } catch (error) {
     console.log('error in CreateUser:' + error);
   }

@@ -8,6 +8,7 @@ import { useAppSelector } from './hooks/hooks';
 import Dashboard from './routes/dashboard';
 import HomePage from './routes/home-page';
 import ProtectedRoute from './routes/protected-route';
+import TopicsDefinition from './routes/topics-definition';
 
 const App: React.FC = (): JSX.Element => {
   const loggeIn = useAppSelector((state) => state.auth.isLoggedIn);
@@ -27,6 +28,15 @@ const App: React.FC = (): JSX.Element => {
               <ProtectedRoute>
                 <Dashboard />
               </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/topics-definition"
+            element={  
+              // <ProtectedRoute>
+                <TopicsDefinition/>  
+              // </ProtectedRoute>
+                              
             }
           />
           <Route path="/login" element={<Login />} />
