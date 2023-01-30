@@ -7,7 +7,7 @@ const userData: Prisma.UserCreateInput[] = [
     firstName: 'Alice',
     familyName: 'Wang',
     email: 'alice@prisma.io',
-    password: '00000',
+    password: '$2b$10$zeA1CJsHpKqAV1pkj86dqOL.RXrZdXSw1.Mmw6Dn//SbXwRVgtgWi', // corresponding to '1234'
     twitterInfo: '@Ally',
   },
 ];

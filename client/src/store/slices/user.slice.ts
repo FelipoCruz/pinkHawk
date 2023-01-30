@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { PayloadAction } from '@reduxjs/toolkit'
+import { PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
-  // isLoggedIn: boolean;
+  isLoggedIn: boolean;
   id: string;
   nickName: string;
   firstName: string;
@@ -11,40 +11,27 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  // isLoggedIn: false,
+  isLoggedIn: false,
   id: '',
   nickName: '',
   firstName: '',
   lastName: '',
-  email: ''
+  email: '',
 };
-
-// TODO: check if needed for async calls
-// export const userAsync = createAsyncThunk(
-//   'counter/fetchCount',
-//   async (data: string) => {
-//     const response = await fetchUser(data);
-//     // The value we return becomes the `fulfilled` action payload
-//     return response.data;
-//   }
-// );
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    // to be used in the future if needed
-    // isUserLogged: (state, action: PayloadAction<boolean>) => {
-    //   state.isLoggedIn = action.payload;
-    //   console.log('state', state)
-    //   return state;
-    // },
-
-    activeUser: (state, action: PayloadAction<string>) => {
-      state.id = action.payload;
+    activeUser: (state, action) => {
+      state.id = action.payload.id;
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.familyName;
+      state.email = action.payload.email;
+      state.isLoggedIn = true;
       return state;
-    }
-  }
+    },
+  },
 });
 
 export const { activeUser } = userSlice.actions;
