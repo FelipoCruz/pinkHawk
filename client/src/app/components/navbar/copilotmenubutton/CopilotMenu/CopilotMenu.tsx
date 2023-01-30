@@ -11,6 +11,7 @@ const CopilotMenu = () => {
       <button onClick={() => setSelectedComponent(<Selection />)} className='selection'>Selection</button>
 
       <button className='queu'>Queu</button>
+      {selectedComponent}
     </div>
   );
 };

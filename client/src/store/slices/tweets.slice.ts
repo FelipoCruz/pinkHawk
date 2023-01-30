@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface Tweet {
   id: string;
-  status: boolean;
+  status: string;
   content: string;
 }
 
@@ -25,8 +25,8 @@ export const tweetSlice = createSlice({
 
     queueTweets: (state, action) => {
       const specificTweet = state.tweets.findIndex(tweet => tweet.id === action.payload.id);
-      if (state.tweets[specificTweet].status === false) {
-        state.tweets[specificTweet].status = true;
+      if (state.tweets[specificTweet].status === 'selection') {
+        state.tweets[specificTweet].status = 'queue';
       }
       return state;
     },

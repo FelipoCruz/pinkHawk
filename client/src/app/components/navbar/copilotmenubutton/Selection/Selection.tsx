@@ -3,7 +3,7 @@ import { getSelectionTweets } from "../../../../../services/api.tweets";
 import { selectionTweets } from "../../../../../store/slices/tweets.slice";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/hooks";
 
-const Selection = async () => {
+const Selection: React.FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
   console.log('active user', user);
