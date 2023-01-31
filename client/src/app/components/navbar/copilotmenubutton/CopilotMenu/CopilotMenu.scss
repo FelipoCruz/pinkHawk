@@ -1,0 +1,15 @@
+@use "../../../../../scss/variables.scss" as v;
+
+.copilot-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: v.$color-lighter-gray;
+  padding: 15px 40px;
+}
+
+.copilot-content {
+  padding: 2rem;
+}
