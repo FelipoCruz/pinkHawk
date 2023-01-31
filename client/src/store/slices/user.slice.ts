@@ -8,6 +8,7 @@ export interface UserState {
   lastName: string;
   email: string;
   topics: string[];
+  frequencyTweetPosting: number;
 }
 
 const initialState: UserState = {
@@ -17,7 +18,8 @@ const initialState: UserState = {
   firstName: '',
   lastName: '',
   email: '',
-  topics: []
+  topics: [],
+  frequencyTweetPosting: 6
 };
 
 export const userSlice = createSlice({

@@ -1,4 +1,5 @@
 import React from "react";
+import TopicsInput from "../../../topics-input/topics-input";
 import Selection from "../Selection/Selection";
 
 const CopilotMenu = () => {
@@ -7,10 +8,9 @@ const CopilotMenu = () => {
   return (
     <div>
       <h1>copilot menu</h1>
-      <button onClick={() => setSelectedComponent} className='preferences'>Preferences</button>
       <button onClick={() => setSelectedComponent(<Selection />)} className='selection'>Selection</button>
-
-      <button className='queu'>Queu</button>
+      <button className='queue'>Queue</button>
+      <button onClick={() => setSelectedComponent(<TopicsInput/>)} className='preferences'>Preferences</button>
       {selectedComponent}
     </div>
   );
