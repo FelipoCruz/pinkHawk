@@ -11,14 +11,13 @@ const Queue = () => {
   return (
     <div>
       <h1>Queue of tweets</h1>
-      {tweet.tweets.map((tweet: any) => {
+      {/* {tweet.tweets.map((tweet: any) => {
         return (
           <div key={tweet.id}>
             <p>{tweet}</p>
           </div>
         );
-      })}
-
+      })} */}
     </div>
   );
 };
