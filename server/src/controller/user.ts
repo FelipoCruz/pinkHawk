@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { userInfo } from 'os';
+import { TwitterApi } from 'twitter-api-v2';
 
 const prisma = new PrismaClient();
 const SECRET_KEY = process.env.SECRET!;
@@ -21,6 +22,15 @@ export const getUserById = async (req: Request, res: Response) => {
     const user = await prisma.user.findUnique({
       where: { id: Number(req.params.id) },
     });
+    const realUser = new TwitterApi({
+      appKey: process.env.API_KEY!,
+      appSecret: process.env.API_KEY_SECRET!,
+      accessToken: user?.twitterToken!,
+      accessSecret: user?.twitterSecret!
+    })
+
+    // const sally = await realUser.v2.tweet('test3')
+    // console.log(sally);
     res.send(user);
   } catch (error) {
     console.log(error);
