@@ -19,8 +19,7 @@ export const tweetSlice = createSlice({
   initialState,
   reducers: {
     selectionTweets: (state, action) => {
-      state.tweets = action.payload;
-      return state;
+      return action.payload;
     },
 
     queueTweets: (state, action) => {
