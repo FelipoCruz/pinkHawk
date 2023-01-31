@@ -10,7 +10,7 @@ const Dashboard = () => {
   console.log('user id us :', user);
 
   const handleClick = async () => {
-    const res = await getAuthUrl();
+    const res = await getAuthUrl(user.id);
     window.location.href = res.url;
   };
 
@@ -26,6 +26,7 @@ const Dashboard = () => {
       <NavLink to="/co-pilot">
         <Button text={'co-pilot'} type={'btn-inverted'} />
       </NavLink>
+      <img src="/Twitter-logo-png.png" alt='twitter-logo' width='50px'></img>
       <button onClick={handleClick}>authorize with twitter</button>
     </div>
   );

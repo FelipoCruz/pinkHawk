@@ -86,9 +86,9 @@ export const getUserById = async (id) => {
   }
 };
 
-export const getAuthUrl = async () => {
+export const getAuthUrl = async (id) => {
   try {
-    const res = await fetch(BASE_URL + 'oauth');
+    const res = await fetch(`${BASE_URL}${id}/oauth`);
     return res.json();
   } catch (error) {
     console.log(error);

@@ -27,7 +27,7 @@ router.post('/topic/set-topics', setTopics);
 router.post('/tweets/generate-tweet', generateTweet);
 
 
-router.get('/oauth', oauth)
+router.get('/user/:id/oauth', oauth)
 router.get('/callback', getAccessToken)
 
 export default router;
