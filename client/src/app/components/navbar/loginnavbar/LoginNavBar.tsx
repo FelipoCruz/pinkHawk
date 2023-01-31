@@ -30,11 +30,8 @@ const NavBarUser: React.FC = () => {
         </NavLink>
       </nav>
       <nav className="navbar-items">
-        <NavLink to="/user/preferences">
+        <NavLink to="user/preferences">
           <img alt="user-preferences" className="icon-button" src={userIcon} />
-        </NavLink>
-        <NavLink to="/userPreferences">
-          <Button text={'Logout'} type={'btn-inverted'} />
         </NavLink>
       </nav>
     </header>
