@@ -19,6 +19,7 @@ model User {
   twitterToken     String?
   twitterSecret    String?
   tweets           Tweet[]
+  topics           String[]
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
@@ -27,6 +28,7 @@ model Tweet {
   id        Int      @id @default(autoincrement())
   twitterId String?  @unique
   text      String
+  status    String
   User      User     @relation(fields: [userId], references: [id])
   userId    Int
   createdAt DateTime @default(now())

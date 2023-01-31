@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface Tweet {
+export interface Tweet {
   id: string;
   status: string;
   content: string;
