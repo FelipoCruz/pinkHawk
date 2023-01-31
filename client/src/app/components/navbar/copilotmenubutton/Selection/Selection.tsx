@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { selectionTweets } from '../../../../../store/slices/tweet.slice';
-// import { getSelectionTweets } from '../../../../../services/api.tweets';
 import { getTweets } from '../../../../helpers/mocks';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 
@@ -11,6 +10,10 @@ const Selection = () => {
   // const [tweets, setTweets] = React.useState<any>([]);
   console.log('user in state', user);
   console.log('tweets in state', tweets);
+
+  const handleMoveToQueu = (id: number) => {
+    console.log('moved to queu', id);
+  };
 
   // useEffect(() => {
   //   const doGetTweets = async () => {
@@ -36,7 +39,7 @@ const Selection = () => {
     <>
       <div>
         <h1>selection of tweets</h1>
-        <ul>
+        {/* <ul>
           {tweets.tweets.map((tweet: any) => {
             return (
               <li key={tweet.id}>
@@ -44,7 +47,7 @@ const Selection = () => {
               </li>
             );
           })}
-        </ul>
+        </ul> */}
       </div>
     </>
   );

@@ -17,9 +17,6 @@ function Header() {
           <Button text={'Sign in'} type={'btn-inverted'} />
         </NavLink>
       </nav>
-      <button className="menu">
-        <img alt="icon menu" />
-      </button>
     </header>
   );
 }

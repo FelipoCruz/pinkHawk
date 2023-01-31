@@ -1,14 +1,18 @@
 @use "../../../scss/variables.scss" as v;
 
-.user-navbar {
+
+.header {
   margin: 0 auto;
   max-width: 100%;
   height: 10vh;
   padding: 30px 40px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: v.$color-white-navbar;
+  flex-direction: row;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+  background-color: v.$color-primary;
+
 
   .header_items {
     display: flex;
@@ -23,17 +27,10 @@
       }
     }
   }
-
-  .nav {
-    z-index: 999;
-  }
-
-  .menu,
-  .close {
-    display: none;
-  }
-
 }
+
+
+
 
 
 
