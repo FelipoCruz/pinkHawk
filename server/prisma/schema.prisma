@@ -27,6 +27,7 @@ model Tweet {
   id        Int      @id @default(autoincrement())
   twitterId String?  @unique
   text      String
+  status    String
   User      User     @relation(fields: [userId], references: [id])
   userId    Int
   createdAt DateTime @default(now())
