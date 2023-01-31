@@ -1,5 +1,5 @@
 import { useAppSelector } from '../hooks/hooks';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import Button from '../components/button/Button';
 import NavBarUser from '../components/navbar/loginnavbar/LoginNavBar';
 import { getAuthUrl } from '../../services/api.service';
@@ -16,7 +16,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <NavBarUser />
-      <nav className="dashboard-nav">
+      {/* <nav className="dashboard-nav">
         <NavLink to="/dashboard/topics-definition">
           <Button text={'topics-definition'} type={'btn-inverted'} />
         </NavLink>
@@ -25,7 +25,8 @@ const Dashboard = () => {
         </NavLink>
         <img src="/Twitter-logo-png.png" alt="twitter-logo" width="50px"></img>
         <button onClick={handleClick}>authorize with twitter</button>
-      </nav>
+      </nav> */}
+      <Outlet />
     </div>
   );
 };

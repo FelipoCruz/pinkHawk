@@ -3,8 +3,6 @@
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
   width: 100%;
 
   .dashboard-nav {
@@ -13,8 +11,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 10%;
-    background-color: v.$color-light-gray;
-    padding: 20px 40px;
+    background-color: v.$color-lighter-gray;
+    padding: 15px 40px;
   }
 }
