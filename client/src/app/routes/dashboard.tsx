@@ -9,7 +9,11 @@ const Dashboard = () => {
 
   return (
     <div>
+      {/* <h1>Dashboard</h1> */}
       <NavBarUser />
+      <>
+        {/* <h1>Body dashBoard</h1> */}
+      </>
       <h1>Dashboard</h1>
       <NavLink to="/topics-definition">
         <Button text={'topics-definition'} type={'btn-inverted'} />
