@@ -1,5 +1,6 @@
 import React from 'react';
 import TopicsInput from '../../../topics-input/topics-input';
+import Queue from '../Queu/Queue';
 import Selection from '../Selection/Selection';
 
 const CopilotMenu = () => {
@@ -15,10 +16,7 @@ const CopilotMenu = () => {
       >
         Selection
       </button>
-      <button
-        onClick={() => setSelectedComponent(<TopicsInput />)}
-        className="queue"
-      >
+      <button onClick={() => setSelectedComponent(<Queue />)} className="queue">
         Queue
       </button>
       <button

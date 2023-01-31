@@ -39,7 +39,7 @@ const Selection = () => {
     <>
       <div>
         <h1>selection of tweets</h1>
-        <ul>
+        {/* <ul>
           {tweets.tweets.map((tweet: any) => {
             return (
               <li key={tweet.id}>
@@ -47,7 +47,7 @@ const Selection = () => {
               </li>
             );
           })}
-        </ul>
+        </ul> */}
       </div>
     </>
   );
