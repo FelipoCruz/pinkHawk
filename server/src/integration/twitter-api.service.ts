@@ -1,5 +1,5 @@
 import {  PrismaClient } from '@prisma/client';
-import { Request, Response } from "express";
+import { request, Request, response, Response } from "express";
 import { TwitterApi } from "twitter-api-v2";
 const prisma = new PrismaClient();
 interface TwitterApiTokens {
@@ -9,12 +9,29 @@ interface TwitterApiTokens {
   accessSecret?: string;
 }
 
+//cron library to post tweets ona schedule
+var CronJob = require('cron').CronJob;
+var job = new CronJob(
+	'* * * * * *', //seconds, minutes, hours, day of month, month, day of week
+	function() {
+		postTweet(request, response)
+    // console.log("hihi");
+	},
+	null,
+	true, //with this parameter set to true, no need to call job.start()
+	'America/Los_Angeles'
+);
+// Use this if the 4th param is default value(false)
+// job.start()
+
 const key = process.env.API_KEY || '';
-const secret = process.env.API_KEY_SECRET
+const secret = process.env.API_KEY_SECRET || '';
 
 let oauthToken = '';
 let oauthSecret = '';
 let userId = '';
+
+
 
 export const oauth = async (req: Request, res: Response) => {
   const client = new TwitterApi({ appKey: key!, appSecret: secret! });
@@ -75,19 +92,22 @@ export const getAccessToken = async (req: Request, res: Response) => {
 }
 
 //TODO: to post the queued tweets every x hours
-export const postTweet = async (req: Request, res: Response) => {
-  const id = req.params.id;
-
-  const user = prisma.user.findFirst({where:{id: Number(id)}})
- 
-  // const realUser = new TwitterApi({
-  //   appKey: key!,
+const postTweet = async (req: Request, res: Response) => {
+  
+  //   const realUser  = new TwitterApi(
+  //   appKey: key,
   //   appSecret: secret!,
-  //   accessToken: accessToken!,
-  //   accessSecret: accessSecret!
+  //   accessToken: user?.twitterToken!,
+  //   accessSecret: user?.twitterSecret!
   // })
 
-} 
+  // const num = Math.random()
+  // const post = realUser.v2.tweet(`test message from pinkHawk in every minute: ${num}`)
+  // console.log(post);
+  
+}
+  
+
 
 
 //tweet data:

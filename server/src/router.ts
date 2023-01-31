@@ -7,7 +7,7 @@ import {
 import { setTopics } from './controller/topic';
 import { fetchTweets, generateTweet, queueTweet } from './controller/tweet';
 import express, { Request, Response } from 'express';
-import {   getAccessToken, oauth, postTweet } from './integration/twitter-api.service';
+import {   getAccessToken, oauth } from './integration/twitter-api.service';
 
 const router = require('express').Router();
 
@@ -34,6 +34,4 @@ router.get('/user/:id/oauth', oauth)
 router.get('/callback', getAccessToken)
 
 
-//to post tweets on behalf of the user
-router.post('user/:id/postTweets', postTweet)
 export default router;
