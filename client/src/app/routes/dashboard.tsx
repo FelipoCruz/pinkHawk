@@ -3,23 +3,22 @@ import { NavLink } from 'react-router-dom';
 import Button from '../components/button/Button';
 import NavBarUser from '../components/navbar/loginnavbar/LoginNavBar';
 import React from 'react';
+import { getAuthUrl } from '../../services/api.service';
 
 const Dashboard = () => {
   const user = useAppSelector((state) => state.user);
   console.log('user id us :', user);
 
-   const handleClick = async () =>{
-    const res = await getAuthUrl()
+  const handleClick = async () => {
+    const res = await getAuthUrl();
     window.location.href = res.url;
-   }
+  };
 
   return (
     <div>
       {/* <h1>Dashboard</h1> */}
       <NavBarUser />
-      <>
-        {/* <h1>Body dashBoard</h1> */}
-      </>
+      <>{/* <h1>Body dashBoard</h1> */}</>
       <h1>Dashboard</h1>
       <NavLink to="/topics-definition">
         <Button text={'topics-definition'} type={'btn-inverted'} />
