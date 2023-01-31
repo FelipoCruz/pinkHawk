@@ -6,8 +6,8 @@ interface Tweet {
   content: string;
 }
 
-interface TweetState {
-  tweets: Tweet[];
+export interface TweetState {
+  tweets: Tweet[]
 };
 
 const initialState: TweetState = {

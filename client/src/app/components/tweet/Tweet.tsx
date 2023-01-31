@@ -1,15 +1,16 @@
 import React from 'react';
-import { deleteTweet } from '../../../store/slices/tweet.slice';
+import { deleteTweet, TweetState } from '../../../store/slices/tweet.slice';
 import { activeUser } from '../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { getUserById } from '../../../services/api.service';
 import { queueTweets } from '../../../store/slices/tweet.slice';
+import { UserState } from '../../../store/slices/user.slice';
 
 const Tweet: React.FC = ({ tweet }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
 
-  const handleDelete = async (user, tweet) => {
+  const handleDelete = async (user: UserState, tweet: TweetState) => {
     try {
       // delete tweet from user, API to be made
       const deleteSingleTweet = await deleteTweetFromUserAPI(user.id, tweet.id);

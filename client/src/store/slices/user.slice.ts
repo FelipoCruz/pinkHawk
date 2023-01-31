@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface UserState {
+export interface UserState {
   isLoggedIn: boolean;
   id: string;
   nickName: string;
