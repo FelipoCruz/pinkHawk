@@ -1,6 +1,6 @@
 // import Axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000/';
+const BASE_URL = 'http://localhost:3001/';
 
 export const register = async (firstname, lastname, email, password) => {
   try {
@@ -85,3 +85,12 @@ export const getUserById = async (id) => {
     console.log(err);
   }
 };
+
+export const getAuthUrl = async () => {
+  try {
+    const res = await fetch(BASE_URL + 'oauth')
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
