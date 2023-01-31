@@ -24,6 +24,7 @@ export const tweetSlice = createSlice({
 
     queueTweets: (state, action) => {
       const specificTweet = state.tweets.findIndex(tweet => tweet.id === action.payload.id);
+      console.log(state.tweets[specificTweet]);
       if (state.tweets[specificTweet].status === 'selection') {
         state.tweets[specificTweet].status = 'queue';
       }
