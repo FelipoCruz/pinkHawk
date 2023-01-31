@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface UserState {
+export interface UserState {
   isLoggedIn: boolean;
   id: string;
   nickName: string;
@@ -9,6 +9,7 @@ interface UserState {
   email: string;
   topics: string[];
   frequencyTweetPosting: number;
+  profilePic?: string;
 }
 
 const initialState: UserState = {
@@ -19,7 +20,7 @@ const initialState: UserState = {
   lastName: '',
   email: '',
   topics: [],
-  frequencyTweetPosting: 6
+  frequencyTweetPosting: 6,
 };
 
 export const userSlice = createSlice({

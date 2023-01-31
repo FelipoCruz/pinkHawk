@@ -25,11 +25,15 @@ router.post('/tweets/generate-tweet', generateTweet);
 //route to fetch tweets with status 'suggested' or 'queued'
 router.get('/user/:id/tweets/:status', fetchTweets)
 
+<<<<<<< HEAD
 // route to modify status of tweet from 'suggested' to 'queued'
 router.put('/user/:id/queue-tweet/:tweetId', queueTweet);
 
 
 router.get('/oauth', oauth)
+=======
+router.get('/user/:id/oauth', oauth)
+>>>>>>> a93ce913e7d314dc9242c609335b02b8103f21aa
 router.get('/callback', getAccessToken)
 
 export default router;
