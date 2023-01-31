@@ -2,7 +2,6 @@ import { useAppSelector } from '../hooks/hooks';
 import { NavLink } from 'react-router-dom';
 import Button from '../components/button/Button';
 import NavBarUser from '../components/navbar/loginnavbar/LoginNavBar';
-import React from 'react';
 import { getAuthUrl } from '../../services/api.service';
 
 const Dashboard = () => {
@@ -15,16 +14,18 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
-      {/* <h1>Dashboard</h1> */}
+    <div className="dashboard-container">
       <NavBarUser />
-      <>{/* <h1>Body dashBoard</h1> */}</>
-      <h1>Dashboard</h1>
-      <NavLink to="/dashboard/co-pilot">
-        <Button text={'co-pilot'} type={'btn-inverted'} />
-      </NavLink>
-      <img src="/Twitter-logo-png.png" alt='twitter-logo' width='50px'></img>
-      <button onClick={handleClick}>authorize with twitter</button>
+      <nav className="dashboard-nav">
+        <NavLink to="/dashboard/topics-definition">
+          <Button text={'topics-definition'} type={'btn-inverted'} />
+        </NavLink>
+        <NavLink to="/dashboard/co-pilot">
+          <Button text={'co-pilot'} type={'btn-inverted'} />
+        </NavLink>
+        <img src="/Twitter-logo-png.png" alt="twitter-logo" width="50px"></img>
+        <button onClick={handleClick}>authorize with twitter</button>
+      </nav>
     </div>
   );
 };
