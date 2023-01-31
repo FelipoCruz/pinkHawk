@@ -26,7 +26,9 @@ const Dashboard = () => {
         <img src="/Twitter-logo-png.png" alt="twitter-logo" width="50px"></img>
         <button onClick={handleClick}>authorize with twitter</button>
       </nav> */}
-      <Outlet />
+      <div className="dashboard-content">
+        <Outlet />
+      </div>
     </div>
   );
 };

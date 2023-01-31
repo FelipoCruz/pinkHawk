@@ -2,6 +2,7 @@ import React from 'react';
 import TopicsInput from '../../../topics-input/topics-input';
 import Queue from '../Queu/Queue';
 import Selection from '../Selection/Selection';
+import './CopilotMenu.scss';
 
 const CopilotMenu = () => {
   const [selectedComponent, setSelectedComponent] =
@@ -9,23 +10,24 @@ const CopilotMenu = () => {
 
   return (
     <div>
-      <h1>copilot menu</h1>
-      <button
-        onClick={() => setSelectedComponent(<Selection />)}
-        className="selection"
-      >
-        Selection
-      </button>
-      <button onClick={() => setSelectedComponent(<Queue />)} className="queue">
-        Queue
-      </button>
-      <button
-        onClick={() => setSelectedComponent(<TopicsInput />)}
-        className="preferences"
-      >
-        Preferences
-      </button>
-      {selectedComponent}
+      <nav className="copilot-nav">
+        <button
+          onClick={() => setSelectedComponent(<Selection />)}
+          className="btn"
+        >
+          Selection
+        </button>
+        <button onClick={() => setSelectedComponent(<Queue />)} className="btn">
+          Queue
+        </button>
+        <button
+          onClick={() => setSelectedComponent(<TopicsInput />)}
+          className="btn"
+        >
+          Preferences
+        </button>
+      </nav>
+      <div className="copilot-content">{selectedComponent}</div>
     </div>
   );
 };
