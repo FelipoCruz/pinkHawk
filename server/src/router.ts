@@ -29,10 +29,10 @@ router.post('/tweets/generate-tweet', generateTweet);
 router.get('/user/:id/tweets/:status', fetchTweets)
 
 // route to modify status of tweet from 'suggested' to 'queued'
-router.put('/user/:id/queue-tweet/:tweetId', queueTweet);
+router.put('/tweet/queueTweet', queueTweet);
 
 // route to modify status of tweets to 'posted'
-router.put('/user/:id/post-tweet-status/:tweetId', tweetStatusPosted);
+router.put('/tweet/tweetStatusPosted', tweetStatusPosted);
 
 // route to delete tweet from DB
 router.delete('/tweet/delete', tweetDelete);

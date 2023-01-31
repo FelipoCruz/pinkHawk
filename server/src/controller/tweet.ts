@@ -41,8 +41,8 @@ export const fetchTweets = async (req: Request, res: Response) => {
 
 export const queueTweet = async (req: Request, res: Response) => {
   try {
-    const userIdReq = Number(req.params.id);
-    const tweetId = Number(req.params.tweetId);
+    const userIdReq = Number(req.body.id);
+    const tweetId = Number(req.body.tweetId);
     console.log('userIdReq is: ' + userIdReq );
     console.log('tweetId is: ' + tweetId);
     const queuedTweetOK = await prisma.tweet.update({
@@ -58,8 +58,9 @@ export const queueTweet = async (req: Request, res: Response) => {
 
 export const tweetStatusPosted = async (req: Request, res: Response) => {
   try {
-    const userIdReq = Number(req.params.id);
-    const tweetId = Number(req.params.tweetId);
+    console.log('req.body is: ', req.body);
+    const userIdReq = Number(req.body.id);
+    const tweetId = Number(req.body.tweetId);
     console.log('userIdReq: ' + userIdReq );
     console.log('tweetId is: ' + tweetId);
     const tweetStatusPostedOK  = await prisma.tweet.update({
