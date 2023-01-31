@@ -2,6 +2,7 @@ import { useAppSelector } from '../hooks/hooks';
 import { NavLink } from 'react-router-dom';
 import Button from '../components/button/Button';
 import NavBarUser from '../components/navbar/loginnavbar/LoginNavBar';
+import React from 'react';
 
 const Dashboard = () => {
   const user = useAppSelector((state) => state.user);
@@ -15,10 +16,10 @@ const Dashboard = () => {
         {/* <h1>Body dashBoard</h1> */}
       </>
       <h1>Dashboard</h1>
-      <NavLink to="/topics-definition">
+      <NavLink to="/dashboard/topics-definition">
         <Button text={'topics-definition'} type={'btn-inverted'} />
       </NavLink>
-      <NavLink to="/co-pilot">
+      <NavLink to="/dashboard/co-pilot">
         <Button text={'co-pilot'} type={'btn-inverted'} />
       </NavLink>
     </div>
