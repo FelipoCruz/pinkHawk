@@ -13,6 +13,7 @@ import Dashboard from './routes/dashboard';
 import HomePage from './routes/home-page';
 import ProtectedRoute from './routes/protected-route';
 import TopicsDefinition from './routes/topics-definition';
+import UserPreferences from './routes/user-preferences';
 
 const App: React.FC = (): JSX.Element => {
   const loggeIn = useAppSelector((state) => state.auth.isLoggedIn);
@@ -73,6 +74,14 @@ const App: React.FC = (): JSX.Element => {
               element={
                 <ProtectedRoute>
                   <h1>Growth</h1>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="user/preferences"
+              element={
+                <ProtectedRoute>
+                  <UserPreferences/>
                 </ProtectedRoute>
               }
             />
