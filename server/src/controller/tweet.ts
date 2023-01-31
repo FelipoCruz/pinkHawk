@@ -17,3 +17,28 @@ export const generateTweet = async (req: Request, res: Response) => {
     console.log('error in CreateUser:' + error);
   }
 };
+
+
+export const querySuggestedTweets = async (req: Request, res: Response) => {
+  try {
+    const user = req.body;
+    console.log(req.body);
+    const newGeneratedTweet = await generateTweetAIService(user.topics)
+    res.status(201);
+    res.send(newGeneratedTweet);
+  } catch (error) {
+    console.log('error in CreateUser:' + error);
+  }
+};
+
+export const queryQueuedTweets = async (req: Request, res: Response) => {
+  try {
+    const user = req.body;
+    console.log(req.body);
+    const newGeneratedTweet = await generateTweetAIService(user.topics)
+    res.status(201);
+    res.send(newGeneratedTweet);
+  } catch (error) {
+    console.log('error in CreateUser:' + error);
+  }
+};
