@@ -67,6 +67,14 @@ const App: React.FC = (): JSX.Element => {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/dashboard/growth"
+            element={
+              <ProtectedRoute>
+                <h1>Growth</h1>
+              </ProtectedRoute>
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
