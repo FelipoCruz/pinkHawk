@@ -54,6 +54,10 @@ const SingleTweet: React.FC = ({ tweetPassed }) => {
       <div className='tweet-text'>
         <p>{tweetPassed.text}</p>
       </div>
+      <div className='tweet-actions'>
+        <button onClick={() => handleSelected(user, tweetPassed)}>+</button>
+        <button onClick={() => handleDelete(user, tweetPassed)}>x</button>
+      </div>
     </div>
   );
 };
