@@ -4,17 +4,13 @@ import { selectionTweets } from '../../../../../store/slices/tweet.slice';
 import { getTweets } from '../../../../helpers/mocks';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 
-const Selection: React.FC = () => {
+const Selection = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
   const tweets = useAppSelector(({ tweets }) => tweets);
   // const [tweets, setTweets] = React.useState<any>([]);
   console.log('user in state', user);
   console.log('tweets in state', tweets);
-
-  const handleMoveToQueu = (id: number) => {
-    console.log('moved to queu', id);
-  }
 
   // useEffect(() => {
   //   const doGetTweets = async () => {
@@ -44,13 +40,7 @@ const Selection: React.FC = () => {
           {tweets.tweets.map((tweet: any) => {
             return (
               <li key={tweet.id}>
-                <p>{tweet.content}</p>
-                <button
-                  type='button'
-                  onClick={() => handleMoveToQueu(tweet.id)}
-                >
-                  +
-                </button>
+                <p>{tweet}</p>
               </li>
             );
           })}
