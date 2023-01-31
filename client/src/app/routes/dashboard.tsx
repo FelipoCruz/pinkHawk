@@ -2,6 +2,7 @@ import { useAppSelector } from '../hooks/hooks';
 import { NavLink } from 'react-router-dom';
 import Button from '../components/button/Button';
 import NavBarUser from '../components/navbar/loginnavbar/LoginNavBar';
+import React from 'react';
 
 const Dashboard = () => {
   const user = useAppSelector((state) => state.user);
