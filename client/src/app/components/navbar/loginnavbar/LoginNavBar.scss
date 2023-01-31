@@ -7,8 +7,11 @@
   padding: 30px 40px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-evenly;
+  box-sizing: border-box;
   background-color: v.$color-primary;
+
 
   .header_items {
     display: flex;
@@ -32,11 +35,22 @@
   .close {
     display: none;
   }
-
-  
-
 }
 
 .logo {
   height: 50px;
+}
+
+.icon-button {
+  height: 25px;
+  margin: 3px;
+  padding: 2%;
+}
+
+
+.navbar-items{
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  align-items: center;
 }
