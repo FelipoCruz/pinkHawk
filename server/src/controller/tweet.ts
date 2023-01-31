@@ -56,10 +56,6 @@ export const queueTweet = async (req: Request, res: Response) => {
   }
 }
 
-
-
-
-
 export const tweetStatusPosted = async (req: Request, res: Response) => {
   try {
     const userIdReq = Number(req.params.id);
@@ -74,6 +70,20 @@ export const tweetStatusPosted = async (req: Request, res: Response) => {
       res.send(tweetStatusPostedOK );
   } catch (error) {
     console.log('Error in tweetStatusPosted @ module controller/tweet.ts: ', error);
+  }
+}
+
+export const tweetDelete = async (req: Request, res: Response) => {
+  try {
+    const tweetId = Number(req.body.tweetId);
+    console.log('tweetId is: ' + tweetId);
+    const tweetStatusPostedOK  = await prisma.tweet.delete({
+      where: { id: tweetId },
+    });
+      res.status(200);
+      res.send(`tweet with id: ${tweetId}, successfully deleted`);
+  } catch (error) {
+    console.log('Error in tweetDelete @ module controller/tweet.ts: ', error);
   }
 }
 

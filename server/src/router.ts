@@ -5,7 +5,7 @@ import {
   signInUser,
 } from './controller/user';
 import { setTopics } from './controller/topic';
-import { fetchTweets, generateTweet, queueTweet, tweetStatusPosted } from './controller/tweet';
+import { fetchTweets, generateTweet, queueTweet, tweetDelete, tweetStatusPosted } from './controller/tweet';
 import express, { Request, Response } from 'express';
 import {   getAccessToken, oauth, postTweet } from './integration/twitter-api.service';
 
@@ -33,6 +33,9 @@ router.put('/user/:id/queue-tweet/:tweetId', queueTweet);
 
 // route to modify status of tweets to 'posted'
 router.put('/user/:id/post-tweet-status/:tweetId', tweetStatusPosted);
+
+// route to delete tweet from DB
+router.delete('/tweet/delete', tweetDelete);
 
 
 /* TWITTER REQUESTS MANAGEMENT? */
