@@ -20,10 +20,7 @@ const Dashboard = () => {
       <NavBarUser />
       <>{/* <h1>Body dashBoard</h1> */}</>
       <h1>Dashboard</h1>
-      <NavLink to="/topics-definition">
-        <Button text={'topics-definition'} type={'btn-inverted'} />
-      </NavLink>
-      <NavLink to="/co-pilot">
+      <NavLink to="/dashboard/co-pilot">
         <Button text={'co-pilot'} type={'btn-inverted'} />
       </NavLink>
       <img src="/Twitter-logo-png.png" alt='twitter-logo' width='50px'></img>

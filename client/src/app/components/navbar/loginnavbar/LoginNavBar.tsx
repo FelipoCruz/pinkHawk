@@ -4,6 +4,11 @@ import './LoginNavBar.scss';
 import { useAppSelector } from '../../../hooks/hooks';
 import CopilotMenu from '../copilotmenubutton/CopilotMenu/CopilotMenu';
 import GrowthMenu from '../growthmenu/GrowthMenu';
+import logo from '../../../../images/pinkhawklogo.svg';
+import copilotButton from '../../../../images/copilot.png';
+import growthButton from '../../../../images/growth.png';
+import userIcon from '../../../../images/user.png';
+import Button from '../../button/Button';
 
 const NavBarUser: React.FC = () => {
   const [selectedComponent, setSelectedComponent] = useState<React.ReactNode | null>(null);
@@ -12,28 +17,27 @@ const NavBarUser: React.FC = () => {
 
   return (
     <header className='user-navbar'>
-      <img alt='pinkhawk logo' className='logo' />
+      <img alt='pinkhawk logo' className='logo' src={logo} />
       <nav className='user-navbar-buttons'>
-        <button
-          onClick={() => setSelectedComponent(<CopilotMenu />)}
-        >
-          Copilot
-        </button>
-        <button
-          onClick={() => setSelectedComponent(<GrowthMenu />)}
-        >
-          Growth
-        </button>
+        <NavLink to='/dashboard/co-pilot'>
+          <img alt='copilot-button' className='icon-button' src={copilotButton} />
+        </NavLink>
+        <NavLink to='/dashboard/growth'>
+          <img alt='growth-button' className='icon-button' src={growthButton} />
+        </NavLink>
       </nav>
-      {/* <nav className='navbar-items'>
-        <NavLink to='/'>
+      <nav className='navbar-items'>
+        <NavLink to='/user/preferences'>
+          <img alt='user-preferences' className='icon-button' src={userIcon} />
+        </NavLink>
+        <NavLink to='/userPreferences'>
           <Button text={'Logout'} type={'btn-inverted'} />
         </NavLink>
-      </nav> */}
+      </nav>
       <button className='menu'>
         <img alt='icon menu' />
       </button>
-      {selectedComponent}
+      {/* {selectedComponent} */}
     </header>
   );
 }

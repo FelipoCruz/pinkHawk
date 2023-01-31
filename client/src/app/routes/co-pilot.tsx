@@ -2,6 +2,7 @@ import React from "react";
 import { generateTweetServiceClient } from "../../services/api.service";
 import { useAppSelector } from "../hooks/hooks";
 import { useState } from "react";
+import CopilotMenu from "../components/navbar/copilotmenubutton/CopilotMenu/CopilotMenu";
 
 const CoPilot = () => {
 
@@ -25,13 +26,14 @@ const CoPilot = () => {
   return (
     <>
       <div className="container">
-        <h1>Co Pilot</h1>
+        <CopilotMenu></CopilotMenu>
         <br />
         <br />
         <button onClick={generateTweet}> CLICK TO GENERATE TWEET </button>
         <br />
         <br />
         <h2>{tweet}</h2>
+        
 
       </div>
 

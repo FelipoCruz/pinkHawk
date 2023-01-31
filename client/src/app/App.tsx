@@ -52,7 +52,7 @@ const App: React.FC = (): JSX.Element => {
             }
           />
           <Route
-            path="/topics-definition"
+            path="/dashboard/topics-definition"
             element={
               <ProtectedRoute>
                 <TopicsDefinition />
@@ -60,10 +60,18 @@ const App: React.FC = (): JSX.Element => {
             }
           />
           <Route
-            path="/co-pilot"
+            path="/dashboard/co-pilot"
             element={
               <ProtectedRoute>
                 <CoPilot />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/growth"
+            element={
+              <ProtectedRoute>
+                <h1>Growth</h1>
               </ProtectedRoute>
             }
           />
