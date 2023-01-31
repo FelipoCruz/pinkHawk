@@ -9,13 +9,14 @@ const Button = ({
   type,
   text,
   isLoading = false,
+  ...otherProps
 }: {
   type?: string;
   text?: string;
   isLoading?: boolean;
 }) => {
   return (
-    <button className={'btn ' + type}>
+    <button {...otherProps} className={'btn ' + type}>
       {isLoading ? <div className="btn-spinner spinner" /> : text}
     </button>
   );

@@ -62,7 +62,7 @@ const SingleTweet = ({ tweetPassed }: Props) => {
         <p>{tweetPassed.text}</p>
       </div>
       <div className="tweet-actions">
-        <button onClick={() => handleSelected(user, tweetPassed)}>+</button>
+        {tweetPassed.status !== 'queue' && <button onClick={() => handleSelected(user, tweetPassed)}>+</button>}
         <button onClick={() => handleDelete(user, tweetPassed)}>x</button>
       </div>
     </div>
