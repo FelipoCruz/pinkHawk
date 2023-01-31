@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface Tweet {
-  id: string;
+  id: number;
   status: string;
-  content: string;
+  text: string;
 }
 
 export interface TweetState {
