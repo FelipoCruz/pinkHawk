@@ -18,29 +18,26 @@ export const generateTweet = async (req: Request, res: Response) => {
   }
 };
 
-
-export const fetchSuggestedTweets = async (req: Request, res: Response) => {
+export const fetchTweets = async (req: Request, res: Response) => {
   try {
-    const { status, userEmail } = req.body;
+    const userIdReq = Number(req.params.id);
+    const status = req.params.status;
     console.log('status is: ' + status);
-    console.log('userEmail is: ' + userEmail);
-    console.log(req.body);
-    const suggestedTweets = await prisma.topics.findMany({ where: { email: userEmail, status: 'suggested' } });
-    res.status(201);
-    res.send();
+    console.log('userEmail is: ' + userIdReq);
+    if (status === 'suggested') {
+      const tweets = await prisma.tweet.findMany({ where: { userId: userIdReq, status: 'suggested' } });
+      res.status(201);
+      res.send(tweets);
+    }
+    if (status === 'queued') {
+      const tweets = await prisma.tweet.findMany({ where: { userId: userIdReq, status: 'queued' } });
+      res.status(201);
+      res.send(tweets);
+    } 
   } catch (error) {
-    console.log('error in CreateUser:' + error);
+    console.log('Error in fetchTweets module controller/tweet.ts: ', error);
   }
-};
+}
 
-export const fetchQueuedTweets = async (req: Request, res: Response) => {
-  try {
-    const user = req.body;
-    console.log(req.body);
-    const newGeneratedTweet = await generateTweetAIService(user.topics)
-    res.status(201);
-    res.send(newGeneratedTweet);
-  } catch (error) {
-    console.log('error in CreateUser:' + error);
-  }
-};
+
+  
