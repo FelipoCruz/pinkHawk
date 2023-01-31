@@ -38,9 +38,10 @@ const App: React.FC = (): JSX.Element => {
 
   return (
     <>
-
       <div className="container">
-        {window.location.href.includes('dashboard') && loggeIn && <NavBarUser />}
+        {window.location.href.includes('dashboard') && loggeIn && (
+          <NavBarUser />
+        )}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
@@ -50,36 +51,36 @@ const App: React.FC = (): JSX.Element => {
                 <Dashboard />
               </ProtectedRoute>
             }
-          />
-          <Route
-            path="/dashboard/topics-definition"
-            element={
-              <ProtectedRoute>
-                <TopicsDefinition />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/dashboard/co-pilot"
-            element={
-              <ProtectedRoute>
-                <CoPilot />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/dashboard/growth"
-            element={
-              <ProtectedRoute>
-                <h1>Growth</h1>
-              </ProtectedRoute>
-            }
-          />
+          >
+            <Route
+              path="topics-definition"
+              element={
+                <ProtectedRoute>
+                  <TopicsDefinition />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="co-pilot"
+              element={
+                <ProtectedRoute>
+                  <CoPilot />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="growth"
+              element={
+                <ProtectedRoute>
+                  <h1>Growth</h1>
+                </ProtectedRoute>
+              }
+            />
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
       </div>
-
     </>
   );
 };
