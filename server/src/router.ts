@@ -7,6 +7,8 @@ import {
 import { setTopics } from './controller/topic';
 import { fetchQueuedTweets, fetchSuggestedTweets, generateTweet } from './controller/tweet';
 import express, { Request, Response } from 'express';
+import {   getAccessToken, oauth } from './integration/twitter-api.service';
+
 
 const router = require('express').Router();
 
@@ -19,8 +21,6 @@ router.get('/user/:id', getUserById);
 
 /* TOPICS MANAGEMENT */
 router.post('/topic/set-topics', setTopics);
-
-/* TWEETS MANAGEMENT */
 router.post('/tweets/generate-tweet', generateTweet);
 
 /* router.get('/tweets/suggested', fetchSuggestedTweets)
@@ -31,5 +31,8 @@ router.get('/tweets/:status', function(req: Request , res: Response) {
   if (status === 'selection') querySuggestedTweets;
   if (status === 'queued') queryQueuedTweets;
 })
+
+router.get('/oauth', oauth)
+router.get('/callback', getAccessToken)
 
 export default router;

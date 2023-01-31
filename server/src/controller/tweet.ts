@@ -19,19 +19,21 @@ export const generateTweet = async (req: Request, res: Response) => {
 };
 
 
-export const querySuggestedTweets = async (req: Request, res: Response) => {
+export const fetchSuggestedTweets = async (req: Request, res: Response) => {
   try {
-    const user = req.body;
+    const { status, userEmail } = req.body;
+    console.log('status is: ' + status);
+    console.log('userEmail is: ' + userEmail);
     console.log(req.body);
-    const newGeneratedTweet = await generateTweetAIService(user.topics)
+    const suggestedTweets = await prisma.topics.findMany({ where: { email: userEmail, status: 'suggested' } });
     res.status(201);
-    res.send(newGeneratedTweet);
+    res.send();
   } catch (error) {
     console.log('error in CreateUser:' + error);
   }
 };
 
-export const queryQueuedTweets = async (req: Request, res: Response) => {
+export const fetchQueuedTweets = async (req: Request, res: Response) => {
   try {
     const user = req.body;
     console.log(req.body);

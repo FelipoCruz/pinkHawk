@@ -1,3 +1,4 @@
+import React from "react";
 import { generateTweetServiceClient } from "../../services/api.service";
 import { useAppSelector } from "../hooks/hooks";
 import { useState } from "react";
@@ -8,7 +9,7 @@ const CoPilot = () => {
   console.log('user id us :', user)
 
   const [tweet, setTweet] = useState('');
-  
+
 
   const generateTweet = async () => {
     console.log('starting to generate tweet')
@@ -18,9 +19,9 @@ const CoPilot = () => {
 
 
 
-    
+
   }
-  
+
   return (
     <>
       <div className="container">
@@ -31,7 +32,7 @@ const CoPilot = () => {
         <br />
         <br />
         <h2>{tweet}</h2>
-        
+
       </div>
 
     </>

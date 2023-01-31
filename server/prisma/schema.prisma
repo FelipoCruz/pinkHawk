@@ -8,11 +8,28 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  firstName   String
-  familyName  String
-  email       String   @unique
-  password    String
-  twitterInfo String?
-  topics      String[]
+  id               Int      @id @default(autoincrement())
+  firstName        String
+  familyName       String
+  email            String   @unique
+  password         String
+  twitterInfo      String?
+  twitterAccountId String?
+  twitterName      String?
+  twitterToken     String?
+  twitterSecret    String?
+  tweets           Tweet[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Tweet {
+  id        Int      @id @default(autoincrement())
+  twitterId String?  @unique
+  text      String
+  status    String
+  User      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

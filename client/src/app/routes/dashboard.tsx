@@ -8,6 +8,11 @@ const Dashboard = () => {
   const user = useAppSelector((state) => state.user);
   console.log('user id us :', user);
 
+   const handleClick = async () =>{
+    const res = await getAuthUrl()
+    window.location.href = res.url;
+   }
+
   return (
     <div>
       {/* <h1>Dashboard</h1> */}
@@ -22,6 +27,7 @@ const Dashboard = () => {
       <NavLink to="/dashboard/co-pilot">
         <Button text={'co-pilot'} type={'btn-inverted'} />
       </NavLink>
+      <button onClick={handleClick}>authorize with twitter</button>
     </div>
   );
 };
