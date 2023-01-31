@@ -7,6 +7,7 @@ interface UserState {
   firstName: string;
   lastName: string;
   email: string;
+  topics: string[];
 }
 
 const initialState: UserState = {
@@ -16,6 +17,7 @@ const initialState: UserState = {
   firstName: '',
   lastName: '',
   email: '',
+  topics: []
 };
 
 export const userSlice = createSlice({
@@ -28,6 +30,7 @@ export const userSlice = createSlice({
       state.lastName = action.payload.familyName;
       state.email = action.payload.email;
       state.isLoggedIn = true;
+      state.topics = action.payload.topics;
       return state;
     },
   },

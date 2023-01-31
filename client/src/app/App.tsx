@@ -7,10 +7,12 @@ import Header from './components/header/Header';
 import Login from './components/login/SignIn/login';
 import SignUp from './components/login/SignUp/sign-up';
 import NavBarUser from './components/navbar/loginnavbar/LoginNavBar';
+import CoPilot from './routes/co-pilot';
 import { useAppDispatch, useAppSelector } from './hooks/hooks';
 import Dashboard from './routes/dashboard';
 import HomePage from './routes/home-page';
 import ProtectedRoute from './routes/protected-route';
+import TopicsDefinition from './routes/topics-definition';
 
 const App: React.FC = (): JSX.Element => {
   const loggeIn = useAppSelector((state) => state.auth.isLoggedIn);
@@ -46,6 +48,22 @@ const App: React.FC = (): JSX.Element => {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/topics-definition"
+            element={
+              <ProtectedRoute>
+                <TopicsDefinition />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/co-pilot"
+            element={
+              <ProtectedRoute>
+                <CoPilot />
               </ProtectedRoute>
             }
           />
