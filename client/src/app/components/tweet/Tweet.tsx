@@ -6,21 +6,24 @@ import { getUserById } from '../../../services/api.service';
 import { queueTweets } from '../../../store/slices/tweet.slice';
 import { UserState } from '../../../store/slices/user.slice';
 
-type Props = { tweetPassed: Tweet }
+type Props = { tweetPassed: Tweet };
 
 const SingleTweet = ({ tweetPassed }: Props) => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector(({ user }) => user);
+  const user: UserState = useAppSelector(({ user }) => user);
 
   const handleDelete = async (user: UserState, tweet: Tweet) => {
     try {
       // delete tweet from user, API to be made
-      const deleteSingleTweet = await deleteTweetFromUserAPI(user.id, tweet.id);
-      console.log('file: tweet.tsx:16 ~~> handleDelete ~~> deleteTweet', deleteTweet)
+      //const deleteSingleTweet = await deleteTweetFromUserAPI(user.id, tweet.id);
+      console.log(
+        'file: tweet.tsx:16 ~~> handleDelete ~~> deleteTweet',
+        deleteTweet
+      );
       // get user with new tweets from DB
       const getUserFromAPI = await getUserById(user.id);
       // update tweet state
-      dispatch(deleteTweet(deleteSingleTweet));
+      //dispatch(deleteTweet(deleteSingleTweet));
       // update user state with fetched user
       dispatch(activeUser(getUserFromAPI));
     } catch (err) {
@@ -31,12 +34,12 @@ const SingleTweet = ({ tweetPassed }: Props) => {
   const handleSelected = async (user: UserState, tweet: Tweet) => {
     try {
       // update tweet status in DB, API to be made
-      const tweetWithNewStatus = await changeTweetStatusFromUserAPI(user.id, tweet.id, 'queue');
-      console.log('file: tweet.tsx:32 ~~> handleSelected ~~> tweetWithNewStatus', tweetWithNewStatus)
+      //const tweetWithNewStatus = await changeTweetStatusFromUserAPI(user.id, tweet.id, 'queue');
+      //console.log('file: tweet.tsx:32 ~~> handleSelected ~~> tweetWithNewStatus', tweetWithNewStatus)
       // get user with new tweets from DB
       const getUserFromAPI = await getUserById(user.id);
       // update tweet status in state
-      dispatch(queueTweets(tweetWithNewStatus));
+      //dispatch(queueTweets(tweetWithNewStatus));
       // update user state with fetched user
       dispatch(activeUser(getUserFromAPI));
     } catch (err) {
@@ -45,18 +48,20 @@ const SingleTweet = ({ tweetPassed }: Props) => {
   };
 
   return (
-    <div className='solo-tweet'>
-      <div className='user-details'>
-        <img src={user.profilePic} alt='profile-pic' />
-        <div className='user-info'>
-          <h3>{user.name}</h3>
-          <p>{user.username}</p>
+    <div className="solo-tweet">
+      <div className="user-details">
+        <img src={user.profilePic} alt="profile-pic" />
+        <div className="user-info">
+          <h3>
+            {user.firstName} {user.lastName}
+          </h3>
+          <p>{user.nickName}</p>
         </div>
       </div>
-      <div className='tweet-text'>
+      <div className="tweet-text">
         <p>{tweetPassed.text}</p>
       </div>
-      <div className='tweet-actions'>
+      <div className="tweet-actions">
         <button onClick={() => handleSelected(user, tweetPassed)}>+</button>
         <button onClick={() => handleDelete(user, tweetPassed)}>x</button>
       </div>
