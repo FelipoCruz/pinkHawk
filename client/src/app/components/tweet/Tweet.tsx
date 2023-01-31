@@ -6,7 +6,9 @@ import { getUserById } from '../../../services/api.service';
 import { queueTweets } from '../../../store/slices/tweet.slice';
 import { UserState } from '../../../store/slices/user.slice';
 
-const SingleTweet: React.FC = ({ tweetPassed }) => {
+type Props = { tweetPassed: Tweet }
+
+const SingleTweet = ({ tweetPassed }: Props) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
 
@@ -45,10 +47,10 @@ const SingleTweet: React.FC = ({ tweetPassed }) => {
   return (
     <div className='solo-tweet'>
       <div className='user-details'>
-        <img src={tweetPassed.user.profilePic} alt='profile-pic' />
+        <img src={user.profilePic} alt='profile-pic' />
         <div className='user-info'>
-          <h3>{tweetPassed.user.name}</h3>
-          <p>{tweetPassed.user.username}</p>
+          <h3>{user.name}</h3>
+          <p>{user.username}</p>
         </div>
       </div>
       <div className='tweet-text'>
