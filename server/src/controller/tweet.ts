@@ -35,7 +35,7 @@ export const fetchTweets = async (req: Request, res: Response) => {
       res.send(tweets);
     } 
   } catch (error) {
-    console.log('Error in fetchTweets module controller/tweet.ts: ', error);
+    console.log('Error in fetchTweets @ module controller/tweet.ts: ', error);
   }
 };
 
@@ -43,8 +43,8 @@ export const queueTweet = async (req: Request, res: Response) => {
   try {
     const userIdReq = Number(req.params.id);
     const tweetId = Number(req.params.tweetId);
-    console.log('status is: ' + userIdReq );
-    console.log('userEmail is: ' + tweetId);
+    console.log('userIdReq is: ' + userIdReq );
+    console.log('tweetId is: ' + tweetId);
     const queuedTweetOK = await prisma.tweet.update({
       where: { id: tweetId },
       data: { status: 'queued' }, 
@@ -52,9 +52,31 @@ export const queueTweet = async (req: Request, res: Response) => {
       res.status(201);
       res.send(queuedTweetOK);
   } catch (error) {
-    console.log('Error in fetchTweets module controller/tweet.ts: ', error);
+    console.log('Error in queueTweet @ module controller/tweet.ts: ', error);
   }
 }
+
+
+
+
+
+export const tweetStatusPosted = async (req: Request, res: Response) => {
+  try {
+    const userIdReq = Number(req.params.id);
+    const tweetId = Number(req.params.tweetId);
+    console.log('userIdReq: ' + userIdReq );
+    console.log('tweetId is: ' + tweetId);
+    const tweetStatusPostedOK  = await prisma.tweet.update({
+      where: { id: tweetId },
+      data: { status: 'posted' }, 
+    });
+      res.status(201);
+      res.send(tweetStatusPostedOK );
+  } catch (error) {
+    console.log('Error in tweetStatusPosted @ module controller/tweet.ts: ', error);
+  }
+}
+
 
 
   
