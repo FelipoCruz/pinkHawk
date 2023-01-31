@@ -14,7 +14,7 @@ const Queue = () => {
   return (
     <div>
       <ul>
-        {tweets?.length > 0 && tweets.filter((tweet: TweetType) => tweet.status === 'queue').map((tweet: TweetType) => {
+        {tweets?.length > 0 && tweets.filter((tweet: TweetType) => tweet.status === 'queued').map((tweet: TweetType) => {
           return <li><Tweet key={tweet.id} tweetPassed={tweet} /></li>;
         })}
       </ul>
