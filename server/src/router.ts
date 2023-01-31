@@ -27,7 +27,7 @@ router.get('/tweets/queued', fetchQueuedTweets); */
 
 router.get('/user/:id/tweets/:status', fetchTweets)
 
-router.get('/oauth', oauth)
+router.get('/user/:id/oauth', oauth)
 router.get('/callback', getAccessToken)
 
 export default router;
