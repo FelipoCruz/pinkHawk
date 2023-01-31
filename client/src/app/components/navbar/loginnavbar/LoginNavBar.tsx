@@ -4,6 +4,7 @@ import './LoginNavBar.scss';
 import { useAppSelector } from '../../../hooks/hooks';
 import CopilotMenu from '../copilotmenubutton/CopilotMenu/CopilotMenu';
 import GrowthMenu from '../growthmenu/GrowthMenu';
+import logo from '../../../../images/pinkhawklogo.svg';
 
 const NavBarUser: React.FC = () => {
   const [selectedComponent, setSelectedComponent] = useState<React.ReactNode | null>(null);
@@ -12,7 +13,7 @@ const NavBarUser: React.FC = () => {
 
   return (
     <header className='user-navbar'>
-      <img alt='pinkhawk logo' className='logo' />
+      <img alt='pinkhawk logo' className='logo' src={logo} />
       <nav className='user-navbar-buttons'>
         <button
           onClick={() => setSelectedComponent(<CopilotMenu />)}
