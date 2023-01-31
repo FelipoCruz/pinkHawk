@@ -71,6 +71,7 @@ export const generateTweetServiceClient = async (user) => {
     console.log(err);
   }
 };
+
 export const getUserById = async (id) => {
   try {
     const url = BASE_URL + 'user/' + id;
