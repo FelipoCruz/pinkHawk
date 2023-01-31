@@ -1,5 +1,7 @@
+import {  PrismaClient } from '@prisma/client';
 import { Request, Response } from "express";
 import { TwitterApi } from "twitter-api-v2";
+const prisma = new PrismaClient();
 interface TwitterApiTokens {
   appKey: string;
   appSecret: string;
@@ -27,9 +29,6 @@ export const oauth = async (req: Request, res: Response) => {
 }
 
 
-
-
-
 export const getAccessToken = async (req: Request, res: Response) => {
   const { oauth_token, oauth_verifier } = req.query;
   // Get the saved oauth_token_secret
@@ -51,20 +50,44 @@ export const getAccessToken = async (req: Request, res: Response) => {
   //then get client real accessTokens and accessSecret
   const { client: loggedClient, accessToken, accessSecret } = await client.login(oauth_verifier as string);
 
-  
-  //then create a real client
-  const realUser = new TwitterApi({
+  //access this real user's data
+ const realUser = new TwitterApi({
     appKey: key!,
     appSecret: secret!,
     accessToken: accessToken!,
     accessSecret: accessSecret!
   })
-
-  const sally = await realUser.v2.tweet('test3')
-  console.log(sally);
-
-  res.redirect('http://localhost:3000')
+  const info = await realUser.v2.me();
+ 
+  //save these user twitter data to database
+  await prisma.user.update({
+    where : { id: parseInt(userId) }, 
+    data: {
+      twitterToken: accessToken,
+      twitterSecret: accessSecret,
+      twitterInfo: info.data.username,
+      twitterName: info.data.name,
+      twitterAccountId: info.data.id
+    }
+  })
+ 
+  res.redirect('http://localhost:3000/dashboard') 
 }
+
+//TODO: to post the queued tweets every x hours
+export const postTweet = async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  const user = prisma.user.findFirst({where:{id: Number(id)}})
+ 
+  // const realUser = new TwitterApi({
+  //   appKey: key!,
+  //   appSecret: secret!,
+  //   accessToken: accessToken!,
+  //   accessSecret: accessSecret!
+  // })
+
+} 
 
 
 //tweet data:
