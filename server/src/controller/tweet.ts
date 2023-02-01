@@ -12,11 +12,13 @@ export const generateTweet = async (req: Request, res: Response) => {
     console.log(req.body);
     const newGeneratedTweet = await generateTweetAIService(user.topics)
     const tweetText = String(newGeneratedTweet?.text);
+    const finalTweet = tweetText.replaceAll(/["]+/g, '');
+    const finalTweet2 = finalTweet.replaceAll(/&amp;/g, "&");
     console.log('new generated tweet from GPT', newGeneratedTweet);
     const saveTweet = await prisma.tweet.create({
       data: { 
         userId: user.id,
-        text: tweetText,
+        text: finalTweet2,
         status: 'suggested', }, 
     });
     res.status(201);
@@ -90,7 +92,7 @@ export const tweetDelete = async (req: Request, res: Response) => {
       where: { id: tweetId },
     });
       res.status(200);
-      res.send(`tweet with id: ${tweetId}, successfully deleted`);
+      // res.send(tweetId);
   } catch (error) {
     console.log('Error in tweetDelete @ module controller/tweet.ts: ', error);
   }

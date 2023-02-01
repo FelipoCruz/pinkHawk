@@ -1,73 +1,31 @@
-import React from 'react';
-import { deleteTweet, Tweet } from '../../../store/slices/tweet.slice';
-import { activeUser } from '../../../store/slices/user.slice';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { getUserById } from '../../../services/api.service';
-import { UserState } from '../../../store/slices/user.slice';
+import { useAppSelector } from '../../hooks/hooks';
+import { UserState } from '../../interfaces/user.interface';
+import { Tweet } from '../../interfaces/tweet.interface';
 
 type Props = { tweetPassed: Tweet };
 
-const SingleTweet = ({ tweetPassed }: Props) => {
-  const dispatch = useAppDispatch();
+const SingleTweetTest = ({ tweetPassed }: Props) => {
   const user: UserState = useAppSelector(({ user }) => user);
+  console.log('user in the state ======>', user);
 
-  const handleDelete = async (user: UserState, tweet: Tweet) => {
-    try {
-      // delete tweet from user, API to be made
-      //const deleteSingleTweet = await deleteTweetFromUserAPI(user.id, tweet.id);
-      console.log(
-        'file: tweet.tsx:16 ~~> handleDelete ~~> deleteTweet',
-        deleteTweet
-      );
-      // get user with new tweets from DB
-      const getUserFromAPI = await getUserById(user.id);
-      // update tweet state
-      //dispatch(deleteTweet(deleteSingleTweet));
-      // update user state with fetched user
-      dispatch(activeUser(getUserFromAPI));
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const handleSelected = async (user: UserState, tweet: Tweet) => {
-    try {
-      // update tweet status in DB, API to be made
-      //const tweetWithNewStatus = await changeTweetStatusFromUserAPI(user.id, tweet.id, 'queue');
-      //console.log('file: tweet.tsx:32 ~~> handleSelected ~~> tweetWithNewStatus', tweetWithNewStatus)
-      // get user with new tweets from DB
-      const getUserFromAPI = await getUserById(user.id);
-      // update tweet status in state
-      //dispatch(queueTweets(tweetWithNewStatus));
-      // update user state with fetched user
-      dispatch(activeUser(getUserFromAPI));
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  if (!tweetPassed) return null;
 
   return (
-    <div className="solo-tweet">
-      <div className="user-details">
-        <img src={user.profilePic} alt="profile-pic" />
-        <div className="user-info">
-          <h3>
-            {user.firstName} {user.lastName}
-          </h3>
-          <p>{user.nickName}</p>
-        </div>
+    <div className='solo-tweet'>
+      <div className='user-details'>
+        {/* <img src={user.profilePic} alt='profile-pic' /> */}
+        <p>{user.twitterName}</p>
+        <p>{user.twitterInfo}</p>
       </div>
-      <div className="tweet-text">
+      <div className='tweet-content'>
         <p>{tweetPassed.text}</p>
       </div>
-      <div className="tweet-actions">
-        {tweetPassed.status !== 'queue' && (
-          <button onClick={() => handleSelected(user, tweetPassed)}>+</button>
-        )}
+      {/* <div className='tweet-actions'>
+        {tweetPassed.status !== 'queue' && <button onClick={() => handleSelected(user, tweetPassed)}>+</button>}
         <button onClick={() => handleDelete(user, tweetPassed)}>x</button>
-      </div>
+      </div> */}
     </div>
   );
 };
 
-export default SingleTweet;
+export default SingleTweetTest;
