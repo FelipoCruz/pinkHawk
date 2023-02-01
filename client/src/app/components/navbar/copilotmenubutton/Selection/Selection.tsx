@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import './Selection.scss';
 import { getSuggestedTweets } from '../../../../../services/getsuggestedtweets.service';
 import { selectionTweets } from '../../../../../store/slices/tweet.slice';
+=======
+import React, { useEffect } from 'react';
+import { Tweet as TweetType } from '../../../../../store/slices/tweet.slice';
+import Tweet from '../../../tweet/Tweet';
+>>>>>>> 9b46b2e9ec2e02fbe5b0e0c8ca33396d60e5b8f7
 import { getTweets } from '../../../../helpers/mocks';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 import SingleTweet from '../../../tweet/Tweet';
@@ -13,7 +19,7 @@ import rejectButton from '../../../../../images/reject.png';
 const Selection = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
-  const tweets = useAppSelector(({ tweets }) => tweets);
+  const { tweets } = useAppSelector(({ tweets }) => tweets);
   // const [tweets, setTweets] = React.useState<any>([]);
   const [sTweets, setSTweets] = useState([])
 
@@ -56,9 +62,9 @@ const Selection = () => {
 
 
 
-  const handleMoveToQueu = (id: number) => {
-    console.log('moved to queu', id);
-  };
+  // const handleMoveToQueu = (id: number) => {
+  //   console.log('moved to queu', id);
+  // };
 
   // useEffect(() => {
   //   const doGetTweets = async () => {
@@ -81,6 +87,7 @@ const Selection = () => {
   if (!tweets) return null;
 
   return (
+<<<<<<< HEAD
     <>
       <div>
         <button onClick={generateTweetsInit}> GENERATE TWEETS INITIAL </button>
@@ -107,6 +114,15 @@ const Selection = () => {
         </ul>
       </div>
     </>
+=======
+    <div>
+      <ul>
+        {tweets?.length > 0 && tweets.filter((tweet: TweetType) => tweet.status === 'suggested').map((tweet: TweetType) => {
+          return <li><Tweet key={tweet.id} tweetPassed={tweet} /></li>;
+        })}
+      </ul>
+    </div>
+>>>>>>> 9b46b2e9ec2e02fbe5b0e0c8ca33396d60e5b8f7
   );
 };
 
