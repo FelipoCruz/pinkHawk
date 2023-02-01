@@ -9,10 +9,12 @@ const openai = new OpenAIApi(configuration);
 
 const basePromptPrefix =
 `
-Create a tweets, using the following topics:
-Each Tweet must be fun, interesting, and engaging. 
-Each tweet must present and explain with details and examples an idea or fact.
-Avoid that tweets sound too generic or vague. Tweets must sound unique and personal.
+Create a tweet, picking just one following topics, from the array of Topics:
+The Tweet must be fun, interesting, and engaging. 
+The tweet must explain with details and examples an idea or fact.
+Avoid that the tweet sound too generic or vague. 
+The tweet must sound unique and personal.
+The tweet must be short, just one sentence.
 
 Topics:
 `
