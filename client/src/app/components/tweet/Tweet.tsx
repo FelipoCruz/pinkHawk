@@ -1,11 +1,11 @@
 import { useAppSelector } from '../../hooks/hooks';
-import { UserState } from '../../interfaces/user.interface';
-import { Tweet } from '../../interfaces/tweet.interface';
+import ITweet from '../../interfaces/tweet.interface';
+import IUser from '../../interfaces/user.interface';
 
-type Props = { tweetPassed: Tweet };
+type Props = { tweetPassed: ITweet };
 
 const SingleTweetTest = ({ tweetPassed }: Props) => {
-  const user: UserState = useAppSelector(({ user }) => user);
+  const user: IUser = useAppSelector(({ user }) => user);
   console.log('user in the state ======>', user);
 
   if (!tweetPassed) return null;
