@@ -110,3 +110,18 @@ export const getAuthUrl = async (id) => {
     console.log(error);
   }
 };
+
+export const updateTimePreference = async (id, frequency) => {
+try {
+  const res = await fetch(`${BASE_URL}user/${id}/frequency`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({frequency}),
+  })
+  return res.json();
+} catch (error) {
+  console.log(error);
+}
+}

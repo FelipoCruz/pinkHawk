@@ -1,6 +1,50 @@
-@use "../../../../scss/variables.scss" as v;
-
+@use "../../../scss/variables.scss" as v;
 
 .topics-input-container {
   
+}
+
+.time-label {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.select-box {
+  width: 70px;
+  height:fit-content;
+  font-size: 14px;
+  margin: 20px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  padding: 10px;
+}
+
+label {
+  font-size: 16px;
+}
+
+.pref-btn {
+  min-width: 145px;
+  height: 40px;
+  letter-spacing: 0.5px;
+  line-height: 50px;
+  padding: 0 30px;
+  font-size: 15px;
+  background-color: v.$black;
+  color: v.$white;
+  text-transform: uppercase;
+  font-weight: bolder;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+
+  &:hover {
+    background-color:transparent;
+    color: black;
+    border: 1px solid black;
+  }
 }
