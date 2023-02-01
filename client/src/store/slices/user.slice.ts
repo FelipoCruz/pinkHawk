@@ -40,11 +40,21 @@ export const userSlice = createSlice({
       state.lastName = action.payload.familyName;
       state.email = action.payload.email;
       state.topics = action.payload.topics;
-      return state;
+    },
+
+    deactivateUser: (state) => {
+      state.isLoggedIn = false;
+      state.id = '';
+      state.name = '';
+      state.username = '';
+      state.firstName = '';
+      state.lastName = '';
+      state.email = '';
+      state.topics = [];
     },
   },
 });
 
-export const { activeUser } = userSlice.actions;
+export const { activeUser, deactivateUser } = userSlice.actions;
 
 export default userSlice.reducer;

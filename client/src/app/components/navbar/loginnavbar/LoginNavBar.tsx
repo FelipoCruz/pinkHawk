@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './LoginNavBar.scss';
-import { useAppSelector } from '../../../hooks/hooks';
-import logo from '../../../../images/pinkhawklogo.svg';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import copilotButton from '../../../../images/copilot.png';
 import growthButton from '../../../../images/growth.png';
 import userIcon from '../../../../images/user.png';
-import Button from '../../button/Button';
+import { logout } from '../../../../services/api.service';
+import { deactivateUser } from '../../../../store/slices/user.slice';
+import { ReactComponent as Logo } from '../../../../images/pinkhawklogo.svg';
 
 const NavBarUser: React.FC = () => {
-  const [selectedComponent, setSelectedComponent] =
-    useState<React.ReactNode | null>(null);
-  const user = useAppSelector((state) => state.user);
-  console.log('user in state', user);
-
   return (
     <header className="user-navbar">
-      <img alt="pinkhawk logo" className="logo" src={logo} />
+      <NavLink to="/dashboard" className="logo-container">
+        <Logo className="logo" />
+        <span className="logo-text">Pink Hawk</span>
+      </NavLink>
       <nav className="navbar-items">
         <NavLink to="/dashboard/co-pilot">
           <img
