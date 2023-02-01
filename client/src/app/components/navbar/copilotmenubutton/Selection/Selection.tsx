@@ -9,11 +9,14 @@ import rejectButton from '../../../../../images/reject.png';
 import { Tweet } from '../../../../interfaces/tweet.interface';
 import { queueTweetDB } from '../../../../../services/tweet-queue-db.service';
 import { deleteTweetDB } from '../../../../../services/tweet-delete-db.service';
+import Button from '../../../button/Button';
+import Spinner from '../../../spinner/Spinner';
 
 
 const Selection = () => {
   //const { tweets } = useAppSelector(({ tweets }) => tweets);
   const user = useAppSelector(({ user }) => user);
+  const [spinner, setSpinner] = useState(false);
   const [tweets, setTweets] = useState([])
 
   useEffect(() => {
@@ -34,12 +37,16 @@ const Selection = () => {
   console.log('Suggested Tweets are: ', tweets);
 
   const generateTweetsInit = async () => {
+    setSpinner(true);
     console.log('starting to generate tweets')
-    await generateTweetServiceClient(user);
-    await generateTweetServiceClient(user);
-    await generateTweetServiceClient(user);
-    await generateTweetServiceClient(user);
-    await generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    await new Promise(resolve => setTimeout(resolve, 14000));
+    fetchSuggestedTweets();
+    setSpinner(false);
   };
 
   const moveTweetQueued = async (tweetToQueue: Tweet, index: number) => {
@@ -69,17 +76,11 @@ const Selection = () => {
   };
 
 
+
   return (
     <>
-      <div>
-        <h1>hi</h1>
-        <button onClick={generateTweetsInit}> GENERATE TWEETS INITIAL </button>
-        <br />
-        <br />
-        {/* <button onClick={generateTweet}> GENERATE TWEETS 2ND </button> */}
-        <br />
-        <br />
-        {/* <SingleTweet tweetPassed={sTweets[0]} /> */}
+        { spinner ? <Spinner/> :
+        <div>
         <ul>
           {tweets.map((tweet: Tweet, index) => {
             return (
@@ -96,7 +97,9 @@ const Selection = () => {
             );
           })}
         </ul>
-      </div>
+        <button onClick={generateTweetsInit}> <Button text={'More Tweets!'}></Button> </button>
+        </div>
+        } 
     </>
   );
 };
