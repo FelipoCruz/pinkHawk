@@ -14,24 +14,24 @@ import { deleteTweetDB } from '../../../../../services/tweet-delete-db.service';
 const Selection = () => {
   //const { tweets } = useAppSelector(({ tweets }) => tweets);
   const user = useAppSelector(({ user }) => user);
-  const [sTweets, setSTweets] = useState([])
+  const [tweets, setTweets] = useState([])
 
   useEffect(() => {
     fetchSuggestedTweets();
-    
+
   }, []);
 
   useEffect(() => {
-    console.log(sTweets.length);
-  }, [sTweets]);
+    console.log(tweets.length);
+  }, [tweets]);
 
   const fetchSuggestedTweets = async () => {
     const fetchedTweets = await getSuggestedTweets(user.id);
-    setSTweets(fetchedTweets);
-    
+    setTweets(fetchedTweets);
+
   };
 
-  console.log('Suggested Tweets are: ', sTweets);
+  console.log('Suggested Tweets are: ', tweets);
 
   const generateTweetsInit = async () => {
     console.log('starting to generate tweets')
@@ -52,7 +52,7 @@ const Selection = () => {
     // generateTweetServiceClient(user);
   };
 
-  const deleteTweet = async (tweetToDelete: Tweet, index: number) => {  
+  const deleteTweet = async (tweetToDelete: Tweet, index: number) => {
     console.log('deleting tweet')
     console.log(tweetToDelete);
     // delete tweet from DB
@@ -63,12 +63,11 @@ const Selection = () => {
   };
 
   const deleteTweetinState = (index: number) => {
-    const items = [...sTweets];
+    const items = [...tweets];
     items.splice(index, 1);
-    setSTweets(items);
+    setTweets(items);
   };
 
- 
 
   return (
     <>
@@ -82,16 +81,16 @@ const Selection = () => {
         <br />
         {/* <SingleTweet tweetPassed={sTweets[0]} /> */}
         <ul>
-          {sTweets.map((tweet: Tweet, index) => {
+          {tweets.map((tweet: Tweet, index) => {
             return (
-              
-              <li key={tweet.id} className="tweet-li">
-                <button name="accept-tweet-button" onClick={() => moveTweetQueued(tweet, index)}>
-                  <img alt="accept-tweet-button-img" className="icon-button" src={acceptButton} />
+
+              <li key={tweet.id} className='tweet-li'>
+                <button name='accept-tweet-button' onClick={() => moveTweetQueued(tweet, index)}>
+                  <img alt='accept-tweet-button-img' className='icon-button' src={acceptButton} />
                 </button>
                 <SingleTweet tweetPassed={tweet} />
-                <button name="reject-tweet-button" onClick={() => deleteTweet(tweet, index)}>
-                  <img alt="reject-tweet-button" className="icon-button" src={rejectButton} />
+                <button name='reject-tweet-button' onClick={() => deleteTweet(tweet, index)}>
+                  <img alt='reject-tweet-button' className='icon-button' src={rejectButton} />
                 </button>
               </li>
             );

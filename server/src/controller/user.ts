@@ -22,6 +22,7 @@ export const getUserById = async (req: Request, res: Response) => {
     const user = await prisma.user.findUnique({
       where: { id: Number(req.params.id) },
     });
+    console.log('user from getUserById: ', user);
     const realUser = new TwitterApi({
       appKey: process.env.API_KEY!,
       appSecret: process.env.API_KEY_SECRET!,
