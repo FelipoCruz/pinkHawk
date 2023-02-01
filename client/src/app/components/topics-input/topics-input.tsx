@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { TagsInput } from 'react-tag-input-component';
-import { saveTopics, updateTimePreference } from '../../../services/api.service';
-import { useAppSelector } from '../../hooks/hooks';
+import { saveTopics, updateFrequencyPreference } from '../../../services/api.service';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import Button from '../button/Button';
 import './topics-input.scss'
 
 const TopicsInput = () => {
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user)
   console.log('user id us :', user)
   const [selectedTopics, setSelectedTopics] = useState(['']);
@@ -22,7 +23,11 @@ const TopicsInput = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const pref = await updateTimePreference(user.id, timePreference)
+    const pref = await updateFrequencyPreference(user.id, timePreference);
+    if (pref) {
+      console.log('pref is: ', pref)
+      
+    }
   }
 
   return (
@@ -42,7 +47,7 @@ const TopicsInput = () => {
       <form onSubmit={handleSubmit}>
         <h2 className='time-label'>Choose your preference for posting a tweet:</h2>
         <label htmlFor='number'>every</label>
-        <select id='number' name='number' className='select-box'  onChange={handleChange} value={timePreference}>
+        <select id='number' name='number' className='select-box' onChange={handleChange} value={timePreference}>
           <option value='1'>1</option>
           <option value='2'>2</option>
           <option value='3'>3</option>

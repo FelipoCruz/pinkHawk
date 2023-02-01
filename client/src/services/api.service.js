@@ -111,17 +111,17 @@ export const getAuthUrl = async (id) => {
   }
 };
 
-export const updateTimePreference = async (id, frequency) => {
-try {
-  const res = await fetch(`${BASE_URL}user/${id}/frequency`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({frequency}),
-  })
-  return res.json();
-} catch (error) {
-  console.log(error);
-}
+export const updateFrequencyPreference = async (id, frequency) => {
+  try {
+    const res = await fetch(`${BASE_URL}user/${id}/frequency/${frequency}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ frequency }),
+    })
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
 }
