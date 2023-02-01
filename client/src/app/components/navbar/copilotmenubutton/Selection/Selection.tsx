@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Selection.scss';
+import '../../../tweet/Tweet.scss';
 import { getSuggestedTweets } from '../../../../../services/getsuggestedtweets.service';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 import SingleTweet from '../../../tweet/Tweet';
@@ -26,6 +27,7 @@ const Selection = () => {
 
   useEffect(() => {
     console.log(tweets.length);
+    if (tweets.length < 1) fetchSuggestedTweets();
   }, [tweets]);
 
   const fetchSuggestedTweets = async () => {
@@ -56,7 +58,7 @@ const Selection = () => {
     queueTweetDB(user.id, tweetToQueue.id)
     // modify tweet status in the State
     deleteTweetinState(index)
-    // generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
   };
 
   const deleteTweet = async (tweetToDelete: Tweet, index: number) => {
@@ -66,7 +68,7 @@ const Selection = () => {
     deleteTweetDB(user.id, tweetToDelete.id);
     // delete tweet from state
     deleteTweetinState(index)
-    // generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
   };
 
   const deleteTweetinState = (index: number) => {
