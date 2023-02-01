@@ -9,7 +9,7 @@ const CopilotMenu = () => {
     React.useState<React.ReactNode | null>(null);
 
   return (
-    <div>
+    <div className="copilot">
       <nav className="copilot-nav">
         <button
           onClick={() => setSelectedComponent(<Selection />)}
