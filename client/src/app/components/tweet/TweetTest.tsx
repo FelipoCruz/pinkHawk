@@ -14,7 +14,8 @@ const SingleTweetTest = ({ tweetPassed }: Props) => {
     <div className='solo-tweet'>
       <div className='user-details'>
         {/* <img src={user.profilePic} alt='profile-pic' /> */}
-        <p>{user.name}</p>
+        <p>{user.twitterName}</p>
+        <p>{user.twitterInfo}</p>
       </div>
       <div className='tweet-content'>
         {/* <div className='tweet-text'> */}

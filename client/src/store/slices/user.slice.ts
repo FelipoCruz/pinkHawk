@@ -10,6 +10,8 @@ const initialState: UserState = {
   firstName: '',
   lastName: '',
   email: '',
+  twitterInfo: '',
+  twitterName: '',
   topics: [],
   frequencyTweetPosting: 6,
 };
@@ -26,6 +28,8 @@ export const userSlice = createSlice({
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.familyName;
       state.email = action.payload.email;
+      state.twitterInfo = action.payload.twitterInfo;
+      state.twitterName = action.payload.twitterName;
       state.topics = action.payload.topics;
     },
 
@@ -37,6 +41,8 @@ export const userSlice = createSlice({
       state.firstName = '';
       state.lastName = '';
       state.email = '';
+      state.twitterInfo = '';
+      state.twitterName = '';
       state.topics = [];
     },
   },
