@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 import Tweet from '../../../tweet/Tweet';
-import { Tweet as TweetType } from '../../../../../store/slices/tweet.slice';
+import { Tweet as TweetType } from '../../../../interfaces/tweet.interface';
 
 const Queue = () => {
   const dispatch = useAppDispatch();

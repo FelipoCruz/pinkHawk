@@ -1,10 +1,11 @@
 import React from 'react';
-import { deleteTweet, Tweet } from '../../../store/slices/tweet.slice';
+import { deleteTweet } from '../../../store/slices/tweet.slice';
 import { activeUser } from '../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { getUserById } from '../../../services/api.service';
 import { queueTweets } from '../../../store/slices/tweet.slice';
-import { UserState } from '../../../store/slices/user.slice';
+import { Tweet } from '../../interfaces/tweet.interface';
+import { UserState } from '../../interfaces/user.interface';
 
 type Props = { tweetPassed: Tweet };
 
@@ -34,7 +35,7 @@ const SingleTweet = ({ tweetPassed }: Props) => {
   const handleSelected = async (user: UserState, tweet: Tweet) => {
     try {
       // update tweet status in DB, API to be made
-      //const tweetWithNewStatus = await changeTweetStatusFromUserAPI(user.id, tweet.id, 'queue');
+      // const tweetWithNewStatus = await changeTweetStatusFromUserAPI(user.id, tweet.id);
       //console.log('file: tweet.tsx:32 ~~> handleSelected ~~> tweetWithNewStatus', tweetWithNewStatus)
       // get user with new tweets from DB
       const getUserFromAPI = await getUserById(user.id);
@@ -48,20 +49,20 @@ const SingleTweet = ({ tweetPassed }: Props) => {
   };
 
   return (
-    <div className="solo-tweet">
-      <div className="user-details">
-        <img src={user.profilePic} alt="profile-pic" />
-        <div className="user-info">
+    <div className='solo-tweet'>
+      <div className='user-details'>
+        <img src={user.profilePic} alt='profile-pic' />
+        <div className='user-info'>
           <h3>
             {user.firstName} {user.lastName}
           </h3>
           <p>{user.nickName}</p>
         </div>
       </div>
-      <div className="tweet-text">
+      <div className='tweet-text'>
         <p>{tweetPassed.text}</p>
       </div>
-      <div className="tweet-actions">
+      <div className='tweet-actions'>
         {tweetPassed.status !== 'queue' && <button onClick={() => handleSelected(user, tweetPassed)}>+</button>}
         <button onClick={() => handleDelete(user, tweetPassed)}>x</button>
       </div>

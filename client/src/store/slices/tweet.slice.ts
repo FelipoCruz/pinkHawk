@@ -1,14 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-export interface Tweet {
-  id: number;
-  status: string;
-  text: string;
-}
-
-export interface TweetState {
-  tweets: Tweet[]
-};
+import { TweetState } from '../../app/interfaces/tweet.interface';
 
 const initialState: TweetState = {
   tweets: [],
@@ -18,7 +9,7 @@ export const tweetSlice = createSlice({
   name: 'tweet',
   initialState,
   reducers: {
-    selectionTweets: (state, action) => {
+    suggestedTweets: (state, action) => {
       return action.payload;
     },
 
@@ -37,6 +28,6 @@ export const tweetSlice = createSlice({
   }
 });
 
-export const { selectionTweets, queueTweets, deleteTweet } = tweetSlice.actions;
+export const { suggestedTweets, queueTweets, deleteTweet } = tweetSlice.actions;
 
 export default tweetSlice.reducer;

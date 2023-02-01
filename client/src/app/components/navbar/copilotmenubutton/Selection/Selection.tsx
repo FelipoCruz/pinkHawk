@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { Tweet as TweetType } from '../../../../../store/slices/tweet.slice';
+import { selectionTweets, Tweet as TweetType } from '../../../../../store/slices/tweet.slice';
 import Tweet from '../../../tweet/Tweet';
-import { getTweets } from '../../../../helpers/mocks';
+// import { getTweets } from '../../../../helpers/mocks';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
+import { getUserTweets } from '../../../../../services/api.tweets';
 
 const Selection = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +26,7 @@ const Selection = () => {
   // }, []);
 
   const fetchSelectionTweets = async () => {
-    const response = await getTweets();
+    const response = await getUserTweets();
     dispatch(selectionTweets(response));
   };
 

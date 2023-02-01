@@ -1,18 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-export interface UserState {
-  isLoggedIn: boolean;
-  id: string;
-  name: string;
-  username: string;
-  nickName: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  topics: string[];
-  frequencyTweetPosting: number;
-  profilePic?: string;
-}
+import { UserState } from '../../app/interfaces/user.interface';
 
 const initialState: UserState = {
   isLoggedIn: false,
