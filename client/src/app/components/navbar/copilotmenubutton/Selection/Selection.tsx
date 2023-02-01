@@ -95,13 +95,13 @@ const Selection = () => {
         <ul>
           {sTweets.map((tweet: any) => {
             return (
-              <li key={tweet.id} className="tweet-li">
-                <button name="accept-tweet-button" onClick={moveTweetQueued}>
-                  <img alt="accept-tweet-button-img" className="icon-button" src={acceptButton} />
+              <li key={tweet.id} className='tweet-li'>
+                <button name='accept-tweet-button' onClick={moveTweetQueued}>
+                  <img alt='accept-tweet-button-img' className='icon-button' src={acceptButton} />
                 </button>
                 <SingleTweet tweetPassed={tweet} />
-                <button name="reject-tweet-button" onClick={deleteTweet}>
-                  <img alt="reject-tweet-button" className="icon-button" src={rejectButton} />
+                <button name='reject-tweet-button' onClick={deleteTweet}>
+                  <img alt='reject-tweet-button' className='icon-button' src={rejectButton} />
                 </button>
               </li>
             );
