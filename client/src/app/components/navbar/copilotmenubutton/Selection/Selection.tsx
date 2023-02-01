@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import './Selection.scss';
 import { getSuggestedTweets } from '../../../../../services/getsuggestedtweets.service';
-import { selectionTweets } from '../../../../../store/slices/tweet.slice';
-import { Tweet as TweetType } from '../../../../../store/slices/tweet.slice';
-import Tweet from '../../../tweet/Tweet';
-import { getTweets } from '../../../../helpers/mocks';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
+// import { selectionTweets } from '../../../../../store/slices/tweet.slice';
+// import { Tweet as TweetType } from '../../../../../store/slices/tweet.slice';
+// import Tweet from '../../../tweet/Tweet';
+// import { getTweets } from '../../../../helpers/mocks';
+import { useAppSelector } from '../../../../hooks/hooks';
 import SingleTweet from '../../../tweet/Tweet';
 import { generateTweetServiceClient } from '../../../../../services/api.service';
 import acceptButton from '../../../../../images/check.png';
 import rejectButton from '../../../../../images/reject.png';
+import { getUserTweets } from '../../../../../services/api.tweets';
+import '../../../tweet/Tweet.scss';
 
 
 const Selection = () => {
-  const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
   const { tweets } = useAppSelector(({ tweets }) => tweets);
   // const [tweets, setTweets] = React.useState<any>([]);
@@ -55,9 +56,6 @@ const Selection = () => {
 
   };
 
-
-
-
   // const handleMoveToQueu = (id: number) => {
   //   console.log('moved to queu', id);
   // };
@@ -77,7 +75,7 @@ const Selection = () => {
   const fetchSelectionTweets = async () => {
     const getTweets =  await getUserTweets(user.id, 'suggested');
     console.log('file: Selection.tsx:35 ~~> fetchSelectionTweets ~~> getTweets', getTweets)
-    setTweets(getTweets);
+    setSTweets(getTweets);
   };
 
   useEffect(() => {
