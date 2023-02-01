@@ -4,32 +4,32 @@ import { saveTopics, updateFrequencyPreference } from '../../../services/api.ser
 import { activeUser } from '../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import Button from '../button/Button';
-import './topics-input.scss'
+import './topics-input.scss';
 
 const TopicsInput = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user)
-  console.log('user in state :', user)
+  const user = useAppSelector((state) => state.user);
+  console.log('user in state :', user);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
-  const [amountPreference, setAmountPreference] = useState('')
+  const [amountPreference, setAmountPreference] = useState('');
 
   const setTopics = () => {
-    console.log('selected topics are:', selectedTopics)
-    saveTopics(selectedTopics, user.email)
-    setSelectedTopics([])
-  }
+    console.log('selected topics are:', selectedTopics);
+    saveTopics(selectedTopics, user.email);
+    setSelectedTopics([]);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setAmountPreference(e.target.value)
-  }
+    setAmountPreference(e.target.value);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    const pref = await updateFrequencyPreference(user.id, amountPreference)
-    console.log('pref is:', pref)
-    setAmountPreference(pref.frequencyPosting);
-    dispatch(activeUser(pref))
-  }
+    e.preventDefault();
+    const pref = await updateFrequencyPreference(user.id, amountPreference);
+    console.log('what we receive from API on submit topic preferences: ====>', pref);
+    setAmountPreference(pref.frequencyTweetPosting);
+    dispatch(activeUser(pref));
+  };
 
   return (
     <div className='pref-container'>

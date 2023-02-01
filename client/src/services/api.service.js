@@ -124,4 +124,4 @@ export const updateFrequencyPreference = async (id, frequency) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
