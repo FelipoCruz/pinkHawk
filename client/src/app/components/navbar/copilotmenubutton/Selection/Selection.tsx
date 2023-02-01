@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
-import { selectionTweets } from '../../../../../store/slices/tweet.slice';
+import { Tweet as TweetType } from '../../../../../store/slices/tweet.slice';
+import Tweet from '../../../tweet/Tweet';
 import { getTweets } from '../../../../helpers/mocks';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 
 const Selection = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
-  const tweets = useAppSelector(({ tweets }) => tweets);
+  const { tweets } = useAppSelector(({ tweets }) => tweets);
   // const [tweets, setTweets] = React.useState<any>([]);
   console.log('user in state', user);
   console.log('tweets in state', tweets);
 
-  const handleMoveToQueu = (id: number) => {
-    console.log('moved to queu', id);
-  };
+  // const handleMoveToQueu = (id: number) => {
+  //   console.log('moved to queu', id);
+  // };
 
   // useEffect(() => {
   //   const doGetTweets = async () => {
@@ -36,20 +37,13 @@ const Selection = () => {
   if (!tweets) return null;
 
   return (
-    <>
-      <div>
-        <h1>selection of tweets</h1>
-        {/* <ul>
-          {tweets.tweets.map((tweet: any) => {
-            return (
-              <li key={tweet.id}>
-                <p>{tweet}</p>
-              </li>
-            );
-          })}
-        </ul> */}
-      </div>
-    </>
+    <div>
+      <ul>
+        {tweets?.length > 0 && tweets.filter((tweet: TweetType) => tweet.status === 'suggested').map((tweet: TweetType) => {
+          return <li><Tweet key={tweet.id} tweetPassed={tweet} /></li>;
+        })}
+      </ul>
+    </div>
   );
 };
 
