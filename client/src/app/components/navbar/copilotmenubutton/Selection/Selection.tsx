@@ -9,16 +9,19 @@ import rejectButton from '../../../../../images/reject.png';
 import { Tweet } from '../../../../interfaces/tweet.interface';
 import { queueTweetDB } from '../../../../../services/tweet-queue-db.service';
 import { deleteTweetDB } from '../../../../../services/tweet-delete-db.service';
+import Button from '../../../button/Button';
+import Spinner from '../../../spinner/Spinner';
 
 
 const Selection = () => {
   //const { tweets } = useAppSelector(({ tweets }) => tweets);
   const user = useAppSelector(({ user }) => user);
-  const [sTweets, setSTweets] = useState([])
+  const [sTweets, setSTweets] = useState([]);
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
     fetchSuggestedTweets();
-    
+
   }, []);
 
   useEffect(() => {
@@ -28,18 +31,22 @@ const Selection = () => {
   const fetchSuggestedTweets = async () => {
     const fetchedTweets = await getSuggestedTweets(user.id);
     setSTweets(fetchedTweets);
-    
+
   };
 
   console.log('Suggested Tweets are: ', sTweets);
 
   const generateTweetsInit = async () => {
+    setSpinner(true);
     console.log('starting to generate tweets')
-    await generateTweetServiceClient(user);
-    await generateTweetServiceClient(user);
-    await generateTweetServiceClient(user);
-    await generateTweetServiceClient(user);
-    await generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    await new Promise(resolve => setTimeout(resolve, 14000));
+    fetchSuggestedTweets();
+    setSpinner(false);
   };
 
   const moveTweetQueued = async (tweetToQueue: Tweet, index: number) => {
@@ -52,7 +59,7 @@ const Selection = () => {
     // generateTweetServiceClient(user);
   };
 
-  const deleteTweet = async (tweetToDelete: Tweet, index: number) => {  
+  const deleteTweet = async (tweetToDelete: Tweet, index: number) => {
     console.log('deleting tweet')
     console.log(tweetToDelete);
     // delete tweet from DB
@@ -68,19 +75,12 @@ const Selection = () => {
     setSTweets(items);
   };
 
- 
+
 
   return (
     <>
-      <div>
-        <h1>hi</h1>
-        <button onClick={generateTweetsInit}> GENERATE TWEETS INITIAL </button>
-        <br />
-        <br />
-        {/* <button onClick={generateTweet}> GENERATE TWEETS 2ND </button> */}
-        <br />
-        <br />
-        {/* <SingleTweet tweetPassed={sTweets[0]} /> */}
+        { spinner ? <Spinner/> :
+        <div>
         <ul>
           {sTweets.map((tweet: Tweet, index) => {
             return (
@@ -97,7 +97,9 @@ const Selection = () => {
             );
           })}
         </ul>
-      </div>
+        <button onClick={generateTweetsInit}> <Button text={'More Tweets!'}></Button> </button>
+        </div>
+        } 
     </>
   );
 };
