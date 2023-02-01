@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import './Selection.scss';
 import { getSuggestedTweets } from '../../../../../services/getsuggestedtweets.service';
 import { selectionTweets } from '../../../../../store/slices/tweet.slice';
-=======
-import React, { useEffect } from 'react';
 import { Tweet as TweetType } from '../../../../../store/slices/tweet.slice';
 import Tweet from '../../../tweet/Tweet';
->>>>>>> 9b46b2e9ec2e02fbe5b0e0c8ca33396d60e5b8f7
 import { getTweets } from '../../../../helpers/mocks';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 import SingleTweet from '../../../tweet/Tweet';
