@@ -85,7 +85,7 @@ export const updateFrequency = async (req: Request, res: Response) => {
  try {
   const {id } = req.params
   const  {frequency} = req.body
-  const user = await prisma.user.update({where:{id: Number(id)}, data:{ frequecyTweetPosting: Number(frequency)}})
+  const user = await prisma.user.update({where:{id: Number(id)}, data:{ frequencyTweetPosting: Number(frequency)}})
   res.status(200).json(user);
  } catch (error) {
   console.log(error);
