@@ -10,6 +10,6 @@ export interface UserState {
   twitterInfo: string;
   twitterName: string;
   topics: string[];
-  frequencyTweetPosting: number;
+  frequencyTweetPosting: number | null;
   profilePic?: string;
 }

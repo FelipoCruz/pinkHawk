@@ -12,11 +12,13 @@ export const generateTweet = async (req: Request, res: Response) => {
     console.log(req.body);
     const newGeneratedTweet = await generateTweetAIService(user.topics)
     const tweetText = String(newGeneratedTweet?.text);
+    const finalTweet = tweetText.replaceAll(/["]+/g, '');
+    const finalTweet2 = finalTweet.replaceAll(/&amp;/g, "&");
     console.log('new generated tweet from GPT', newGeneratedTweet);
     const saveTweet = await prisma.tweet.create({
       data: { 
         userId: user.id,
-        text: tweetText,
+        text: finalTweet2,
         status: 'suggested', }, 
     });
     res.status(201);
