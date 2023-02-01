@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { userInfo } from 'os';
 import { TwitterApi } from 'twitter-api-v2';
+import { IUser } from '../interfaces/user.interface';
 
 const prisma = new PrismaClient();
 const SECRET_KEY = process.env.SECRET!;
@@ -19,7 +19,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const getUserById = async (req: Request, res: Response) => {
   try {
-    const user: IUser = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { id: Number(req.params.id) },
     });
     console.log('user from getUserById: ', user);
@@ -87,7 +87,7 @@ export const updateFrequency = async (req: Request, res: Response) => {
     const { frequency } = req.body;
     const user = await prisma.user.update({
       where: { id: Number(id) },
-      data: { frequecyTweetPosting: Number(frequency) },
+      data: { frequencyTweetPosting: Number(frequency) },
     });
     res.status(200).json(user);
   } catch (error) {

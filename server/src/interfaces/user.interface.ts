@@ -1,13 +1,14 @@
 export interface IUser {
-  isLoggedIn: boolean;
-  id: string;
-  name: string;
-  username: string;
-  nickName: string;
   firstName: string;
-  lastName: string;
+  familyName: string;
   email: string;
+  twitterInfo: string;
+  id: string;
+  twitterAccountId: string;
+  twitterName: string;
+  twitterToken: string;
+  twitterSecret: string;
   topics: string[];
   frequencyTweetPosting: number;
-  profilePic?: string;
+  postingHours?: number[];
 }

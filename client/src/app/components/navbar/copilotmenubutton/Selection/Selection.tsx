@@ -11,6 +11,7 @@ import { queueTweetDB } from '../../../../../services/tweet-queue-db.service';
 import { deleteTweetDB } from '../../../../../services/tweet-delete-db.service';
 import Button from '../../../button/Button';
 import Spinner from '../../../spinner/Spinner';
+import '../../../tweet/Tweet.scss';
 
 const Selection = () => {
   //const { tweets } = useAppSelector(({ tweets }) => tweets);
