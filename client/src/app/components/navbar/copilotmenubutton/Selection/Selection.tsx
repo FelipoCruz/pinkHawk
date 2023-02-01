@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
-import { selectionTweets, Tweet as TweetType } from '../../../../../store/slices/tweet.slice';
-import Tweet from '../../../tweet/Tweet';
+import { Tweet as TweetType } from '../../../../interfaces/tweet.interface';
+import TweetTest from '../../../tweet/TweetTest';
 // import { getTweets } from '../../../../helpers/mocks';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 import { getUserTweets } from '../../../../../services/api.tweets';
+import '../../../tweet/Tweet.scss';
 
 const Selection = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
-  const { tweets } = useAppSelector(({ tweets }) => tweets);
-  // const [tweets, setTweets] = React.useState<any>([]);
+  // const { tweets } = useAppSelector(({ tweets }) => tweets);
+  const [tweets, setTweets] = React.useState<any>([]);
   console.log('user in state', user);
   console.log('tweets in state', tweets);
 
@@ -25,9 +26,14 @@ const Selection = () => {
   //   doGetTweets();
   // }, []);
 
+  // const fetchSelectionTweets = async () => {
+  //   const response = await getUserTweets(user.id, '');
+  //   dispatch(selectionTweets(response));
+  // };
   const fetchSelectionTweets = async () => {
-    const response = await getUserTweets();
-    dispatch(selectionTweets(response));
+    const getTweets =  await getUserTweets(user.id, 'suggested');
+    console.log('file: Selection.tsx:35 ~~> fetchSelectionTweets ~~> getTweets', getTweets)
+    setTweets(getTweets);
   };
 
   useEffect(() => {
@@ -40,8 +46,8 @@ const Selection = () => {
   return (
     <div>
       <ul>
-        {tweets?.length > 0 && tweets.filter((tweet: TweetType) => tweet.status === 'suggested').map((tweet: TweetType) => {
-          return <li><Tweet key={tweet.id} tweetPassed={tweet} /></li>;
+        {tweets?.map((tweet: TweetType) => {
+          return <li><TweetTest key={tweet.id} tweetPassed={tweet} /></li>;
         })}
       </ul>
     </div>
