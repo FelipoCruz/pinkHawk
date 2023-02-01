@@ -26,8 +26,8 @@ export const getUserById = async (req: Request, res: Response) => {
       appKey: process.env.API_KEY!,
       appSecret: process.env.API_KEY_SECRET!,
       accessToken: user?.twitterToken!,
-      accessSecret: user?.twitterSecret!
-    })
+      accessSecret: user?.twitterSecret!,
+    });
 
     // const sally = await realUser.v2.tweet('test3')
     // console.log(sally);
@@ -78,4 +78,12 @@ export const signInUser = async (req: Request, res: Response) => {
   } catch (error) {
     console.log('error in CreateUser:' + error);
   }
+};
+
+export const signOutUser = (req: Request, res: Response) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    // httpOnly: true,
+  });
+  res.status(200).json({ status: 'success' });
 };

@@ -6,8 +6,9 @@ import logo from '../../../images/pinkhawklogo.svg';
 function Header() {
   return (
     <header className="header">
-      <NavLink to="/">
+      <NavLink to="/" className="logo-container">
         <img alt="home logo" className="logo" src={logo} />
+        <span className="logo-text">Pink Hawk</span>
       </NavLink>
       <nav className="header_items">
         <NavLink to="/signup">

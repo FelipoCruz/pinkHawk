@@ -40,6 +40,21 @@ export const login = async (email, password) => {
   }
 };
 
+export const logout = async () => {
+  try {
+    const url = BASE_URL + 'user/signout';
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const saveTopics = async (topics, userEmail) => {
   try {
     const url = BASE_URL + 'topic/set-topics';

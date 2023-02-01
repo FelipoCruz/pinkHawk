@@ -11,6 +11,21 @@
   background-color: v.$color-white-navbar;
   box-shadow: 0 8px 6px -6px rgb(171, 171, 171);
 
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .logo-text {
+      color: v.$color-light-black;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-left: 1rem;
+      align-self: flex-end;
+      margin-left: 7px;
+    }
+  }
+
   .navbar-items{
     display: flex;
     flex-direction: row;
