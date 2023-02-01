@@ -1,13 +1,13 @@
 import Button from '../button/Button';
 import './header.scss';
 import { NavLink } from 'react-router-dom';
-import logo from '../../../images/pinkhawklogo.svg';
+import { ReactComponent as Logo } from '../../../images/pinkhawklogo.svg';
 
 function Header() {
   return (
     <header className="header">
       <NavLink to="/" className="logo-container">
-        <img alt="home logo" className="logo" src={logo} />
+        <Logo className="logo" />
         <span className="logo-text">Pink Hawk</span>
       </NavLink>
       <nav className="header_items">

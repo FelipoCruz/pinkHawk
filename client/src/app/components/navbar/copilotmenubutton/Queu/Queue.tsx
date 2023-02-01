@@ -10,15 +10,19 @@ const Queue = () => {
   const { tweets } = useAppSelector(({ tweets }) => tweets);
   console.log('tweets from state', tweets);
 
-
   return (
-    <div>
-      <ul>
-        {tweets?.length > 0 && tweets.filter((tweet: TweetType) => tweet.status === 'queued').map((tweet: TweetType) => {
-          return <li><Tweet key={tweet.id} tweetPassed={tweet} /></li>;
-        })}
-      </ul>
-    </div>
+    <ul>
+      {tweets?.length > 0 &&
+        tweets
+          .filter((tweet: TweetType) => tweet.status === 'queued')
+          .map((tweet: TweetType) => {
+            return (
+              <li>
+                <Tweet key={tweet.id} tweetPassed={tweet} />
+              </li>
+            );
+          })}
+    </ul>
   );
 };
 
