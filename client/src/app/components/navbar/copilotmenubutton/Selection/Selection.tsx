@@ -16,8 +16,8 @@ import Spinner from '../../../spinner/Spinner';
 const Selection = () => {
   //const { tweets } = useAppSelector(({ tweets }) => tweets);
   const user = useAppSelector(({ user }) => user);
-  const [sTweets, setSTweets] = useState([]);
   const [spinner, setSpinner] = useState(false);
+  const [tweets, setTweets] = useState([])
 
   useEffect(() => {
     fetchSuggestedTweets();
@@ -25,16 +25,16 @@ const Selection = () => {
   }, []);
 
   useEffect(() => {
-    console.log(sTweets.length);
-  }, [sTweets]);
+    console.log(tweets.length);
+  }, [tweets]);
 
   const fetchSuggestedTweets = async () => {
     const fetchedTweets = await getSuggestedTweets(user.id);
-    setSTweets(fetchedTweets);
+    setTweets(fetchedTweets);
 
   };
 
-  console.log('Suggested Tweets are: ', sTweets);
+  console.log('Suggested Tweets are: ', tweets);
 
   const generateTweetsInit = async () => {
     setSpinner(true);
@@ -70,9 +70,9 @@ const Selection = () => {
   };
 
   const deleteTweetinState = (index: number) => {
-    const items = [...sTweets];
+    const items = [...tweets];
     items.splice(index, 1);
-    setSTweets(items);
+    setTweets(items);
   };
 
 
@@ -82,16 +82,16 @@ const Selection = () => {
         { spinner ? <Spinner/> :
         <div>
         <ul>
-          {sTweets.map((tweet: Tweet, index) => {
+          {tweets.map((tweet: Tweet, index) => {
             return (
-              
-              <li key={tweet.id} className="tweet-li">
-                <button name="accept-tweet-button" onClick={() => moveTweetQueued(tweet, index)}>
-                  <img alt="accept-tweet-button-img" className="icon-button" src={acceptButton} />
+
+              <li key={tweet.id} className='tweet-li'>
+                <button name='accept-tweet-button' onClick={() => moveTweetQueued(tweet, index)}>
+                  <img alt='accept-tweet-button-img' className='icon-button' src={acceptButton} />
                 </button>
                 <SingleTweet tweetPassed={tweet} />
-                <button name="reject-tweet-button" onClick={() => deleteTweet(tweet, index)}>
-                  <img alt="reject-tweet-button" className="icon-button" src={rejectButton} />
+                <button name='reject-tweet-button' onClick={() => deleteTweet(tweet, index)}>
+                  <img alt='reject-tweet-button' className='icon-button' src={rejectButton} />
                 </button>
               </li>
             );

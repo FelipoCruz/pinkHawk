@@ -7,6 +7,8 @@ export interface UserState {
   firstName: string;
   lastName: string;
   email: string;
+  twitterInfo: string;
+  twitterName: string;
   topics: string[];
   frequencyTweetPosting: number;
   profilePic?: string;
