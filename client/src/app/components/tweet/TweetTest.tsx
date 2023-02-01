@@ -13,12 +13,12 @@ const SingleTweet = ({ tweetPassed }: Props) => {
   return (
     <div className='solo-tweet'>
       <div className='user-details'>
-        <img src={user.profilePic} alt='profile-pic' />
+        {/* <img src={user.profilePic} alt='profile-pic' /> */}
         <div className='user-info'>
           <h3>
             {user.firstName} {user.lastName}
           </h3>
-          <p>{user.nickName}</p>
+          {/* <p>{user.nickName}</p> */}
         </div>
       </div>
       <div className='tweet-text'>
