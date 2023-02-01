@@ -8,4 +8,3 @@ export const getUserTweets = async (id, status) => {
     console.error(err);
   }
 };
-

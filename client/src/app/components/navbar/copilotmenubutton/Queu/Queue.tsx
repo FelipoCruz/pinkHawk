@@ -1,28 +1,62 @@
-import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../../../hooks/hooks';
 import Tweet from '../../../tweet/Tweet';
-import { Tweet as TweetType } from '../../../../interfaces/tweet.interface';
+import ITweet from '../../../../interfaces/tweet.interface';
+import { getUserTweets } from '../../../../../services/api.tweets';
+import '../../../tweet/Tweet.scss';
+import { deleteTweetDB } from '../../../../../services/tweet-delete-db.service';
+import rejectButton from '../../../../../images/reject.png';
 
 const Queue = () => {
-  const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
-  console.log('user from state', user);
-  const { tweets } = useAppSelector(({ tweets }) => tweets);
-  console.log('tweets from state', tweets);
+  const [tweets, setTweets] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const queuedTweets = await getUserTweets(user.id, 'queued');
+      console.log('queued tweets are: ', queuedTweets);
+      setTweets(queuedTweets);
+    })();
+  }, []);
+
+  const deleteTweet = async (tweetToDelete: ITweet, index: number) => {
+    console.log('deleting tweet');
+    console.log(tweetToDelete);
+    // delete tweet from DB
+    deleteTweetDB(user.id, tweetToDelete.id);
+    // delete tweet from state
+    deleteTweetinState(index);
+    // generateTweetServiceClient(user);
+  };
+
+  const deleteTweetinState = (index: number) => {
+    const items = [...tweets];
+    items.splice(index, 1);
+    setTweets(items);
+  };
 
   return (
-    <ul>
-      {tweets?.length > 0 &&
-        tweets
-          .filter((tweet: TweetType) => tweet.status === 'queued')
-          .map((tweet: TweetType) => {
-            return (
-              <li>
-                <Tweet key={tweet.id} tweetPassed={tweet} />
-              </li>
-            );
-          })}
-    </ul>
+    <>
+      {tweets?.length ? (
+        tweets.map((tweet: ITweet, index) => (
+          <li key={tweet.id} className="tweet-li">
+            <Tweet key={tweet.id} tweetPassed={tweet} />
+            <button
+              name="reject-tweet-button"
+              onClick={() => deleteTweet(tweet, index)}
+            >
+              <img
+                alt="reject-tweet-button"
+                className="icon-button"
+                src={rejectButton}
+              />
+            </button>
+          </li>
+        ))
+      ) : (
+        <h2>You have no queued tweets yet</h2>
+      )}
+    </>
   );
 };
 

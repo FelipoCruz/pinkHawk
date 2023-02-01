@@ -1,4 +1,4 @@
-export interface UserState {
+export default interface IUser {
   isLoggedIn: boolean;
   id: string;
   name: string;
