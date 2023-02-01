@@ -79,3 +79,14 @@ export const signInUser = async (req: Request, res: Response) => {
     console.log('error in CreateUser:' + error);
   }
 };
+
+export const updateFrequency = async (req: Request, res: Response) => {
+ try {
+  const {id } = req.params
+  const  {frequency} = req.body
+  const user = await prisma.user.update({where:{id: Number(id)}, data:{ frequecyTweetPosting: Number(frequency)}})
+  res.status(200).json(user);
+ } catch (error) {
+  console.log(error);
+ }
+}

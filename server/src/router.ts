@@ -3,6 +3,7 @@ import {
   getAllUsers,
   getUserById,
   signInUser,
+  updateFrequency,
 } from './controller/user';
 import { setTopics } from './controller/topic';
 import { fetchTweets, generateTweet, queueTweet, tweetDelete, tweetStatusPosted } from './controller/tweet';
@@ -33,6 +34,9 @@ router.put('/tweet/queueTweet', queueTweet);
 
 // route to modify status of tweets to 'posted'
 router.put('/tweet/tweetStatusPosted', tweetStatusPosted);
+
+//route to modify the user posting frequency
+router.put('/user/:id/frequency', updateFrequency)
 
 // route to delete tweet from DB
 router.delete('/tweet/delete', tweetDelete);
