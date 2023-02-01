@@ -8,23 +8,23 @@ datasource db {
 }
 
 model User {
-  id                   Int       @id @default(autoincrement())
-  firstName            String
-  familyName           String
-  email                String    @unique
-  password             String
-  twitterInfo          String?
-  twitterAccountId     String?
-  twitterName          String?
-  twitterToken         String?
-  twitterSecret        String?
-  tweets               Tweet[]
-  topics               String[]
-  createdAt            DateTime  @default(now())
-  updatedAt            DateTime  @updatedAt
-  frequecyTweetPosting Int?
-  lastPostingAt        DateTime?
-  postingHours         Int[]
+  id                    Int       @id @default(autoincrement())
+  firstName             String
+  familyName            String
+  email                 String    @unique
+  password              String
+  twitterInfo           String?
+  twitterAccountId      String?
+  twitterName           String?
+  twitterToken          String?
+  twitterSecret         String?
+  tweets                Tweet[]
+  topics                String[]
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  frequencyTweetPosting Int?
+  lastPostingAt         DateTime?
+  postingHours          Int[]
 }
 
 model Tweet {
