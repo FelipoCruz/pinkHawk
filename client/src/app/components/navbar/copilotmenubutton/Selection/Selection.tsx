@@ -87,7 +87,6 @@ const Selection = () => {
   if (!tweets) return null;
 
   return (
-<<<<<<< HEAD
     <>
       <div>
         <button onClick={generateTweetsInit}> GENERATE TWEETS INITIAL </button>
@@ -114,15 +113,6 @@ const Selection = () => {
         </ul>
       </div>
     </>
-=======
-    <div>
-      <ul>
-        {tweets?.length > 0 && tweets.filter((tweet: TweetType) => tweet.status === 'suggested').map((tweet: TweetType) => {
-          return <li><Tweet key={tweet.id} tweetPassed={tweet} /></li>;
-        })}
-      </ul>
-    </div>
->>>>>>> 9b46b2e9ec2e02fbe5b0e0c8ca33396d60e5b8f7
   );
 };
 
