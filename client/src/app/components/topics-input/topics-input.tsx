@@ -24,9 +24,8 @@ const TopicsInput = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const pref = await updateTimePreference(user.id, timePreference)
-    console.log(pref);
   }
-
+  
   return (
     <div className='topics-input-container'>
       <h1>It´s time to define what you want to tweet about.</h1>
