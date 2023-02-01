@@ -1,93 +1,78 @@
 import React, { useEffect, useState } from 'react';
 import './Selection.scss';
 import { getSuggestedTweets } from '../../../../../services/getsuggestedtweets.service';
-// import { selectionTweets } from '../../../../../store/slices/tweet.slice';
-// import { Tweet as TweetType } from '../../../../../store/slices/tweet.slice';
-// import Tweet from '../../../tweet/Tweet';
-// import { getTweets } from '../../../../helpers/mocks';
-import { useAppSelector } from '../../../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 import SingleTweet from '../../../tweet/Tweet';
 import { generateTweetServiceClient } from '../../../../../services/api.service';
 import acceptButton from '../../../../../images/check.png';
 import rejectButton from '../../../../../images/reject.png';
-import { getUserTweets } from '../../../../../services/api.tweets';
-import '../../../tweet/Tweet.scss';
+import { Tweet } from '../../../../interfaces/tweet.interface';
+import { queueTweetDB } from '../../../../../services/tweet-queue-db.service';
+import { deleteTweetDB } from '../../../../../services/tweet-delete-db.service';
 
 
 const Selection = () => {
+  //const { tweets } = useAppSelector(({ tweets }) => tweets);
   const user = useAppSelector(({ user }) => user);
-  const { tweets } = useAppSelector(({ tweets }) => tweets);
-  // const [tweets, setTweets] = React.useState<any>([]);
-  const [sTweets, setSTweets] = useState([])
+  const [tweets, setTweets] = useState([])
 
   useEffect(() => {
-    // fetch tweets with status suggested
     fetchSuggestedTweets();
+
   }, []);
 
+  useEffect(() => {
+    console.log(tweets.length);
+  }, [tweets]);
+
   const fetchSuggestedTweets = async () => {
-    const fetchedTweets = await getSuggestedTweets(3);
-    setSTweets(fetchedTweets);
+    const fetchedTweets = await getSuggestedTweets(user.id);
+    setTweets(fetchedTweets);
+
   };
 
-  console.log('Suggested Tweets are: ', sTweets);
+  console.log('Suggested Tweets are: ', tweets);
 
   const generateTweetsInit = async () => {
     console.log('starting to generate tweets')
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
+    await generateTweetServiceClient(user);
+    await generateTweetServiceClient(user);
+    await generateTweetServiceClient(user);
+    await generateTweetServiceClient(user);
+    await generateTweetServiceClient(user);
   };
 
-  const deleteTweet = async () => {
-    console.log('deleting tweet')
-
-  };
-
-  const moveTweetQueued = async () => {
+  const moveTweetQueued = async (tweetToQueue: Tweet, index: number) => {
     console.log('moving tweet to queued')
-
+    console.log(tweetToQueue);
+    // modify tweet status in the DB
+    queueTweetDB(user.id, tweetToQueue.id)
+    // modify tweet status in the State
+    deleteTweetinState(index)
+    // generateTweetServiceClient(user);
   };
 
-  // const handleMoveToQueu = (id: number) => {
-  //   console.log('moved to queu', id);
-  // };
-
-  // useEffect(() => {
-  //   const doGetTweets = async () => {
-  //     const result = await getTweets();
-  //     setTweets(result);
-  //   };
-  //   doGetTweets();
-  // }, []);
-
-  // const fetchSelectionTweets = async () => {
-  //   const response = await getUserTweets(user.id, '');
-  //   dispatch(selectionTweets(response));
-  // };
-  const fetchSelectionTweets = async () => {
-    const getTweets =  await getUserTweets(user.id, 'suggested');
-    console.log('file: Selection.tsx:35 ~~> fetchSelectionTweets ~~> getTweets', getTweets)
-    setSTweets(getTweets);
+  const deleteTweet = async (tweetToDelete: Tweet, index: number) => {
+    console.log('deleting tweet')
+    console.log(tweetToDelete);
+    // delete tweet from DB
+    deleteTweetDB(user.id, tweetToDelete.id);
+    // delete tweet from state
+    deleteTweetinState(index)
+    // generateTweetServiceClient(user);
   };
 
-  useEffect(() => {
-    fetchSelectionTweets();
-  }, []);
+  const deleteTweetinState = (index: number) => {
+    const items = [...tweets];
+    items.splice(index, 1);
+    setTweets(items);
+  };
 
-  // we first check if there are tweets in the store
-  if (!tweets) return null;
 
   return (
     <>
       <div>
+        <h1>hi</h1>
         <button onClick={generateTweetsInit}> GENERATE TWEETS INITIAL </button>
         <br />
         <br />
@@ -96,14 +81,15 @@ const Selection = () => {
         <br />
         {/* <SingleTweet tweetPassed={sTweets[0]} /> */}
         <ul>
-          {sTweets.map((tweet: any) => {
+          {tweets.map((tweet: Tweet, index) => {
             return (
+
               <li key={tweet.id} className='tweet-li'>
-                <button name='accept-tweet-button' onClick={moveTweetQueued}>
+                <button name='accept-tweet-button' onClick={() => moveTweetQueued(tweet, index)}>
                   <img alt='accept-tweet-button-img' className='icon-button' src={acceptButton} />
                 </button>
                 <SingleTweet tweetPassed={tweet} />
-                <button name='reject-tweet-button' onClick={deleteTweet}>
+                <button name='reject-tweet-button' onClick={() => deleteTweet(tweet, index)}>
                   <img alt='reject-tweet-button' className='icon-button' src={rejectButton} />
                 </button>
               </li>

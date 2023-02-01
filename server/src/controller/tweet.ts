@@ -90,7 +90,7 @@ export const tweetDelete = async (req: Request, res: Response) => {
       where: { id: tweetId },
     });
       res.status(200);
-      res.send(`tweet with id: ${tweetId}, successfully deleted`);
+      // res.send(tweetId);
   } catch (error) {
     console.log('Error in tweetDelete @ module controller/tweet.ts: ', error);
   }
