@@ -1,4 +1,4 @@
-export default interface IUser {
+export interface IUser {
   isLoggedIn: boolean;
   id: string;
   name: string;
@@ -7,8 +7,6 @@ export default interface IUser {
   firstName: string;
   lastName: string;
   email: string;
-  twitterInfo: string;
-  twitterName: string;
   topics: string[];
   frequencyTweetPosting: number;
   profilePic?: string;

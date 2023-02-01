@@ -1,28 +1,31 @@
-import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../../../hooks/hooks';
 import Tweet from '../../../tweet/Tweet';
-import { Tweet as TweetType } from '../../../../interfaces/tweet.interface';
+import ITweet from '../../../../interfaces/tweet.interface';
+import { getUserTweets } from '../../../../../services/api.tweets';
 
 const Queue = () => {
-  const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
-  console.log('user from state', user);
-  const { tweets } = useAppSelector(({ tweets }) => tweets);
-  console.log('tweets from state', tweets);
+  const [tweets, setTweets] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const queuedTweets = await getUserTweets(user.id, 'queued');
+      console.log('queued tweets are: ', queuedTweets);
+      setTweets(queuedTweets);
+    })();
+  }, []);
 
   return (
-    <ul>
-      {tweets?.length > 0 &&
-        tweets
-          .filter((tweet: TweetType) => tweet.status === 'queued')
-          .map((tweet: TweetType) => {
-            return (
-              <li>
-                <Tweet key={tweet.id} tweetPassed={tweet} />
-              </li>
-            );
-          })}
-    </ul>
+    <>
+      {tweets?.length ? (
+        tweets.map((tweet: ITweet) => (
+          <Tweet key={tweet.id} tweetPassed={tweet} />
+        ))
+      ) : (
+        <h2>You have no queued tweets yet</h2>
+      )}
+    </>
   );
 };
 

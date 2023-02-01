@@ -11,13 +11,13 @@ const SingleTweetTest = ({ tweetPassed }: Props) => {
   if (!tweetPassed) return null;
 
   return (
-    <div className='solo-tweet'>
-      <div className='user-details'>
+    <div className="solo-tweet">
+      <div className="user-details">
         {/* <img src={user.profilePic} alt='profile-pic' /> */}
         <p>{user.twitterName}</p>
         <p>{user.twitterInfo}</p>
       </div>
-      <div className='tweet-content'>
+      <div className="tweet-content">
         <p>{tweetPassed.text}</p>
       </div>
       {/* <div className='tweet-actions'>
