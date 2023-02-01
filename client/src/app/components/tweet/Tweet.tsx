@@ -3,7 +3,6 @@ import { deleteTweet, Tweet } from '../../../store/slices/tweet.slice';
 import { activeUser } from '../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { getUserById } from '../../../services/api.service';
-import { queueTweets } from '../../../store/slices/tweet.slice';
 import { UserState } from '../../../store/slices/user.slice';
 
 type Props = { tweetPassed: Tweet };
@@ -62,7 +61,9 @@ const SingleTweet = ({ tweetPassed }: Props) => {
         <p>{tweetPassed.text}</p>
       </div>
       <div className="tweet-actions">
-        {tweetPassed.status !== 'queue' && <button onClick={() => handleSelected(user, tweetPassed)}>+</button>}
+        {tweetPassed.status !== 'queue' && (
+          <button onClick={() => handleSelected(user, tweetPassed)}>+</button>
+        )}
         <button onClick={() => handleDelete(user, tweetPassed)}>x</button>
       </div>
     </div>

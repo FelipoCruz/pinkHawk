@@ -80,6 +80,16 @@ export const signInUser = async (req: Request, res: Response) => {
   }
 };
 
+export const updateFrequency = async (req: Request, res: Response) => {
+ try {
+  const {id } = req.params
+  const  {frequency} = req.body
+  const user = await prisma.user.update({where:{id: Number(id)}, data:{ frequecyTweetPosting: Number(frequency)}})
+  res.status(200).json(user);
+ } catch (error) {
+  console.log(error);
+ }
+}
 export const signOutUser = (req: Request, res: Response) => {
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
