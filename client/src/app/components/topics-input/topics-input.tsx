@@ -25,7 +25,8 @@ const TopicsInput = () => {
   const handleChangeTimes = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTimesPreference(Number(e.target.value));
   };
-
+  // chenge the state of hoursPreference when the user selects a time to tweet
+  // if the user selects more than the defined tweets per day, the last selection is not saved
   const handleChangeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log('e.target.value :', e.target.value);
     console.log('e.target.checked :', e.target.checked);
@@ -53,11 +54,11 @@ const TopicsInput = () => {
     // if (timesPreferences && hoursPreference) dispatch(activeUser(timesPreferences, hoursPreference));
     dispatch(activeUser(timesPreferences));
   };
-
+  // set a maximum tweet posting frequency of 4 times per day
   const timesPerDay = () => {
     return Array.from({ length: 4 }, (_, i) => i + 1);
   };
-
+  // define 24h in a day to be used as options for the user to select
   const hoursADay = () => {
     return Array.from({ length: 24 }, (_, i) => i);
   };
