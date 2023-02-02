@@ -13,7 +13,7 @@ const initialState: IUser = {
   twitterInfo: '',
   twitterName: '',
   topics: [],
-  frequencyTweetPosting: 6,
+  frequencyTweetPosting: 0,
 };
 
 export const userSlice = createSlice({
@@ -31,6 +31,7 @@ export const userSlice = createSlice({
       state.twitterInfo = action.payload.twitterInfo;
       state.twitterName = action.payload.twitterName;
       state.topics = action.payload.topics;
+      state.frequencyTweetPosting = action.payload.frequencyTweetPosting;
     },
 
     deactivateUser: (state) => {
@@ -44,6 +45,7 @@ export const userSlice = createSlice({
       state.twitterInfo = '';
       state.twitterName = '';
       state.topics = [];
+      state.frequencyTweetPosting = 0;
     },
   },
 });
