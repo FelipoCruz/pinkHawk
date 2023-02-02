@@ -11,7 +11,7 @@ const TopicsInput = () => {
   const user = useAppSelector((state) => state.user);
   console.log('user in state :', user);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
-  const [amountPreference, setAmountPreference] = useState('');
+  const [amountPreference, setAmountPreference] = useState(user.frequencyTweetPosting || '');
 
   const setTopics = () => {
     console.log('selected topics are:', selectedTopics);
