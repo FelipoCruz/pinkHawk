@@ -58,11 +58,17 @@ export const queueTweet = async (req: Request, res: Response) => {
   try {
     const userIdReq = Number(req.body.id);
     const tweetId = Number(req.body.tweetId);
+    const postingTimestamp = req.body.postingTimestamp;
+    const postingTimestampAsDate = new Date(postingTimestamp);
+    const postingTimestampISO = postingTimestampAsDate.toISOString();
+    //const postingTimestampISO = postingTimestamp.toISOString();
     console.log('userIdReq is: ' + userIdReq );
     console.log('tweetId is: ' + tweetId);
     const queuedTweetOK = await prisma.tweet.update({
       where: { id: tweetId },
-      data: { status: 'queued' }, 
+      data: { 
+        status: 'queued',
+        postingTimestamp: postingTimestampISO },
     });
       res.status(201);
       res.send(queuedTweetOK);
