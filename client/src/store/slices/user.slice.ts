@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UserState } from '../../app/interfaces/user.interface';
+import IUser from '../../app/interfaces/user.interface';
 
-const initialState: UserState = {
+const initialState: IUser = {
   isLoggedIn: false,
   id: '',
   name: '',

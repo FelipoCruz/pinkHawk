@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { login, register } from '../../../../services/api.service';
 import { activeUser } from '../../../../store/slices/user.slice';
 import { useAppDispatch } from '../../../hooks/hooks';
+import IUser from '../../../interfaces/user.interface';
 import Button from '../../button/Button';
 import './login.scss';
 // TESTING
@@ -21,7 +22,7 @@ const Login = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const userData = await login(email, password);
+      const userData: IUser = await login(email, password);
       if (!userData) {
         throw new Error('User not found');
       }
@@ -43,7 +44,7 @@ const Login = () => {
   // TODO: sign up
   return (
     <div className="login-container">
-      <div className="form-container">
+      <div className="login-form-container">
         <form className="form" onSubmit={(event) => handleSubmit(event)}>
           <h1 className="login-header">Login</h1>
           <div className="form-input">
