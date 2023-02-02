@@ -84,19 +84,22 @@ export const signInUser = async (req: Request, res: Response) => {
 export const updateFrequency = async (req: Request, res: Response) => {
   try {
     console.log('req body update frequency: ', req.body);
-    const { id } = req.params
-    console.log('file: user.ts:87 ~~> updateFrequency ~~> id', id)
-    const { frequency } = req.body
-    console.log('file: user.ts:89 ~~> updateFrequency ~~> frequency', frequency)
-    const user = await prisma.user.update({ where: { id: Number(id) }, data: { frequencyTweetPosting: Number(frequency) } })
+    const { id } = req.params;
+    console.log('file: user.ts:87 ~~> updateFrequency ~~> id', id);
+    const { frequency } = req.body;
+    console.log(
+      'file: user.ts:89 ~~> updateFrequency ~~> frequency',
+      frequency
+    );
+    const user = await prisma.user.update({
+      where: { id: Number(id) },
+      data: { frequencyTweetPosting: Number(frequency) },
+    });
     console.log('user response from db: ', user);
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
   }
-
-}
-
 };
 
 export const signOutUser = (req: Request, res: Response) => {

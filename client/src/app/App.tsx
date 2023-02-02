@@ -47,7 +47,7 @@ const App: React.FC = (): JSX.Element => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
-            path="/dashboard"
+            path="/dashboard/*"
             element={
               <ProtectedRoute>
                 <Dashboard />
@@ -86,6 +86,7 @@ const App: React.FC = (): JSX.Element => {
                 </ProtectedRoute>
               }
             />
+            <Route path="*" element={<Navigate to="/dashboard/co-pilot" />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
