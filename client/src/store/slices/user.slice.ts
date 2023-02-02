@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UserState } from '../../app/interfaces/user.interface';
+import IUser from '../../app/interfaces/user.interface';
 
-const initialState: UserState = {
+const initialState: IUser = {
   isLoggedIn: false,
   id: '',
   name: '',
@@ -13,7 +13,7 @@ const initialState: UserState = {
   twitterInfo: '',
   twitterName: '',
   topics: [],
-  frequencyTweetPosting: 6,
+  frequencyTweetPosting: 0,
 };
 
 export const userSlice = createSlice({

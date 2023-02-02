@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { register } from '../../../../services/api.service';
 import { activeUser } from '../../../../store/slices/user.slice';
 import { useAppDispatch } from '../../../hooks/hooks';
+import IUser from '../../../interfaces/user.interface';
 import Button from '../../button/Button';
 import './sign-up.scss';
 
@@ -22,7 +23,12 @@ export default function SignUp() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const userData = await register(firstname, lastname, email, password);
+      const userData: IUser = await register(
+        firstname,
+        lastname,
+        email,
+        password
+      );
       dispatch(activeUser(userData));
 
       localStorage.setItem('user', JSON.stringify({ userData }));
