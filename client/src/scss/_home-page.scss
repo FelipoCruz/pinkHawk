@@ -1,0 +1,70 @@
+@use "./variables.scss" as v;
+
+.home-page {
+  height: 100vh;
+  background-image: linear-gradient(-225deg, #FF057C 0%, #7C64D5 48%, #4CC3FF 100%);
+
+  .slogan {
+    text-align: center;
+    margin: 30px;
+    font-size: 60px;
+    color: v.$color-Off-white;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .home-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 80px;
+    padding: 20px;
+  }
+
+  .banner-slogan {
+    margin-top: 30px;
+    font-size: 25px;
+    color: v.$color-Off-white;
+    
+  }
+
+  .h1 {
+    font-weight: bold;
+    font-size: 60px;
+  }
+
+  .banner-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px #0c4a69;;
+  }
+
+  .banner-img {
+    height: 300px;
+    width: auto;
+  }
+
+
+  .trial-btn {
+    background-image: linear-gradient(to right, #AA076B 0%, #61045F 51%, #AA076B 100%);
+    margin-top: 30px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .trial-btn:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+
+
+}
+
+         
