@@ -14,20 +14,24 @@ import HomePage from './routes/home-page';
 import ProtectedRoute from './routes/protected-route';
 import TopicsDefinition from './routes/topics-definition';
 import UserPreferences from './routes/user-preferences';
+import IUser from './interfaces/user.interface';
 
 const App: React.FC = (): JSX.Element => {
-  const loggeIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!loggeIn) {
+    console.log('isLoggedIn in App', isLoggedIn);
+
+    if (!isLoggedIn) {
       (async () => {
         let storedString = localStorage.getItem('user');
         if (storedString) {
-          const storedUser = JSON.parse(storedString);
+          const storedUser: IUser = JSON.parse(storedString);
+          console.log('storedUser', storedUser);
 
           if (storedUser) {
-            const user = await getUserById(storedUser.id);
+            const user: IUser = await getUserById(storedUser.id);
             console.log(user);
 
             dispatch(activeUser(user));
@@ -40,9 +44,6 @@ const App: React.FC = (): JSX.Element => {
   return (
     <>
       <div className="container">
-        {window.location.href.includes('dashboard') && loggeIn && (
-          <NavBarUser />
-        )}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
@@ -81,7 +82,7 @@ const App: React.FC = (): JSX.Element => {
               path="user/preferences"
               element={
                 <ProtectedRoute>
-                  <UserPreferences/>
+                  <UserPreferences />
                 </ProtectedRoute>
               }
             />
