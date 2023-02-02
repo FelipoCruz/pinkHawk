@@ -99,11 +99,7 @@ export const updateFrequency = async (req: Request, res: Response) => {
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
-<<<<<<< HEAD
   };
-=======
-  }
->>>>>>> 9cfbcf93c771f8f5aef123b4ab458d73bfd0d8d0
 };
 
 export const signOutUser = (req: Request, res: Response) => {
