@@ -6,7 +6,7 @@ type Props = { tweetPassed: ITweet };
 
 const SingleTweetTest = ({ tweetPassed }: Props) => {
   const user: IUser = useAppSelector(({ user }) => user);
-  console.log('user in the state ======>', user);
+  // console.log('user in the state ======>', user);
 
   if (!tweetPassed) return null;
 
