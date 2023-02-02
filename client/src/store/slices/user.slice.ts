@@ -33,6 +33,7 @@ export const userSlice = createSlice({
       state.twitterName = action.payload.twitterName;
       state.topics = action.payload.topics;
       state.frequencyTweetPosting = action.payload.frequencyTweetPosting;
+      state.postingHours = action.payload.postingHours;
     },
 
     deactivateUser: (state) => {
@@ -47,6 +48,7 @@ export const userSlice = createSlice({
       state.twitterName = '';
       state.topics = [];
       state.frequencyTweetPosting = 0;
+      state.postingHours = [];
     },
   },
 });
