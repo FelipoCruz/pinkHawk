@@ -81,6 +81,7 @@ export const generateTweetServiceClient = async (user) => {
       },
       body: JSON.stringify(user),
     });
+    console.log(response);
     return response.json();
   } catch (err) {
     console.log(err);
