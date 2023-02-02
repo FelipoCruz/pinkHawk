@@ -59,6 +59,7 @@ export const queueTweet = async (req: Request, res: Response) => {
     const userIdReq = Number(req.body.id);
     const tweetId = Number(req.body.tweetId);
     const postingTimestamp = req.body.postingTimestamp;
+    console.log('postingTimestamp at body is: ', req.body.postingTimestamp)
     const postingTimestampAsDate = new Date(postingTimestamp);
     const postingTimestampISO = postingTimestampAsDate.toISOString();
     //const postingTimestampISO = postingTimestamp.toISOString();
