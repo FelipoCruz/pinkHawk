@@ -46,7 +46,7 @@ export default function SignUp() {
 
   return (
     <div className="login-container">
-      <div className="form-container">
+      <div className="login-form-container">
         <form className="form" onSubmit={(event) => handleSubmit(event)}>
           <h1 id="login-header">Sign Up</h1>
           <div className="form-input">
