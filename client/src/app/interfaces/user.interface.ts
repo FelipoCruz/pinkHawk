@@ -11,5 +11,6 @@ export default interface IUser {
   twitterName: string;
   topics: string[];
   frequencyTweetPosting: number;
+  postingHours: number[];
   profilePic?: string;
 }

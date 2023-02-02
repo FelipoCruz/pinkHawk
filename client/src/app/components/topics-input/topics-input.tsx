@@ -11,7 +11,8 @@ const TopicsInput = () => {
   const user = useAppSelector((state) => state.user);
   console.log('user in state :', user);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
-  const [amountPreference, setAmountPreference] = useState(user.frequencyTweetPosting || '');
+  const [timesPreference, setTimesPreference] = useState(user.frequencyTweetPosting || '');
+  const [hoursPreference, setHoursPreference] = useState(user.postingHours || []);
 
   const setTopics = () => {
     console.log('selected topics are:', selectedTopics);
@@ -21,20 +22,20 @@ const TopicsInput = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setAmountPreference(e.target.value);
+    setTimesPreference(e.target.value);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const pref = await updateFrequencyPreference(user.id, amountPreference);
+    const pref = await updateFrequencyPreference(user.id, timesPreference);
     console.log('what we receive from API on submit topic preferences: ====>', pref);
-    setAmountPreference(pref.frequencyTweetPosting);
+    setTimesPreference(pref.frequencyTweetPosting);
     dispatch(activeUser(pref));
   };
 
   const timesPerDay = () => {
     return Array.from({ length: 6 }, (_, i) => i + 1);
-  }
+  };
 
   return (
     <div className='pref-container'>
@@ -54,14 +55,15 @@ const TopicsInput = () => {
         <form onSubmit={handleSubmit}>
           <h1 className='time-label'>Tweet posting preferences</h1>
           <label htmlFor='number'>Times per day</label>
-          <select id='number' name='number' className='select-box' onChange={handleChange} value={amountPreference}>
+          <select id='number' name='number' className='select-box' onChange={handleChange} value={timesPreference}>
             {timesPerDay().map((times: number) => (
               <option key={times} value={times}>
                 {times}
               </option>
             ))}
           </select>
-          <label>Select the hours</label>
+          <label htmlFor='hours'>Select the hours</label>
+
           <button className='pref-btn'>Save preference</button>
         </form>
       </div>
