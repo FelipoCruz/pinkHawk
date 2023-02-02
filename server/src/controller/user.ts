@@ -93,10 +93,7 @@ export const updateFrequency = async (req: Request, res: Response) => {
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
-  }
-
-}
-
+  };
 };
 
 export const signOutUser = (req: Request, res: Response) => {
