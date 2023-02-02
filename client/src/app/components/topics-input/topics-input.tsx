@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TagsInput } from 'react-tag-input-component';
-import { saveTopics, updateFrequencyPreference } from '../../../services/api.service';
+import { saveTopics, updateTimeFrequencyPreference } from '../../../services/api.service';
 import { activeUser } from '../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import Button from '../button/Button';
@@ -11,8 +11,9 @@ const TopicsInput = () => {
   const user = useAppSelector((state) => state.user);
   console.log('user in state :', user);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
-  const [timesPreference, setTimesPreference] = useState(user.frequencyTweetPosting || '');
+  const [timesPreference, setTimesPreference] = useState(user.frequencyTweetPosting || 1);
   const [hoursPreference, setHoursPreference] = useState(user.postingHours || []);
+  console.log('hoursPreference :', hoursPreference);
 
   const setTopics = () => {
     console.log('selected topics are:', selectedTopics);
@@ -21,20 +22,45 @@ const TopicsInput = () => {
     setSelectedTopics([]);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTimesPreference(e.target.value);
+  const handleChangeTimes = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setTimesPreference(Number(e.target.value));
+  };
+  // chenge the state of hoursPreference when the user selects a time to tweet
+  // if the user selects more than the defined tweets per day, the last selection is not saved
+  const handleChangeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('e.target.value :', e.target.value);
+    console.log('e.target.checked :', e.target.checked);
+    if (e.target.checked) {
+      setHoursPreference((prevState) => {
+        if (prevState.length < timesPreference) {
+          return [...prevState, Number(e.target.value)];
+        } else {
+          e.target.checked = false;
+          return prevState;
+        }
+      });
+    } else {
+      setHoursPreference(hoursPreference.filter((hour) => hour !== Number(e.target.value)));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const pref = await updateFrequencyPreference(user.id, timesPreference);
-    console.log('what we receive from API on submit topic preferences: ====>', pref);
-    setTimesPreference(pref.frequencyTweetPosting);
-    dispatch(activeUser(pref));
+    const timesPreferences = await updateTimeFrequencyPreference(user.id, timesPreference);
+    console.log('what we receive from API on submit topic preferences: ====>', timesPreferences);
+    setTimesPreference(timesPreferences.frequencyTweetPosting);
+    // const hourPreferences = await updateHourFrequencyPreference(user.id, hoursPreference);
+    setHoursPreference(timesPreferences.postingHours);
+    // if (timesPreferences && hoursPreference) dispatch(activeUser(timesPreferences, hoursPreference));
+    dispatch(activeUser(timesPreferences));
   };
-
+  // set a maximum tweet posting frequency of 4 times per day
   const timesPerDay = () => {
-    return Array.from({ length: 6 }, (_, i) => i + 1);
+    return Array.from({ length: 4 }, (_, i) => i + 1);
+  };
+  // define 24h in a day to be used as options for the user to select
+  const hoursADay = () => {
+    return Array.from({ length: 24 }, (_, i) => i);
   };
 
   return (
@@ -55,15 +81,19 @@ const TopicsInput = () => {
         <form onSubmit={handleSubmit}>
           <h1 className='time-label'>Tweet posting preferences</h1>
           <label htmlFor='number'>Times per day</label>
-          <select id='number' name='number' className='select-box' onChange={handleChange} value={timesPreference}>
-            {timesPerDay().map((times: number) => (
-              <option key={times} value={times}>
-                {times}
+          <select id='number' name='number' className='select-box' onChange={handleChangeTimes} defaultValue={user.frequencyTweetPosting}>
+            {timesPerDay().map((time: number) => (
+              <option key={time} value={time}>
+                {time}
               </option>
             ))}
           </select>
-          <label htmlFor='hours'>Select the hours</label>
-
+          {hoursADay().map((hour: number) => (
+            <label key={hour} htmlFor={hour.toString()}>
+              <input type='checkbox' id={hour.toString()} name={hour.toString()} value={hour} onChange={handleChangeHours} />
+              {hour < 10 ? `0${hour}:00 h` : `${hour}:00 h`}
+            </label>
+          ))}
           <button className='pref-btn'>Save preference</button>
         </form>
       </div>
