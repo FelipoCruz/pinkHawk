@@ -14,6 +14,7 @@ const initialState: IUser = {
   twitterName: '',
   topics: [],
   frequencyTweetPosting: 0,
+  postingHours: [],
 };
 
 export const userSlice = createSlice({
