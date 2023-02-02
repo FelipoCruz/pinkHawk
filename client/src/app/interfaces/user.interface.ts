@@ -12,6 +12,5 @@ export default interface IUser {
   topics: string[];
   postingHours: number[];
   frequencyTweetPosting: number;
-  postingHours: number[];
   profilePic?: string;
 }
