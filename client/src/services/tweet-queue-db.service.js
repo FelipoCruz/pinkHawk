@@ -1,6 +1,8 @@
 const BASE_URL = 'http://localhost:5000/';
 
 export const queueTweetDB = async (userId, tweetId, postingDate) => {
+  console.log('postingDate is module queueTweetDB is: ', postingDate);
+  console.log('postingDate is module queueTweetDB type is: ', typeof postingDate);
   try {
     const url = BASE_URL + 'tweet/queueTweet';
     const response = await fetch(url, {
@@ -11,7 +13,7 @@ export const queueTweetDB = async (userId, tweetId, postingDate) => {
       body: JSON.stringify({
         Id: userId,
         tweetId: tweetId,
-        postingTimeStamp: postingDate
+        postingTimestamp: postingDate
       }),
     });
     return response.json();

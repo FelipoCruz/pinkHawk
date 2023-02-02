@@ -22,8 +22,17 @@ const Selection = () => {
   const user = useAppSelector(({ user }) => user);
   const [spinner, setSpinner] = useState(false);
   const [tweets, setTweets] = useState([]);
-  const [queuedTweets, setQueuedTweets] = useState([]);
+  const [queuedTweets, setQueuedTweets] = useState<ITweet[]>([]);
   const [nextPostingDate, setNextPostingDate] = useState(Date);
+  const [lastQueuedTweetDate, setLastQueuedTweetDate] = useState('')
+
+  console.log(user)
+  console.log('Suggested Tweets are: ', tweets);
+  console.log('Queued Tweets are: ', queuedTweets);
+  console.log('queuedTweets length is: ', queuedTweets.length);
+  console.log('nextPostingDate is: ', nextPostingDate);
+  console.log('nextPostingDate typeof: ', typeof nextPostingDate);
+  console.log('lastQueuedTweets is: ', lastQueuedTweetDate);
 
   useEffect(() => {
     fetchSuggestedTweets();
@@ -32,7 +41,7 @@ const Selection = () => {
 
   useEffect(() => {
     defineNextPostingDate();
-  }, [queuedTweets]);
+  }, [tweets]);
 
   useEffect(() => {
     console.log(tweets.length);
@@ -50,11 +59,7 @@ const Selection = () => {
     setQueuedTweets(queuedTweetsV);
   };
 
-  console.log('Suggested Tweets are: ', tweets);
-  console.log('Queued Tweets are: ', queuedTweets);
-  console.log('queuedTweets length is: ', queuedTweets.length);
-  console.log('nextPostingDate is: ', nextPostingDate);
-  console.log('nextPostingDate typeof: ', typeof nextPostingDate)
+
   // console.log('nextPostingDate to UTC is: ', nextPostingDate.)
 
   const generateTweetsInit = async () => {
@@ -72,11 +77,17 @@ const Selection = () => {
 
   const moveTweetQueued = async (tweetToQueue: ITweet, index: number, postingDate: string) => {
     console.log('moving tweet to queued');
+    tweetToQueue.postingTimestamp = postingDate;
     console.log(tweetToQueue);
+    console.log('posting date: ' + postingDate);
     // modify tweet status in the DB
     queueTweetDB(user.id, tweetToQueue.id, postingDate);
-    // modify tweet status in the State
+    setLastQueuedTweetDate(postingDate);
+    // modify tweet status in state of suggested tweets
     deleteTweetinState(index)
+    // add the tweet in state of queued tweets
+    addTweetToQueueState(tweetToQueue)
+    // generate a new suggested tweet from GPT
     generateTweetServiceClient(user);
   };
 
@@ -90,6 +101,10 @@ const Selection = () => {
     generateTweetServiceClient(user);
   };
 
+  const addTweetToQueueState = (tweet: ITweet) => {
+    setQueuedTweets([...queuedTweets, tweet])
+  }
+
   const deleteTweetinState = (index: number) => {
     const items = [...tweets];
     items.splice(index, 1);
@@ -97,7 +112,6 @@ const Selection = () => {
   };
 
   // this function sets nextPostingDate
-
   const defineNextPostingDate = () => {
     console.log('hi');
     // if there are tweets in queue => the next postingDate will be:
@@ -105,6 +119,31 @@ const Selection = () => {
     if (queuedTweets.length > 0) {
       const lastTweetInQueue = queuedTweets[queuedTweets.length - 1];
       console.log('lastTweetInQueue is: ', lastTweetInQueue);
+      const lastTweetInQueueDate = lastTweetInQueue.postingTimestamp;
+      console.log('lastTweetInQueueDate', lastTweetInQueueDate);
+      const formatDate = new Date(lastTweetInQueueDate);
+      const hourOfDate = formatDate.getHours();
+      console.log('hour of Date is; ', hourOfDate);
+      const postingHours = user.postingHours
+      console.log('posting hours are: ', postingHours);
+      if (postingHours[postingHours.length - 1] === hourOfDate) {
+        formatDate.setDate(formatDate.getDate() + 1);
+        formatDate.setHours(postingHours[0]);
+        console.log('formatDate 1 is: ', formatDate);
+        setNextPostingDate(formatDate.toUTCString());
+      } else {
+        for (let postingHour of postingHours) {
+          if (postingHour > hourOfDate) {
+            console.log(' curr postingHour is', postingHour)
+            formatDate.setHours(postingHour);
+            console.log('formatDate 2 is: ', formatDate);
+            setNextPostingDate(formatDate.toUTCString())
+            break;
+          }
+        }
+      }
+      //setNextPostingDate(lastTweetInQueueDate);
+
     };
 
     // if there are no tweets in queue => the next postingDate will be: tomorrow at firstPostingHour.
@@ -117,7 +156,7 @@ const Selection = () => {
       tomorrow.setDate(tomorrow.getDate() + 1);
       tomorrow.setHours(firstPostingHour, 0, 0, 0);
       console.log('tomorrow first posting hour is: ', tomorrow);
-      setNextPostingDate(tomorrow.toString());
+      setNextPostingDate(tomorrow.toUTCString());
     };
   };
 
