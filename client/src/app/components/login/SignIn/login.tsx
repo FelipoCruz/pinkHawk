@@ -6,6 +6,8 @@ import { useAppDispatch } from '../../../hooks/hooks';
 import IUser from '../../../interfaces/user.interface';
 import Button from '../../button/Button';
 import './login.scss';
+import loginImg from '../../../../images/login.png'
+
 // TESTING
 // import { useSelector, type TypedUseSelectorHook, useDispatch } from 'react-redux';
 const defaultFormFields = {
@@ -72,7 +74,9 @@ const Login = () => {
           </div>
         </form>
       </div>
-      <div className="graphic"></div>
+      <div className="graphic">
+        <img src={loginImg} alt='login-img' className='login-img'/>
+      </div>
     </div>
   );
 };
