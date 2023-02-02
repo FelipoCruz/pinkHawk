@@ -11,31 +11,37 @@ const TopicsInput = () => {
   const user = useAppSelector((state) => state.user);
   console.log('user in state :', user);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
-  const [amountPreference, setAmountPreference] = useState(user.frequencyTweetPosting || '');
+  const [timesPreference, setTimesPreference] = useState(user.frequencyTweetPosting || '');
+  const [hoursPreference, setHoursPreference] = useState(user.postingHours || []);
 
   const setTopics = () => {
     console.log('selected topics are:', selectedTopics);
+    // why are we using user.email instead of .id? just curious.
     saveTopics(selectedTopics, user.email);
     setSelectedTopics([]);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setAmountPreference(e.target.value);
+    setTimesPreference(e.target.value);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const pref = await updateFrequencyPreference(user.id, amountPreference);
+    const pref = await updateFrequencyPreference(user.id, timesPreference);
     console.log('what we receive from API on submit topic preferences: ====>', pref);
-    setAmountPreference(pref.frequencyTweetPosting);
+    setTimesPreference(pref.frequencyTweetPosting);
     dispatch(activeUser(pref));
+  };
+
+  const timesPerDay = () => {
+    return Array.from({ length: 6 }, (_, i) => i + 1);
   };
 
   return (
     <div className='pref-container'>
       <div className='topics-input-container'>
-        <h1>Tweets tags</h1>
-        <p>Define the most important topics you want to tweet about:</p>
+        <h1>Tweet Tags</h1>
+        <p>Define topics you want to tweet about.</p>
         <TagsInput
           value={selectedTopics}
           onChange={setSelectedTopics}
@@ -43,27 +49,21 @@ const TopicsInput = () => {
           placeHolder='Enter here tweet tags'
         />
         <em>(Press enter to add new tag)</em>
-        <button onClick={setTopics} className='pref-btn'>submit topics</button>
+        <button onClick={setTopics} className='pref-btn'>save topics</button>
       </div>
       <div className='form-container'>
         <form onSubmit={handleSubmit}>
-          <h1 className='time-label'>Choose your preference for posting a tweet:</h1>
-          <label htmlFor='number'>every</label>
-          <select id='number' name='number' className='select-box' onChange={handleChange} value={amountPreference}>
-            <option value='1'>1</option>
-            <option value='2'>2</option>
-            <option value='3'>3</option>
-            <option value='4'>4</option>
-            <option value='5'>5</option>
-            <option value='6'>6</option>
-            <option value='7'>7</option>
-            <option value='8'>8</option>
-            <option value='9'>9</option>
-            <option value='10'>10</option>
-            <option value='11'>11</option>
-            <option value='12'>12</option>
+          <h1 className='time-label'>Tweet posting preferences</h1>
+          <label htmlFor='number'>Times per day</label>
+          <select id='number' name='number' className='select-box' onChange={handleChange} value={timesPreference}>
+            {timesPerDay().map((times: number) => (
+              <option key={times} value={times}>
+                {times}
+              </option>
+            ))}
           </select>
-          <label>hour(s)</label>
+          <label htmlFor='hours'>Select the hours</label>
+
           <button className='pref-btn'>Save preference</button>
         </form>
       </div>
