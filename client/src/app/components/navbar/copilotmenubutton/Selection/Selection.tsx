@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Selection.scss';
 import '../../../tweet/Tweet.scss';
 import { useAppSelector } from '../../../../hooks/hooks';
 import SingleTweet from '../../../tweet/Tweet';
 import {
-  deleteTweetDB,
   generateTweetServiceClient,
   getSuggestedTweets,
-  getUserTweets,
-  queueTweetDB,
 } from '../../../../../services/api.service';
 import acceptButton from '../../../../../images/check.png';
 import rejectButton from '../../../../../images/reject.png';
@@ -16,6 +13,11 @@ import ITweet from '../../../../interfaces/tweet.interface';
 import Button from '../../../button/Button';
 import Spinner from '../../../spinner/Spinner';
 import '../../../tweet/Tweet.scss';
+import {
+  queueTweetDB,
+  getUserTweets,
+  deleteTweetDB,
+} from '../../../../../services/api.service';
 import dayjs from 'dayjs';
 
 const Selection = () => {
@@ -85,9 +87,6 @@ const Selection = () => {
     console.log(tweetToQueue);
     console.log('posting date: ' + postingDate);
     // modify tweet status in the DB
-    queueTweetDB(user.id, tweetToQueue.id);
-    // modify tweet status in the State
-    deleteTweetinState(index);
     queueTweetDB(user.id, tweetToQueue.id, postingDate);
     setLastQueuedTweetDate(postingDate);
     // modify tweet status in state of suggested tweets

@@ -1,17 +1,36 @@
-import { useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { NavLink, Outlet } from 'react-router-dom';
 import Button from '../components/button/Button';
 import NavBarUser from '../components/navbar/loginnavbar/LoginNavBar';
-import { getAuthUrl } from '../../services/api.service';
+import { getAuthUrl, getUserById } from '../../services/api.service';
+import { useEffect } from 'react';
+import IUser from '../interfaces/user.interface';
+import { activeUser } from '../../store/slices/user.slice';
 
 const Dashboard = () => {
-  const user = useAppSelector((state) => state.user);
-  console.log('user id us :', user);
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+  const dispatch = useAppDispatch();
 
-  const handleClick = async () => {
-    const res = await getAuthUrl(user.id);
-    window.location.href = res.url;
-  };
+  useEffect(() => {
+    console.log('isLoggedIn in App', isLoggedIn);
+
+    if (!isLoggedIn) {
+      (async () => {
+        let storedString = localStorage.getItem('user');
+        if (storedString) {
+          const storedUser: IUser = JSON.parse(storedString);
+          console.log('storedUser', storedUser);
+
+          if (storedUser) {
+            const user: IUser = await getUserById(storedUser.id);
+            console.log(user);
+
+            dispatch(activeUser(user));
+          }
+        }
+      })();
+    }
+  }, []);
 
   return (
     <div className="dashboard-container">

@@ -38,7 +38,10 @@ export const createUser = async (req: Request, res: Response) => {
     });
     const { password, ...userNoPassword } = newUser;
     const accessToken = jwt.sign({ id: newUser.id }, SECRET_KEY);
-    res.cookie('token', accessToken).status(201).json(userNoPassword);
+    res
+      .cookie('token', accessToken, { httpOnly: true })
+      .status(201)
+      .json(userNoPassword);
   } catch (error) {
     console.log('error in CreateUser:' + error);
   }
@@ -64,7 +67,10 @@ export const signInUser = async (req: Request, res: Response) => {
     const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
     console.log('accessToken: ', accessToken);
 
-    res.cookie('token', accessToken).status(200).json(userNoPassword);
+    res
+      .cookie('token', accessToken, { httpOnly: true })
+      .status(200)
+      .json(userNoPassword);
   } catch (error) {
     console.log('error in CreateUser:' + error);
   }

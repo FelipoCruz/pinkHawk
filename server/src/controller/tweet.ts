@@ -56,7 +56,6 @@ export const queueTweet = async (req: Request, res: Response) => {
   try {
     const userIdReq = Number(req.body.id);
     const tweetId = Number(req.body.tweetId);
-    console.log('userIdReq is: ' + userIdReq);
     const postingTimestamp = req.body.postingTimestamp;
     console.log('postingTimestamp at body is: ', req.body.postingTimestamp);
     const postingTimestampAsDate = new Date(postingTimestamp);
@@ -66,7 +65,6 @@ export const queueTweet = async (req: Request, res: Response) => {
     console.log('tweetId is: ' + tweetId);
     const queuedTweetOK = await prisma.tweet.update({
       where: { id: tweetId },
-      data: { status: 'queued' },
       data: {
         status: 'queued',
         postingTimestamp: postingTimestampISO,

@@ -15,8 +15,11 @@ import {
   tweetStatusPosted,
 } from './controller/tweet';
 
-import { getAccessToken, oauth } from './integration/twitter-api.service';
 import { authProtect } from './middleware/auth-protect';
+import {
+  getAccessToken,
+  oauth,
+} from './integration/twitter-service/twitter-auth';
 
 const router = require('express').Router();
 

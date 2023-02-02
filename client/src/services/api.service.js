@@ -183,7 +183,12 @@ export const deleteTweetDB = async (userId, tweetId) => {
   }
 };
 
-export const queueTweetDB = async (userId, tweetId) => {
+export const queueTweetDB = async (userId, tweetId, postingDate) => {
+  console.log('postingDate is module queueTweetDB is: ', postingDate);
+  console.log(
+    'postingDate is module queueTweetDB type is: ',
+    typeof postingDate
+  );
   try {
     const url = BASE_URL + 'tweet/queueTweet';
     const response = await fetch(url, {
@@ -195,6 +200,7 @@ export const queueTweetDB = async (userId, tweetId) => {
       body: JSON.stringify({
         Id: userId,
         tweetId: tweetId,
+        postingTimestamp: postingDate,
       }),
     });
     return response.json();
