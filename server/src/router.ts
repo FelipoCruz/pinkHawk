@@ -16,8 +16,6 @@ import {
 } from './controller/tweet';
 import { getAccessToken, oauth } from './integration/twitter-service/twitter-auth';
 
-
-
 const router = require('express').Router();
 
 /* USER MANAGEMENT */
@@ -43,7 +41,7 @@ router.put('/tweet/queueTweet', queueTweet);
 router.put('/tweet/tweetStatusPosted', tweetStatusPosted);
 
 //route to modify the user posting frequency
-router.put('/user/:id/frequency/:frequency', updateFrequency)
+router.put('/user/:id/frequency', updateFrequency);
 
 // route to delete tweet from DB
 router.delete('/tweet/delete', tweetDelete);

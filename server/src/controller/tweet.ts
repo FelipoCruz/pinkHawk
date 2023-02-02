@@ -35,12 +35,17 @@ export const fetchTweets = async (req: Request, res: Response) => {
     console.log('status is: ' + status);
     console.log('userEmail is: ' + userIdReq);
     if (status === 'suggested') {
-      const tweets = await prisma.tweet.findMany({ where: { userId: userIdReq, status: 'suggested' } });
+      const tweets = await prisma.tweet.findMany({ 
+        where: { userId: userIdReq, status: 'suggested' },
+      });
       res.status(201);
       res.send(tweets);
     }
     if (status === 'queued') {
-      const tweets = await prisma.tweet.findMany({ where: { userId: userIdReq, status: 'queued' } });
+      const tweets = await prisma.tweet.findMany({ 
+        where: { userId: userIdReq, status: 'queued' },
+        orderBy: { postingTimestamp: 'asc' } 
+      });
       res.status(201);
       res.send(tweets);
     } 

@@ -81,6 +81,7 @@ export const generateTweetServiceClient = async (user) => {
       },
       body: JSON.stringify(user),
     });
+    console.log(response);
     return response.json();
   } catch (err) {
     console.log(err);
@@ -111,14 +112,29 @@ export const getAuthUrl = async (id) => {
   }
 };
 
-export const updateFrequencyPreference = async (id, frequency) => {
+export const updateTimeFrequencyPreference = async (id, frequency) => {
   try {
-    const res = await fetch(`${BASE_URL}user/${id}/frequency/${frequency}`, {
+    const res = await fetch(`${BASE_URL}user/${id}/frequency`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ frequency }),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateHourFrequencyPreference = async (id, hour) => {
+  try {
+    const res = await fetch(`${BASE_URL}user/${id}/hour/${hour}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ hour }),
     })
     return res.json();
   } catch (error) {

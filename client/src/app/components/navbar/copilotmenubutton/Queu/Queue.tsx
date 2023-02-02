@@ -6,6 +6,7 @@ import { getUserTweets } from '../../../../../services/api.tweets';
 import '../../../tweet/Tweet.scss';
 import { deleteTweetDB } from '../../../../../services/tweet-delete-db.service';
 import rejectButton from '../../../../../images/reject.png';
+import dayjs from 'dayjs'
 
 const Queue = () => {
   const user = useAppSelector(({ user }) => user);
@@ -35,12 +36,15 @@ const Queue = () => {
     setTweets(items);
   };
 
+  console.log('tweets are: ', tweets);
+
   return (
     <>
       {tweets?.length ? (
-        tweets.map((tweet: ITweet, index) => (
+        tweets.map((tweet: ITweet, index) => (        
           <li key={tweet.id} className="tweet-li">
             <Tweet key={tweet.id} tweetPassed={tweet} />
+            <p>{dayjs(String(tweet.postingTimestamp)).format('DD/MM/YY [at] HH:mm')}</p>
             <button
               name="reject-tweet-button"
               onClick={() => deleteTweet(tweet, index)}
