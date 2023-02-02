@@ -14,8 +14,7 @@ import {
   tweetDelete,
   tweetStatusPosted,
 } from './controller/tweet';
-
-import { getAccessToken, oauth } from './integration/twitter-api.service';
+import { getAccessToken, oauth } from './integration/twitter-service/twitter-auth';
 
 const router = require('express').Router();
 
@@ -48,7 +47,6 @@ router.put('/user/:id/frequency', updateFrequency);
 router.delete('/tweet/delete', tweetDelete);
 
 /* TWITTER REQUESTS MANAGEMENT? */
-router.get('/oauth', oauth);
 router.get('/user/:id/oauth', oauth);
 router.get('/callback', getAccessToken);
 

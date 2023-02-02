@@ -2,55 +2,6 @@ import { PrismaClient, Tweet } from '@prisma/client';
 import { request, Request, response, Response } from "express";
 import { TwitterApi } from "twitter-api-v2";
 const prisma = new PrismaClient();
-// interface TwitterApiTokens {
-//   appKey: string;
-//   appSecret: string;
-//   accessToken?: string;
-//   accessSecret?: string;
-// }
-
-
-//cron library to post tweets on schedule
-var CronJob = require('cron').CronJob;
-var job = new CronJob(
-  '0 */01 * * * *', //seconds, minutes, hours, day of month, month, day of week
-  async function () {
-    const users = await prisma.user.findMany();
-    for (let user of users) {
-      //for every user, get his twitter access and all his queued tweets 
-      const { twitterToken, twitterSecret, id } = user;
-      const realUser = new TwitterApi({
-        appKey: key,
-        appSecret: secret!,
-        accessToken: twitterToken!,
-        accessSecret: twitterSecret!
-      })
-
-      await realUser.v2.tweet((await getOneQueuedTweet(id)).toString())
-      console.log("hihi");
-    }
-  },
-  null,
-  false, //with this parameter set to true, no need to call job.start()
-  'America/Los_Angeles'
-);
-// Use this if the 4th param is default value(false)
-// job.start()
-
-const getOneQueuedTweet = async (id: number) => {
-  let currentIndex = 0;
-  const tweets = await prisma.tweet.findMany({ where: { userId: id, status: "queued" } })
-
-  let currentTweet = tweets[currentIndex]
-  if (currentTweet) {
-    await prisma.tweet.update({ where: { id: currentTweet.id }, data: { status: "posted" } })
-  }
-  currentIndex++
-  console.log(currentTweet);
-
-  return currentTweet.text;
-}
-
 
 const key = process.env.API_KEY || '';
 const secret = process.env.API_KEY_SECRET || '';
@@ -117,22 +68,3 @@ export const getAccessToken = async (req: Request, res: Response) => {
 }
 
 
-
-
-//tweet data:
-// {
-//   data: {
-//     edit_history_tweet_ids: [ '1620442212197621762' ],
-//     id: '1620442212197621762',
-//     text: 'test'
-//   }
-// }
-
-//User data
-// {
-//   data: {
-//     id: '1618905953499332609',
-//     name: 'IsNotSally',
-//     username: 'IsNotSally'
-//   }
-// }
