@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TagsInput } from 'react-tag-input-component';
-import { saveTopics, updateTimeFrequencyPreference } from '../../../services/api.service';
+import { saveTopics, updateFrequencyPreference } from '../../../services/api.service';
 import { activeUser } from '../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import Button from '../button/Button';
@@ -9,14 +9,12 @@ import './topics-input.scss';
 const TopicsInput = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
-  console.log('user in state :', user);
+  // console.log('user in state :', user);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [timesPreference, setTimesPreference] = useState(user.frequencyTweetPosting || 1);
-  const [hoursPreference, setHoursPreference] = useState(user.postingHours || []);
-  console.log('hoursPreference :', hoursPreference);
+  const [hoursPreference, setHoursPreference] = useState(user.postingHours);
 
   const setTopics = () => {
-    console.log('selected topics are:', selectedTopics);
     // why are we using user.email instead of .id? just curious.
     saveTopics(selectedTopics, user.email);
     setSelectedTopics([]);
@@ -24,12 +22,13 @@ const TopicsInput = () => {
 
   const handleChangeTimes = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTimesPreference(Number(e.target.value));
+    // reset hours selected on change of frequency preference
+    setHoursPreference([]);
   };
+
   // chenge the state of hoursPreference when the user selects a time to tweet
   // if the user selects more than the defined tweets per day, the last selection is not saved
   const handleChangeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('e.target.value :', e.target.value);
-    console.log('e.target.checked :', e.target.checked);
     if (e.target.checked) {
       setHoursPreference((prevState) => {
         if (prevState.length < timesPreference) {
@@ -46,13 +45,13 @@ const TopicsInput = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const timesPreferences = await updateTimeFrequencyPreference(user.id, timesPreference);
-    console.log('what we receive from API on submit topic preferences: ====>', timesPreferences);
-    setTimesPreference(timesPreferences.frequencyTweetPosting);
-    // const hourPreferences = await updateHourFrequencyPreference(user.id, hoursPreference);
-    setHoursPreference(timesPreferences.postingHours);
-    // if (timesPreferences && hoursPreference) dispatch(activeUser(timesPreferences, hoursPreference));
-    dispatch(activeUser(timesPreferences));
+
+    const frequencyPrefence = await updateFrequencyPreference(user.id, timesPreference, hoursPreference);
+    setTimesPreference(frequencyPrefence.frequencyTweetPosting);
+    setHoursPreference(frequencyPrefence.postingHours);
+
+    if (frequencyPrefence && hoursPreference) dispatch(activeUser(frequencyPrefence + hoursPreference));
+    else throw new Error('Error updating user preferences');
   };
   // set a maximum tweet posting frequency of 4 times per day
   const timesPerDay = () => {
@@ -88,9 +87,11 @@ const TopicsInput = () => {
               </option>
             ))}
           </select>
+          <br />
+          <label htmlFor='hour'>Hours of the day</label>
           {hoursADay().map((hour: number) => (
             <label key={hour} htmlFor={hour.toString()}>
-              <input type='checkbox' id={hour.toString()} name={hour.toString()} value={hour} onChange={handleChangeHours} />
+              <input type='checkbox' id={hour.toString()} checked={hoursPreference.includes(hour)} className='select-box-hours' name={hour.toString()} value={hour} onChange={handleChangeHours} />
               {hour < 10 ? `0${hour}:00 h` : `${hour}:00 h`}
             </label>
           ))}
