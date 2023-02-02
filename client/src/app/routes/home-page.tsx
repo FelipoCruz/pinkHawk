@@ -18,7 +18,7 @@ const HomePage = () => {
           <h2 className='banner-slogan'>AUTOMATE YOUR TWEETS</h2>
           <h2 className='banner-slogan'>ENGAGE WITH YOUR FOLLOWERS</h2>
           <h2 className='banner-slogan'>EMPOWER AND MONETIZE</h2>
-          <h1 className='banner-slogan h1'>FAST & EASY</h1>
+          <h2 className='banner-slogan h1'>FAST & EASY</h2>
           <button onClick={handleClick} className='trial-btn'>Start your free trial</button>
         </div>
         <div className='banner-img-container'>

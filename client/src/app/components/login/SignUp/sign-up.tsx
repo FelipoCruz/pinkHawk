@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../../hooks/hooks';
 import IUser from '../../../interfaces/user.interface';
 import Button from '../../button/Button';
 import './sign-up.scss';
+import signup from '../../../../images/signup.png'
 
 const defaultFormFields = {
   firstname: '',
@@ -94,7 +95,9 @@ export default function SignUp() {
           </div>
         </form>
       </div>
-      <div className="graphic"></div>
+      <div className="graphic">
+        <img src={signup} alt='signup-img' className='signup-img'/>
+      </div>
     </div>
   );
 }

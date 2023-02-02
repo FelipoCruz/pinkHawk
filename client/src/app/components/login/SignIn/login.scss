@@ -1,12 +1,13 @@
 @use "../../../../scss/variables.scss" as v;
 
 .login-container {
-  min-height: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 
   .graphic {
     width: 50%;
-    background-color: grey;
   }
 
   .login-form-container {
@@ -31,23 +32,16 @@
           font-size: 1.5rem;
           font-weight: 500;
         }
-
-        input {
-          font-size: 1rem;
-          font-family: inherit;
-          border: none;
-          border-radius: 8px;
-          padding: 0.5rem 0.75rem;
-          box-shadow: 0 0px 1px hsl(0deg 0% 0% / 20%), 0 1px 2px hsl(0deg 0% 0% / 20%);
-          background-color: v.$white;
-          line-height: 1.5;
-          margin: 0;
-        }
       }
-
-      .submit {
-        width: fit-content;
-    }
+      
+      .form-input input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid lightgray;
+        font-size: 16px;
+      }
+      }
     }
   }
-}
+
