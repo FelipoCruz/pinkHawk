@@ -16,7 +16,7 @@ export const setTopics = async (req: Request, res: Response) => {
         topics: topics,
       },
     });
-    res.status(201).json('Topics Saved');
+    res.status(201).json(topicsSaved);
   } catch (error) {
     console.log('error in CreateUser:' + error);
   }
