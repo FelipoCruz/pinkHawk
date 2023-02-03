@@ -15,9 +15,8 @@ const TopicsInput = () => {
   const [hoursPreference, setHoursPreference] = useState(user.postingHours);
 
   const setTopics = async () => {
-    // why are we using user.email instead of .id? just curious.
-    // TODO: when the user saves topics, the state resets itself
-    // perhaps we should use a useEffect to update the state???
+    // TODO: change user.email to user.id
+    // TODO: this logic will be moved to the submit handler, so we can use preventDefault
     await saveTopics(selectedTopics, user.email);
     dispatch(activeUser(selectedTopics));
   };
@@ -59,7 +58,7 @@ const TopicsInput = () => {
   const timesPerDay = () => {
     return Array.from({ length: 4 }, (_, i) => i + 1);
   };
-  // define 24h in a day to be used as options for the user to select
+  // define 24h in a day to be used as desired tweeting hours
   const hoursADay = () => {
     return Array.from({ length: 24 }, (_, i) => i);
   };

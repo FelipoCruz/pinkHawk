@@ -9,6 +9,15 @@ const UserPreferences = () => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
 
+  const handleClickNavigate = async () => {
+    navigate('/dashboard/co-pilot');
+  };
+
+  const handleClick = async () => {
+    const res = await getAuthUrl(user.id);
+    window.location.href = res.url;
+  };
+
   const logoutUser = async () => {
     const response = await logout();
 
@@ -22,21 +31,30 @@ const UserPreferences = () => {
     navigate('/dashboard');
   };
 
-  const handleClick = async () => {
-    const res = await getAuthUrl(user.id);
-    window.location.href = res.url;
-  };
-
   return (
     <>
-      <div className="container">
+      <div className='container'>
         <h1>User Preferences</h1>
-        <NavLink to="">
-          <button className="btn btn-inverted" onClick={logoutUser}>
-            Logout
-          </button>
-        </NavLink>
-        <button onClick={handleClick} className='connect-btn'>Connect to your Twitter account</button>
+        <div className='current-setting' onClick={handleClickNavigate}>
+          <p>Current posting daily frequency:</p>
+          <p>{user.frequencyTweetPosting}</p>
+          <div className='selected-hours'>
+            <p>Selected posting hours:</p>
+            {user.postingHours.map((hour: number) => (
+              <p key={hour}>{hour < 10 ? `0${hour}:00 h` : `${hour}:00 h`}</p>
+            ))}
+          </div>
+        </div>
+        <div className='connection-to-twitter'>
+          <p>Connection to Twitter:</p>
+          {user.twitterToken !== null ? 'Connected to Twitter' : 'Not connected to Twitter'}
+          <button onClick={handleClick} className='connect-btn'>Connect to Twitter</button>
+          <NavLink to=''>
+            <button className='btn btn-inverted' onClick={logoutUser}>
+              Logout
+            </button>
+          </NavLink>
+        </div>
       </div>
     </>
   );
