@@ -173,10 +173,10 @@ const Selection = () => {
         <div className='selection-container'>
           <div className="selection-header">
             <div className='next-tweet-time'>
-              <h2 className=''>Selected tweet will be posted at: </h2>
+              <h2 className=''>Next accepted tweet will be posted at: </h2>
               <h1>{dayjs(nextPostingDate).format('DD/MM/YY [at] HH:mm')}</h1>
             </div>
-            <button className='generate-btn' onClick={generateTweetsInit}>Give Me More Tweets!</button>
+            
           </div>
 
           <div className="tweets-list">
@@ -217,6 +217,7 @@ const Selection = () => {
               );
             })}
           </div>
+          <button className='generate-btn' onClick={generateTweetsInit}>Give Me More Tweets!</button>
 
           {/* <button onClick={generateTweetsInit}>
             {' '}
