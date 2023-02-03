@@ -8,14 +8,14 @@ export const authProtect = (
   res: Response,
   next: NextFunction
 ) => {
-  // const { token } = req.cookies;
-  // if (!token) console.log('No token');
-  // console.log('token: ', token);
+  const { token } = req.cookies;
+  if (!token) console.log('No token');
+  console.log('token: ', token);
 
-  // const decoded = jwt.verify(token, SECRET_KEY);
-  // if (!decoded) {
-  //   console.log('No decoded');
-  //   throw new Error('Invalid token');
-  // }
+  const decoded = jwt.verify(token, SECRET_KEY);
+  if (!decoded) {
+    console.log('No decoded');
+    throw new Error('Invalid token');
+  }
   next();
 };
