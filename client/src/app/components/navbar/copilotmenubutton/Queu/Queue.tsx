@@ -9,7 +9,7 @@ import {
   deleteTweetDB,
   getUserTweets,
 } from '../../../../../services/api.service';
-
+import './Queue.scss'
 const Queue = () => {
   const user = useAppSelector(({ user }) => user);
   const [tweets, setTweets] = useState([]);
@@ -44,14 +44,27 @@ const Queue = () => {
     <>
       {tweets?.length ? (
         tweets.map((tweet: ITweet, index) => (
-          <li key={tweet.id} className="tweet-li">
+          <li key={tweet.id} className="queue-tweet-li">
             <Tweet key={tweet.id} tweetPassed={tweet} />
-            <p>
-              {dayjs(String(tweet.postingTimestamp)).format(
-                'DD/MM/YY [at] HH:mm'
-              )}
-            </p>
-            <button
+            <div className='date-btn-container'>
+              <div className="date-container">
+                <p className='date-header'>Posting time:</p>
+                <p className='date-info'>
+                  {dayjs(String(tweet.postingTimestamp)).format(
+                    'DD/MM/YY HH:mm'
+                  )}
+                </p>
+              </div>
+
+              <div className='icon-container'>
+                <span className="material-symbols-outlined queue-cancel" onClick={() => deleteTweet(tweet, index)}>
+                  cancel
+                </span>
+              </div>
+            </div>
+
+
+            {/* <button
               name="reject-tweet-button"
               onClick={() => deleteTweet(tweet, index)}
             >
@@ -60,7 +73,7 @@ const Queue = () => {
                 className="icon-button"
                 src={rejectButton}
               />
-            </button>
+            </button> */}
           </li>
         ))
       ) : (
