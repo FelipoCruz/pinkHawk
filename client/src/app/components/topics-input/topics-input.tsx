@@ -23,7 +23,8 @@ const TopicsInput = () => {
     // TODO: change user.email to user.id
     // TODO: this logic will be moved to the submit handler, so we can use preventDefault
     await saveTopics(selectedTopics, user.email);
-    dispatch(activeUser(selectedTopics));
+    user.topics = selectedTopics;
+    dispatch(activeUser(user));
   };
 
   const handleChangeTimes = (e: React.ChangeEvent<HTMLSelectElement>) => {
