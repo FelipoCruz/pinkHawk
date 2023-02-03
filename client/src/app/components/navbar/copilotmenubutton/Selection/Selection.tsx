@@ -166,31 +166,36 @@ const Selection = () => {
   };
 
   return (
-    <div className='selection-page'>
+    <div className="selection-page">
       {spinner ? (
         <Spinner />
       ) : (
-        <div className='selection-container'>
+        <div className="selection-container">
           <div className="selection-header">
-            <div className='next-tweet-time'>
-              <h2 className=''>Next accepted tweet will be posted at: </h2>
-              <h1>{dayjs(nextPostingDate).format('DD/MM/YY [at] HH:mm')}</h1>
-            </div>
-            
+            {tweets?.length === 0 ? (
+              <h2 className="selection-header-text">
+                No generated tweets yet !
+              </h2>
+            ) : (
+              <div className="next-tweet-time">
+                <h2 className="">Next accepted tweet will be posted at: </h2>
+                <h1>{dayjs(nextPostingDate).format('DD/MM/YY [at] HH:mm')}</h1>
+              </div>
+            )}
           </div>
 
           <div className="tweets-list">
-
             {tweets?.map((tweet: ITweet, index) => {
               return (
                 <div key={tweet.id} className="tweet-li">
-                  <button className='tweet-btn accept'
+                  <button
+                    className="tweet-btn accept"
                     name="accept-tweet-button"
                     onClick={() =>
                       moveTweetQueued(tweet, index, nextPostingDate)
                     }
                   >
-                    <span className="material-symbols-outlined"  >
+                    <span className="material-symbols-outlined">
                       add_circle
                     </span>
                     {/* <img
@@ -200,13 +205,12 @@ const Selection = () => {
                       /> */}
                   </button>
                   <SingleTweet tweetPassed={tweet} />
-                  <button className='tweet-btn reject'
+                  <button
+                    className="tweet-btn reject"
                     name="reject-tweet-button"
                     onClick={() => deleteTweet(tweet, index)}
                   >
-                    <span className="material-symbols-outlined">
-                      cancel
-                    </span>
+                    <span className="material-symbols-outlined">cancel</span>
                     {/* <img
                         alt="reject-tweet-button"
                         className="icon-button"
@@ -217,7 +221,9 @@ const Selection = () => {
               );
             })}
           </div>
-          <button className='generate-btn' onClick={generateTweetsInit}>Give Me More Tweets!</button>
+          <button className="generate-btn" onClick={generateTweetsInit}>
+            Give Me More Tweets!
+          </button>
 
           {/* <button onClick={generateTweetsInit}>
             {' '}
