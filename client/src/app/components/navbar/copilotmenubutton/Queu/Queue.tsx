@@ -45,7 +45,10 @@ const Queue = () => {
       {tweets?.length ? (
         tweets.map((tweet: ITweet, index) => (
           <li key={tweet.id} className="queue-tweet-li">
-            <Tweet key={tweet.id} tweetPassed={tweet} />
+            <div className="queue-tweet-wrap">
+              <Tweet key={tweet.id} tweetPassed={tweet} />
+            </div>
+
             <div className='date-btn-container'>
               <div className="date-container">
                 <p className='date-header'>Posting time:</p>
@@ -61,7 +64,10 @@ const Queue = () => {
                   cancel
                 </span>
               </div>
+
+
             </div>
+
 
 
             {/* <button
