@@ -1,3 +1,4 @@
+@use "../../../../../scss/variables.scss" as v;
 // .icon-button {
 //   height: 30px;
 //   margin: 3px;
@@ -5,19 +6,21 @@
 // }
 .tweets-list {
   display:flex;
+  flex-direction: column;
   flex-wrap: wrap;
+  align-self: center;
+  justify-content: center;
 }
 
 .tweet-li{
   display: flex;
-  width: 40%;
   margin: 30px;
 }
 
 .material-symbols-outlined {
   cursor: pointer;
   font-size: 50px;
-  color: #B24592;
+  color: v.$color-primary;
 }
 
 .selection-header {
@@ -53,5 +56,10 @@
   background-position: right center; /* change the direction of the change here */
   color: #fff;
   text-decoration: none;
+}
+
+.selection-container{
+  display: flex;
+  flex-direction: column;
 }
 
