@@ -6,7 +6,6 @@ import {
 } from '../../../services/api.service';
 import { activeUser } from '../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import Button from '../button/Button';
 import './topics-input.scss';
 
 const TopicsInput = () => {
@@ -19,11 +18,11 @@ const TopicsInput = () => {
   );
   const [hoursPreference, setHoursPreference] = useState(user.postingHours);
 
-  const setTopics = async () => {
+  const setTopics = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     // TODO: change user.email to user.id
-    // TODO: this logic will be moved to the submit handler, so we can use preventDefault
-    await saveTopics(selectedTopics, user.email);
-    dispatch(activeUser(selectedTopics));
+    const savingTopics = await saveTopics(selectedTopics, user.email);
+    dispatch(activeUser(savingTopics));
   };
 
   const handleChangeTimes = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -76,64 +75,64 @@ const TopicsInput = () => {
   };
 
   return (
-    <div className="pref-container">
-      <div className="topics-input-container">
+    <div className='pref-container'>
+      <div className='topics-input-container'>
         <h1>Tweet Tags</h1>
         <p>Define topics you want to tweet about.</p>
-        <TagsInput
-          value={selectedTopics}
-          onChange={setSelectedTopics}
-          name="tags"
-          placeHolder="Enter here tweet tags"
-        />
-        <em className="prim-color">(Press enter to add new tag)</em>
-        <div>
-          <button onClick={setTopics} className="pref-btn">
-            save topics
-          </button>
-        </div>
+        <form onSubmit={setTopics}>
+          <TagsInput
+            value={selectedTopics}
+            onChange={setSelectedTopics}
+            name='tags'
+            placeHolder='Enter here tweet tags'
+          />
+          <em className='prim-color'>(Press enter to add new tag)</em>
+          <div>
+            <input className='pref-btn' type='submit' value='Save topics' />
+          </div>
+        </form>
       </div>
-      <div className="form-container">
+      <div className='form-container'>
         <form onSubmit={handleSubmit}>
-          <h1 className="time-label">Tweet posting preferences</h1>
-          <label htmlFor="number">Times per day</label>
+          <h1 className='time-label'>Tweet posting preferences</h1>
+          <label htmlFor='number'>Times per day</label>
           <select
-            id="number"
-            name="number"
-            className="select-box"
+            id='number'
+            name='number'
+            className='select-box'
             onChange={handleChangeTimes}
             defaultValue={user.frequencyTweetPosting}
           >
             {timesPerDay().map((time: number) => (
-              <option key={time} value={time} className="select-box-hour">
+              <option key={time} value={time} className='select-box-hour'>
                 {time}
               </option>
             ))}
           </select>
           <br />
-          <label htmlFor="hour">Hours of the day</label>
-          <div className="pref-hours-list">
+          <label htmlFor='hour'>Hours of the day</label>
+          <div className='pref-hours-list'>
             {hoursADay().map((hour: number) => (
               <label
                 key={hour}
                 htmlFor={hour.toString()}
-                className="pref-hours-item"
+                className='pref-hours-item'
               >
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   id={hour.toString()}
                   checked={hoursPreference.includes(hour)}
-                  className="select-box-hours"
+                  className='select-box-hours'
                   name={hour.toString()}
                   value={hour}
                   onChange={handleChangeHours}
                 />
-                <span className="checkmark"></span>
+                <span className='checkmark'></span>
                 {hour < 10 ? `0${hour}h00` : `${hour}h00`}
               </label>
             ))}
           </div>
-          <button className="pref-btn">Save preference</button>
+          <button className='pref-btn'>Save preference</button>
         </form>
       </div>
     </div>
