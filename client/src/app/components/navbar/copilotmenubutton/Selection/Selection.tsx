@@ -161,49 +161,63 @@ const Selection = () => {
   };
 
   return (
-    <>
+    <div className='selection-page'>
       {spinner ? (
         <Spinner />
       ) : (
-        <div>
-          <h2>next accepted tweet will go to queue and will be posted at: </h2>
-          <h2>{dayjs(nextPostingDate).format('DD/MM/YY [at] HH:mm')}</h2>
-          <ul>
+        <div className='selection-container'>
+          <div className="selection-header">
+            <div className='next-tweet-time'>
+              <h2 className=''>Selected tweet will be posted at: </h2>
+              <h1>{dayjs(nextPostingDate).format('DD/MM/YY [at] HH:mm')}</h1>
+            </div>
+            <button className='generate-btn' onClick={generateTweetsInit}>Give Me More Tweets!</button>
+          </div>
+
+          <div className="tweets-list">
+
             {tweets.map((tweet: ITweet, index) => {
               return (
-                <li key={tweet.id} className="tweet-li">
-                  <button
+                <div key={tweet.id} className="tweet-li">
+                  <button className='tweet-btn accept'
                     name="accept-tweet-button"
                     onClick={() => moveTweetQueued(tweet, index, nextPostingDate)}
                   >
-                    <img
-                      alt="accept-tweet-button-img"
-                      className="icon-button"
-                      src={acceptButton}
-                    />
+                    <span className="material-symbols-outlined"  >
+                      add_circle
+                    </span>
+                    {/* <img
+                        alt="accept-tweet-button-img"
+                        className="icon-button"
+                        src={acceptButton}
+                      /> */}
                   </button>
                   <SingleTweet tweetPassed={tweet} />
-                  <button
+                  <button className='tweet-btn reject'
                     name="reject-tweet-button"
                     onClick={() => deleteTweet(tweet, index)}
                   >
-                    <img
-                      alt="reject-tweet-button"
-                      className="icon-button"
-                      src={rejectButton}
-                    />
+                    <span className="material-symbols-outlined">
+                      cancel
+                    </span>
+                    {/* <img
+                        alt="reject-tweet-button"
+                        className="icon-button"
+                        src={rejectButton}
+                      /> */}
                   </button>
-                </li>
+                </div>
               );
             })}
-          </ul>
-          <button onClick={generateTweetsInit}>
+          </div>
+
+          {/* <button onClick={generateTweetsInit}>
             {' '}
             <Button text={'More Tweets!'}></Button>{' '}
-          </button>
+          </button> */}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

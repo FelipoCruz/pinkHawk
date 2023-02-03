@@ -11,19 +11,24 @@ const SingleTweetTest = ({ tweetPassed }: Props) => {
   if (!tweetPassed) return null;
 
   return (
-    <div className="solo-tweet">
-      <div className="user-details">
-        {/* <img src={user.profilePic} alt='profile-pic' /> */}
-        <p>{user.twitterName}</p>
-        <p>{user.twitterInfo}</p>
-      </div>
-      <div className="tweet-content">
+    // <div className="solo-tweet">
+    //   <div className="user-details">
+    //     {/* <img src={user.profilePic} alt='profile-pic' /> */}
+    //     <p>{user.twitterName}</p>
+    //     <p>{user.twitterInfo}</p>
+    //   </div>
+    //   <div className="tweet-content">
+    //     <p>{tweetPassed.text}</p>
+    //   </div>
+    //   <div className='tweet-actions'>
+    //     {tweetPassed.status !== 'queue' && <button onClick={() => handleSelected(user, tweetPassed)}>+</button>}
+    //     <button onClick={() => handleDelete(user, tweetPassed)}>x</button>
+    //   </div> 
+    // </div>
+    <div className='solo-tweet'>
+      <div className='glass-effect'>
         <p>{tweetPassed.text}</p>
       </div>
-      {/* <div className='tweet-actions'>
-        {tweetPassed.status !== 'queue' && <button onClick={() => handleSelected(user, tweetPassed)}>+</button>}
-        <button onClick={() => handleDelete(user, tweetPassed)}>x</button>
-      </div> */}
     </div>
   );
 };

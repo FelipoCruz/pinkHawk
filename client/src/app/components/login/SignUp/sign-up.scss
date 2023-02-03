@@ -1,6 +1,6 @@
 @use "../../../../scss/variables.scss" as v;
 
-.login-container {
+.signup-container {
   min-height: 100%;
   display: flex;
   background-color:v.$white;
@@ -16,7 +16,7 @@
 
   }
 
-  .login-form-container {
+  .signup-form-container {
     width: 50%;
     padding: 2rem 4rem;
     display: flex;
@@ -58,4 +58,3 @@
     }
   }
 }
-
