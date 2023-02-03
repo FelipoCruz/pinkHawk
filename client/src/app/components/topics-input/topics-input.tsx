@@ -62,9 +62,11 @@ const TopicsInput = () => {
     setTimesPreference(frequencyPrefence.frequencyTweetPosting);
     setHoursPreference(frequencyPrefence.postingHours);
 
-    if (frequencyPrefence && hoursPreference)
-      dispatch(activeUser(frequencyPrefence + hoursPreference));
-    else throw new Error('Error updating user preferences');
+    if (frequencyPrefence && hoursPreference) {
+      user.frequencyTweetPosting = frequencyPrefence.frequencyTweetPosting;
+      user.postingHours = frequencyPrefence.postingHours;
+      dispatch(activeUser(user));
+    } else throw new Error('Error updating user preferences');
   };
   // set a maximum tweet posting frequency of 4 times per day
   const timesPerDay = () => {
