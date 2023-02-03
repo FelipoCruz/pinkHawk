@@ -6,7 +6,7 @@ import CopilotMenu from '../components/navbar/copilotmenubutton/CopilotMenu/Copi
 
 const CoPilot = () => {
   const user = useAppSelector((state) => state.user);
-  console.log('user id us :', user);
+
 
   return (
     <>

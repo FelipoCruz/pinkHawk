@@ -7,10 +7,11 @@ const SECRET_KEY = process.env.SECRET!;
 
 export const setTopics = async (req: Request, res: Response) => {
   try {
-    const { topics, userEmail } = req.body;
+    const { id } = req.params;
+    const { topics } = req.body;
     const topicsSaved = await prisma.user.update({
       where: {
-        email: userEmail,
+        id: Number(id),
       },
       data: {
         topics: topics,

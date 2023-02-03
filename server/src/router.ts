@@ -32,7 +32,7 @@ router.get('/user/:id', authProtect, getUserById);
 // router.get('/', getAllUsers)
 
 /* TOPICS MANAGEMENT */
-router.post('/topic/set-topics', authProtect, setTopics);
+router.put('/user/:id/topics', authProtect, setTopics);
 router.post('/tweets/generate-tweet', authProtect, generateTweet);
 
 /* TWEETS MANAGEMENT */
