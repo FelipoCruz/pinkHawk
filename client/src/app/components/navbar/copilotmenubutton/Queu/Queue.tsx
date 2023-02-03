@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../../hooks/hooks';
 import Tweet from '../../../tweet/Tweet';
 import ITweet from '../../../../interfaces/tweet.interface';
-import { getUserTweets } from '../../../../../services/api.tweets';
 import '../../../tweet/Tweet.scss';
-import { deleteTweetDB } from '../../../../../services/tweet-delete-db.service';
 import rejectButton from '../../../../../images/reject.png';
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
+import {
+  deleteTweetDB,
+  getUserTweets,
+} from '../../../../../services/api.service';
 
 const Queue = () => {
   const user = useAppSelector(({ user }) => user);
@@ -41,10 +43,14 @@ const Queue = () => {
   return (
     <>
       {tweets?.length ? (
-        tweets.map((tweet: ITweet, index) => (        
+        tweets.map((tweet: ITweet, index) => (
           <li key={tweet.id} className="tweet-li">
             <Tweet key={tweet.id} tweetPassed={tweet} />
-            <p>{dayjs(String(tweet.postingTimestamp)).format('DD/MM/YY [at] HH:mm')}</p>
+            <p>
+              {dayjs(String(tweet.postingTimestamp)).format(
+                'DD/MM/YY [at] HH:mm'
+              )}
+            </p>
             <button
               name="reject-tweet-button"
               onClick={() => deleteTweet(tweet, index)}

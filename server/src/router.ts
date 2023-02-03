@@ -14,7 +14,12 @@ import {
   tweetDelete,
   tweetStatusPosted,
 } from './controller/tweet';
-import { getAccessToken, oauth } from './integration/twitter-service/twitter-auth';
+
+import { authProtect } from './middleware/auth-protect';
+import {
+  getAccessToken,
+  oauth,
+} from './integration/twitter-service/twitter-auth';
 
 const router = require('express').Router();
 
@@ -23,31 +28,31 @@ router.post('/user/signup', createUser);
 router.post('/user/signin', signInUser);
 router.get('/user/signout', signOutUser);
 
-router.get('/user/:id', getUserById);
+router.get('/user/:id', authProtect, getUserById);
 // router.get('/', getAllUsers)
 
 /* TOPICS MANAGEMENT */
-router.post('/topic/set-topics', setTopics);
-router.post('/tweets/generate-tweet', generateTweet);
+router.post('/topic/set-topics', authProtect, setTopics);
+router.post('/tweets/generate-tweet', authProtect, generateTweet);
 
 /* TWEETS MANAGEMENT */
 //route to fetch tweets with status 'suggested' or 'queued'
-router.get('/user/:id/tweets/:status', fetchTweets);
+router.get('/user/:id/tweets/:status', authProtect, fetchTweets);
 
 // route to modify status of tweet from 'suggested' to 'queued'
-router.put('/tweet/queueTweet', queueTweet);
+router.put('/tweet/queueTweet', authProtect, queueTweet);
 
 // route to modify status of tweets to 'posted'
-router.put('/tweet/tweetStatusPosted', tweetStatusPosted);
+router.put('/tweet/tweetStatusPosted', authProtect, tweetStatusPosted);
 
 //route to modify the user posting frequency
-router.put('/user/:id/frequency', updateFrequency);
+router.put('/user/:id/frequency', authProtect, updateFrequency);
 
 // route to delete tweet from DB
-router.delete('/tweet/delete', tweetDelete);
+router.delete('/tweet/delete', authProtect, tweetDelete);
 
 /* TWITTER REQUESTS MANAGEMENT? */
-router.get('/user/:id/oauth', oauth);
+router.get('/user/:id/oauth', authProtect, oauth);
 router.get('/callback', getAccessToken);
 
 export default router;
