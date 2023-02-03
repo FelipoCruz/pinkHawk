@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { TagsInput } from 'react-tag-input-component';
-import { saveTopics, updateFrequencyPreference } from '../../../services/api.service';
+import {
+  saveTopics,
+  updateFrequencyPreference,
+} from '../../../services/api.service';
 import { activeUser } from '../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import Button from '../button/Button';
@@ -11,7 +14,9 @@ const TopicsInput = () => {
   const user = useAppSelector((state) => state.user);
   // console.log('user in state :', user);
   const [selectedTopics, setSelectedTopics] = useState(user.topics);
-  const [timesPreference, setTimesPreference] = useState(user.frequencyTweetPosting || 1);
+  const [timesPreference, setTimesPreference] = useState(
+    user.frequencyTweetPosting || 1
+  );
   const [hoursPreference, setHoursPreference] = useState(user.postingHours);
 
   const setTopics = async () => {
@@ -40,18 +45,25 @@ const TopicsInput = () => {
         }
       });
     } else {
-      setHoursPreference(hoursPreference.filter((hour) => hour !== Number(e.target.value)));
+      setHoursPreference(
+        hoursPreference.filter((hour) => hour !== Number(e.target.value))
+      );
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const frequencyPrefence = await updateFrequencyPreference(user.id, timesPreference, hoursPreference);
+    const frequencyPrefence = await updateFrequencyPreference(
+      user.id,
+      timesPreference,
+      hoursPreference
+    );
     setTimesPreference(frequencyPrefence.frequencyTweetPosting);
     setHoursPreference(frequencyPrefence.postingHours);
 
-    if (frequencyPrefence && hoursPreference) dispatch(activeUser(frequencyPrefence + hoursPreference));
+    if (frequencyPrefence && hoursPreference)
+      dispatch(activeUser(frequencyPrefence + hoursPreference));
     else throw new Error('Error updating user preferences');
   };
   // set a maximum tweet posting frequency of 4 times per day
@@ -64,39 +76,64 @@ const TopicsInput = () => {
   };
 
   return (
-    <div className='pref-container'>
-      <div className='topics-input-container'>
+    <div className="pref-container">
+      <div className="topics-input-container">
         <h1>Tweet Tags</h1>
         <p>Define topics you want to tweet about.</p>
         <TagsInput
           value={selectedTopics}
           onChange={setSelectedTopics}
-          name='tags'
-          placeHolder='Enter here tweet tags'
+          name="tags"
+          placeHolder="Enter here tweet tags"
         />
-        <em>(Press enter to add new tag)</em>
-        <button onClick={setTopics} className='pref-btn'>save topics</button>
+        <em className="prim-color">(Press enter to add new tag)</em>
+        <div>
+          <button onClick={setTopics} className="pref-btn">
+            save topics
+          </button>
+        </div>
       </div>
-      <div className='form-container'>
+      <div className="form-container">
         <form onSubmit={handleSubmit}>
-          <h1 className='time-label'>Tweet posting preferences</h1>
-          <label htmlFor='number'>Times per day</label>
-          <select id='number' name='number' className='select-box' onChange={handleChangeTimes} defaultValue={user.frequencyTweetPosting}>
+          <h1 className="time-label">Tweet posting preferences</h1>
+          <label htmlFor="number">Times per day</label>
+          <select
+            id="number"
+            name="number"
+            className="select-box"
+            onChange={handleChangeTimes}
+            defaultValue={user.frequencyTweetPosting}
+          >
             {timesPerDay().map((time: number) => (
-              <option key={time} value={time}>
+              <option key={time} value={time} className="select-box-hour">
                 {time}
               </option>
             ))}
           </select>
           <br />
-          <label htmlFor='hour'>Hours of the day</label>
-          {hoursADay().map((hour: number) => (
-            <label key={hour} htmlFor={hour.toString()}>
-              <input type='checkbox' id={hour.toString()} checked={hoursPreference.includes(hour)} className='select-box-hours' name={hour.toString()} value={hour} onChange={handleChangeHours} />
-              {hour < 10 ? `0${hour}:00 h` : `${hour}:00 h`}
-            </label>
-          ))}
-          <button className='pref-btn'>Save preference</button>
+          <label htmlFor="hour">Hours of the day</label>
+          <div className="pref-hours-list">
+            {hoursADay().map((hour: number) => (
+              <label
+                key={hour}
+                htmlFor={hour.toString()}
+                className="pref-hours-item"
+              >
+                <input
+                  type="checkbox"
+                  id={hour.toString()}
+                  checked={hoursPreference.includes(hour)}
+                  className="select-box-hours"
+                  name={hour.toString()}
+                  value={hour}
+                  onChange={handleChangeHours}
+                />
+                <span className="checkmark"></span>
+                {hour < 10 ? `0${hour}h00` : `${hour}h00`}
+              </label>
+            ))}
+          </div>
+          <button className="pref-btn">Save preference</button>
         </form>
       </div>
     </div>
