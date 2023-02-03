@@ -181,7 +181,7 @@ const Selection = () => {
 
           <div className="tweets-list">
 
-            {tweets.map((tweet: ITweet, index) => {
+            {tweets?.map((tweet: ITweet, index) => {
               return (
                 <div key={tweet.id} className="tweet-li">
                   <button className='tweet-btn accept'
