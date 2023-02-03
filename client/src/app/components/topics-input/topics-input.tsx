@@ -11,7 +11,6 @@ import './topics-input.scss';
 const TopicsInput = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
-  // console.log('user in state :', user);
   const [selectedTopics, setSelectedTopics] = useState(user.topics);
   const [timesPreference, setTimesPreference] = useState(
     user.frequencyTweetPosting || 1
@@ -20,8 +19,8 @@ const TopicsInput = () => {
 
   const setTopics = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: change user.email to user.id
-    const savingTopics = await saveTopics(selectedTopics, user.email);
+    const savingTopics = await saveTopics(selectedTopics, user.id);
+    console.log('file: topics-input.tsx:25 ~~> setTopics ~~> savingTopics', savingTopics)
     dispatch(activeUser(savingTopics));
   };
 

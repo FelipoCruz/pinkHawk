@@ -56,16 +56,16 @@ export const logout = async () => {
   }
 };
 
-export const saveTopics = async (topics, userEmail) => {
+export const saveTopics = async (topics, userId) => {
   try {
-    const url = BASE_URL + 'topic/set-topics';
+    const url = `${BASE_URL}user/${userId}/topics`;
     const response = await fetch(url, {
-      method: 'POST',
+      method: 'PUT',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ topics, userEmail }),
+      body: JSON.stringify({ topics }),
     });
     return response.json();
   } catch (err) {
