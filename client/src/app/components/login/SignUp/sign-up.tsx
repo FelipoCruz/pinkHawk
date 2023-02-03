@@ -46,10 +46,10 @@ export default function SignUp() {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form-container">
+    <div className="signup-container">
+      <div className="signup-form-container">
         <form className="form" onSubmit={(event) => handleSubmit(event)}>
-          <h1 id="login-header">Sign Up</h1>
+          <h1 id="signup-header">Sign up</h1>
           <div className="form-input">
             <label className="form-input-label">First Name</label>
             <input
@@ -91,13 +91,14 @@ export default function SignUp() {
             />
           </div>
           <div className="submit">
-            <Button text="Sign in" type="submit" />
+            <Button text="Sign up" type="submit" />
           </div>
         </form>
       </div>
       <div className="graphic">
-        <img src={signup} alt='signup-img' className='signup-img'/>
+        <img src={signup} alt='signup-img' className='signup-img' />
       </div>
-    </div>
+</div>
+
   );
 }
