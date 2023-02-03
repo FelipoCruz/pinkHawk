@@ -29,7 +29,6 @@ export const login = async (email, password) => {
     const url = BASE_URL + 'user/signin';
     const response = await fetch(url, {
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -62,6 +61,7 @@ export const saveTopics = async (topics, userEmail) => {
     const url = BASE_URL + 'topic/set-topics';
     const response = await fetch(url, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
