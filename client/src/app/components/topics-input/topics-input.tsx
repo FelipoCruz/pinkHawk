@@ -16,6 +16,8 @@ const TopicsInput = () => {
 
   const setTopics = async () => {
     // why are we using user.email instead of .id? just curious.
+    // TODO: when the user saves topics, the state resets itself
+    // perhaps we should use a useEffect to update the state???
     await saveTopics(selectedTopics, user.email);
     dispatch(activeUser(selectedTopics));
   };
