@@ -1,21 +1,55 @@
-   
-         .connect-btn {
-          background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
-          margin: 10px;
-          padding: 15px 45px;
-          text-align: center;
-          text-transform: uppercase;
-          transition: 0.5s;
-          background-size: 200% auto;
-          color: white;            
-          box-shadow: 0 0 20px #eee;
-          border-radius: 10px;
-          display: block;
-        }
+.container-user-settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100vh;
+  width: 100vw;
 
-        .connect-btn:hover {
-          background-position: right center; /* change the direction of the change here */
-          color: #fff;
-          text-decoration: none;
-        }
-       
+  .current-user-settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #eee;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    .frequency-tweet-posting {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      color: grey;
+    }
+
+    .selected-hours {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      color: grey;
+    }
+  }
+
+  .connect-btn {
+    background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF 100%);
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .connect-btn:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+}
