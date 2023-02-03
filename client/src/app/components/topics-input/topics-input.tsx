@@ -20,8 +20,10 @@ const TopicsInput = () => {
   const setTopics = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const savingTopics = await saveTopics(selectedTopics, user.id);
-    console.log('file: topics-input.tsx:25 ~~> setTopics ~~> savingTopics', savingTopics)
-    dispatch(activeUser(savingTopics));
+    if (savingTopics) {
+      dispatch(activeUser(savingTopics))
+      alert('Topics saved successfully');
+    } else throw new Error('Error saving topics');
   };
 
   const handleChangeTimes = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -60,10 +62,9 @@ const TopicsInput = () => {
     setTimesPreference(frequencyPrefence.frequencyTweetPosting);
     setHoursPreference(frequencyPrefence.postingHours);
 
-    if (frequencyPrefence && hoursPreference) {
-      user.frequencyTweetPosting = frequencyPrefence.frequencyTweetPosting;
-      user.postingHours = frequencyPrefence.postingHours;
-      dispatch(activeUser(user));
+    if (frequencyPrefence) {
+      dispatch(activeUser(frequencyPrefence));
+      alert('User preferences updated successfully');
     } else throw new Error('Error updating user preferences');
   };
   // set a maximum tweet posting frequency of 4 times per day
