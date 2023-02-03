@@ -10,14 +10,14 @@ const TopicsInput = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   // console.log('user in state :', user);
-  const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
+  const [selectedTopics, setSelectedTopics] = useState(user.topics);
   const [timesPreference, setTimesPreference] = useState(user.frequencyTweetPosting || 1);
   const [hoursPreference, setHoursPreference] = useState(user.postingHours);
 
-  const setTopics = () => {
+  const setTopics = async () => {
     // why are we using user.email instead of .id? just curious.
-    saveTopics(selectedTopics, user.email);
-    setSelectedTopics([]);
+    await saveTopics(selectedTopics, user.email);
+    dispatch(activeUser(selectedTopics));
   };
 
   const handleChangeTimes = (e: React.ChangeEvent<HTMLSelectElement>) => {
