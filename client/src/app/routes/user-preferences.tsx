@@ -3,6 +3,7 @@ import { logout } from '../../services/api.service';
 import { deactivateUser } from '../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getAuthUrl } from '../../services/api.service';
+import '../../scss/_user-preference.scss';
 
 const UserPreferences = () => {
   const dispatch = useAppDispatch();
@@ -33,11 +34,13 @@ const UserPreferences = () => {
 
   return (
     <>
-      <div className='container'>
+      <div className='container-user-settings'>
         <h1>User Preferences</h1>
-        <div className='current-setting' onClick={handleClickNavigate}>
+        <div className='current-user-settings' onClick={handleClickNavigate}>
+          <div className='frequency-tweet-posting'>
           <p>Current posting daily frequency:</p>
-          <p>{user.frequencyTweetPosting}</p>
+            {user.frequencyTweetPosting}
+          </div>
           <div className='selected-hours'>
             <p>Selected posting hours:</p>
             {user.postingHours.map((hour: number) => (
