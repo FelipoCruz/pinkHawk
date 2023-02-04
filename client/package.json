@@ -12,6 +12,7 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/react-redux": "^7.1.25",
+    "cloudinary": "^1.33.0",
     "dayjs": "^1.11.7",
     "i": "^0.3.7",
     "npm": "^9.4.0",

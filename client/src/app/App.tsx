@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import './App.scss';
 import Login from './components/login/SignIn/login';
 import SignUp from './components/login/SignUp/sign-up';
 import CoPilot from './routes/co-pilot';
@@ -9,15 +8,16 @@ import HomePage from './routes/home-page';
 import ProtectedRoute from './routes/protected-route';
 import TopicsDefinition from './routes/topics-definition';
 import UserPreferences from './routes/user-preferences';
+import './App.scss';
 
 const App: React.FC = (): JSX.Element => {
   return (
     <>
-      <div className="container">
+      <div className='container'>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path='/' element={<HomePage />} />
           <Route
-            path="/dashboard/*"
+            path='/dashboard/*'
             element={
               <ProtectedRoute>
                 <Dashboard />
@@ -25,7 +25,7 @@ const App: React.FC = (): JSX.Element => {
             }
           >
             <Route
-              path="topics-definition"
+              path='topics-definition'
               element={
                 <ProtectedRoute>
                   <TopicsDefinition />
@@ -33,7 +33,7 @@ const App: React.FC = (): JSX.Element => {
               }
             />
             <Route
-              path="co-pilot"
+              path='co-pilot'
               element={
                 <ProtectedRoute>
                   <CoPilot />
@@ -41,7 +41,7 @@ const App: React.FC = (): JSX.Element => {
               }
             />
             <Route
-              path="growth"
+              path='growth'
               element={
                 <ProtectedRoute>
                   <h1>Growth</h1>
@@ -49,17 +49,19 @@ const App: React.FC = (): JSX.Element => {
               }
             />
             <Route
-              path="user/preferences"
+              path='user/preferences'
               element={
                 <ProtectedRoute>
-                  <UserPreferences />
+                  <UserPreferences image={''} imageUpload={function (event: React.ChangeEvent<HTMLInputElement>): void {
+                    throw new Error('Function not implemented.');
+                  } } />
                 </ProtectedRoute>
               }
             />
-            <Route path="*" element={<Navigate to="/dashboard/co-pilot" />} />
+            <Route path='*' element={<Navigate to='/dashboard/co-pilot' />} />
           </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<SignUp />} />
         </Routes>
       </div>
     </>
