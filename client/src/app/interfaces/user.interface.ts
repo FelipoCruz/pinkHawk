@@ -14,4 +14,9 @@ export default interface IUser {
   twitterToken: string;
   profilePic?: string;
   postingHours: number[];
-}
+};
+
+export interface ProfilePictureProps {
+  image: string;
+  imageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};

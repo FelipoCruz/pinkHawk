@@ -1,12 +1,8 @@
 import React, { createRef, useState } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
+import { ProfilePictureProps } from '../../interfaces/user.interface';
 
-export interface ProfilePictureProps {
-  image: string;
-  imageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-const ProfilePicture = (props: any) => {
+const ProfilePicture = (props: ProfilePictureProps) => {
   const user = useAppSelector((state) => state.user);
   const [image, _setImage] = useState('');
   const inputFileRef = createRef<any>();
@@ -14,25 +10,24 @@ const ProfilePicture = (props: any) => {
   const cleanup = () => {
     URL.revokeObjectURL(image && props.image);
     if (inputFileRef.current) {
-
       inputFileRef.current.value = null;
     }
   };
 
-  const setImage = (newImage: any) => {
+  const setImage = (newImage: React.SetStateAction<string>) => {
     if (image) {
       cleanup();
     }
     _setImage(newImage);
   };
 
-  const handleFileChange = (event: any) => {
-    // if (event.target.files) {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
       const newImage = event.target.files[0];
       if (newImage) {
         setImage(URL.createObjectURL(newImage));
       }
-    // }
+    }
     props.imageUpload(event)
   };
 
@@ -43,7 +38,7 @@ const ProfilePicture = (props: any) => {
         alt={user.name}
         src={image || props.image}
       />
-      <input
+      <input className='profile-picture-input'
         ref={inputFileRef}
         accept='image/*'
         type='file'
@@ -51,12 +46,12 @@ const ProfilePicture = (props: any) => {
         // hidden
         id='avatar-image-upload'
       />
-      <label htmlFor='avatar-image-upload' className='profile-picture-label'>
-        <button>
-          {image ? <button>Delete</button> : <button>Upload</button>}
-          {image ? 'Change' : 'Upload'} profile picture
-        </button>
-      </label>
+      {/* <label htmlFor='avatar-image-upload' className='profile-picture-label'> */}
+      <button className='profile-picture-button'>
+        {/* {image ? <button>Delete</button> : <button>Upload</button>} */}
+        {image ? 'Change' : 'Upload'} profile picture
+      </button>
+      {/* </label> */}
     </div>
   );
 };

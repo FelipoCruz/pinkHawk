@@ -1,14 +1,14 @@
+import { MouseEvent, SetStateAction, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../../services/api.service';
 import { deactivateUser } from '../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getAuthUrl } from '../../services/api.service';
-import { useState } from 'react';
-import ProfilePicture, { ProfilePictureProps } from '../components/profilepicture/ProfilePicture';
+import ProfilePicture from '../components/profilepicture/ProfilePicture';
+import { ProfilePictureProps } from '../interfaces/user.interface';
 // import ProfilePicture from '../components/profilepicture/ProfilePicture';
 import { CLOUDINARY_URL } from '../../services/cloudinary.service';
 import '../../scss/_user-preference.scss';
-
 
 const UserPreferences = (props: ProfilePictureProps) => {
   const [logo, setLogo] = useState('');
@@ -19,15 +19,6 @@ const UserPreferences = (props: ProfilePictureProps) => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
 
-  // const handleImage = (event: any) => {
-  //   if (event.target.files[0]) {
-  //     setImg({
-  //       src: URL.createObjectURL(event.target.files[0]),
-  //       alt: event.target.files[0].name,
-  //     });
-  //     setLogo(event.target.files[0]);
-  //   }
-  // };
   const handleImage = (event: any) => {
     if (event.target.files && event.target.files[0]) {
       const imgSrc = URL.createObjectURL(event.target.files[0]);
@@ -37,7 +28,7 @@ const UserPreferences = (props: ProfilePictureProps) => {
     }
   };
 
-  const profileUpload = async (file: any) => {
+  const profileUpload = async (file: string) => {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', 'PinkHawkUserImage');
@@ -60,7 +51,7 @@ const UserPreferences = (props: ProfilePictureProps) => {
     console.log('file: user-preferences.tsx:56 ~~> profileUpload ~~> data', data)
     return data;
   };
-
+  // TODO: fix this type
   const handleImageUpload = async (event: any) => {
     event.preventDefault();
     imageUpload.image = logo;
@@ -94,13 +85,12 @@ const UserPreferences = (props: ProfilePictureProps) => {
       <div className='container-user-settings'>
         <h1>User Preferences</h1>
         <form className='user-setting-picture'>
+          <img alt='user profile pic' src={user.profilePic} />
           <div className='user-set-profile-avatar'>
             <ProfilePicture imageUpload={handleImage} image={imageUpload.image} />
           </div>
           <div className='upload-profile-avatar'>
-            <button type='submit' onClick={(e) => handleImageUpload(e)}>
-              Upload
-            </button>
+            <input type='submit' className='submit-button' value='Upload' onClick={(e) => handleImageUpload(e)} />
           </div>
         </form>
         <div className='current-user-settings' onClick={handleClickNavigate}>
