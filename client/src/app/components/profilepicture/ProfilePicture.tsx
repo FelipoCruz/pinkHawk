@@ -35,9 +35,9 @@ const ProfilePicture = (props: ProfilePictureProps) => {
   };
 
   return (
-    <div className='profile-picture'>
+    <div className='profile-picture-body'>
       <img
-        className='profile-picture__image'
+        className='profile-picture-image'
         alt='user profile avatar'
         src={image || props.image}
       />
@@ -51,7 +51,7 @@ const ProfilePicture = (props: ProfilePictureProps) => {
       />
       <label htmlFor='avatar-image-upload' className='profile-picture-label'>
         <button>
-          {image ? 'Change' : 'Upload'}
+          {image ? 'Change' : 'Upload'} profile picture
         </button>
       </label>
     </div>
