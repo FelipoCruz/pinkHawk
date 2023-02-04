@@ -10,15 +10,22 @@ let oauthSecret = '';
 let userId = '';
 
 export const oauth = async (req: Request, res: Response) => {
-  const client = new TwitterApi({ appKey: key!, appSecret: secret! });
-  userId = req.params.id;
-  // generate auth link
-  const authLink = await client.generateAuthLink(process.env.CALLBACK_URL, { linkMode: 'authorize' });
-  const { url, oauth_token, oauth_token_secret } = authLink
-  console.log(url, oauth_token, oauth_token_secret);
-  oauthToken = oauth_token
-  oauthSecret = oauth_token_secret
-  res.send({ url: url, oauth_token: oauth_token, oauth_token_secret: oauth_token_secret })
+  try {
+    const client = new TwitterApi({ appKey: key!, appSecret: secret! });
+    userId = req.params.id;
+    // generate auth link
+    const authLink = await client.generateAuthLink(process.env.CALLBACK_URL, { linkMode: 'authorize' });
+    const { url, oauth_token, oauth_token_secret } = authLink
+    console.log(url, oauth_token, oauth_token_secret);
+    oauthToken = oauth_token
+    oauthSecret = oauth_token_secret
+    res.send({ url: url, oauth_token: oauth_token, oauth_token_secret: oauth_token_secret })
+
+  } catch (error) {
+    console.log('error in oauth in twitter-auth.ts module', error )
+
+  }
+
 }
 
 

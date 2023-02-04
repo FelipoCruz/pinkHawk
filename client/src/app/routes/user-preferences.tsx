@@ -70,8 +70,12 @@ const UserPreferences = (props: ProfilePictureProps) => {
   };
 
   const handleClick = async () => {
-    const res = await getAuthUrl(user.id);
-    window.location.href = res.url;
+    try {
+      const res = await getAuthUrl(user.id);
+      window.location.href = res.url;
+    } catch (error) {
+      console.log('error in handleClick in fetAuthUul', error )
+    }
   };
 
   const logoutUser = async () => {
