@@ -1,7 +1,7 @@
 import { MouseEvent, SetStateAction, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../../services/api.service';
-import { deactivateUser } from '../../store/slices/user.slice';
+import { activeUser, deactivateUser } from '../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getAuthUrl } from '../../services/api.service';
 import ProfilePicture from '../components/profilepicture/ProfilePicture';
@@ -48,6 +48,13 @@ const UserPreferences = (props: ProfilePictureProps) => {
     } else {
       console.log('Error trying to upload image')
     }
+    // TODO: uncomment this when updateProfilePicture is created
+    // update user profile picture in database and redux store
+    // to be uncommented when updateProfilePicture is created
+    // const updatePicture = await updateProfilePicture(data);
+    // if (updatePicture.status === 'success') {
+    //   dispatch(activeUser(user.profilePic = data));
+    // }
     console.log('file: user-preferences.tsx:56 ~~> profileUpload ~~> data', data)
     return data;
   };
