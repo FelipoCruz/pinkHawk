@@ -1,18 +1,19 @@
 import React, { createRef, useState } from 'react';
+import { useAppSelector } from '../../hooks/hooks';
+// export interface ProfilePictureProps {
+//   image: string;
+//   imageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
+// };
 
-interface ProfilePictureProps {
-  image: string;
-  imageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-const ProfilePicture = (props: ProfilePictureProps) => {
+const ProfilePicture = (props: any) => {
+  const user = useAppSelector((state) => state.user);
   const [image, _setImage] = useState('');
-  const inputFileRef = createRef<HTMLInputElement>();
+  const inputFileRef = createRef<any>();
 
   const cleanup = () => {
     URL.revokeObjectURL(image && props.image);
     if (inputFileRef.current) {
-      // @ts-ignore
+
       inputFileRef.current.value = null;
     }
   };
@@ -24,21 +25,21 @@ const ProfilePicture = (props: ProfilePictureProps) => {
     _setImage(newImage);
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
+  const handleFileChange = (event: any) => {
+    // if (event.target.files) {
       const newImage = event.target.files[0];
       if (newImage) {
         setImage(URL.createObjectURL(newImage));
       }
-    }
+    // }
     props.imageUpload(event)
   };
 
   return (
     <div className='profile-picture-body'>
-      <img
+      <input
         className='profile-picture-image'
-        alt='user profile avatar'
+        alt={user.name}
         src={image || props.image}
       />
       <input
@@ -46,11 +47,12 @@ const ProfilePicture = (props: ProfilePictureProps) => {
         accept='image/*'
         type='file'
         onChange={handleFileChange}
-        hidden
+        // hidden
         id='avatar-image-upload'
       />
       <label htmlFor='avatar-image-upload' className='profile-picture-label'>
         <button>
+          {image ? <button>Delete</button> : <button>Upload</button>}
           {image ? 'Change' : 'Upload'} profile picture
         </button>
       </label>

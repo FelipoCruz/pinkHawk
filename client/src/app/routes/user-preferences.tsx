@@ -3,12 +3,66 @@ import { logout } from '../../services/api.service';
 import { deactivateUser } from '../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getAuthUrl } from '../../services/api.service';
+import { useState } from 'react';
+// import ProfilePicture, { ProfilePictureProps } from '../components/profilepicture/ProfilePicture';
+import ProfilePicture from '../components/profilepicture/ProfilePicture';
 import '../../scss/_user-preference.scss';
 
-const UserPreferences = () => {
+
+const UserPreferences = (props: any) => {
+  const [logo, setLogo] = useState('');
+  const [imageUpload,] = useState<{ image?: any }>({});
+  const [, setImg] = useState({});
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
+
+  const handleImage = (event: any) => {
+    if (event.target.files[0]) {
+      setImg({
+        src: URL.createObjectURL(event.target.files[0]),
+        alt: event.target.files[0].name,
+      });
+      setLogo(event.target.files[0]);
+    }
+  };
+  // const handleImage = (event: any) => {
+  //   if (event.target.files && event.target.files[0]) {
+  //     const imgSrc = URL.createObjectURL(event.target.files[0]);
+  //     const imgAlt = event.target.files[0].name;
+  //     setImg({ src: imgSrc, alt: imgAlt });
+  //     setLogo(event.target.files[0]);
+  //   }
+  // };
+
+  const profileUpload = async (file: any) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'PinkHawkUserImage');
+    formData.append('cloud_name', 'dnwteqila')
+    let data = '';
+    const response = await fetch(
+      'https://api.cloudinary.com/v1_1/dnwteqila/image/upload',
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
+    console.log('file: user-preferences.tsx:51 ~~> profileUpload ~~> response', response)
+    if (response.ok) {
+      const responseJson = await response.json();
+      data = responseJson['secure_url'];
+    }
+    console.log('file: user-preferences.tsx:56 ~~> profileUpload ~~> data', data)
+    return data;
+  };
+
+  const handleImageUpload = async (event: any) => {
+    event.preventDefault();
+    imageUpload.image = logo;
+    await profileUpload(logo);
+  };
 
   const handleClickNavigate = async () => {
     navigate('/dashboard/co-pilot');
@@ -36,9 +90,19 @@ const UserPreferences = () => {
     <>
       <div className='container-user-settings'>
         <h1>User Preferences</h1>
+        <form className='user-setting-picture'>
+          <div className='user-set-profile-avatar'>
+            <ProfilePicture imageUpload={handleImage} image={imageUpload.image} />
+          </div>
+          <div className='upload-profile-avatar'>
+            <button type='submit' onClick={(e) => handleImageUpload(e)}>
+              Upload
+            </button>
+          </div>
+        </form>
         <div className='current-user-settings' onClick={handleClickNavigate}>
           <div className='frequency-tweet-posting'>
-          <p>Current posting daily frequency:</p>
+            <p>Current posting daily frequency:</p>
             {user.frequencyTweetPosting}
           </div>
           <div className='selected-hours'>

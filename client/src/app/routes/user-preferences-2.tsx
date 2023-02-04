@@ -4,18 +4,11 @@ import { deactivateUser } from '../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getAuthUrl } from '../../services/api.service';
 import '../../scss/_user-preference.scss';
-import { useState } from 'react';
 
-const UserPreferences = (props: ProfilePictureProps) => {
-  const [logo, setLogo] = useState('');
-  const [imageUpload,] = useState({});
-  const [, setImg] = useState({});
-
+const UserPreferences = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
-
-  const 
 
   const handleClickNavigate = async () => {
     navigate('/dashboard/co-pilot');
