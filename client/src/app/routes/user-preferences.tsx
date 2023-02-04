@@ -15,8 +15,12 @@ const UserPreferences = () => {
   };
 
   const handleClick = async () => {
-    const res = await getAuthUrl(user.id);
-    window.location.href = res.url;
+    try {
+      const res = await getAuthUrl(user.id);
+      window.location.href = res.url;
+    } catch (error) {
+      console.log('error in handleClick in fetAuthUul', error )
+    }
   };
 
   const logoutUser = async () => {
@@ -38,7 +42,7 @@ const UserPreferences = () => {
         <h1>User Preferences</h1>
         <div className='current-user-settings' onClick={handleClickNavigate}>
           <div className='frequency-tweet-posting'>
-          <p>Current posting daily frequency:</p>
+            <p>Current posting daily frequency:</p>
             {user.frequencyTweetPosting}
           </div>
           <div className='selected-hours'>
