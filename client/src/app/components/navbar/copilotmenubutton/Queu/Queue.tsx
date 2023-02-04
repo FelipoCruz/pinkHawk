@@ -26,7 +26,7 @@ const Queue = () => {
     console.log('deleting tweet');
     console.log(tweetToDelete);
     // delete tweet from DB
-    deleteTweetDB(user.id, tweetToDelete.id);
+    await deleteTweetDB(user.id, tweetToDelete.id);
     // delete tweet from state
     deleteTweetinState(index);
     // generateTweetServiceClient(user);

@@ -10,6 +10,7 @@ export const authProtect = (
 ) => {
   try {
     const { token } = req.cookies;
+    console.log('token line', token)
     if (!token) {
       console.log('No token');
       res.status(400).json({ error: 'token not found' })

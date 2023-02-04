@@ -87,7 +87,7 @@ const Selection = () => {
     console.log(tweetToQueue);
     console.log('posting date: ' + postingDate);
     // modify tweet status in the DB
-    queueTweetDB(user.id, tweetToQueue.id, postingDate);
+    await queueTweetDB(user.id, tweetToQueue.id, postingDate);
     setLastQueuedTweetDate(postingDate);
     // modify tweet status in state of suggested tweets
     deleteTweetinState(index);
@@ -101,7 +101,8 @@ const Selection = () => {
     console.log('deleting tweet');
     console.log(tweetToDelete);
     // delete tweet from DB
-    deleteTweetDB(user.id, tweetToDelete.id);
+    const DBdelete = await deleteTweetDB(user.id, tweetToDelete.id);
+    console.log('tweet deleted from DB', DBdelete );
     // delete tweet from state
     deleteTweetinState(index);
     generateTweetServiceClient(user);
@@ -115,6 +116,7 @@ const Selection = () => {
     const items = [...tweets];
     items.splice(index, 1);
     setTweets(items);
+    console.log('tweet deleted from DB2');
   };
 
   // this function sets nextPostingDate
