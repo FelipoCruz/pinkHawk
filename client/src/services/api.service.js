@@ -113,6 +113,7 @@ export const getAuthUrl = async (id) => {
       method: 'GET',
       credentials: 'include',
     });
+    console.log('res.body is: ', res.body);
     return res.json();
   } catch (error) {
     console.log(error);
