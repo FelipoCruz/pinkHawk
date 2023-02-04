@@ -4,12 +4,13 @@ import { deactivateUser } from '../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getAuthUrl } from '../../services/api.service';
 import { useState } from 'react';
-// import ProfilePicture, { ProfilePictureProps } from '../components/profilepicture/ProfilePicture';
-import ProfilePicture from '../components/profilepicture/ProfilePicture';
+import ProfilePicture, { ProfilePictureProps } from '../components/profilepicture/ProfilePicture';
+// import ProfilePicture from '../components/profilepicture/ProfilePicture';
+import { CLOUDINARY_URL } from '../../services/cloudinary.service';
 import '../../scss/_user-preference.scss';
 
 
-const UserPreferences = (props: any) => {
+const UserPreferences = (props: ProfilePictureProps) => {
   const [logo, setLogo] = useState('');
   const [imageUpload,] = useState<{ image?: any }>({});
   const [, setImg] = useState({});
@@ -18,23 +19,23 @@ const UserPreferences = (props: any) => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
 
-  const handleImage = (event: any) => {
-    if (event.target.files[0]) {
-      setImg({
-        src: URL.createObjectURL(event.target.files[0]),
-        alt: event.target.files[0].name,
-      });
-      setLogo(event.target.files[0]);
-    }
-  };
   // const handleImage = (event: any) => {
-  //   if (event.target.files && event.target.files[0]) {
-  //     const imgSrc = URL.createObjectURL(event.target.files[0]);
-  //     const imgAlt = event.target.files[0].name;
-  //     setImg({ src: imgSrc, alt: imgAlt });
+  //   if (event.target.files[0]) {
+  //     setImg({
+  //       src: URL.createObjectURL(event.target.files[0]),
+  //       alt: event.target.files[0].name,
+  //     });
   //     setLogo(event.target.files[0]);
   //   }
   // };
+  const handleImage = (event: any) => {
+    if (event.target.files && event.target.files[0]) {
+      const imgSrc = URL.createObjectURL(event.target.files[0]);
+      const imgAlt = event.target.files[0].name;
+      setImg({ src: imgSrc, alt: imgAlt });
+      setLogo(event.target.files[0]);
+    }
+  };
 
   const profileUpload = async (file: any) => {
     const formData = new FormData();
@@ -43,7 +44,7 @@ const UserPreferences = (props: any) => {
     formData.append('cloud_name', 'dnwteqila')
     let data = '';
     const response = await fetch(
-      'https://api.cloudinary.com/v1_1/dnwteqila/image/upload',
+      `${CLOUDINARY_URL}image/upload`,
       {
         method: 'POST',
         body: formData,
@@ -53,6 +54,8 @@ const UserPreferences = (props: any) => {
     if (response.ok) {
       const responseJson = await response.json();
       data = responseJson['secure_url'];
+    } else {
+      console.log('Error trying to upload image')
     }
     console.log('file: user-preferences.tsx:56 ~~> profileUpload ~~> data', data)
     return data;

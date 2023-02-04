@@ -1,9 +1,10 @@
 import React, { createRef, useState } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
-// export interface ProfilePictureProps {
-//   image: string;
-//   imageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
-// };
+
+export interface ProfilePictureProps {
+  image: string;
+  imageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
 const ProfilePicture = (props: any) => {
   const user = useAppSelector((state) => state.user);
