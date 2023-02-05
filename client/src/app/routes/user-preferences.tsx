@@ -45,11 +45,12 @@ const UserPreferences = (props: ProfilePictureProps) => {
     if (response.ok) {
       const responseJson = await response.json();
       data = responseJson['secure_url'];
+      alert('Image uploaded successfully');
     } else {
       console.log('Error trying to upload image')
     }
-    dispatch(activeUser({ ...user, profilePic: data}))
-    console.log('file: user-preferences.tsx:56 ~~> profileUpload ~~> data', data)
+    dispatch(activeUser({ ...user, profilePic: data}));
+    console.log('file: user-preferences.tsx:56 ~~> profileUpload ~~> data', data);
 
     // TODO: uncomment this when updateProfilePicture is created
     // update user profile picture in database and redux store
@@ -60,7 +61,7 @@ const UserPreferences = (props: ProfilePictureProps) => {
     // }
     return data;
   };
-  console.log('user in the state after uploading picture to cloudinary', user);
+
   // TODO: fix this type
   const handleImageUpload = async (event: any) => {
     event.preventDefault();
@@ -102,9 +103,9 @@ const UserPreferences = (props: ProfilePictureProps) => {
           <img alt='user profile pic' src={user.profilePic} />
           <div className='user-set-profile-avatar'>
             <ProfilePicture imageUpload={handleImage} image={imageUpload.image} />
+            <input type='submit' className='submit-button' value='Upload' onClick={(e) => handleImageUpload(e)} />
           </div>
           <div className='upload-profile-avatar'>
-            <input type='submit' className='submit-button' value='Upload' onClick={(e) => handleImageUpload(e)} />
           </div>
         </form>
         <div className='current-user-settings' onClick={handleClickNavigate}>

@@ -5,6 +5,7 @@ import { ProfilePictureProps } from '../../interfaces/user.interface';
 const ProfilePicture = (props: ProfilePictureProps) => {
   const user = useAppSelector((state) => state.user);
   const [image, _setImage] = useState('');
+  // TODO: check for the correct type
   const inputFileRef = createRef<any>();
 
   const cleanup = () => {
