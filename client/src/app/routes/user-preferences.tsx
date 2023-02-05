@@ -1,4 +1,4 @@
-import { MouseEvent, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../../services/api.service';
 import { activeUser, deactivateUser } from '../../store/slices/user.slice';
@@ -17,7 +17,7 @@ const UserPreferences = (props: ProfilePictureProps) => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector(({ user }) => user);
 
   const handleImage = (event: any) => {
     if (event.target.files && event.target.files[0]) {

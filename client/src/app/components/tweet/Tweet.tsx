@@ -1,6 +1,5 @@
 import { useAppSelector } from '../../hooks/hooks';
 import ITweet from '../../interfaces/tweet.interface';
-import IUser from '../../interfaces/user.interface';
 import userIcon from '../../../images/user.png';
 import commentIcon from '../../../images/Twitter_Reply.png';
 import retweetIcon from '../../../images/retweetIcon.png';
@@ -9,7 +8,7 @@ import likeHeart from '../../../images/likeHeart.png';
 type Props = { tweetPassed: ITweet };
 
 const SingleTweetTest = ({ tweetPassed }: Props) => {
-  const user: IUser = useAppSelector(({ user }) => user);
+  const user = useAppSelector(({ user }) => user);
   // console.log('user in the state ======>', user);
 
   if (!tweetPassed) return null;
