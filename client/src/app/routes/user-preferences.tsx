@@ -48,16 +48,19 @@ const UserPreferences = (props: ProfilePictureProps) => {
     } else {
       console.log('Error trying to upload image')
     }
+    dispatch(activeUser({ ...user, profilePic: data}))
+    console.log('file: user-preferences.tsx:56 ~~> profileUpload ~~> data', data)
+
     // TODO: uncomment this when updateProfilePicture is created
     // update user profile picture in database and redux store
     // to be uncommented when updateProfilePicture is created
     // const updatePicture = await updateProfilePicture(data);
     // if (updatePicture.status === 'success') {
-    //   dispatch(activeUser(user.profilePic = data));
+    //   dispatch(activeUser({ ...user, profilePic: data}));
     // }
-    console.log('file: user-preferences.tsx:56 ~~> profileUpload ~~> data', data)
     return data;
   };
+  console.log('user in the state after uploading picture to cloudinary', user);
   // TODO: fix this type
   const handleImageUpload = async (event: any) => {
     event.preventDefault();
