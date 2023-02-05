@@ -22,6 +22,7 @@ const ProfilePicture = (props: ProfilePictureProps) => {
       cleanup();
     }
     _setImage(newImage);
+    setShowInput(false);
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,15 +42,15 @@ const ProfilePicture = (props: ProfilePictureProps) => {
         alt={user.name}
         src={image || props.image}
       /> */}
-      <button className='profile-picture-buttons' onClick={() => setShowInput(!showInput)}>
+      <button className='profile-picture-button' type='button' onClick={() => setShowInput(!showInput)}>
         {image ? 'Change' : 'Add'} profile picture
       </button>
-      <input className={`profile-picture-upload ${showInput ? 'show-input' : ''}`}
+      <input className={`profile-picture-upload ${showInput || image ? '' : 'show-input'}`}
         ref={inputFileRef}
         accept='image/*'
         type='file'
         onChange={handleFileChange}
-        // hidden
+        hidden
       />
     </div>
   );

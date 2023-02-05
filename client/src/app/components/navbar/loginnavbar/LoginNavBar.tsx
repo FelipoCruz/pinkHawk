@@ -11,26 +11,26 @@ import { ReactComponent as Logo } from '../../../../images/pinkhawklogo.svg';
 
 const NavBarUser: React.FC = () => {
   return (
-    <header className="user-navbar">
-      <NavLink to="/dashboard" className="logo-container">
-        <Logo className="logo" />
-        <span className="logo-text">Pink Hawk</span>
+    <header className='user-navbar'>
+      <NavLink to='/dashboard' className='logo-container'>
+        <Logo className='logo' />
+        <span className='logo-text'>Pink Hawk</span>
       </NavLink>
-      <nav className="navbar-items">
-        <NavLink to="/dashboard/co-pilot">
+      <nav className='navbar-items'>
+        <NavLink to='/dashboard/co-pilot'>
           <img
-            alt="copilot-button"
-            className="icon-button"
+            alt='copilot-button'
+            className='icon-button'
             src={copilotButton}
           />
         </NavLink>
-        <NavLink to="/dashboard/growth">
-          <img alt="growth-button" className="icon-button" src={growthButton} />
+        <NavLink to='/dashboard/growth'>
+          <img alt='growth-button' className='icon-button' src={growthButton} />
         </NavLink>
       </nav>
-      <nav className="navbar-items">
-        <NavLink to="user/preferences">
-          <img alt="user-preferences" className="icon-button" src={userIcon} />
+      <nav className='navbar-items'>
+        <NavLink to='user/preferences'>
+          <img alt='user-preferences' className='icon-button' src={userIcon} />
         </NavLink>
       </nav>
     </header>
