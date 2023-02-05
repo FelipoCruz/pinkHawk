@@ -1,0 +1,107 @@
+@use "../../../scss/variables.scss" as v;
+
+.sidebar {
+  position: fixed;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  width: 270px;
+  z-index: 996;
+  transition: all 0.4s ease-in-out;
+  padding: 80px 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #aab7cf transparent;
+  box-shadow: 0px 0px 20px rgb(1 41 112 / 10%);
+  background-color: #fff;
+  font-size: 16px;
+
+  .sidebar-nav {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+
+    .sidebar-nav-item {
+      display: flex;
+      align-items: center;
+      // letter-spacing: 2px;
+      font-size: 18px;
+      font-weight: 600;
+      color: v.$color-secondary;
+      background: #fff;
+      padding: 10px 15px;
+      border-radius: 4px;
+      column-gap: 10px;
+      svg {
+        font-size: 20px;
+        color: #899bbd
+      }
+    }
+    .sidebar-sub-nav {
+      padding-left: 30px;
+      margin: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      row-gap: 15px;
+
+      .sidebar-sub-nav-subitem {
+        display: flex;
+        align-items: center;
+        color: v.$color-secondary;
+        font-size: 15px;
+        font-weight: 600;
+        background: #fff;
+        // padding: 10px 15px;
+        border-radius: 4px;
+        column-gap: 5px;
+        svg {
+          font-size: 15px;
+          color: #899bbd
+        }
+      }
+
+      .active {
+        color: v.$color-primary;
+  
+        svg {
+          color: v.$color-primary;
+        }
+      }
+    }
+
+    .active {
+      background: #f6f9ff;
+      // background: #f5f7fa;
+      color: v.$color-primary;
+
+      svg {
+        color: v.$color-primary;
+      }
+    }
+  }
+
+
+
+}
+
+@media (max-width: 1199px) {
+  .open {
+    left: 0;
+  }
+  
+  .closed {
+    left: -270px;
+  }
+}
+
+@media (min-width: 1200px){
+  .sidebar {
+      left: 0;
+      font-size: 18px;
+  }
+}
