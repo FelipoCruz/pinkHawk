@@ -7,7 +7,7 @@ import { getAuthUrl } from '../../services/api.service';
 import ProfilePicture from '../components/profilepicture/ProfilePicture';
 import { ProfilePictureProps } from '../interfaces/user.interface';
 // import ProfilePicture from '../components/profilepicture/ProfilePicture';
-import { CLOUDINARY_URL } from '../../services/cloudinary.service';
+import { uploadImage } from '../../services/cloudinary.service';
 import '../../scss/_user-preference.scss';
 
 const UserPreferences = (props: ProfilePictureProps) => {
@@ -33,24 +33,17 @@ const UserPreferences = (props: ProfilePictureProps) => {
     formData.append('file', file);
     formData.append('upload_preset', 'PinkHawkUserImage');
     formData.append('cloud_name', 'dnwteqila')
-    let data = '';
-    const response = await fetch(
-      `${CLOUDINARY_URL}image/upload`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    );
-    console.log('file: user-preferences.tsx:51 ~~> profileUpload ~~> response', response)
-    if (response.ok) {
-      const responseJson = await response.json();
-      data = responseJson['secure_url'];
+    let avatarLink = '';
+
+    const response = await uploadImage(formData);
+    // TEMPORARY: this is to test the uploadImage functionProfileUpload
+    if (response) {
+      avatarLink = response['secure_url'];
       alert('Image uploaded successfully');
     } else {
       console.log('Error trying to upload image')
     }
-    dispatch(activeUser({ ...user, profilePic: data}));
-    console.log('file: user-preferences.tsx:56 ~~> profileUpload ~~> data', data);
+    dispatch(activeUser({ ...user, profilePic: avatarLink}));
 
     // TODO: uncomment this when updateProfilePicture is created
     // update user profile picture in database and redux store
@@ -59,11 +52,11 @@ const UserPreferences = (props: ProfilePictureProps) => {
     // if (updatePicture.status === 'success') {
     //   dispatch(activeUser({ ...user, profilePic: data}));
     // }
-    return data;
   };
 
   // TODO: fix this type
   const handleImageUpload = async (event: any) => {
+    console.log('let\'s see the type of event:',typeof event)
     event.preventDefault();
     imageUpload.image = logo;
     await profileUpload(logo);
@@ -100,10 +93,10 @@ const UserPreferences = (props: ProfilePictureProps) => {
       <div className='container-user-settings'>
         <h1>User Preferences</h1>
         <form className='user-setting-picture'>
-          <img alt='user profile pic' src={user.profilePic} />
+          <img alt='user profile pic' src={user.profilePic} className='user-profile-picture'/>
           <div className='user-set-profile-avatar'>
             <ProfilePicture imageUpload={handleImage} image={imageUpload.image} />
-            <input type='submit' className='submit-button' value='Upload' onClick={(e) => handleImageUpload(e)} />
+            <input type='submit' className='submit-button' value='Upload' onClick={(event) => handleImageUpload(event)} />
           </div>
           <div className='upload-profile-avatar'>
           </div>

@@ -1,10 +1,12 @@
 import React, { createRef, useState } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
 import { ProfilePictureProps } from '../../interfaces/user.interface';
+import './ProfilePicture.scss';
 
 const ProfilePicture = (props: ProfilePictureProps) => {
   const user = useAppSelector(({ user }) => user);
   const [image, _setImage] = useState('');
+  const [showInput, setShowInput] = useState(false);
   // TODO: check for the correct type
   const inputFileRef = createRef<any>();
 
@@ -34,25 +36,21 @@ const ProfilePicture = (props: ProfilePictureProps) => {
 
   return (
     <div className='profile-picture-body'>
-      <input
+      {/* <input
         className='profile-picture-image'
         alt={user.name}
         src={image || props.image}
-      />
-      <input className='profile-picture-input'
+      /> */}
+      <button className='profile-picture-buttons' onClick={() => setShowInput(!showInput)}>
+        {image ? 'Change' : 'Add'} profile picture
+      </button>
+      <input className={`profile-picture-upload ${showInput ? 'show-input' : ''}`}
         ref={inputFileRef}
         accept='image/*'
         type='file'
         onChange={handleFileChange}
         // hidden
-        id='avatar-image-upload'
       />
-      {/* <label htmlFor='avatar-image-upload' className='profile-picture-label'> */}
-      <button className='profile-picture-button'>
-        {/* {image ? <button>Delete</button> : <button>Upload</button>} */}
-        {image ? 'Change' : 'Upload'} profile picture
-      </button>
-      {/* </label> */}
     </div>
   );
 };
