@@ -30,6 +30,7 @@ export const generateTweet = async (req: Request, res: Response) => {
 
 export const fetchTweets = async (req: Request, res: Response) => {
   try {
+    console.log('fetchTweets')
     const userIdReq = Number(req.params.id);
     const status = req.params.status;
     if (status === 'suggested') {
@@ -70,8 +71,7 @@ export const queueTweet = async (req: Request, res: Response) => {
         postingTimestamp: postingTimestampISO,
       },
     });
-    res.status(201);
-    res.send(queuedTweetOK);
+    res.status(201).json(queuedTweetOK);
   } catch (error) {
     console.log('Error in queueTweet @ module controller/tweet.ts: ', error);
   }
@@ -99,13 +99,16 @@ export const tweetStatusPosted = async (req: Request, res: Response) => {
 };
 
 export const tweetDelete = async (req: Request, res: Response) => {
+
   try {
+    console.log('server tweet delete start')
     const tweetId = Number(req.body.tweetId);
     console.log('tweetId is: ' + tweetId);
     const tweetStatusPostedOK = await prisma.tweet.delete({
       where: { id: tweetId },
     });
-    res.status(200);
+    console.log('tweetStatusPostedOK is: ' + tweetStatusPostedOK);
+    res.status(200).json(tweetId)
     // res.send(tweetId);
   } catch (error) {
     console.log('Error in tweetDelete @ module controller/tweet.ts: ', error);
