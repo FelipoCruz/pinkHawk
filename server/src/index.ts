@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 import job from './integration/twitter-service/twitter-api.service';
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
-const port = process.env.SERVER_PORT;
+const port = process.env.SERVER_PORT || 5000;
 const app = express();
 
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
