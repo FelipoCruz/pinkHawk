@@ -43,7 +43,7 @@ const UserPreferences = (props: ProfilePictureProps) => {
     } else {
       console.log('Error trying to upload image')
     }
-    dispatch(activeUser({ ...user, profilePic: avatarLink}));
+    dispatch(activeUser({ ...user, profilePic: avatarLink }));
 
     // TODO: uncomment this when updateProfilePicture is created
     // update user profile picture in database and redux store
@@ -56,7 +56,7 @@ const UserPreferences = (props: ProfilePictureProps) => {
 
   // TODO: fix this type
   const handleImageUpload = async (event: any) => {
-    console.log('let\'s see the type of event:',typeof event)
+    console.log('let\'s see the type of event:', typeof event)
     event.preventDefault();
     imageUpload.image = logo;
     await profileUpload(logo);
@@ -71,7 +71,7 @@ const UserPreferences = (props: ProfilePictureProps) => {
       const res = await getAuthUrl(user.id);
       window.location.href = res.url;
     } catch (error) {
-      console.log('error in handleClick in fetAuthUul', error )
+      console.log('error in handleClick in fetAuthUul', error)
     }
   };
 
@@ -93,7 +93,9 @@ const UserPreferences = (props: ProfilePictureProps) => {
       <div className='container-user-settings'>
         <h1>User Preferences</h1>
         <form className='user-setting-picture'>
-          <img alt='user profile pic' src={user.profilePic} className='user-profile-picture'/>
+          <div className='user-profile-picture-circle'>
+            <img alt='user profile pic' src={user.profilePic} className='user-profile-picture' />
+          </div>
           <div className='user-set-profile-avatar'>
             <ProfilePicture imageUpload={handleImage} image={imageUpload.image} />
             <input type='submit' className='submit-button' value='Upload' onClick={(event) => handleImageUpload(event)} />
