@@ -39,7 +39,7 @@ export default function SignUp() {
     }
   };
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     setFormFields({ ...formFields, [name]: value });
@@ -98,7 +98,6 @@ export default function SignUp() {
       <div className="graphic">
         <img src={signup} alt='signup-img' className='signup-img' />
       </div>
-</div>
-
+    </div>
   );
 }

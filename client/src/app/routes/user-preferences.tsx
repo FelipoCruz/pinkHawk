@@ -7,6 +7,7 @@ import { getAuthUrl } from '../../services/api.service';
 import ProfilePicture from '../components/profilepicture/ProfilePicture';
 import { updateAvatar, uploadImage } from '../../services/cloudinary.service';
 import '../../scss/_user-preference.scss';
+import RightMenuButton from '../components/userpreferences/user-submenu/UserSubmenu';
 
 const CLOUDINARY_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
 const CLOUDINARY_CLOUD = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
@@ -94,6 +95,7 @@ const UserPreferences = () => {
     <>
       <div className='container-user-settings'>
         <h1>User Preferences</h1>
+        <RightMenuButton />
         <form className='user-setting-picture'>
           <div className='user-profile-picture-circle'>
             <img
