@@ -3,13 +3,14 @@ import { useAppSelector } from '../../../../hooks/hooks';
 import Tweet from '../../../tweet/Tweet';
 import ITweet from '../../../../interfaces/tweet.interface';
 import '../../../tweet/Tweet.scss';
-import rejectButton from '../../../../../images/reject.png';
 import dayjs from 'dayjs';
 import {
   deleteTweetDB,
   getUserTweets,
 } from '../../../../../services/api.service';
 import './Queue.scss'
+import SingleTweetTest2 from '../../../tweet/Tweet2';
+
 const Queue = () => {
   const user = useAppSelector(({ user }) => user);
   const [tweets, setTweets] = useState([]);
@@ -20,7 +21,7 @@ const Queue = () => {
       console.log('queued tweets are: ', queuedTweets);
       setTweets(queuedTweets);
     })();
-  }, []);
+  }, [user]);
 
   const deleteTweet = async (tweetToDelete: ITweet, index: number) => {
     console.log('deleting tweet');
@@ -46,40 +47,8 @@ const Queue = () => {
         tweets.map((tweet: ITweet, index) => (
           <li key={tweet.id} className="queue-tweet-li">
             <div className="queue-tweet-wrap">
-              <Tweet key={tweet.id} tweetPassed={tweet} />
+              <SingleTweetTest2 tweet={tweet} index={index} deleteTweet={deleteTweet} />
             </div>
-
-            <div className='date-btn-container'>
-              <div className="date-container">
-                <p className='date-header'>Posting time:</p>
-                <p className='date-info'>
-                  {dayjs(String(tweet.postingTimestamp)).format(
-                    'DD/MM/YY HH:mm'
-                  )}
-                </p>
-              </div>
-
-              <div className='icon-container'>
-                <span className="material-symbols-outlined queue-cancel" onClick={() => deleteTweet(tweet, index)}>
-                  cancel
-                </span>
-              </div>
-
-
-            </div>
-
-
-
-            {/* <button
-              name="reject-tweet-button"
-              onClick={() => deleteTweet(tweet, index)}
-            >
-              <img
-                alt="reject-tweet-button"
-                className="icon-button"
-                src={rejectButton}
-              />
-            </button> */}
           </li>
         ))
       ) : (

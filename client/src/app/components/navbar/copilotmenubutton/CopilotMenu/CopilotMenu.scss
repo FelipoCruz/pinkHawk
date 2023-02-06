@@ -8,6 +8,30 @@
   width: 100%;
   background-color: v.$color-lighter-gray;
   padding: 15px 40px;
+
+  .copilot-menu-item {
+    min-width: 145px;
+    height: 40px;
+    letter-spacing: 0.5px;
+    line-height: 50px;
+    padding: 0 30px;
+    font-size: 15px;
+    background-color: v.$black;
+    color: v.$white;
+    text-transform: uppercase;
+    font-weight: bolder;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+  }
+  .active {
+    background-color:transparent;
+    color: black;
+    border: 1px solid black;
+  }
 }
 
 .copilot-content {
