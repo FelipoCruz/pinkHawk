@@ -9,7 +9,7 @@ console.log('envTest is: ', envTest);
 
 console.log(process.env.SERVER_URL);
 
-const BASE_URL = process.env.SERVER_URL || 'http://164.92.135.228:5000/';
+const BASE_URL = process.env.SERVER_URL || 'https://159.89.13.196/';
 console.log('server / base url is: ' + BASE_URL);
 
 export const register = async (firstname, lastname, email, password) => {
