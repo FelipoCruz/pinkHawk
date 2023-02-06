@@ -1,13 +1,12 @@
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { Navigate, NavLink, Outlet, Route, Routes } from 'react-router-dom';
-import Button from '../components/button/Button';
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import NavBarUser from '../components/navbar/loginnavbar/LoginNavBar';
-import { getAuthUrl, getUserById } from '../../services/api.service';
+import { getUserById } from '../../services/api.service';
 import { useEffect } from 'react';
 import IUser from '../interfaces/user.interface';
 import { activeUser } from '../../store/slices/user.slice';
 import CoPilot from './co-pilot';
-import UserPreferences from './user-preferences-2';
+import UserPreferences from './user-preferences';
 
 const Dashboard = () => {
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
@@ -59,7 +58,7 @@ const Dashboard = () => {
         <Route path="/" element={<Navigate to="co-pilot" />} />
         <Route path="co-pilot/*" element={<CoPilot />}></Route>
         <Route path="growth" element={<h1>Growth</h1>} />
-        <Route path="user-settings" element={<UserPreferences />} />
+        <Route path="user-preferences" element={<UserPreferences />} />
       </Routes>
       <Outlet />
     </div>

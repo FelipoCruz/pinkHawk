@@ -26,28 +26,30 @@ const Selection = () => {
   const [nextPostingDate, setNextPostingDate] = useState(Date);
   const [lastQueuedTweetDate, setLastQueuedTweetDate] = useState('');
 
-  console.log(user);
-  console.log('Suggested Tweets are: ', tweets);
-  console.log('Queued Tweets are: ', queuedTweets);
-  console.log('queuedTweets length is: ', queuedTweets.length);
-  console.log('nextPostingDate is: ', nextPostingDate);
-  console.log('nextPostingDate typeof: ', typeof nextPostingDate);
-  console.log('lastQueuedTweets is: ', lastQueuedTweetDate);
+  // console.log(user);
+  // console.log('Suggested Tweets are: ', tweets);
+  // console.log('Queued Tweets are: ', queuedTweets);
+  // console.log('queuedTweets length is: ', queuedTweets.length);
+  // console.log('nextPostingDate is: ', nextPostingDate);
+  // console.log('nextPostingDate typeof: ', typeof nextPostingDate);
+  // console.log('lastQueuedTweets is: ', lastQueuedTweetDate);
 
   useEffect(() => {
     (async () => {
       await fetchSuggestedTweets();
       await fetchQueuedTweets();
     })();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     defineNextPostingDate();
   }, [tweets]);
 
   useEffect(() => {
-    console.log(tweets.length);
-    if (tweets.length < 1) fetchSuggestedTweets();
+    (async () => {
+      console.log(tweets.length);
+      if (tweets.length < 1) await fetchSuggestedTweets();
+    })();
   }, []);
 
   const fetchSuggestedTweets = async () => {
@@ -66,13 +68,13 @@ const Selection = () => {
   const generateTweetsInit = async () => {
     setSpinner(true);
     console.log('starting to generate tweets');
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    await new Promise((resolve) => setTimeout(resolve, 7000));
-    fetchSuggestedTweets();
+    // generateTweetServiceClient(user);
+    // generateTweetServiceClient(user);
+    // generateTweetServiceClient(user);
+    // generateTweetServiceClient(user);
+    // generateTweetServiceClient(user);
+    // await new Promise((resolve) => setTimeout(resolve, 7000));
+    // fetchSuggestedTweets();
     setSpinner(false);
   };
 

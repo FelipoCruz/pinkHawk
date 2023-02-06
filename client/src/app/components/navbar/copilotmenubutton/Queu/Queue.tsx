@@ -19,7 +19,7 @@ const Queue = () => {
       console.log('queued tweets are: ', queuedTweets);
       setTweets(queuedTweets);
     })();
-  }, []);
+  }, [user]);
 
   const deleteTweet = async (tweetToDelete: ITweet, index: number) => {
     console.log('deleting tweet');
