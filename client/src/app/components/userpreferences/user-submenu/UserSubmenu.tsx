@@ -76,9 +76,9 @@ const RightMenuButton = () => {
             />
             <i onClick={togglePassword}>{passwordShown ? 'Hide' : 'Show'}</i>
             Change Profile Picture
-          <button type='button' onClick={fetchTweetsFromServer}>
-            Download Your Tweets
-          </button>
+            <button type='button' onClick={fetchTweetsFromServer}>
+              Download Your Tweets
+            </button>
           </form>
         </div>
       )}
