@@ -1,6 +1,5 @@
 import { useAppSelector } from '../../hooks/hooks';
 import ITweet from '../../interfaces/tweet.interface';
-import IUser from '../../interfaces/user.interface';
 import userIcon from '../../../images/tom.jpg';
 import commentIcon from '../../../images/Twitter_Reply.png';
 import retweetIcon from '../../../images/repost.png';
@@ -46,20 +45,21 @@ const SingleTweetTest2 = ({ tweet, deleteTweet, moveTweetQueued, index, nextPost
     const likes = Math.round(Math.random() * 10 * 10) / 10 + 1
     return likes;
   };
+
   const generateRetweets = () => {
     const retweets = Math.floor(Math.random() * 500);
     return retweets;
   };
+
   const generateComments = () => {
     const comments = Math.floor(Math.random() * 500);
     return comments;
   };
 
-
   return (
     <>
       <div className='tweet-wrap'>
-        {tweet.status === "queued"
+        {tweet.status === 'queued'
           ?
           <div className="date-container">
             <p className='date-header'>Posting time:
@@ -70,7 +70,6 @@ const SingleTweetTest2 = ({ tweet, deleteTweet, moveTweetQueued, index, nextPost
           </div>
           : null
         }
-
         <div className='tweet-header'>
           <img src={!user.profilePicture ? userIcon : user.profilePicture} alt="" className="avator" />
           <div className="tweet-header-info">
@@ -89,22 +88,18 @@ const SingleTweetTest2 = ({ tweet, deleteTweet, moveTweetQueued, index, nextPost
                 <img height="3" className="tweet-icon" src={commentIcon} alt="" />
                 <div className="comment-count">{generateComments()}</div>
               </div>
-
-              <div className="retweets">
-                <img className="tweet-icon" src={retweetIcon} alt="retweetIcon" />
-                <div className="retweet-count">{generateRetweets()}</div>
+              <div className='retweets'>
+                <img className='tweet-icon' src={retweetIcon} alt='retweetIcon' />
+                <div className='retweet-count'>{generateRetweets()}</div>
               </div>
-
-
-              <div className="likes">
-                <img className="tweet-icon" src={likeHeart} alt="likeHeart" />
-                <div className="likes-count">
-                  {generateLikes() + "k"}
+              <div className='likes'>
+                <img className='tweet-icon' src={likeHeart} alt='likeHeart' />
+                <div className='likes-count'>
+                  {generateLikes() + 'k'}
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
 

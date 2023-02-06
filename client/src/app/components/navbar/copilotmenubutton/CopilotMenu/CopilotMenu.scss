@@ -4,9 +4,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
-  background-color: v.$color-lighter-gray;
+  // background-color: v.$color-lighter-gray;
   padding: 15px 40px;
 
   .copilot-menu-item {

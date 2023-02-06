@@ -12,53 +12,15 @@ const CopilotMenu = () => {
   return (
     <div className="copilot">
       <nav className="copilot-nav">
-        <NavLink to="selection" className="copilot-menu-item">
+        <NavLink to="selection" className="logo-container">
           <span className="logo-text">Selection</span>
         </NavLink>
-        <NavLink to="queue" className="copilot-menu-item">
+        <NavLink to="queue" className="logo-container">
           <span className="logo-text">Queue</span>
         </NavLink>
-        <NavLink to="topics-definition" className="copilot-menu-item">
-          <span className="logo-text">Preferences</span>
-        </NavLink>
-        {/* <button
-          onClick={() => setSelectedComponent(<Selection />)}
-          className="btn"
-        >
-          Selection
-        </button>
-        <button onClick={() => setSelectedComponent(<Queue />)} className="btn">
-          Queue
-        </button>
-        <button
-          onClick={() => setSelectedComponent(<TopicsInput />)}
-          className="btn"
-        >
-          Preferences
-        </button> */}
       </nav>
       <div className="copilot-content">{selectedComponent}</div>
     </div>
-    // <div className="copilot">
-    //   <nav className="copilot-nav">
-    //     <button
-    //       onClick={() => setSelectedComponent(<Selection />)}
-    //       className="btn"
-    //     >
-    //       Selection
-    //     </button>
-    //     <button onClick={() => setSelectedComponent(<Queue />)} className="btn">
-    //       Queue
-    //     </button>
-    //     <button
-    //       onClick={() => setSelectedComponent(<TopicsInput />)}
-    //       className="btn"
-    //     >
-    //       Preferences
-    //     </button>
-    //   </nav>
-    //   <div className="copilot-content">{selectedComponent}</div>
-    // </div>
   );
 };
 
