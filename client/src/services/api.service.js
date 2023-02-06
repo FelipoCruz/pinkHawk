@@ -219,4 +219,4 @@ export const getGrowth = async (userId) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
