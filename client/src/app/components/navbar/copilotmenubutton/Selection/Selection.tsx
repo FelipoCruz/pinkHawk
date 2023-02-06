@@ -174,14 +174,15 @@ const Selection = () => {
           </div>
 
           <div className="tweets-list">
-            {tweets?.map((tweet: ITweet, index) => {
+            {tweets.length > 0 ? tweets?.map((tweet: ITweet, index) => {
               return (
                 <div key={tweet.id} className="tweet-li">
                   
                   <SingleTweetTest2 tweet={tweet} moveTweetQueued = {moveTweetQueued} deleteTweet={deleteTweet} index={index} nextPostingDate={nextPostingDate}/>
                 </div>
               );
-            })}
+            }) :
+            <h1>No Tweets yet!</h1>}
           </div>
           <button className="generate-btn" onClick={generateTweetsInit}>
             Give Me More Tweets!

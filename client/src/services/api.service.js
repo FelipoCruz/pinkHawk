@@ -4,15 +4,10 @@
 
 dotenv.config(); */
 
-
-
-
-const envTest = process.env.TEST;
+const envTest = process.env.REACT_APP_BASE_URL;
 console.log('envTest is: ', envTest);
 
-console.log(process.env.SERVER_URL);
-
-const BASE_URL = process.env.SERVER_URL || 'http://164.92.135.228:5000/';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 console.log('server / base url is: ' + BASE_URL);
 
 export const register = async (firstname, lastname, email, password) => {
