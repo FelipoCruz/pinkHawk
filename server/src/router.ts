@@ -5,6 +5,7 @@ import {
   signInUser,
   updateFrequency,
   signOutUser,
+  updateAvatar,
 } from './controller/user';
 import { setTopics } from './controller/topic';
 import {
@@ -47,6 +48,9 @@ router.put('/tweet/tweetStatusPosted', authProtect, tweetStatusPosted);
 
 //route to modify the user posting frequency
 router.put('/user/:id/frequency', authProtect, updateFrequency);
+
+//route to modify the user profile picture
+router.put('/user/:id/profilePicture', authProtect, updateAvatar);
 
 // route to delete tweet from DB
 router.delete('/tweet/delete', authProtect, tweetDelete);

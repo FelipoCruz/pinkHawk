@@ -94,6 +94,20 @@ export const updateFrequency = async (req: Request, res: Response) => {
   }
 };
 
+export const updateAvatar = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { pictureLink } = req.body;
+    const user = await prisma.user.update({
+      where: { id: Number(id) },
+      data: { profilePicture: pictureLink },
+    });
+    res.status(200).json(user.profilePicture);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const signOutUser = (req: Request, res: Response) => {
   res.cookie('token', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
