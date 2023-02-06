@@ -31,6 +31,18 @@
       "version": "latest"
     }
   },
+  "ignorePatterns": [
+    "node_modules/",
+    "dist/",
+    "build/",
+    "coverage/",
+    "public/",
+    "src/serviceWorker.js",
+    "src/setupTests.js",
+    "src/index.js",
+    "src/reportWebVitals.js",
+    "*.env"
+  ],
   "rules": {
     "indent": [
       "error",
