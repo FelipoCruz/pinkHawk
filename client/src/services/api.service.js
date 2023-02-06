@@ -211,3 +211,20 @@ export const queueTweetDB = async (userId, tweetId, postingDate) => {
     console.log(err);
   }
 };
+
+export const updateText = async (id, text) => {
+  try {
+    const url = `${BASE_URL}tweet/${id}`;
+    const response = await fetch(url, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({text}),
+    });
+    return response.json();
+  } catch (err) {
+    console.log(err);
+  }
+}
