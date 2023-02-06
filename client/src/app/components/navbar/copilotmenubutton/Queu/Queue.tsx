@@ -9,7 +9,6 @@ import {
   getUserTweets,
 } from '../../../../../services/api.service';
 import './Queue.scss';
-import './Queue.scss';
 import SingleTweetTest2 from '../../../tweet/Tweet2';
 
 const Queue = () => {
@@ -48,44 +47,12 @@ const Queue = () => {
         tweets.map((tweet: ITweet, index) => (
           <li key={tweet.id} className="queue-tweet-li">
             <div className="queue-tweet-wrap">
-              <Tweet key={tweet.id} tweetPassed={tweet} />
-            </div>
-
-            <div className="date-btn-container">
-              <div className="date-container">
-                <p className="date-header">Posting time:</p>
-                <p className="date-info">
-                  {dayjs(String(tweet.postingTimestamp)).format(
-                    'DD/MM/YY HH:mm'
-                  )}
-                </p>
-              </div>
-
-              <div className="icon-container">
-                <span
-                  className="material-symbols-outlined queue-cancel"
-                  onClick={() => deleteTweet(tweet, index)}
-                >
-                  cancel
-                </span>
-              </div>
               <SingleTweetTest2
                 tweet={tweet}
                 index={index}
                 deleteTweet={deleteTweet}
               />
             </div>
-
-            {/* <button
-              name="reject-tweet-button"
-              onClick={() => deleteTweet(tweet, index)}
-            >
-              <img
-                alt="reject-tweet-button"
-                className="icon-button"
-                src={rejectButton}
-              />
-            </button> */}
           </li>
         ))
       ) : (
