@@ -7,8 +7,6 @@ import cookieParser from 'cookie-parser';
 import job from './integration/twitter-service/twitter-api.service';
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
-const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
-console.log(CLIENT_URL);
 const port = process.env.SERVER_PORT || 5000;
 const app = express();
 
@@ -19,7 +17,6 @@ app.use(router);
 // job();
 
 app.listen(port, () =>
-  console.log(`🚀 Server ready at port ${port}`)
+  console.log(`
+🚀 Server ready at: http://localhost:${port}`)
 );
-
-

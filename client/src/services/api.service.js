@@ -1,6 +1,16 @@
 import { fetchWrapper } from './fetch-wrapper.js';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+/* import dotenv from 'dotenv';
+
+dotenv.config(); */
+
+const envTest = process.env.TEST;
+console.log('envTest is: ', envTest);
+
+console.log(process.env.SERVER_URL);
+
+const BASE_URL = process.env.SERVER_URL || 'http://164.92.135.228:5000/';
+console.log('server / base url is: ' + BASE_URL);
 
 export const register = async (firstname, lastname, email, password) => {
   try {
