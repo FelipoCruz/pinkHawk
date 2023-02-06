@@ -1,4 +1,4 @@
-import React, { createRef, useState } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
 import { ProfilePictureProps } from '../../interfaces/user.interface';
 import './ProfilePicture.scss';
@@ -7,7 +7,6 @@ const ProfilePicture = (props: ProfilePictureProps) => {
   const user = useAppSelector(({ user }) => user);
   const [image, _setImage] = useState('');
   const [showInput, setShowInput] = useState(false);
-  // TODO: check for the correct type
   const inputFileRef = createRef<any>();
 
   const cleanup = () => {
@@ -29,29 +28,40 @@ const ProfilePicture = (props: ProfilePictureProps) => {
     if (event.target.files) {
       const newImage = event.target.files[0];
       if (newImage) {
+        props.setRawImage(newImage);
         setImage(URL.createObjectURL(newImage));
+        props.changeSubmit();
       }
     }
     props.imageUpload(event)
   };
 
+  useEffect(() => {
+    if (!props.rawImage) return;
+    props.setImageURL(URL.createObjectURL(props.rawImage));
+  }, [props.rawImage]);
+
   return (
     <div className='profile-picture-body'>
-      {/* <input
-        className='profile-picture-image'
-        alt={user.name}
-        src={image || props.image}
-      /> */}
-      <button className='profile-picture-button' type='button' onClick={() => setShowInput(!showInput)}>
-        {image ? 'Change' : 'Add'} profile picture
+      <button className='profile-picture-button' type='button' onClick={() => setShowInput((prevInput) => !prevInput)}>
+        {user.profilePicture ? 'Change' : 'Add'} profile picture
       </button>
-      <input className={`profile-picture-upload ${showInput || image ? '' : 'show-input'}`}
-        ref={inputFileRef}
-        accept='image/*'
-        type='file'
-        onChange={handleFileChange}
-        hidden
-      />
+      {showInput &&
+        <label htmlFor='files' className={`cool-upload ${showInput ? 'show-input' : ''}`}>
+          {/* {showInput && */}
+            <input className='profile-picture-upload'
+              ref={inputFileRef}
+              accept='image/*'
+              type='file'
+              onChange={handleFileChange}
+              id='files'
+              hidden
+            />
+          {/* } */}
+          Upload File
+        </label>
+      }
+      {props.imageURL && <img src={props.imageURL} alt='selected file' className='selected-image-modal' />}
     </div>
   );
 };

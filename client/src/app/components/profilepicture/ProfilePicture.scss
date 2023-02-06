@@ -5,42 +5,40 @@
   align-items: center;
   cursor: pointer;
 
-  // .profile-picture-image {
-  //   width: 100%;
-  //   height: 100%;
-  //   object-fit: cover;
+  // .profile-picture-upload {
+  //   display: none;
   // }
-  // .profile-picture-image {
-  //   color: black;
-  // }
-
-  .profile-picture-upload {
-    display: none;
-  }
 
   .show-input {
     display: block;
   }
 
-  // .profile-picture-label {
-  //   position: absolute;
-  //   width: 100%;
-  //   height: 100%;
-  //   background-color: rgba(0, 0, 0, 0.5);
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   opacity: 0;
-  //   transition: opacity 0.3s ease-in-out;
-  //   cursor: pointer;
-  // }
+  .cool-upload {
+    // border: 1px solid #000;
+    // cursor: pointer;
+    // display: inline-block;
+    // padding: 5px 15px;
+    // display: none;
+  }
+
+  .cool-upload input[type='file'] {
+    display: none;
+  }
+
+  .selected-image-modal {
+    aspect-ratio: 1;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
 
   .profile-picture-button {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    // margin-top: 10px;
     padding: 10px;
   }
 }
