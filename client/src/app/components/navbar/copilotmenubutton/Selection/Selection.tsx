@@ -38,8 +38,10 @@ const Selection = () => {
   console.log('lastQueuedTweets is: ', lastQueuedTweetDate);
 
   useEffect(() => {
-    fetchSuggestedTweets();
-    fetchQueuedTweets();
+    (async () => {
+      await fetchSuggestedTweets();
+      await fetchQueuedTweets();
+    })();
   }, []);
 
   useEffect(() => {
