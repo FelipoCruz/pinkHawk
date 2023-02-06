@@ -2,8 +2,6 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 const CLOUDINARY = process.env.REACT_APP_CLOUDINARY_URL;
 const CLOUDINARY_CLOUD = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
 
-console.log('both merged in the file', `${CLOUDINARY}${CLOUDINARY_CLOUD}`);
-
 export const uploadImage = async (file: FormData) => {
   try {
     const url = `${CLOUDINARY}${CLOUDINARY_CLOUD}/image/upload`;
@@ -17,7 +15,9 @@ export const uploadImage = async (file: FormData) => {
   }
 };
 
-export const updateAvatar = async (userId: number, pictureLink: string) => {
+export const updateAvatar = async (userId: string, pictureLink: string) => {
+  console.log('picture link in api call', pictureLink)
+  console.log('type of picture link in api call', typeof pictureLink)
   try {
     const url = `${BASE_URL}user/${userId}/profilePicture`;
     const response = await fetch(url, {

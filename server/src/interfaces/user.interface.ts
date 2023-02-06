@@ -10,5 +10,6 @@ export interface IUser {
   twitterSecret: string;
   topics: string[];
   frequencyTweetPosting: number;
+  profilePicture: string;
   postingHours?: number[];
 }

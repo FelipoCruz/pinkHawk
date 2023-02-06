@@ -22,7 +22,7 @@ const SingleTweetTest = ({ tweetPassed }: Props) => {
 
       <div className='tweet-wrap'>
         <div className='tweet-header'>
-          <img src={!user.profilePic ? userIcon : user.profilePic} alt='user profile pic' className='avator' />
+          <img src={!user.profilePicture ? userIcon : user.profilePicture} alt='user profile pic' className='avator' />
           <div className='tweet-header-info'>
             {user.firstName} {user.lastName} <span>@{user.firstName}{user.lastName}</span><span>
             </span>

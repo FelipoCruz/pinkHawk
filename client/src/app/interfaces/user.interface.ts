@@ -12,7 +12,7 @@ export default interface IUser {
   topics: string[];
   frequencyTweetPosting: number;
   twitterToken: string;
-  profilePic?: string;
+  profilePicture?: string;
   postingHours: number[];
 };
 

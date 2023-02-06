@@ -7,7 +7,7 @@ import { getAuthUrl } from '../../services/api.service';
 import ProfilePicture from '../components/profilepicture/ProfilePicture';
 import { ProfilePictureProps } from '../interfaces/user.interface';
 // import ProfilePicture from '../components/profilepicture/ProfilePicture';
-import { uploadImage } from '../../services/cloudinary.service';
+import { updateAvatar, uploadImage } from '../../services/cloudinary.service';
 import '../../scss/_user-preference.scss';
 
 const CLOUDINARY_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
@@ -39,24 +39,22 @@ const UserPreferences = (props: ProfilePictureProps) => {
     let avatarLink = '';
 
     const response = await uploadImage(formData);
-    // TEMPORARY: this is to test the uploadImage functionProfileUpload
+
     if (response) {
       avatarLink = response['secure_url'];
       alert('Image uploaded successfully');
     } else {
       console.log('Error trying to upload image')
     }
-    dispatch(activeUser({ ...user, profilePic: avatarLink }));
 
-    // TODO: uncomment this when updateProfilePicture is created
-    // update user profile picture in database and redux store
-    // to be uncommented when updateProfilePicture is created
-    // const updatePicture = await updateProfilePicture(data);
-    // if (updatePicture.status === 'success') {
-    //   dispatch(activeUser({ ...user, profilePic: data}));
-    // }
+    const userUpdatedPicture = await updateAvatar(user.id, avatarLink);
+
+    if (userUpdatedPicture) {
+      dispatch(activeUser({ ...user, profilePicture: avatarLink }));
+    } else {
+      console.log('Error trying to update profile picture to user')
+    }
   };
-
   // TODO: fix this type
   const handleImageUpload = async (event: any) => {
     console.log('let\'s see the type of event:', typeof event)
@@ -97,7 +95,7 @@ const UserPreferences = (props: ProfilePictureProps) => {
         <h1>User Preferences</h1>
         <form className='user-setting-picture'>
           <div className='user-profile-picture-circle'>
-            <img alt='user profile pic' src={user.profilePic} className='user-profile-picture' />
+            <img alt='user profile pic' src={user.profilePicture} className='user-profile-picture' />
           </div>
           <div className='user-set-profile-avatar'>
             <ProfilePicture imageUpload={handleImage} image={imageUpload.image} />
