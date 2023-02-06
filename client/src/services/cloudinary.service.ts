@@ -1,9 +1,12 @@
-export const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dnwteqila/';
-const BASE_URL = 'http://localhost:5000/';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+const CLOUDINARY = process.env.REACT_APP_CLOUDINARY_URL;
+const CLOUDINARY_CLOUD = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
+
+console.log('both merged in the file', `${CLOUDINARY}${CLOUDINARY_CLOUD}`);
 
 export const uploadImage = async (file: FormData) => {
   try {
-    const url = `${CLOUDINARY_URL}image/upload`;
+    const url = `${CLOUDINARY}${CLOUDINARY_CLOUD}/image/upload`;
     const response = await fetch(url, {
       method: 'POST',
       body: file,
