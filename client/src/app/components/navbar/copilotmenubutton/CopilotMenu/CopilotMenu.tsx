@@ -12,13 +12,13 @@ const CopilotMenu = () => {
   return (
     <div className="copilot">
       <nav className="copilot-nav">
-        <NavLink to="selection" className="logo-container">
+        <NavLink to="selection" className="copilot-menu-item">
           <span className="logo-text">Selection</span>
         </NavLink>
-        <NavLink to="queue" className="logo-container">
+        <NavLink to="queue" className="copilot-menu-item">
           <span className="logo-text">Queue</span>
         </NavLink>
-        <NavLink to="topics-definition" className="logo-container">
+        <NavLink to="topics-definition" className="copilot-menu-item">
           <span className="logo-text">Preferences</span>
         </NavLink>
         {/* <button

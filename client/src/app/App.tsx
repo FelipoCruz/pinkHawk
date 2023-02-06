@@ -1,13 +1,10 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Login from './components/login/SignIn/login';
 import SignUp from './components/login/SignUp/sign-up';
-import CoPilot from './routes/co-pilot';
 import Dashboard from './routes/dashboard';
 import HomePage from './routes/home-page';
 import ProtectedRoute from './routes/protected-route';
-import TopicsDefinition from './routes/topics-definition';
-import UserPreferences from './routes/user-preferences';
 import './App.scss';
 
 const App: React.FC = (): JSX.Element => {
