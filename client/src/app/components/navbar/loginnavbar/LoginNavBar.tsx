@@ -8,6 +8,7 @@ import { ReactComponent as Logo } from '../../../../images/pinkhawklogo.svg';
 import { toggleSidebar } from '../../../../store/slices/layout.slice';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { CgProfile } from 'react-icons/cg';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 
 const NavBarUser = () => {
   const layout = useAppSelector((state) => state.layout);
@@ -22,10 +23,10 @@ const NavBarUser = () => {
       {/* <button className="mobile-menu-button" onClick={toggleClick}> */}
       <GiHamburgerMenu className="mobile-menu-button" onClick={toggleClick} />
       {/* </button> */}
-      <NavLink to="/dashboard" className="logo-container">
+      <a href="/dashboard" className="logo-container">
         <Logo className="logo" />
         <span className="logo-text">Pink Hawk</span>
-      </NavLink>
+      </a>
       {/* <nav className="navbar-items">
         <NavLink to="/dashboard/co-pilot">
           <img

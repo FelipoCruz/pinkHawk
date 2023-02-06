@@ -41,11 +41,6 @@ const Selection = () => {
       await fetchQueuedTweets();
     })();
   }, [user]);
-    (async () => {
-      await fetchSuggestedTweets();
-      await fetchQueuedTweets();
-    })();
-  }, [user]);
 
   useEffect(() => {
     // defineNextPostingDate();
