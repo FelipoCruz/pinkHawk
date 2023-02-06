@@ -14,7 +14,7 @@ const initialState: IUser = {
   twitterName: '',
   topics: [],
   frequencyTweetPosting: 0,
-  profilePic: '',
+  profilePicture: '',
   postingHours: [],
   twitterToken: '',
 };
@@ -35,7 +35,7 @@ export const userSlice = createSlice({
       state.twitterName = action.payload.twitterName;
       state.topics = action.payload.topics;
       state.frequencyTweetPosting = action.payload.frequencyTweetPosting;
-      state.profilePic = action.payload.profilePic;
+      state.profilePicture = action.payload.profilePicture;
       state.postingHours = action.payload.postingHours;
       state.twitterToken = action.payload.twitterToken;
     },
@@ -52,7 +52,7 @@ export const userSlice = createSlice({
       state.twitterName = '';
       state.topics = [];
       state.frequencyTweetPosting = 0;
-      state.profilePic = '';
+      state.profilePicture = '';
       state.postingHours = [];
       state.twitterToken = '';
     },
