@@ -19,4 +19,10 @@ export default interface IUser {
 export interface ProfilePictureProps {
   image: string;
   imageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  setRawImage: React.Dispatch<React.SetStateAction<File | null>>;
+  rawImage: File | null;
+  setImageURL: React.Dispatch<React.SetStateAction<string>>;
+  imageURL: string;
+  // onClick: React.MouseEventHandler<HTMLButtonElement>;
+  changeSubmit: () => void;
 };
