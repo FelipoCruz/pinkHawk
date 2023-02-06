@@ -8,6 +8,7 @@ import './Tweet2.scss'
 import dayjs from 'dayjs';
 import { updateText } from '../../../services/api.service';
 import { useEffect, useState } from 'react';
+import IUser from '../../interfaces/user.interface';
 
 
 type Props = {
