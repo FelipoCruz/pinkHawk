@@ -14,6 +14,7 @@ import {
   queueTweet,
   tweetDelete,
   tweetStatusPosted,
+  updateTweetText,
 } from './controller/tweet';
 
 import { authProtect } from './middleware/auth-protect';
@@ -54,6 +55,9 @@ router.put('/user/:id/profilePicture', authProtect, updateAvatar);
 
 // route to delete tweet from DB
 router.delete('/tweet/delete', authProtect, tweetDelete);
+
+//route to modify the tweet text 
+router.put('/tweet/:id', authProtect, updateTweetText);
 
 /* TWITTER REQUESTS MANAGEMENT? */
 router.get('/user/:id/oauth', authProtect, oauth);
