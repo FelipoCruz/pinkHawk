@@ -8,7 +8,7 @@ import {
   deleteTweetDB,
   getUserTweets,
 } from '../../../../../services/api.service';
-import './Queue.scss'
+import './Queue.scss';
 import SingleTweetTest2 from '../../../tweet/Tweet2';
 
 const Queue = () => {
@@ -47,7 +47,11 @@ const Queue = () => {
         tweets.map((tweet: ITweet, index) => (
           <li key={tweet.id} className="queue-tweet-li">
             <div className="queue-tweet-wrap">
-              <SingleTweetTest2 tweet={tweet} index={index} deleteTweet={deleteTweet} />
+              <SingleTweetTest2
+                tweet={tweet}
+                index={index}
+                deleteTweet={deleteTweet}
+              />
             </div>
           </li>
         ))

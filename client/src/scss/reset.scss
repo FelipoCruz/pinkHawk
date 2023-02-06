@@ -62,10 +62,18 @@ select {
   min-height: 100vh;
 }
 
-.logo {
-  height: 50px;
-}
+
 
 .prim-color {
+  color: v.$color-primary;
+}
+
+svg {
+  color: v.$color-secondary;
+  font-size: 25px;
+}
+
+.logo {
+  height: 30px;
   color: v.$color-primary;
 }
