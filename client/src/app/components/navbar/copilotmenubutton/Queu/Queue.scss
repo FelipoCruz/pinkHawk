@@ -1,0 +1,51 @@
+
+
+.queue-tweet-li {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  
+ 
+  .date-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 30px;
+    background-color: #f15e50;
+    padding: 10px;
+    border-radius: 10px;
+
+    .date-container {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      margin: 0 auto;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    
+
+      .date-header {
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 10px;  
+      }
+
+      .date-info {
+        font-size: 12px;
+        margin-bottom: 0;
+      }
+    }
+
+    .icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 30px;
+
+      .queue-cancel {
+        color: white;
+        font-size: 40px;
+      }
+    }
+  }
+}

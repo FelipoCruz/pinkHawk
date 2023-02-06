@@ -1,0 +1,82 @@
+@use "./variables.scss" as v;
+
+.home-page {
+  min-height: 100vh;
+  background-image: linear-gradient(-225deg, #FF057C 0%, #7C64D5 48%, #4CC3FF 100%);
+
+  .slogan {
+    text-align: center;
+    margin: 30px;
+    font-size: 50px;
+    color: v.$color-Off-white;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-column-gap: 80px;
+    grid-row-gap: 80px;
+    margin: 50px 80px;
+    padding: 20px;
+  }
+
+  .banner {
+    grid-column-start: span 1;
+    grid-row-start: span 1;
+    grid-row-end: span 1;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .banner-slogan {
+    margin-bottom: 40px;
+    font-size: 22px;
+    color: v.$color-Off-white;
+  }
+
+  .h1 {
+    font-weight: bold;
+    font-size: 60px;
+  }
+
+  .banner-img-container {
+    grid-column-start: span 1;
+    grid-column-end: span 1;
+    grid-row-start: span 1;
+    grid-row-end: span 1;
+    justify-self:center;
+    align-self: center;
+    box-shadow: 0 0 20px #0c4a69;
+    padding: 20px 0px;
+  }
+
+  .banner-img {
+    max-height: 300px;
+  }
+
+
+  .trial-btn {
+    background-image: linear-gradient(to right, #AA076B 0%, #61045F 51%, #AA076B 100%);
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .trial-btn:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+
+
+}
+
+         

@@ -1,0 +1,66 @@
+@use "../../../../../scss/variables.scss" as v;
+// .icon-button {
+//   height: 30px;
+//   margin: 3px;
+//   padding: 2%;
+// }
+.tweets-list {
+  display:flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-self: center;
+  justify-content: center;
+}
+
+.tweet-li{
+  display: flex;
+  margin: 30px;
+  column-gap: 15px;
+}
+
+.material-symbols-outlined {
+  cursor: pointer;
+  font-size: 50px;
+  color: v.$color-primary;
+}
+
+.selection-header {
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.next-tweet-time {
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  
+} 
+       
+.generate-btn {
+  background-image: linear-gradient(to right, #B24592 0%, #F15F79  51%, #B24592  100%);
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;            
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.generate-btn:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.selection-container{
+  display: flex;
+  flex-direction: column;
+}
+

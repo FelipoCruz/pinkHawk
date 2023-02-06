@@ -6,3 +6,36 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id                    Int       @id @default(autoincrement())
+  firstName             String
+  familyName            String
+  email                 String    @unique
+  password              String
+  twitterInfo           String?
+  twitterAccountId      String?
+  twitterName           String?
+  twitterToken          String?
+  twitterSecret         String?
+  tweets                Tweet[]
+  topics                String[]
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  frequencyTweetPosting Int?
+  profilePicture        String?
+  lastPostingAt         DateTime?
+  postingHours          Int[]
+}
+
+model Tweet {
+  id               Int       @id @default(autoincrement())
+  twitterId        String?   @unique
+  text             String
+  status           String
+  User             User      @relation(fields: [userId], references: [id])
+  userId           Int
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  postingTimestamp DateTime?
+}

@@ -1,0 +1,47 @@
+@use "../../../../scss/variables.scss" as v;
+
+.login-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+
+  .graphic {
+    width: 50%;
+  }
+
+  .login-form-container {
+    width: 50%;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      width: 70%;
+
+      .form-input {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        label {
+          font-size: 1.5rem;
+          font-weight: 500;
+        }
+      }
+      
+      .form-input input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid lightgray;
+        font-size: 16px;
+      }
+      }
+    }
+  }
+

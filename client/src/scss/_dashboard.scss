@@ -1,0 +1,17 @@
+@use "./variables.scss" as v;
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .dashboard-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: v.$color-lighter-gray;
+    padding: 15px 40px;
+  }
+}

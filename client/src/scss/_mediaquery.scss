@@ -1,0 +1,13 @@
+@use "./variables.scss" as v;
+
+@media (max-width: 1135px) {
+  .pref-hours-item {
+    flex: 1 0 10%;
+  }
+}
+
+@media (max-width: 700px) {
+  .pref-hours-item {
+    flex: 1 0 50%;
+  }
+}

@@ -1,5 +1,11 @@
 # **Git conventions and Guidelines**
 
+Roles:
+200 Felipe
+300 Jafaar
+400 Ziyang
+500 Dolgar
+
 ## Quick commands:
 
 ### Branches

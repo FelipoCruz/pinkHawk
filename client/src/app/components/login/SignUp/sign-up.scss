@@ -1,0 +1,60 @@
+@use "../../../../scss/variables.scss" as v;
+
+.signup-container {
+  min-height: 100%;
+  display: flex;
+  background-color:v.$white;
+
+  .graphic {
+    width: 50%;
+
+    .signup-img {
+      object-fit:cover;
+      width: 100%;
+      height: 100%;
+    }
+
+  }
+
+  .signup-form-container {
+    width: 50%;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      width: 70%;
+
+      .form-input {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        label {
+          font-size: 1.5rem;
+          font-weight: 500;
+        }
+
+        input {
+          font-size: 1rem;
+          font-family: inherit;
+          border: none;
+          border-radius: 8px;
+          padding: 0.5rem 0.75rem;
+          box-shadow: 0 0px 1px hsl(0deg 0% 0% / 20%), 0 1px 2px hsl(0deg 0% 0% / 20%);
+          background-color: v.$white;
+          line-height: 1.5;
+          margin: 0;
+        }
+      }
+
+      .submit {
+        width: fit-content;
+    }
+    }
+  }
+}
