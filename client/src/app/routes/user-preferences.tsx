@@ -10,6 +10,9 @@ import { ProfilePictureProps } from '../interfaces/user.interface';
 import { uploadImage } from '../../services/cloudinary.service';
 import '../../scss/_user-preference.scss';
 
+const CLOUDINARY_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
+const CLOUDINARY_CLOUD = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
+
 const UserPreferences = (props: ProfilePictureProps) => {
   const [logo, setLogo] = useState('');
   const [imageUpload,] = useState<{ image?: any }>({});
@@ -31,8 +34,8 @@ const UserPreferences = (props: ProfilePictureProps) => {
   const profileUpload = async (file: string) => {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'PinkHawkUserImage');
-    formData.append('cloud_name', 'dnwteqila')
+    formData.append('upload_preset', `${CLOUDINARY_PRESET}`);
+    formData.append('cloud_name', `${CLOUDINARY_CLOUD}`);
     let avatarLink = '';
 
     const response = await uploadImage(formData);
