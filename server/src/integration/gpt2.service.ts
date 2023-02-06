@@ -46,20 +46,26 @@ const generateTweetAIService = async (topics: []) => {
 
     console.log('basePromptOutput1 is:', basePromptOutput)
 
-    const prompt2 = `Create a tweet about: ${basePromptOutput} The tweet must be cool, unique and should explain something in detail, with logic, arguments and facts. The tweet must be more than 20 words long and also less than 35 words long. It is really important that the tweet is less than 25 words long.`
+    const prompt2 = `Create a tweet about: ${basePromptOutput} The tweet must be cool, unique and should explain something in detail, with logic, arguments and facts. The tweet must be more than 20 words long and also less than 25 words long. It is really important that the tweet is less than 25 words long. The tweet should countain just a single hashtag.`
     console.log("prompt2 is: ", prompt2)
     const baseCompletion2 = await openai.createCompletion({
       model: model,
       prompt: prompt2,
       temperature: 0.9,
       max_tokens: 300,
+      best_of: 2
     });
 
     const basePromptOutput2 = baseCompletion2.data.choices.pop();
     console.log('basePromptOutput2', basePromptOutput2)
 
-    return basePromptOutput2;
-
+    if(!basePromptOutput2) {
+      const emergencyOutput: any = {}
+      emergencyOutput.text = "pinkHawk is awesome!"
+      return emergencyOutput
+    } else {
+      return basePromptOutput2;
+    }
   } catch (error) {
     console.log('error in generateTweetAIService: ', error)
   }
