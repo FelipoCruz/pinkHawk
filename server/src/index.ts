@@ -7,7 +7,6 @@ import cookieParser from 'cookie-parser';
 import { job, job1 } from './integration/twitter-service/twitter-api.service';
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
-const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 const port = process.env.SERVER_PORT || 5000;
 const app = express();
 
