@@ -126,7 +126,7 @@ const UserPreferences = () => {
         </form>
         <div className='current-user-settings' onClick={handleClickNavigate}>
           <div className='frequency-tweet-posting'>
-            <p>Current posting daily frequency:</p>
+            <p>Current daily posting frequency:</p>
             {user.frequencyTweetPosting}
           </div>
           <div className='selected-hours'>
