@@ -7,10 +7,7 @@ import {
   generateTweetServiceClient,
   getSuggestedTweets,
 } from '../../../../../services/api.service';
-import acceptButton from '../../../../../images/check.png';
-import rejectButton from '../../../../../images/reject.png';
 import ITweet from '../../../../interfaces/tweet.interface';
-import Button from '../../../button/Button';
 import Spinner from '../../../spinner/Spinner';
 // import '../../../tweet/Tweet.scss';
 import {
@@ -31,9 +28,11 @@ const Selection = () => {
   const [lastQueuedTweetDate, setLastQueuedTweetDate] = useState('');
 
   useEffect(() => {
-    fetchSuggestedTweets();
-    fetchQueuedTweets();
-  }, []);
+    (async () => {
+      await fetchSuggestedTweets();
+      await fetchQueuedTweets();
+    })();
+  }, [user]);
 
   useEffect(() => {
     defineNextPostingDate();
@@ -76,7 +75,7 @@ const Selection = () => {
     tweetToQueue.postingTimestamp = postingDate;
   
     // modify tweet status in the DB
-    queueTweetDB(user.id, tweetToQueue.id, postingDate);
+    await queueTweetDB(user.id, tweetToQueue.id, postingDate);
     setLastQueuedTweetDate(postingDate);
     // modify tweet status in state of suggested tweets
     deleteTweetinState(index);
@@ -89,7 +88,8 @@ const Selection = () => {
   const deleteTweet = async (tweetToDelete: ITweet, index: number) => {
   
     // delete tweet from DB
-    deleteTweetDB(user.id, tweetToDelete.id);
+    const DBdelete = await deleteTweetDB(user.id, tweetToDelete.id);
+    console.log('tweet deleted from DB', DBdelete);
     // delete tweet from state
     deleteTweetinState(index);
     generateTweetServiceClient(user);
@@ -103,6 +103,7 @@ const Selection = () => {
     const items = [...tweets];
     items.splice(index, 1);
     setTweets(items);
+    console.log('tweet deleted from DB2');
   };
 
   // this function sets nextPostingDate

@@ -12,6 +12,11 @@ export default interface IUser {
   topics: string[];
   frequencyTweetPosting: number;
   twitterToken: string;
-  profilePic?: string;
+  profilePicture?: string;
   postingHours: number[];
-}
+};
+
+export interface ProfilePictureProps {
+  image: string;
+  imageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};

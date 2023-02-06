@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './LoginNavBar.scss';
-import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import copilotButton from '../../../../images/copilot.png';
 import growthButton from '../../../../images/growth.png';
 import userIcon from '../../../../images/user.png';
-import { logout } from '../../../../services/api.service';
-import { deactivateUser } from '../../../../store/slices/user.slice';
 import { ReactComponent as Logo } from '../../../../images/pinkhawklogo.svg';
+import { useAppSelector } from '../../../hooks/hooks';
 
 const NavBarUser: React.FC = () => {
+  const profilePicture = useAppSelector((state) => state.user.profilePicture);
+
   return (
     <header className="user-navbar">
       <NavLink to="/dashboard" className="logo-container">
@@ -29,8 +29,12 @@ const NavBarUser: React.FC = () => {
         </NavLink>
       </nav>
       <nav className="navbar-items">
-        <NavLink to="user/preferences">
-          <img alt="user-preferences" className="icon-button" src={userIcon} />
+        <NavLink to="/dashboard/user-preferences">
+          <img
+            alt="user-preferences"
+            className="icon-button"
+            src={profilePicture ? profilePicture : userIcon}
+          />
         </NavLink>
       </nav>
     </header>

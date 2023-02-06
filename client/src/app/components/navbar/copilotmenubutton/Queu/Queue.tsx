@@ -3,7 +3,6 @@ import { useAppSelector } from '../../../../hooks/hooks';
 import Tweet from '../../../tweet/Tweet';
 import ITweet from '../../../../interfaces/tweet.interface';
 import '../../../tweet/Tweet.scss';
-import rejectButton from '../../../../../images/reject.png';
 import dayjs from 'dayjs';
 import {
   deleteTweetDB,
@@ -22,13 +21,13 @@ const Queue = () => {
       console.log('queued tweets are: ', queuedTweets);
       setTweets(queuedTweets);
     })();
-  }, []);
+  }, [user]);
 
   const deleteTweet = async (tweetToDelete: ITweet, index: number) => {
     console.log('deleting tweet');
     console.log(tweetToDelete);
     // delete tweet from DB
-    deleteTweetDB(user.id, tweetToDelete.id);
+    await deleteTweetDB(user.id, tweetToDelete.id);
     // delete tweet from state
     deleteTweetinState(index);
     // generateTweetServiceClient(user);

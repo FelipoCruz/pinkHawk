@@ -23,6 +23,7 @@ model User {
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
   frequencyTweetPosting Int?
+  profilePicture        String?
   lastPostingAt         DateTime?
   postingHours          Int[]
 }

@@ -20,8 +20,11 @@ export const getUserById = async (req: Request, res: Response) => {
     const user = await prisma.user.findUnique({
       where: { id: Number(req.params.id) },
     });
+    if (!user) {
+      res.status(400).json({ message: 'User not found' });
+    }
     console.log('user from getUserById: ', user);
-    res.send(user);
+    res.status(200).json(user);
   } catch (error) {
     console.log(error);
   }
@@ -86,6 +89,20 @@ export const updateFrequency = async (req: Request, res: Response) => {
       data: { frequencyTweetPosting: Number(frequency), postingHours },
     });
     res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateAvatar = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { pictureLink } = req.body;
+    const user = await prisma.user.update({
+      where: { id: Number(id) },
+      data: { profilePicture: pictureLink },
+    });
+    res.status(200).json(user.profilePicture);
   } catch (error) {
     console.log(error);
   }
