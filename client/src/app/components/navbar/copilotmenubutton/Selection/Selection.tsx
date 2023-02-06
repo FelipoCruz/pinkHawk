@@ -7,10 +7,7 @@ import {
   generateTweetServiceClient,
   getSuggestedTweets,
 } from '../../../../../services/api.service';
-import acceptButton from '../../../../../images/check.png';
-import rejectButton from '../../../../../images/reject.png';
 import ITweet from '../../../../interfaces/tweet.interface';
-import Button from '../../../button/Button';
 import Spinner from '../../../spinner/Spinner';
 import '../../../tweet/Tweet.scss';
 import {
@@ -38,8 +35,10 @@ const Selection = () => {
   console.log('lastQueuedTweets is: ', lastQueuedTweetDate);
 
   useEffect(() => {
-    fetchSuggestedTweets();
-    fetchQueuedTweets();
+    (async () => {
+      await fetchSuggestedTweets();
+      await fetchQueuedTweets();
+    })();
   }, []);
 
   useEffect(() => {
@@ -102,7 +101,7 @@ const Selection = () => {
     console.log(tweetToDelete);
     // delete tweet from DB
     const DBdelete = await deleteTweetDB(user.id, tweetToDelete.id);
-    console.log('tweet deleted from DB', DBdelete );
+    console.log('tweet deleted from DB', DBdelete);
     // delete tweet from state
     deleteTweetinState(index);
     generateTweetServiceClient(user);

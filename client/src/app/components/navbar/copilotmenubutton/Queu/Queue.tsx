@@ -3,13 +3,12 @@ import { useAppSelector } from '../../../../hooks/hooks';
 import Tweet from '../../../tweet/Tweet';
 import ITweet from '../../../../interfaces/tweet.interface';
 import '../../../tweet/Tweet.scss';
-import rejectButton from '../../../../../images/reject.png';
 import dayjs from 'dayjs';
 import {
   deleteTweetDB,
   getUserTweets,
 } from '../../../../../services/api.service';
-import './Queue.scss'
+import './Queue.scss';
 const Queue = () => {
   const user = useAppSelector(({ user }) => user);
   const [tweets, setTweets] = useState([]);
@@ -49,26 +48,25 @@ const Queue = () => {
               <Tweet key={tweet.id} tweetPassed={tweet} />
             </div>
 
-            <div className='date-btn-container'>
+            <div className="date-btn-container">
               <div className="date-container">
-                <p className='date-header'>Posting time:</p>
-                <p className='date-info'>
+                <p className="date-header">Posting time:</p>
+                <p className="date-info">
                   {dayjs(String(tweet.postingTimestamp)).format(
                     'DD/MM/YY HH:mm'
                   )}
                 </p>
               </div>
 
-              <div className='icon-container'>
-                <span className="material-symbols-outlined queue-cancel" onClick={() => deleteTweet(tweet, index)}>
+              <div className="icon-container">
+                <span
+                  className="material-symbols-outlined queue-cancel"
+                  onClick={() => deleteTweet(tweet, index)}
+                >
                   cancel
                 </span>
               </div>
-
-
             </div>
-
-
 
             {/* <button
               name="reject-tweet-button"
