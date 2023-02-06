@@ -21,15 +21,30 @@ const RightMenuButton = () => {
     // fetch tweets with status sent from server
   };
 
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     // set user.email to value
     setUserFields({ ...userFileds, [name]: value });
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
+    const formData = new FormData(event.target);
+    const details = {
+      email: formData.get('email'),
+      password: formData.get('password'),
+    }
+    try {
+      const userDetails = await updateUserDetails(user.id, details);
+      if (!userDetails) {
+        //   throw new Error('User not found');
+        // } else {  // update user in redux store and local storage
+        //   // dispatch(activeUser(userDetails));
+        //   // localStorage.setItem('user', JSON.stringify(userDetails));
+      }
+    } catch (err) {
+      console.error(err);
+    }
     // const userDetails = await updateUserDetails(user.id, user.email, user.password);
     // if (!userDetails) {
     //   throw new Error('User not found');
@@ -45,18 +60,21 @@ const RightMenuButton = () => {
       {isMenuOpen && (
         <div style={{ position: 'absolute', right: 0 }}>
           <form className='sumit-new-preferences' onSubmit={(event) => handleSubmit(event)}>
-            <label htmlFor='email'>Change Email</label>
+            <label htmlFor='email'>Change Email:</label>
             <input
               className='email-input'
-              type='email'
+              type='text'
+              name='email'
+              value={userFileds.email}
               onChange={handleChange}
-              value={user.email}
             />
-            <label htmlFor='password'>Change Password</label>
+            <label htmlFor='password'>Change Password:</label>
             <input
               className='password-input'
-              onChange={handleChange}
               type='password'
+              name='password'
+              value={userFileds.password}
+              onChange={handleChange}
             />
             Change Profile Picture
           </form>
