@@ -7,6 +7,7 @@ export default interface IUser {
   firstName: string;
   lastName: string;
   email: string;
+  password: string;
   twitterInfo: string;
   twitterName: string;
   topics: string[];
