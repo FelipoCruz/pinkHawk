@@ -1,0 +1,20 @@
+.user-submenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  // height: 200px;
+  // width: 100px;
+  border: 1px solid red;
+
+  .menu-container {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 300px;
+    border: 1px solid red;
+    padding: 20px;
+    justify-content: center;
+
+  }
+}

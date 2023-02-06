@@ -1,6 +1,4 @@
-// import Axios from 'axios';
-
-const BASE_URL = 'http://localhost:5000/';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export const register = async (firstname, lastname, email, password) => {
   try {
@@ -204,6 +202,25 @@ export const queueTweetDB = async (userId, tweetId, postingDate) => {
         Id: userId,
         tweetId: tweetId,
         postingTimestamp: postingDate,
+      }),
+    });
+    return response.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateUserDetails = async (userId, details) => {
+  try {
+    const url = `${BASE_URL}user/${userId}`;
+    const response = await fetch(url, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        details: details,
       }),
     });
     return response.json();

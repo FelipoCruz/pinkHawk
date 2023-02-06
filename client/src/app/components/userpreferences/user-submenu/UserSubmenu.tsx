@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
-import { getUserTweets } from '../../../../services/api.service';
+import { getUserTweets, updateUserDetails } from '../../../../services/api.service';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import './UserSubmenu.scss';
+
+const formFields = {
+  email: '',
+  password: '',
+};
 
 const RightMenuButton = () => {
   const user = useAppSelector(({ user }) => user);
   const dispatch = useAppDispatch();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [tweets, setTweets] = useState([]);
-
-  const formFields = {
-    email: `${user.email}`,
-    password: '',
-  };
-
   const [userFileds, setUserFields] = useState(formFields);
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const fetchTweetsFromServer = async () => {
     const tweetsFromAPI = await getUserTweets(user.id, 'accepted');
@@ -45,20 +50,13 @@ const RightMenuButton = () => {
     } catch (err) {
       console.error(err);
     }
-    // const userDetails = await updateUserDetails(user.id, user.email, user.password);
-    // if (!userDetails) {
-    //   throw new Error('User not found');
-    // } else {  // update user in redux store and local storage
-    //   // dispatch(activeUser(userDetails));
-    //   // localStorage.setItem('user', JSON.stringify(userDetails));
-    // }
   };
 
   return (
-    <div>
+    <div className='user-submenu'>
       <button onClick={() => setMenuOpen(!isMenuOpen)}>Open Menu</button>
       {isMenuOpen && (
-        <div style={{ position: 'absolute', right: 0 }}>
+        <div className='menu-container' style={{ position: 'absolute', right: 30 }}>
           <form className='sumit-new-preferences' onSubmit={(event) => handleSubmit(event)}>
             <label htmlFor='email'>Change Email:</label>
             <input
@@ -71,16 +69,17 @@ const RightMenuButton = () => {
             <label htmlFor='password'>Change Password:</label>
             <input
               className='password-input'
-              type='password'
+              type={passwordShown ? 'text' : 'password'}
               name='password'
               value={userFileds.password}
               onChange={handleChange}
             />
+            <i onClick={togglePassword}>{passwordShown ? 'Hide' : 'Show'}</i>
             Change Profile Picture
-          </form>
           <button type='button' onClick={fetchTweetsFromServer}>
             Download Your Tweets
           </button>
+          </form>
         </div>
       )}
     </div>
