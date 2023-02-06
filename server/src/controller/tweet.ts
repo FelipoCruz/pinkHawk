@@ -114,3 +114,17 @@ export const tweetDelete = async (req: Request, res: Response) => {
     console.log('Error in tweetDelete @ module controller/tweet.ts: ', error);
   }
 };
+
+export const updateTweetText = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const tweet = req.body;
+  try {
+    const updatedTweet = await prisma.tweet.update({
+      where: { id: Number(id) },
+      data: { text: tweet.text },
+    });
+    res.status(201).json(updatedTweet);
+  } catch (error) {
+    console.log('Error in updateTweetText @ module controller/tweet.ts: ', error);
+  }
+}
