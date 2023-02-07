@@ -42,7 +42,7 @@ export const createUser = async (req: Request, res: Response) => {
     const { password, ...userNoPassword } = newUser;
     const accessToken = jwt.sign({ id: newUser.id }, SECRET_KEY);
     res
-      .cookie('token', accessToken)
+      .cookie('token', accessToken, { httpOnly: true })
       .status(201)
       .json(userNoPassword);
   } catch (error) {
@@ -71,7 +71,7 @@ export const signInUser = async (req: Request, res: Response) => {
     console.log('accessToken: ', accessToken);
 
     res
-      .cookie('token', accessToken)
+      .cookie('token', accessToken, { httpOnly: true })
       .status(200)
       .json(userNoPassword);
   } catch (error) {
