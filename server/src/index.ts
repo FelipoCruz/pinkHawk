@@ -10,7 +10,7 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 const port = process.env.SERVER_PORT || 5000;
 const app = express();
 
-app.use(cors({ origin: 'https://pink-hawk2.vercel.app', credentials: true }));
+app.use(cors({ origin: process.env.ORIGINVAR, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(router);
