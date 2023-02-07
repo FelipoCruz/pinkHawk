@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { getAuthUrl, logout } from '../../../services/api.service';
 import { deactivateUser } from '../../../store/slices/user.slice';
@@ -9,6 +10,8 @@ const UserPreferences = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(({ user }) => user);
+  // TODO: make the connect to twitter button appear only when not connected
+  const [connectionTwitter, setConnectionTwitter] = useState(false);
 
   const handleClickNavigate = async () => {
     navigate('/dashboard/co-pilot');
@@ -42,35 +45,35 @@ const UserPreferences = () => {
         <div className='right-menu-slide-right'>
           <RightMenuButton />
         </div>
-        <label htmlFor='user-name'>Current Preferences</label>
         <div className='current-user-settings' onClick={handleClickNavigate}>
+        <label className='current-preferences-user' htmlFor='user-name'>Current Preferences</label>
           <div className='frequency-tweet-posting'>
-            <p>Current daily posting frequency:</p>
+            <p>Daily posting frequency:</p>
             {user.frequencyTweetPosting}
           </div>
           <div className='selected-hours'>
-            <p>Selected posting hours:</p>
+            <p>Posting hours:</p>
             {user.postingHours.map((hour: number) => (
               <p key={hour}>{hour < 10 ? `0${hour}:00 h` : `${hour}:00 h`}</p>
             ))}
           </div>
         </div>
         <div className='connection-to-twitter'>
-          <p>Connection to Twitter:</p>
           <div className='connection-status'>
+          <p>Connection to Twitter:</p>
             {user.twitterToken !== null
-              ? 'Connected'
+              ? 'Connected!'
               : 'Not connected'}
           </div>
           <button onClick={handleClick} className='connect-btn'>
             Connect to Twitter
           </button>
-          <NavLink to=''>
-            <button className='btn btn-inverted' onClick={logoutUser}>
-              Logout
-            </button>
-          </NavLink>
         </div>
+        <NavLink to=''>
+          <button className='btn btn-inverted' onClick={logoutUser}>
+            Logout
+          </button>
+        </NavLink>
       </div>
     </>
   );

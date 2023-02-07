@@ -109,7 +109,7 @@ const RightMenuButton = () => {
 
   return (
     <div className='user-submenu'>
-      <button type='button' className='user-details-button' onClick={() => setMenuOpen(!isMenuOpen)}>User Details</button>
+      <button type='button' className='user-details-button' onClick={() => setMenuOpen(!isMenuOpen)}>USER DETAILS</button>
       {isMenuOpen && (
         <div className='menu-container' style={{ position: 'absolute', right: 50 }}>
           <div className='user-submenu-avatar'>
@@ -166,7 +166,7 @@ const RightMenuButton = () => {
             <button type='button' className='download-tweets' onClick={fetchTweetsFromServer}>
               Download Your Tweets
             </button>
-            <button className='submit-button-user-preferences' type='submit'>Save</button>
+            <button className='submit-button-user-preferences' type='submit'>SAVE</button>
           </form>
         </div>
       )}
