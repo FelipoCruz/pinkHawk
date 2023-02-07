@@ -3,7 +3,7 @@ import { getUserTweets, updateUserDetails } from '../../../../services/api.servi
 import { updateAvatar, uploadImage } from '../../../../services/cloudinary.service';
 import { activeUser } from '../../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import ProfilePicture from '../../profilepicture/ProfilePicture';
+import ProfilePicture from '../profilepicture/ProfilePicture';
 import './UserSubmenu.scss';
 
 const CLOUDINARY_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
@@ -14,7 +14,7 @@ const formFields = {
   password: '',
 };
 
-const RightMenuButton2 = () => {
+const RightMenuButton = () => {
   const user = useAppSelector(({ user }) => user);
   const dispatch = useAppDispatch();
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -109,7 +109,7 @@ const RightMenuButton2 = () => {
 
   return (
     <div className='user-submenu'>
-      <button onClick={() => setMenuOpen(!isMenuOpen)}>Open Menu</button>
+      <button type='button' onClick={() => setMenuOpen(!isMenuOpen)}>User Details</button>
       {isMenuOpen && (
         <div className='menu-container' style={{ position: 'absolute', right: 30 }}>
           <div className='user-submenu-avatar'>
@@ -171,4 +171,4 @@ const RightMenuButton2 = () => {
   );
 }
 
-export default RightMenuButton2;
+export default RightMenuButton;

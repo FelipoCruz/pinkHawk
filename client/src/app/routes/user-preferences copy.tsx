@@ -4,7 +4,7 @@ import { logout } from '../../services/api.service';
 import { activeUser, deactivateUser } from '../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getAuthUrl } from '../../services/api.service';
-import ProfilePicture from '../components/profilepicture/ProfilePicture';
+import ProfilePicture from '../components/userpreferences/profilepicture/ProfilePicture';
 import { updateAvatar, uploadImage } from '../../services/cloudinary.service';
 import '../../scss/_user-preference.scss';
 // import RightMenuButton from '../components/userpreferences/user-submenu/UserSubmenu';
