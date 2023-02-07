@@ -7,17 +7,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Node|S app
-        uses: appleboy/ssh-action@v0.1.2
+      - name: SSH Remote Commands
+        uses: appleboy/ssh-action@v0.1.7
         with:
-          host: ${{secrets.SSH_HOST}} # IP address of the server you wish to ssh into
-          key: ${{secrets.SSH_KEY}} # Private or public key of the server
-          username: ${{secrets.SSH_USERNAME}} # User of the server you want to ssh into
-          script: I
-            mkdir test
-            cd test
-            git clone https://github.com/FelipoCruz/pinkHawk.git
-            echo 'Deployment successful to digital ocean'
+          key: ${{secrets.SSH_KEY}}
+          host: ${{secrets.SSH_HOST}}
+          username: ${{secrets.SSH_USERNAME}}
+          script:
+            pm2 delete all
             cd pinkHawk/server
+            git pull
             npm install
             npx prisma migrate
+            pm2 start npm --start
