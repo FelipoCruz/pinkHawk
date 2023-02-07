@@ -31,7 +31,7 @@ const Selection = () => {
   }, [user]);
 
   useEffect(() => {
-    // defineNextPostingDate();
+    defineNextPostingDate();
   }, [tweets]);
 
   useEffect(() => {
@@ -56,13 +56,9 @@ const Selection = () => {
 
   const generateTweetsInit = async () => {
     setSpinner(true);
-    // generateTweetServiceClient(user);
-    // generateTweetServiceClient(user);
-    // generateTweetServiceClient(user);
-    // generateTweetServiceClient(user);
-    // generateTweetServiceClient(user);
-    // await new Promise((resolve) => setTimeout(resolve, 7000));
-    // fetchSuggestedTweets();
+    generateTweetServiceClient(user);
+    await new Promise((resolve) => setTimeout(resolve, 7000));
+    fetchSuggestedTweets();
     setSpinner(false);
   };
 
@@ -121,6 +117,7 @@ const Selection = () => {
       if (postingHours[postingHours.length - 1] === hourOfDate) {
         formatDate.setDate(formatDate.getDate() + 1);
         formatDate.setHours(postingHours[0]);
+        formatDate.setSeconds(0);
 
         setNextPostingDate(formatDate.toUTCString());
       } else {
