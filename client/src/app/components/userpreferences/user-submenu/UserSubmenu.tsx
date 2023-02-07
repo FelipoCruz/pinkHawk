@@ -164,6 +164,7 @@ const RightMenuButton = () => {
             <button type='button' onClick={fetchTweetsFromServer}>
               Download Your Tweets
             </button>
+            <button type='submit'>Save</button>
           </form>
         </div>
       )}

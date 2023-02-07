@@ -4,12 +4,10 @@
   justify-content: flex-start;
   align-items: flex-start;
 
-  
-
   .menu-container {
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
+    border-radius: 8px;
     width: 300px;
     padding: 20px;
     justify-content: center;
@@ -28,8 +26,8 @@
     100% {
       -webkit-transform: translateZ(50px);
       transform: translateZ(50px);
-      -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
-      box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+      -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.15);
     }
   }
 
@@ -44,8 +42,17 @@
     100% {
       -webkit-transform: translateZ(50px);
       transform: translateZ(50px);
-      -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
-      box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+      -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.15);
     }
+  }
+
+  .sumit-new-preferences {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
   }
 }

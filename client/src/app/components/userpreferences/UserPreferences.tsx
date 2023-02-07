@@ -3,7 +3,7 @@ import { getAuthUrl, logout } from '../../../services/api.service';
 import { deactivateUser } from '../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import RightMenuButton from './user-submenu/UserSubmenu';
-import './UserPreference.scss';
+import './UserPreferences.scss';
 
 const UserPreferences = () => {
   const dispatch = useAppDispatch();

@@ -4,11 +4,11 @@ import { getUserById } from '../../../services/api.service';
 import { activeUser } from '../../../store/slices/user.slice';
 import NavBarUser from '../../components/navbar/loginnavbar/LoginNavBar';
 import Sidebar from '../../components/sidebar/sidebar';
+import UserPreferences from '../../components/userpreferences/UserPreferences';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import IUser from '../../interfaces/user.interface';
 import CoPilot from '../co-pilot';
 import TopicsDefinition from '../topics-definition';
-import UserPreferences from '../user-preferences';
 import './dashboard.scss';
 
 const Dashboard = () => {
