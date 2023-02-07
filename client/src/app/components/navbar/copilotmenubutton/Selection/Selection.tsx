@@ -56,13 +56,13 @@ const Selection = () => {
 
   const generateTweetsInit = async () => {
     setSpinner(true);
-    // generateTweetServiceClient(user);
-    // generateTweetServiceClient(user);
-    // generateTweetServiceClient(user);
-    // generateTweetServiceClient(user);
-    // generateTweetServiceClient(user);
-    // await new Promise((resolve) => setTimeout(resolve, 7000));
-    // fetchSuggestedTweets();
+    generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    generateTweetServiceClient(user);
+    await new Promise((resolve) => setTimeout(resolve, 7000));
+    fetchSuggestedTweets();
     setSpinner(false);
   };
 
