@@ -19,4 +19,5 @@ jobs:
             git pull
             npm install
             npx prisma migrate
-            pm2 start npm --start
+            cd src
+            pm2 start index.ts 
