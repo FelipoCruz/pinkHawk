@@ -14,8 +14,8 @@ jobs:
           host: ${{secrets.SSH_HOST}}
           username: ${{secrets.SSH_USERNAME}}
           script: |
-            echo 'Deployment success'
-            pm2 start index.ts
+            echo 'Deployment start'
+            pm2 start npm -- start
             echo 'Started app'
             pm2 delete all
             echo 'deleted process'
