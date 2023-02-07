@@ -5,6 +5,7 @@ export const BUTTON_TYPE_CLASSES = {
   inverted: 'inverted',
 };
 
+
 const Button = ({
   type,
   text,
