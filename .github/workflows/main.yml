@@ -19,7 +19,7 @@ jobs:
             pm2 delete all
             cd pinkHawk/server
             echo 'Git Pull'
-            git pull
+            git pull origin main
             npm install
             echo 'Apply migration'
             npx prisma migrate
