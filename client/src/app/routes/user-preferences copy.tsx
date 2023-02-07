@@ -8,7 +8,7 @@ import ProfilePicture from '../components/profilepicture/ProfilePicture';
 import { updateAvatar, uploadImage } from '../../services/cloudinary.service';
 import '../../scss/_user-preference.scss';
 // import RightMenuButton from '../components/userpreferences/user-submenu/UserSubmenu';
-import RightMenuButton2 from '../components/userpreferences/user-submenu/UserSubmenu-2';
+import RightMenuButton2 from '../components/userpreferences/user-submenu/UserSubmenu';
 
 // const CLOUDINARY_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
 // const CLOUDINARY_CLOUD = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;

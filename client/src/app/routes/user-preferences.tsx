@@ -3,8 +3,7 @@ import { logout } from '../../services/api.service';
 import { deactivateUser } from '../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getAuthUrl } from '../../services/api.service';
-// import RightMenuButton from '../components/userpreferences/user-submenu/UserSubmenu';
-import RightMenuButton2 from '../components/userpreferences/user-submenu/UserSubmenu-2';
+import RightMenuButton from '../components/userpreferences/user-submenu/UserSubmenu';
 import '../../scss/_user-preference.scss';
 
 const UserPreferences = () => {
@@ -42,7 +41,7 @@ const UserPreferences = () => {
       <div className='container-user-settings'>
         <h1>User Preferences</h1>
         <div className='right-menu-slide-right'>
-          <RightMenuButton2 />
+          <RightMenuButton />
         </div>
         <div className='current-user-settings' onClick={handleClickNavigate}>
           <div className='frequency-tweet-posting'>
