@@ -1,5 +1,11 @@
 @use "./variables.scss" as v;
 
+@media (min-width: 1200px) {
+#main, #footer {
+    margin-left: 270px;
+}
+}
+
 @media (max-width: 1135px) {
   .pref-hours-item {
     flex: 1 0 10%;

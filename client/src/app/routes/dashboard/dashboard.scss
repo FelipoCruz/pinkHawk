@@ -1,0 +1,25 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.dashboard-content {
+  flex: 1 1 auto;
+}
+
+#main {
+  margin-top: 50px;
+  padding: 20px;
+}
+
+@media (min-width: 1200px) {
+  
+  }
+

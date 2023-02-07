@@ -9,6 +9,7 @@
 
 *::selection {
   background-color: v.$color-primary-light;
+  color: v.$color-secondary;
 }
 
 html:focus-within {
@@ -17,6 +18,7 @@ html:focus-within {
 
 body {
   min-height: 100vh;
+  color: v.$color-secondary;
 }
 
 img,
@@ -62,10 +64,20 @@ select {
   min-height: 100vh;
 }
 
-.logo {
-  height: 50px;
-}
+
 
 .prim-color {
   color: v.$color-primary;
+}
+
+svg {
+  color: v.$color-secondary;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.logo {
+  height: 30px;
+  color: v.$color-primary;
+  cursor: pointer;
 }

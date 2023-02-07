@@ -1,0 +1,36 @@
+.profile-picture-body {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(0, 21, 255);
+  align-items: center;
+  cursor: pointer;
+
+  .show-input {
+    display: block;
+  }
+
+  .cool-upload {
+    cursor: pointer;
+  }
+
+  .cool-upload input[type='file'] {
+    display: none;
+  }
+
+  .selected-image-modal {
+    aspect-ratio: 1;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .profile-picture-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+}

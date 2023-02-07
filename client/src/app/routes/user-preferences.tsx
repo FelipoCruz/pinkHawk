@@ -1,68 +1,16 @@
-import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../../services/api.service';
-import { activeUser, deactivateUser } from '../../store/slices/user.slice';
+import { deactivateUser } from '../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getAuthUrl } from '../../services/api.service';
-import ProfilePicture from '../components/profilepicture/ProfilePicture';
-import { ProfilePictureProps } from '../interfaces/user.interface';
-// import ProfilePicture from '../components/profilepicture/ProfilePicture';
-import { updateAvatar, uploadImage } from '../../services/cloudinary.service';
+import RightMenuButton from '../components/userpreferences/user-submenu/UserSubmenu';
 import '../../scss/_user-preference.scss';
 
-const CLOUDINARY_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
-const CLOUDINARY_CLOUD = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
-
 const UserPreferences = () => {
-  const [logo, setLogo] = useState('');
-  const [imageUpload] = useState<{ image?: any }>({});
-  const [, setImg] = useState({});
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(({ user }) => user);
-
-  const handleImage = (event: any) => {
-    if (event.target.files && event.target.files[0]) {
-      const imgSrc = URL.createObjectURL(event.target.files[0]);
-      const imgAlt = event.target.files[0].name;
-      setImg({ src: imgSrc, alt: imgAlt });
-      setLogo(event.target.files[0]);
-    }
-  };
-
-  const profileUpload = async (file: string) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', `${CLOUDINARY_PRESET}`);
-    formData.append('cloud_name', `${CLOUDINARY_CLOUD}`);
-    let avatarLink = '';
-
-    const response = await uploadImage(formData);
-
-    if (response) {
-      avatarLink = response['secure_url'];
-      alert('Image uploaded successfully');
-    } else {
-      console.log('Error trying to upload image');
-    }
-
-    const userUpdatedPicture = await updateAvatar(user.id, avatarLink);
-
-    if (userUpdatedPicture) {
-      dispatch(activeUser({ ...user, profilePicture: avatarLink }));
-    } else {
-      console.log('Error trying to update profile picture to user');
-    }
-  };
-  // TODO: fix this type
-  const handleImageUpload = async (event: any) => {
-    console.log("let's see the type of event:", typeof event);
-    event.preventDefault();
-    imageUpload.image = logo;
-    await profileUpload(logo);
-  };
-
+  
   const handleClickNavigate = async () => {
     navigate('/dashboard/co-pilot');
   };
@@ -82,42 +30,22 @@ const UserPreferences = () => {
     if (response.status !== 'success') {
       throw new Error('A problem occurred while logging out');
     }
-    dispatch(deactivateUser());
-    console.log(response);
 
+    dispatch(deactivateUser());
     localStorage.removeItem('user');
     navigate('/dashboard');
   };
 
   return (
     <>
-      <div className="container-user-settings">
+      <div className='container-user-settings'>
         <h1>User Preferences</h1>
-        <form className="user-setting-picture">
-          <div className="user-profile-picture-circle">
-            <img
-              alt="user profile pic"
-              src={user.profilePicture}
-              className="user-profile-picture"
-            />
-          </div>
-          <div className="user-set-profile-avatar">
-            <ProfilePicture
-              imageUpload={handleImage}
-              image={imageUpload.image}
-            />
-            <input
-              type="submit"
-              className="submit-button"
-              value="Upload"
-              onClick={(event) => handleImageUpload(event)}
-            />
-          </div>
-          <div className="upload-profile-avatar"></div>
-        </form>
-        <div className="current-user-settings" onClick={handleClickNavigate}>
-          <div className="frequency-tweet-posting">
-            <p>Current posting daily frequency:</p>
+        <div className='right-menu-slide-right'>
+          <RightMenuButton />
+        </div>
+        <div className='current-user-settings' onClick={handleClickNavigate}>
+          <div className='frequency-tweet-posting'>
+            <p>Current daily posting frequency:</p>
             {user.frequencyTweetPosting}
           </div>
           <div className="selected-hours">

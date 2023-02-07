@@ -10,6 +10,7 @@ const initialState: IUser = {
   firstName: '',
   lastName: '',
   email: '',
+  password: '',
   twitterInfo: '',
   twitterName: '',
   topics: [],

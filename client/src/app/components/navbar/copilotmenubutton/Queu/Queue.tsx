@@ -8,7 +8,7 @@ import {
   deleteTweetDB,
   getUserTweets,
 } from '../../../../../services/api.service';
-import './Queue.scss'
+import './Queue.scss';
 import SingleTweetTest2 from '../../../tweet/Tweet2';
 
 const Queue = () => {
@@ -18,7 +18,6 @@ const Queue = () => {
   useEffect(() => {
     (async () => {
       const queuedTweets = await getUserTweets(user.id, 'queued');
-      console.log('queued tweets are: ', queuedTweets);
       setTweets(queuedTweets);
     })();
   }, [user]);
@@ -43,11 +42,16 @@ const Queue = () => {
 
   return (
     <>
+      <h2>Queued tweets</h2>
       {tweets?.length ? (
         tweets.map((tweet: ITweet, index) => (
           <li key={tweet.id} className="queue-tweet-li">
             <div className="queue-tweet-wrap">
-              <SingleTweetTest2 tweet={tweet} index={index} deleteTweet={deleteTweet} />
+              <SingleTweetTest2
+                tweet={tweet}
+                index={index}
+                deleteTweet={deleteTweet}
+              />
             </div>
           </li>
         ))

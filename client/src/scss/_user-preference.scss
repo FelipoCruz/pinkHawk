@@ -10,17 +10,22 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    border: 1px solid green;
+    // border: 1px solid green;
     margin-bottom: 20px;
     align-items: center;
 
     .user-profile-picture-circle {
-      aspect-ratio: 1/1;
-      width: 100px;
-      height: 100px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
       overflow: hidden;
       margin-bottom: 10px;
+    }
+
+    .user-profile-picture-circle img {
+      width: 90%;
+      height: 90%;
+      object-fit: cover;
     }
 
     .user-set-profile-avatar {
@@ -40,6 +45,11 @@
         align-items: center;
         gap: 10px;
         margin-bottom: 10px;
+        display: none;
+      }
+
+      .show-submit {
+        display: block;
       }
     }
   }
@@ -86,7 +96,6 @@
 
   .connect-btn:hover {
     background-position: right center;
-    /* change the direction of the change here */
     color: #fff;
     text-decoration: none;
   }
