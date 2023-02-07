@@ -1,5 +1,7 @@
 # DP - Prisma: Best practices and useful commands
 
+deploy
+
 ## 1- After Schema modification
 
 After a schema (model) modification, we need to generate a migration:
