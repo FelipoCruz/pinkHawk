@@ -13,13 +13,12 @@ jobs:
           key: ${{secrets.SSH_KEY}}
           host: ${{secrets.SSH_HOST}}
           username: ${{secrets.SSH_USERNAME}}
-          script:
+          script: |
             pm2 start index.ts
             pm2 delete all
             cd pinkHawk/server
             git pull
             npm install
             npx prisma migrate
-            cd src
-            pm2 start index.ts
+            pm2 start npm -- start
             echo 'Deployment success'
