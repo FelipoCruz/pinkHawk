@@ -14,18 +14,14 @@ jobs:
           host: ${{secrets.SSH_HOST}}
           username: ${{secrets.SSH_USERNAME}}
           script: |
-            echo 'Deployment start'
+            echo 'Deployment Started'
             pm2 start npm -- start
-            echo 'Started app'
             pm2 delete all
-            echo 'deleted process'
             cd pinkHawk/server
+            echo 'Git Pull'
             git pull
-            echo 'Git pull done'
             npm install
-            echo 'npm install done'
+            echo 'Apply migration'
             npx prisma migrate
-            echo 'migration done'
             pm2 start npm -- start
-            echo 'Restart'
-            echo 'Deployment success'
+            echo 'Deployment Done'
