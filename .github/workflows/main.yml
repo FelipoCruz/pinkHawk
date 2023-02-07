@@ -14,7 +14,6 @@ jobs:
           host: ${{secrets.SSH_HOST}}
           username: ${{secrets.SSH_USERNAME}}
           script:
-            echo 'Deployment successful to digital ocean'
             pm2 start index.ts
             pm2 delete all
             cd pinkHawk/server
@@ -23,3 +22,4 @@ jobs:
             npx prisma migrate
             cd src
             pm2 start index.ts
+            echo 'Deployment success'
