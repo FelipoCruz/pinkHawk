@@ -14,7 +14,9 @@ const CLOUDINARY_CLOUD = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
 
 const UserPreferences = () => {
   const [logo, setLogo] = useState<File | null>(null);
-  const [imageUpload, setImageUpload] = useState<{ image: File }>({} as { image: File });
+  const [imageUpload, setImageUpload] = useState<{ image: File }>(
+    {} as { image: File }
+  );
   const [, setImg] = useState({});
   const [rawImage, setRawImage] = useState<File | null>(null);
   const [imageURL, setImageURL] = useState('');
@@ -47,7 +49,7 @@ const UserPreferences = () => {
       alert('Image uploaded successfully');
     } else {
       console.log('Error trying to upload image');
-    };
+    }
 
     const userUpdatedPicture = await updateAvatar(user.id, avatarLink);
 
@@ -55,10 +57,12 @@ const UserPreferences = () => {
       dispatch(activeUser({ ...user, profilePicture: avatarLink }));
     } else {
       console.log('Error trying to update profile picture to user');
-    };
+    }
   };
   // TODO: fix this type
-  const handleImageUpload = async (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+  const handleImageUpload = async (
+    event: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
     event.preventDefault();
     setImageUpload({ image: logo! });
     await profileUpload(logo!);
@@ -84,7 +88,7 @@ const UserPreferences = () => {
 
     if (response.status !== 'success') {
       throw new Error('A problem occurred while logging out');
-    };
+    }
 
     dispatch(deactivateUser());
     localStorage.removeItem('user');
@@ -93,18 +97,18 @@ const UserPreferences = () => {
 
   return (
     <>
-      <div className='container-user-settings'>
-        <h1>User Preferences</h1>
+      <div className="container-user-settings">
+        <h2>Settings</h2>
         <RightMenuButton />
-        <form className='user-setting-picture'>
-          <div className='user-profile-picture-circle'>
+        <form className="user-setting-picture">
+          <div className="user-profile-picture-circle">
             <img
-              alt='user profile pic'
+              alt="user profile pic"
               src={user.profilePicture}
-              className='user-profile-picture'
+              className="user-profile-picture"
             />
           </div>
-          <div className='user-set-profile-avatar'>
+          <div className="user-set-profile-avatar">
             <ProfilePicture
               changeSubmit={() => setShowSubmit(!showSubmit)}
               setRawImage={setRawImage}
@@ -114,40 +118,42 @@ const UserPreferences = () => {
               imageUpload={handleImage}
               image={imageUpload.image as unknown as string}
             />
-            {showSubmit &&
+            {showSubmit && (
               <input
-                type='submit'
-                className={`submit-button ${showSubmit ? 'show-submit' : 'show-submit'}`}
-                value='Upload'
+                type="submit"
+                className={`submit-button ${
+                  showSubmit ? 'show-submit' : 'show-submit'
+                }`}
+                value="Upload"
                 onClick={(event) => handleImageUpload(event)}
                 hidden
               />
-            }
+            )}
           </div>
           {/* <div className='upload-profile-avatar'></div> */}
         </form>
-        <div className='current-user-settings' onClick={handleClickNavigate}>
-          <div className='frequency-tweet-posting'>
+        <div className="current-user-settings" onClick={handleClickNavigate}>
+          <div className="frequency-tweet-posting">
             <p>Current daily posting frequency:</p>
             {user.frequencyTweetPosting}
           </div>
-          <div className='selected-hours'>
+          <div className="selected-hours">
             <p>Selected posting hours:</p>
             {user.postingHours.map((hour: number) => (
               <p key={hour}>{hour < 10 ? `0${hour}:00 h` : `${hour}:00 h`}</p>
             ))}
           </div>
         </div>
-        <div className='connection-to-twitter'>
+        <div className="connection-to-twitter">
           <p>Connection to Twitter:</p>
           {user.twitterToken !== null
             ? 'Connected to Twitter'
             : 'Not connected to Twitter'}
-          <button onClick={handleClick} className='connect-btn'>
+          <button onClick={handleClick} className="connect-btn">
             Connect to Twitter
           </button>
-          <NavLink to=''>
-            <button className='btn btn-inverted' onClick={logoutUser}>
+          <NavLink to="">
+            <button className="btn btn-inverted" onClick={logoutUser}>
               Logout
             </button>
           </NavLink>

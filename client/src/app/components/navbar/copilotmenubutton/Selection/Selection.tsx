@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
 import './Selection.scss';
-// import '../../../tweet/Tweet.scss';
 import { useAppSelector } from '../../../../hooks/hooks';
-import SingleTweet from '../../../tweet/Tweet';
 import {
   generateTweetServiceClient,
   getSuggestedTweets,
 } from '../../../../../services/api.service';
 import ITweet from '../../../../interfaces/tweet.interface';
 import Spinner from '../../../spinner/Spinner';
-// import '../../../tweet/Tweet.scss';
 import {
   queueTweetDB,
   getUserTweets,
@@ -19,7 +16,6 @@ import dayjs from 'dayjs';
 import SingleTweetTest2 from '../../../tweet/Tweet2';
 
 const Selection = () => {
-  //const { tweets } = useAppSelector(({ tweets }) => tweets);
   const user = useAppSelector(({ user }) => user);
   const [spinner, setSpinner] = useState(false);
   const [tweets, setTweets] = useState([]);
@@ -35,11 +31,15 @@ const Selection = () => {
   }, [user]);
 
   useEffect(() => {
-    defineNextPostingDate();
+    // defineNextPostingDate();
   }, [tweets]);
 
   useEffect(() => {
-    if (tweets.length < 1) fetchSuggestedTweets();
+    (async () => {
+      console.log('user id: ', user.id);
+      console.log(tweets.length);
+      if (tweets.length < 1) fetchSuggestedTweets();
+    })();
   }, []);
 
   const fetchSuggestedTweets = async () => {
@@ -152,6 +152,7 @@ const Selection = () => {
 
   return (
     <div className="selection-page">
+      <h2>Suggested tweets</h2>
       {spinner ? (
         <Spinner />
       ) : (

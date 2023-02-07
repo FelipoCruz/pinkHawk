@@ -18,7 +18,6 @@ const Queue = () => {
   useEffect(() => {
     (async () => {
       const queuedTweets = await getUserTweets(user.id, 'queued');
-      console.log('queued tweets are: ', queuedTweets);
       setTweets(queuedTweets);
     })();
   }, [user]);
@@ -43,6 +42,7 @@ const Queue = () => {
 
   return (
     <>
+      <h2>Queued tweets</h2>
       {tweets?.length ? (
         tweets.map((tweet: ITweet, index) => (
           <li key={tweet.id} className="queue-tweet-li">
