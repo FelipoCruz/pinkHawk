@@ -111,7 +111,7 @@ const RightMenuButton = () => {
     <div className='user-submenu'>
       <button type='button' onClick={() => setMenuOpen(!isMenuOpen)}>User Details</button>
       {isMenuOpen && (
-        <div className='menu-container' style={{ position: 'absolute', right: 30 }}>
+        <div className='menu-container' style={{ position: 'absolute', right: 50 }}>
           <div className='user-submenu-avatar'>
             <form className='user-setting-picture'>
               <div className='user-profile-picture-circle'>
@@ -143,8 +143,8 @@ const RightMenuButton = () => {
               </div>
             </form>
           </div>
-          <form className='sumit-new-preferences' onSubmit={(event) => handleSubmit(event)}>
-            <label htmlFor='email'>Change Email:</label>
+          <form className='sumbit-new-preferences' onSubmit={(event) => handleSubmit(event)}>
+            <label typeof='label' htmlFor='email'>Change Email</label>
             <input
               className='email-input'
               type='text'
@@ -152,7 +152,10 @@ const RightMenuButton = () => {
               value={userFileds.email}
               onChange={handleChange}
             />
-            <label htmlFor='password'>Change Password:</label>
+            <label className='change-password-label' typeof='label' htmlFor='password'>
+              Change Password
+              <i className='show-password' onClick={togglePassword}>{passwordShown ? 'Hide' : 'Show'}</i>
+            </label>
             <input
               className='password-input'
               type={passwordShown ? 'text' : 'password'}
@@ -160,11 +163,10 @@ const RightMenuButton = () => {
               value={userFileds.password}
               onChange={handleChange}
             />
-            <i onClick={togglePassword}>{passwordShown ? 'Hide' : 'Show'}</i>
-            <button type='button' onClick={fetchTweetsFromServer}>
+            <button type='button' className='download-tweets' onClick={fetchTweetsFromServer}>
               Download Your Tweets
             </button>
-            <button type='submit'>Save</button>
+            <button className='submit-button-user-preferences' type='submit'>Save</button>
           </form>
         </div>
       )}

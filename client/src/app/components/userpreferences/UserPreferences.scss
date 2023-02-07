@@ -7,52 +7,65 @@
   height: 100vh;
   width: 100vw;
 
-  // .user-setting-picture {
-  //   display: flex;
-  //   flex-direction: column;
-  //   padding: 20px;
-  //   margin-bottom: 20px;
-  //   align-items: center;
+  .user-setting-picture {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    align-items: center;
 
-  //   .user-profile-picture-circle {
-  //     width: 90px;
-  //     height: 90px;
-  //     border-radius: 50%;
-  //     overflow: hidden;
-  //     margin-bottom: 10px;
-  //   }
+    .user-profile-picture-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
 
-  //   .user-profile-picture-circle img {
-  //     width: 90%;
-  //     height: 90%;
-  //     object-fit: cover;
-  //   }
+    .user-profile-picture-circle img {
+      width: 90%;
+      height: 90%;
+      object-fit: cover;
+    }
 
-  //   .user-set-profile-avatar {
-  //     display: flex;
-  //     border: 1px solid pink;
-  //     flex-direction: column;
-  //     justify-content: flex-start;
-  //     align-items: center;
-  //     gap: 10px;
-  //     margin-bottom: 10px;
+    .user-set-profile-avatar {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
 
-  //     .submit-button {
-  //       display: flex;
-  //       border: 1px solid black;
-  //       flex-direction: row;
-  //       justify-content: flex-start;
-  //       align-items: center;
-  //       gap: 10px;
-  //       margin-bottom: 10px;
-  //       display: none;
-  //     }
+      .submit-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+        display: none;
+      }
 
-  //     .show-submit {
-  //       display: block;
-  //     }
-  //   }
-  // }
+      .show-submit {
+        margin-top: 5px;
+        display: flex;
+        align-self: center;
+        width: 120px;
+        height: 38px;
+        border: 1px solid black;
+        border-radius: 21px;
+        justify-content: center;
+        align-items: center;
+        color: rgb(0, 0, 0);
+        font-weight: 600;
+        box-shadow: #000;
+        display: block;
+      }
+
+      .show-submit:hover {
+        background-color: #000;
+        transition: 0.2s;
+        color: white;
+      }
+    }
+  }
 
   .current-user-settings {
     display: flex;
@@ -62,7 +75,6 @@
     border: none;
     border-radius: 10px;
     box-shadow: 0 0 20px #eee;
-    // padding: 20px;
     margin-bottom: 20px;
 
     .frequency-tweet-posting {
@@ -82,8 +94,8 @@
 
   .connect-btn {
     background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF 100%);
-    // margin: 10px;
-    // padding: 15px 45px;
+    margin: 10px 0;
+    padding: 15px 45px;
     text-align: center;
     text-transform: uppercase;
     transition: 0.7s;
@@ -91,7 +103,7 @@
     color: white;
     box-shadow: 0 0 20px #eee;
     border-radius: 10px;
-    // display: block;
+    display: block;
   }
 
   .connect-btn:hover {
