@@ -1,6 +1,6 @@
 # DP - Prisma: Best practices and useful commands
 
-deploy2
+deploy25
 
 ## 1- After Schema modification
 
