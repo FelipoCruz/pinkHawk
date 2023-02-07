@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import TopicsInput from '../../../topics-input/topics-input';
+import TopicsInput from '../topics-input/topics-input';
 import Queue from '../Queu/Queue';
 import Selection from '../Selection/Selection';
 import './CopilotMenu.scss';

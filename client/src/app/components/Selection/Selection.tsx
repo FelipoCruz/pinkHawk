@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import './Selection.scss';
-import { useAppSelector } from '../../../../hooks/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import {
   generateTweetServiceClient,
   getSuggestedTweets,
-} from '../../../../../services/api.service';
-import ITweet from '../../../../interfaces/tweet.interface';
-import Spinner from '../../../spinner/Spinner';
+} from '../../../services/api.service';
+import ITweet from '../../interfaces/tweet.interface';
+import Spinner from '../spinner/Spinner';
 import {
   queueTweetDB,
   getUserTweets,
   deleteTweetDB,
-} from '../../../../../services/api.service';
+} from '../../../services/api.service';
 import dayjs from 'dayjs';
-import SingleTweetTest2 from '../../../tweet/Tweet2';
+import SingleTweetTest2 from '../tweet/Tweet2';
 
 const Selection = () => {
   const user = useAppSelector(({ user }) => user);

@@ -76,6 +76,7 @@ export const signInUser = async (req: Request, res: Response) => {
       .json(userNoPassword);
   } catch (error) {
     console.log('error in CreateUser:' + error);
+    res.status(500).json('server problem');
   }
 };
 
