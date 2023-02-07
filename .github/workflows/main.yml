@@ -2,7 +2,7 @@ name: Build & Deploy
 on:
   push:
     branches: [main]
-    
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,11 +14,18 @@ jobs:
           host: ${{secrets.SSH_HOST}}
           username: ${{secrets.SSH_USERNAME}}
           script: |
+            echo 'Deployment success'
             pm2 start index.ts
+            echo 'Started app'
             pm2 delete all
+            echo 'deleted process'
             cd pinkHawk/server
             git pull
+            echo 'Git pull done'
             npm install
+            echo 'npm install done'
             npx prisma migrate
+            echo 'migration done'
             pm2 start npm -- start
+            echo 'Restart'
             echo 'Deployment success'
