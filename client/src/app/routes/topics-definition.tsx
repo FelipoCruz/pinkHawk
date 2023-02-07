@@ -1,14 +1,12 @@
-import TopicsInput from "../components/topics-input/topics-input";
+import TopicsInput from '../components/topics-input/topics-input';
 
 const TopicsDefinition = () => {
-  
   return (
     <>
       <div className="container">
-        <h1>Topics Definition</h1>
+        <h2>Preferences</h2>
         <TopicsInput></TopicsInput>
       </div>
-
     </>
   );
 };

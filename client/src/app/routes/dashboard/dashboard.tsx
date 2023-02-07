@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { getUserById } from '../../../services/api.service';
 import { activeUser } from '../../../store/slices/user.slice';
+import GrowthMenu from '../../components/navbar/growthmenu/GrowthMenu';
 import NavBarUser from '../../components/navbar/loginnavbar/LoginNavBar';
 import Sidebar from '../../components/sidebar/sidebar';
 import UserPreferences from '../../components/userpreferences/UserPreferences';
@@ -47,7 +48,7 @@ const Dashboard = () => {
         <Routes>
           <Route path="/" element={<Navigate to="co-pilot" />} />
           <Route path="co-pilot/*" element={<CoPilot />} />
-          <Route path="growth" element={<h1>Growth</h1>} />
+          <Route path="growth" element={<GrowthMenu />} />
           <Route path="user-preferences" element={<TopicsDefinition />} />
           <Route path="user-settings" element={<UserPreferences />} />
           {/* <Route path="*" element={<Navigate to="co-pilot" />} /> */}

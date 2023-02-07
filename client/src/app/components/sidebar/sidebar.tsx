@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import './sidebar.scss';
 import { BsBarChartLine, BsCardChecklist } from 'react-icons/bs';
 import { GiSettingsKnobs } from 'react-icons/gi';
+import { MdOutlineSettings } from 'react-icons/md';
 import { RxDot } from 'react-icons/rx';
 import { toggleSidebar } from '../../../store/slices/layout.slice';
 
@@ -64,16 +65,16 @@ const Sidebar = ({ navbarState }: { navbarState: boolean }) => {
           Preferences
         </NavLink>
       </nav>
-      {/* <div className="bottom">
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "LIGHT" })}
-        ></div>
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "DARK" })}
-        ></div>
-      </div> */}
+      <nav>
+        <NavLink
+          className="sidebar-nav-item"
+          to="/dashboard/user-settings"
+          onClick={closeSidebar}
+        >
+          <MdOutlineSettings />
+          Settings
+        </NavLink>
+      </nav>
     </aside>
   );
 };

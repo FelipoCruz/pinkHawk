@@ -10,7 +10,7 @@ const UserPreferences = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(({ user }) => user);
-
+  
   const handleClickNavigate = async () => {
     navigate('/dashboard/co-pilot');
   };
@@ -29,7 +29,7 @@ const UserPreferences = () => {
 
     if (response.status !== 'success') {
       throw new Error('A problem occurred while logging out');
-    };
+    }
 
     dispatch(deactivateUser());
     localStorage.removeItem('user');
@@ -48,23 +48,23 @@ const UserPreferences = () => {
             <p>Current daily posting frequency:</p>
             {user.frequencyTweetPosting}
           </div>
-          <div className='selected-hours'>
+          <div className="selected-hours">
             <p>Selected posting hours:</p>
             {user.postingHours.map((hour: number) => (
               <p key={hour}>{hour < 10 ? `0${hour}:00 h` : `${hour}:00 h`}</p>
             ))}
           </div>
         </div>
-        <div className='connection-to-twitter'>
+        <div className="connection-to-twitter">
           <p>Connection to Twitter:</p>
           {user.twitterToken !== null
             ? 'Connected to Twitter'
             : 'Not connected to Twitter'}
-          <button onClick={handleClick} className='connect-btn'>
+          <button onClick={handleClick} className="connect-btn">
             Connect to Twitter
           </button>
-          <NavLink to=''>
-            <button className='btn btn-inverted' onClick={logoutUser}>
+          <NavLink to="">
+            <button className="btn btn-inverted" onClick={logoutUser}>
               Logout
             </button>
           </NavLink>
