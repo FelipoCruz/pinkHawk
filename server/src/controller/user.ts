@@ -168,13 +168,29 @@ export const getUserFollowers = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     const data = await prisma.growthData.findMany({
-      where: { 
+      where: {
         userId: Number(id),
       },
-      select: { followers: true, date: true, likes: true, comments: true }
+      select: { followers: true, date: true, likes: true, comments: true },
     });
     res.status(200).json(data);
   } catch (error) {
     console.log(error);
   }
-}
+};
+
+export const getUserFollowers = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const data = await prisma.growthData.findMany({
+      where: {
+        userId: Number(id),
+      },
+      select: { followers: true, date: true, likes: true, comments: true },
+    });
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
