@@ -7,6 +7,11 @@
   height: 100vh;
   width: 100vw;
 
+  .right-menu-slide-right {
+    margin-bottom: 20px;
+    animation: user-submenu 0.5s ease-in-out;
+  }
+
   .user-setting-picture {
     display: flex;
     flex-direction: column;
@@ -74,7 +79,6 @@
     align-items: flex-start;
     border: none;
     border-radius: 10px;
-    box-shadow: 0 0 20px #eee;
     margin-bottom: 20px;
 
     .frequency-tweet-posting {

@@ -42,6 +42,7 @@ const UserPreferences = () => {
         <div className='right-menu-slide-right'>
           <RightMenuButton />
         </div>
+        <label htmlFor='user-name'>Current Preferences</label>
         <div className='current-user-settings' onClick={handleClickNavigate}>
           <div className='frequency-tweet-posting'>
             <p>Current daily posting frequency:</p>
@@ -56,9 +57,11 @@ const UserPreferences = () => {
         </div>
         <div className='connection-to-twitter'>
           <p>Connection to Twitter:</p>
-          {user.twitterToken !== null
-            ? 'Connected to Twitter'
-            : 'Not connected to Twitter'}
+          <div className='connection-status'>
+            {user.twitterToken !== null
+              ? 'Connected'
+              : 'Not connected'}
+          </div>
           <button onClick={handleClick} className='connect-btn'>
             Connect to Twitter
           </button>
