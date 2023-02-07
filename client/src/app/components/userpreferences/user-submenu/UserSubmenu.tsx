@@ -3,7 +3,7 @@ import { getUserTweets, updateUserDetails } from '../../../../services/api.servi
 import { updateAvatar, uploadImage } from '../../../../services/cloudinary.service';
 import { activeUser } from '../../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import ProfilePicture from '../../profilepicture/ProfilePicture';
+import ProfilePicture from '../profilepicture/ProfilePicture';
 import './UserSubmenu.scss';
 
 const CLOUDINARY_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
