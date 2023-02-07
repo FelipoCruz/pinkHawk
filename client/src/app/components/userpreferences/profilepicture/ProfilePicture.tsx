@@ -1,6 +1,6 @@
 import React, { createRef, useEffect, useState } from 'react';
-import { useAppSelector } from '../../hooks/hooks';
-import { ProfilePictureProps } from '../../interfaces/user.interface';
+import { useAppSelector } from '../../../hooks/hooks';
+import { ProfilePictureProps } from '../../../interfaces/user.interface';
 import './ProfilePicture.scss';
 
 const ProfilePicture = (props: ProfilePictureProps) => {
@@ -49,14 +49,14 @@ const ProfilePicture = (props: ProfilePictureProps) => {
       {showInput &&
         <label htmlFor='files' className={`cool-upload ${showInput ? 'show-input' : ''}`}>
           {/* {showInput && */}
-            <input className='profile-picture-upload'
-              ref={inputFileRef}
-              accept='image/*'
-              type='file'
-              onChange={handleFileChange}
-              id='files'
-              hidden
-            />
+          <input className='profile-picture-upload'
+            ref={inputFileRef}
+            accept='image/*'
+            type='file'
+            onChange={handleFileChange}
+            id='files'
+            hidden
+          />
           {/* } */}
           Upload File
         </label>
