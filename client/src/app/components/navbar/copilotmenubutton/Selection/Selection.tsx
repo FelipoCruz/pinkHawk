@@ -165,7 +165,7 @@ const Selection = () => {
             ) : (
               <div className="next-tweet-time">
                 <h2 className="">Next accepted tweet will be posted at: </h2>
-                <h1>{dayjs(nextPostingDate).format('DD/MM/YY [at] HH:mm')}</h1>
+                <h1>{dayjs(nextPostingDate).format('DD/MM/YY  HH:mm')}</h1>
               </div>
             )}
           </div>
