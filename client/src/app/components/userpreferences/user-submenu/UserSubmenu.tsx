@@ -14,7 +14,7 @@ const formFields = {
   password: '',
 };
 
-const RightMenuButton2 = () => {
+const RightMenuButton = () => {
   const user = useAppSelector(({ user }) => user);
   const dispatch = useAppDispatch();
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -109,7 +109,7 @@ const RightMenuButton2 = () => {
 
   return (
     <div className='user-submenu'>
-      <button onClick={() => setMenuOpen(!isMenuOpen)}>Open Menu</button>
+      <button type='button' onClick={() => setMenuOpen(!isMenuOpen)}>User Details</button>
       {isMenuOpen && (
         <div className='menu-container' style={{ position: 'absolute', right: 30 }}>
           <div className='user-submenu-avatar'>
@@ -171,4 +171,4 @@ const RightMenuButton2 = () => {
   );
 }
 
-export default RightMenuButton2;
+export default RightMenuButton;
