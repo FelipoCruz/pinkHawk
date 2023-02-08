@@ -1,4 +1,5 @@
 // import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuthUrl } from '../../../services/api.service';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
@@ -8,6 +9,7 @@ import './UserPreferences.scss';
 const UserPreferences = () => {
   // const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [backgroundColor, setBackgroundColor] = useState(false);
   const user = useAppSelector(({ user }) => user);
   // TODO: make the connect to twitter button appear only when not connected
   // const [connectionTwitter, setConnectionTwitter] = useState(false);
@@ -25,11 +27,17 @@ const UserPreferences = () => {
     }
   };
 
+  useEffect(() => {
+    console.log('backgroundColor', backgroundColor)
+  }, [backgroundColor]);
+
   return (
     <>
-      <div className='container-user-settings'>
+      <div className={`container-user-settings ${backgroundColor ? '' : 'background-fade'}`}>
         <h1>User Preferences</h1>
-        <div className='right-menu-slide-right'>
+        <div className='right-menu-slide-right' onClick={() => {
+          setBackgroundColor(!backgroundColor);
+        }}>
           <RightMenuButton />
         </div>
         <div className='current-user-settings' onClick={handleClickNavigate}>
