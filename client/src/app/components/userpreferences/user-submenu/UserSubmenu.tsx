@@ -5,6 +5,7 @@ import { updateAvatar, uploadImage } from '../../../../services/cloudinary.servi
 import { activeUser } from '../../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import ProfilePicture from '../profilepicture/ProfilePicture';
+import TweetDownload from '../tweetdownload/TweetDownload';
 import './UserSubmenu.scss';
 
 const CLOUDINARY_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
@@ -32,38 +33,6 @@ const RightMenuButton = () => {
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
-  };
-  //TODO:
-  // fetch tweets with status posted from server
-  const fetchTweetsFromServer = async () => {
-    const tweetsFromAPI = await getUserTweets(user.id, 'posted');
-    setTweets(tweetsFromAPI);
-
-    const csvContent = tweetsFromAPI.map((tweet: any) => {
-      return `${tweet.id},${tweet.text},${tweet.createdAt}`;
-    }).join('');
-
-    const encodedUri = encodeURI(`data:text/csv;charset=utf-8,\uFEFF${csvContent}`);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', 'tweets.csv');
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  };
-
-  const downloadTweets = async () => {
-    await fetchTweetsFromServer().then(() => {
-      const tweetData = tweets.map((tweet: any) => {
-        return `${tweet.id},${tweet.text},${tweet.createdAt}`;
-      }).join('\n');
-
-      const blob = new Blob([tweetData], { type: 'text/csv' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'tweets.csv';
-      link.click();
-    })
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -190,7 +159,9 @@ const RightMenuButton = () => {
             />
             <button className='submit-button-user-preferences' type='submit'>SAVE</button>
           </form>
-          <button onClick={downloadTweets}>Download Tweets</button>
+          <div className='tweet-download-button'>
+            <TweetDownload />
+          </div>
         </div>
       )}
     </div>

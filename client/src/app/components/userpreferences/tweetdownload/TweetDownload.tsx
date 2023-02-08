@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { getUserTweets } from '../../../../services/api.service';
 import { useAppSelector } from '../../../hooks/hooks';
+import ITweet from '../../../interfaces/tweet.interface';
 
 const TweetDownload = () => {
-  const [tweets, setTweets] = useState([]);
   const user = useAppSelector(({ user }) => user);
+  const [tweets, setTweets] = useState<ITweet[]>([]);
 
   const fetchTweetsFromServer = async () => {
     const tweetsFromAPI = await getUserTweets(user.id, 'posted');
@@ -12,43 +13,28 @@ const TweetDownload = () => {
 
     const csvContent = tweetsFromAPI.map((tweet: any) => {
       return `${tweet.id},${tweet.text},${tweet.createdAt}`;
-    }).join('');
+    }).join('\n');
 
     const encodedUri = encodeURI(`data:text/csv;charset=utf-8,\uFEFF${csvContent}`);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', 'tweets.csv');
+    link.setAttribute('download', `${user.firstName}, ${user.email} twitter history.csv`);
     document.body.appendChild(link);
     link.click();
     link.remove();
   };
 
-  const downloadTweets = () => {
-    fetchTweetsFromServer().then(() => {
-      const tweetData = tweets.map((tweet: any) => {
-        return `${tweet.id},${tweet.text},${tweet.createdAt}`;
+  const downloadData = async () => {
+    await fetchTweetsFromServer().then(() => {
+      tweets.map((tweet: ITweet) => {
+        return `${tweet.id},${tweet.text},${tweet.postingTimestamp}`;
       }).join('\n');
-
-      const blob = new Blob([tweetData], { type: 'text/plain' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'tweets.txt';
-      link.click();
     })
   };
 
   return (
     <div>
-      <button onClick={fetchTweetsFromServer}>Fetch Tweets</button>
-      <button onClick={downloadTweets}>Download Tweets</button>
-      {tweets && (
-        tweets.map((tweet: any) => {
-          return (
-            <div key={tweet.id}>
-              {tweet.text}: {tweet.createdAt}
-            </div>
-          );
-        }))}
+      <button onClick={downloadData}>Download Tweets</button>
     </div>
   );
 };
