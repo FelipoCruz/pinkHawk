@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
+.background-fade {
+  // width: 100vw;
+  // height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  // z-index: 100;
+  // display: none;
+}
+
 .container-user-settings {
   display: flex;
   flex-direction: column;

@@ -157,25 +157,25 @@
 
 }
 
-@media screen and (max-width: 420px) {
-  .menu-container {
-    position: fixed;
-    top: 210px;
-    left: 50px;
-  }
-}
+// @media screen and (max-width: 420px) {
+//   .menu-container {
+//     position: fixed;
+//     top: 210px;
+//     left: 50px;
+//   }
+// }
 
 @media screen and (min-width: 750px) and (max-width: 800px) {
   .menu-container {
-    // position: fixed;
+    position: fixed;
     top: 210px;
     left: 400px;
   }
 }
 
-@media screen and (min-width: 800px) and (max-width: 850px) {
+@media screen and (min-width: 801px) and (max-width: 850px) {
   .menu-container {
-    // position: fixed;
+    position: fixed;
     top: 210px;
     left: 420px;
   }

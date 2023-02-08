@@ -33,7 +33,7 @@ const UserPreferences = () => {
 
   return (
     <>
-      <div className={`container-user-settings ${backgroundColor ? '' : 'background-fade'}`}>
+      <div className={`container-user-settings ${backgroundColor ? 'background-fade' : ''}`}>
         <h1>User Preferences</h1>
         <div className='right-menu-slide-right' onClick={() => {
           setBackgroundColor(!backgroundColor);
