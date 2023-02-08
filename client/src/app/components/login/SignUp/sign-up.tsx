@@ -7,6 +7,7 @@ import IUser from '../../../interfaces/user.interface';
 import Button from '../../button/Button';
 import './sign-up.scss';
 import signup from '../../../../images/signup.png';
+import { IoIosArrowDropleft } from 'react-icons/io';
 
 const defaultFormFields = {
   firstname: '',
@@ -45,8 +46,14 @@ export default function SignUp() {
     setFormFields({ ...formFields, [name]: value });
   };
 
+  const handleClick = () => {
+    navigate('/');
+  };
+
   return (
     <div className="signup-container">
+
+      <IoIosArrowDropleft onClick={handleClick}/>
       <div className="signup-form-container">
         <form className="form" onSubmit={(event) => handleSubmit(event)}>
           <h1 id="signup-header">Sign up</h1>
@@ -92,6 +99,7 @@ export default function SignUp() {
           </div>
           <div className="submit">
             <Button text="Sign up" type="submit" />
+            <p className='redirect-login'>Already have an account? <a href='/login'>Login</a></p>
           </div>
         </form>
       </div>
