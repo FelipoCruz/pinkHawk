@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { getUserById } from '../../../services/api.service';
 import { activeUser } from '../../../store/slices/user.slice';
-import GrowthMenu from '../../components/navbar/growthmenu/GrowthMenu';
-import NavBarUser from '../../components/navbar/loginnavbar/LoginNavBar';
+import GrowthMenu from '../../components/growthmenu/GrowthMenu';
+import NavBarUser from '../../components/loginnavbar/LoginNavBar';
 import Sidebar from '../../components/sidebar/sidebar';
+import UserPreferences from '../../components/userpreferences/UserPreferences';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import IUser from '../../interfaces/user.interface';
 import CoPilot from '../co-pilot';
 import TopicsDefinition from '../topics-definition';
-import UserPreferences from '../user-preferences';
 import './dashboard.scss';
 
 const Dashboard = () => {

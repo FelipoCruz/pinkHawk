@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '../../../../hooks/hooks';
-import Tweet from '../../../tweet/Tweet';
-import ITweet from '../../../../interfaces/tweet.interface';
-import '../../../tweet/Tweet.scss';
-import dayjs from 'dayjs';
-import {
-  deleteTweetDB,
-  getUserTweets,
-} from '../../../../../services/api.service';
+import { useAppSelector } from '../../hooks/hooks';
+import Tweet from '../tweet/Tweet';
+import ITweet from '../../interfaces/tweet.interface';
+import '../tweet/Tweet.scss';
+import { deleteTweetDB, getUserTweets } from '../../../services/api.service';
 import './Queue.scss';
-import SingleTweetTest2 from '../../../tweet/Tweet2';
+import SingleTweetTest2 from '../tweet/Tweet2';
 
 const Queue = () => {
   const user = useAppSelector(({ user }) => user);

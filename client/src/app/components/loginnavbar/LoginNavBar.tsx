@@ -1,14 +1,10 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './LoginNavBar.scss';
-import copilotButton from '../../../../images/copilot.png';
-import growthButton from '../../../../images/growth.png';
-import userIcon from '../../../../images/user.png';
-import { ReactComponent as Logo } from '../../../../images/pinkhawklogo.svg';
-import { toggleSidebar } from '../../../../store/slices/layout.slice';
+import { ReactComponent as Logo } from '../../../images/pinkhawklogo.svg';
+import { toggleSidebar } from '../../../store/slices/layout.slice';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { CgProfile } from 'react-icons/cg';
-import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 const NavBarUser = () => {
   const layout = useAppSelector((state) => state.layout);

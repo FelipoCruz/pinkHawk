@@ -2,10 +2,10 @@ import React from 'react';
 import { generateTweetServiceClient } from '../../services/api.service';
 import { useAppSelector } from '../hooks/hooks';
 import { useState } from 'react';
-import CopilotMenu from '../components/navbar/copilotmenubutton/CopilotMenu/CopilotMenu';
+import CopilotMenu from '../components/CopilotMenu/CopilotMenu';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
-import Selection from '../components/navbar/copilotmenubutton/Selection/Selection';
-import Queue from '../components/navbar/copilotmenubutton/Queu/Queue';
+import Selection from '../components/Selection/Selection';
+import Queue from '../components/Queu/Queue';
 import TopicsDefinition from './topics-definition';
 
 const CoPilot = () => {

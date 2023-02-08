@@ -22,44 +22,61 @@ type Props = {
 const SingleTweetTest2 = ({ tweet, deleteTweet, moveTweetQueued, index, nextPostingDate }: Props) => {
   const user: IUser = useAppSelector(({ user }) => user);
 
+  //edit tweet state logic
   const [newText, setNewText] = useState(tweet.text);
-  console.log('newText is: ', newText);
   const [isEditing, setIsEditing] = useState(false);
-
+  //click the btn to show the edit modal
   const handleEdit = () => {
     setIsEditing(true);
   };
-
+ //click save btn to update the tweet
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await updateText(tweet.id, newText);
     setIsEditing(false);
   };
-
+ //click cancel btn to close the modal
   const handleModal = () => {
     setIsEditing(false);
   }
 
   if (!tweet) return null;
 
+  //generate random likes, retweets, comments for each tweet
   const generateLikes = () => {
     const likes = Math.round(Math.random() * 10 * 10) / 10 + 1
     return likes;
   };
-
   const generateRetweets = () => {
     const retweets = Math.floor(Math.random() * 500);
     return retweets;
   };
-
   const generateComments = () => {
     const comments = Math.floor(Math.random() * 500);
     return comments;
   };
 
+
   return (
     <>
-      <div className='tweet-wrap'>
+      <div className={isEditing ? "tweet-wrap-dark" : 'tweet-wrap'}>
+        {isEditing
+          ?
+          <form onSubmit={handleSubmit}>
+            <div className='modal'>
+              <div className="span">
+                <span className="material-symbols-outlined" onClick={handleModal}>cancel</span>
+              </div>
+              <textarea className="on-edit-tweet-text"
+                value={newText.trim()}
+                onChange={(e) => setNewText(e.target.value)}
+              />
+              <button type="submit" className='save-button'>Save</button>
+            </div>
+          </form>
+          :
+          null
+        }
         {tweet.status === 'queued'
           ?
           <div className="date-container">
@@ -71,6 +88,7 @@ const SingleTweetTest2 = ({ tweet, deleteTweet, moveTweetQueued, index, nextPost
           </div>
           : null
         }
+
         <div className='tweet-header'>
           <img src={!user.profilePicture ? userIcon : user.profilePicture} alt="" className="avator" />
           <div className="tweet-header-info">
@@ -84,7 +102,6 @@ const SingleTweetTest2 = ({ tweet, deleteTweet, moveTweetQueued, index, nextPost
             <p className='tweet-text'>{newText}</p>
 
             <div className="tweet-info-counts">
-
               <div className="comments">
                 <img height="3" className="tweet-icon" src={commentIcon} alt="" />
                 <div className="comment-count">{generateComments()}</div>
@@ -104,21 +121,7 @@ const SingleTweetTest2 = ({ tweet, deleteTweet, moveTweetQueued, index, nextPost
         </div>
       </div>
 
-      {isEditing
-        ?
-        <form onSubmit={handleSubmit}>
-          <div className="modal">
-            <span className="material-symbols-outlined" onClick={handleModal}>cancel</span>
-            <textarea className="on-edit-tweet-text"
-              value={newText}
-              onChange={(e) => setNewText(e.target.value)}
-            />
-            <button type="submit" className='save-button'>Save</button>
-          </div>
-        </form>
-        :
-        null
-      }
+
 
     </>
   );
