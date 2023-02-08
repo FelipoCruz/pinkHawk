@@ -7,7 +7,7 @@ import IUser from '../../../interfaces/user.interface';
 import Button from '../../button/Button';
 import './login.scss';
 import loginImg from '../../../../images/login.png';
-
+import { IoIosArrowDropleft } from 'react-icons/io';
 // TESTING
 // import { useSelector, type TypedUseSelectorHook, useDispatch } from 'react-redux';
 const defaultFormFields = {
@@ -56,9 +56,15 @@ const Login = () => {
 
     setFormFields({ ...formFields, [name]: value });
   };
+
+  const handleClick = () => {
+    navigate('/');
+  };
+
   // TODO: sign up
   return (
     <div className="login-container">
+      <IoIosArrowDropleft onClick={handleClick} />
       <div className="login-form-container">
         <form className="login-form" onSubmit={(event) => handleSubmit(event)}>
           <h1 className="login-header">Login</h1>
@@ -82,8 +88,9 @@ const Login = () => {
               required
             />
           </div>
-          <div className="submit">
+          <div className="submit-container">
             <Button text="Sign in" type="submit" />
+            <p className='redirect-signup'>Don't have an account? <a href='/signup'>Sign up</a></p>
           </div>
         </form>
       </div>
