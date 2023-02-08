@@ -88,40 +88,64 @@ const TopicsInput = () => {
 
   return (
     <div className="pref-container">
-      <div className="topics-input-container">
-        <h2>Tweet Tags</h2>
-        <form onSubmit={setTopics}>
-          <TagsInput
-            value={selectedTopics}
-            onChange={setSelectedTopics}
-            name="tags"
-            placeHolder="Enter here tweet tags"
-          />
-          <em className="prim-color">(Press enter to add new tag)</em>
-          <div>
-            <input className="pref-btn" type="submit" value="Save topics" />
+      <div className="pref-top">
+        <div className="connection-to-twitter">
+          {/* <div className="card-title">
+            <h3>Connection to Twitter</h3>
+            {user.twitterToken !== null ? 'Connected!' : 'Not connected'}
+          </div> */}
+          <div className="card-title">
+            <h3>Twitter Connection</h3>
+            <em className="prim-color">
+              {user.twitterToken !== null ? 'Connected!' : 'Not connected'}
+            </em>
           </div>
-        </form>
+          {!user.twitterToken && (
+            <div className="btn-container">
+              <button className="connect-btn">Connect</button>
+            </div>
+          )}
+        </div>
+        <div className="topics-input-container">
+          <div className="card-title">
+            <h3>Tweet Tags</h3>
+            <em className="prim-color">(Press enter to add new tag)</em>
+          </div>
+          <form onSubmit={setTopics}>
+            <TagsInput
+              value={selectedTopics}
+              onChange={setSelectedTopics}
+              name="tags"
+              placeHolder="Enter here tweet tags"
+            />
+            <div>
+              <input className="pref-btn" type="submit" value="Save topics" />
+            </div>
+          </form>
+        </div>
       </div>
       <div className="form-container">
         <form onSubmit={handleSubmit}>
-          <h2 className="time-label">Posting preferences</h2>
-          <label htmlFor="number">Times per day:</label>
-          <select
-            id="number"
-            name="number"
-            className="select-box"
-            onChange={handleChangeTimes}
-            defaultValue={user.frequencyTweetPosting}
-          >
-            {timesPerDay().map((time: number) => (
-              <option key={time} value={time} className="select-box-hour">
-                {time}
-              </option>
-            ))}
-          </select>
-          <br />
-          <label htmlFor="hour" className='hour-label'>Hours of the day:</label>
+          <div className="time-top card-title">
+            <h3 className="time-label">Posting preferences</h3>
+            <div className="tmpd">
+              <label htmlFor="number">Times per day:</label>
+              <select
+                id="number"
+                name="number"
+                className="select-box"
+                onChange={handleChangeTimes}
+                defaultValue={user.frequencyTweetPosting}
+              >
+                {timesPerDay().map((time: number) => (
+                  <option key={time} value={time} className="select-box-hour">
+                    {time}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <p className="hour-title">Hours of the day:</p>
           <div className="pref-hours-list">
             {hoursADay().map((hour: number) => (
               <label

@@ -1,17 +1,16 @@
-import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { getAuthUrl, logout } from '../../../services/api.service';
-import { deactivateUser } from '../../../store/slices/user.slice';
+// import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getAuthUrl } from '../../../services/api.service';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import RightMenuButton from './user-submenu/UserSubmenu';
 import './UserPreferences.scss';
 
 const UserPreferences = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(({ user }) => user);
   // TODO: make the connect to twitter button appear only when not connected
-  const [connectionTwitter, setConnectionTwitter] = useState(false);
+  // const [connectionTwitter, setConnectionTwitter] = useState(false);
 
   const handleClickNavigate = async () => {
     navigate('/dashboard/co-pilot');
@@ -47,15 +46,6 @@ const UserPreferences = () => {
               <p key={hour}>{hour < 10 ? `0${hour}:00 h` : `${hour}:00 h`}</p>
             ))}
           </div>
-        </div>
-        <div className="connection-to-twitter">
-          <div className="connection-status">
-            <p>Connection to Twitter:</p>
-            {user.twitterToken !== null ? 'Connected!' : 'Not connected'}
-          </div>
-          <button onClick={handleClick} className="connect-btn">
-            Connect to Twitter
-          </button>
         </div>
       </div>
     </>

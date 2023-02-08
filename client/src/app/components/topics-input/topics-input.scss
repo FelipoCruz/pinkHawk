@@ -3,30 +3,10 @@
 .pref-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
   align-items: center;
-  margin: 30px;
+  margin: 4rem 3rem;
+  gap: 2rem;
 }
-
-.topics-input-container {
-  width: 670px;
-  margin: 20px 50px;
-  border-radius: 10px;
-  padding: 30px;
-  box-shadow: 0px 0 30px rgb(1 41 112 / 10%);
-  display: flex;
-  flex-direction: column;
-  background: white;
-
-  h2 {
-    margin-bottom: 20px;
-  }
-  
-  
-}
-
-
-
 
 .rti--container {
   // width: 100%;
@@ -46,14 +26,13 @@
 
 em {
   display: block;
-  margin: 10px 0px;
   font-size: 14px;
  
 }
 
 .form-container {
-  width: 670px;
-  margin: 20px 50px;
+  max-width: 1200px;
+  // margin: 20px 0;
   border-radius: 10px;
   padding: 30px;
   background: white;
@@ -61,12 +40,11 @@ em {
 }
 
 
-
 .select-box {
   width: 60px;
   height: fit-content;
   font-size: 18px;
-  margin: 20px;
+  margin: 0 20px;
   border-radius: 5px;
   border: 1px solid gray;
   padding: 10px;
@@ -105,12 +83,13 @@ label {
   display: flex;
   flex-wrap: wrap;
   row-gap: 5px;
-  margin-bottom: 10px;
+  margin: 1rem 0;
 
   .pref-hours-item {
     display: flex;
+    justify-content: center;
     gap: 10px;
-    flex: 1 0 14%;
+    flex: 1 0 10%;
     margin: 10px;
     font-size: 16px;
     -webkit-user-select: none;
@@ -152,80 +131,111 @@ label {
   background-color: v.$color-primary;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
-// .checkmark:after {
-//   content: "";
-//   position: absolute;
-//   display: none;
-// }
 
-// /* Show the checkmark when checked */
-// .pref-hours-item input:checked~.checkmark:after {
-//   display: block;
-// }
+.pref-top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  // padding: 20px 0;
+  max-width: 1200px;
+  gap: 2rem;
+  flex-wrap: wrap;
 
-// /* Style the checkmark/indicator */
-// .pref-hours-item .checkmark:after {
-//   left: 5px;
-//   top: 1px;
-//   width: 5px;
-//   height: 10px;
-//   border: solid white;
-//   border-width: 0 3px 3px 0;
-//   -webkit-transform: rotate(45deg);
-//   -ms-transform: rotate(45deg);
-//   transform: rotate(45deg);
-// }
+  .connection-to-twitter {
+    // margin: 20px 0;
+    max-width: 100%;
+    min-width: 150px;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 0 30px rgb(1 41 112 / 10%);
+    background: white;
+    display: flex;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
 
+  .topics-input-container {
+    flex-grow: 1;
+    // margin: 20px 0;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 0 30px rgb(1 41 112 / 10%);
+    display: flex;
+    flex-direction: column;
+    background: white;
+  
+    h2 {
+      margin-bottom: 20px;
+    } 
+  }
+}
+
+.form-container {
+  max-width: 1200px;
+  width: 100%;
+  border-radius: 10px;
+  padding: 30px;
+  background: white;
+  box-shadow: 0px 0 30px rgb(1 41 112 / 10%);
+}
 
 @media screen and (max-width: 450px) {
 
   .pref-container {
-    margin: 0px;
+    margin: 2rem 0;
   }
-  .topics-input-container {
-    width: 320px;
-    margin: 20px 20px 0px 20px;
-    padding: 20px;
-    max-height: 30%;
-    
-    form {
-      max-height: 100%;
-
-      .rti--container {
-        --rti-tag-padding: .01rem;
-      }
-    }
-
-    h2 {
-      margin-bottom: 15px;
-      font-size: 16px;
-    }
-
-    p {
-      display: none;
-    }
-  }
-
   .pref-btn {
     padding: 10px;
     font-size: 12px;
     margin-top: 15px;
   }
 
-  .prim-color {
-    display: none;
-  }
-
-
   .rti--input {
     width: 100%;
   }
+  
+  
+  .pref-top {
+    padding: 0;
+    // margin: 20px;
+    row-gap: 2rem;
+  
+    .connection-to-twitter {
+      margin: 0;
+      width: 320px;
+    }
+  
+    .topics-input-container {
+      width: 320px;
+      margin: 0;
+      padding: 20px;
+      max-height: 30%;
+      
+      form {
+        max-height: 100%;
+  
+        .rti--container {
+          --rti-tag-padding: .01rem;
+        }
+      }
+  
+      h2 {
+        margin-bottom: 15px;
+        font-size: 16px;
+      }
+  
+      p {
+        display: none;
+      }
+    }
+    
+  }
 
   .form-container {
-    width: 320px;
-    margin: 20px;
-    padding: 20px;
+    // width: 320px;
+    margin: 0 2rem;
+    padding: 30px;
 
     .time-label {
       margin-bottom: 10px;
@@ -233,37 +243,43 @@ label {
     }
 
     .select-box {
-      padding: 0px;
+      padding: 8px 0;
       margin: 0px 0px 5px 10px;
     }
 
     .pref-hours-list {
+      row-gap: 0px;
+      margin-bottom: -5px;
       font-size: 12px;
+  
+      .pref-hours-item {
+        font-size: 14px;
+        margin: 10px;
+      }
     }
   }
 
-  // .checkmark {
-  //   height: 15px;
-  //   width: 15px;
-  //   border-radius: 50%;
-  // }
+}
 
-  // .pref-hours-item input:checked~.checkmark:after {
-  //   display: none;
-  // }
+.card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
 
-  .pref-hours-list {
-    row-gap: 0px;
-    margin-bottom: -5px;
-
-    .pref-hours-item {
-      font-size: 14px;
-      margin: 10px;
-    }
-  }
- 
-  .hour-label {
-    display: none;
-  }
-
+.connect-btn {
+  padding: 10px 20px;
+  min-width: 150px;
+  margin-top: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  background-color: #4285f4;
+  color: white;
+  border-radius: 10px;
+  font-size: 14px;
 }

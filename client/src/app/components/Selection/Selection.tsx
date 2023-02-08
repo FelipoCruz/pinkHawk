@@ -111,7 +111,7 @@ const Selection = () => {
   const defineNextPostingDate = () => {
     // if there are tweets in queue => the next postingDate will be:
     // nextPostingHour in the sequence, as of the last tweet in the queue [ (lastTweetinQueue => nextPostingHour) ]
-    if (queuedTweets.length > 0) {
+    if (queuedTweets?.length > 0) {
       const lastTweetInQueue = queuedTweets[queuedTweets.length - 1];
 
       const lastTweetInQueueDate = lastTweetInQueue.postingTimestamp;
@@ -141,7 +141,7 @@ const Selection = () => {
     }
 
     // if there are no tweets in queue => the next postingDate will be: tomorrow at firstPostingHour.
-    if (queuedTweets.length === 0) {
+    if (queuedTweets?.length === 0) {
       const postingHours = user.postingHours;
       const firstPostingHour = Math.min(...postingHours);
 
@@ -163,13 +163,20 @@ const Selection = () => {
         <div className="selection-container">
           <div className="selection-header">
             {tweets?.length === 0 ? (
-              <h2 className="selection-header-text">
+              <h3 className="selection-header-text">
                 No generated tweets yet !
-              </h2>
+              </h3>
             ) : (
-              <div className="next-tweet-time">
-                <h2 className="">Next accepted tweet will be posted at: </h2>
-                <h1>{dayjs(nextPostingDate).format('DD/MM/YY  HH:mm')}</h1>
+              <div className="header-elements">
+                <div className="next-tweet-time">
+                  <p className="">Next tweet: </p>
+                  <p className="h2">
+                    {dayjs(nextPostingDate).format('DD/MM/YY  HH:mm')}
+                  </p>
+                </div>
+                <button className="generate-btn" onClick={generateTweetsInit}>
+                  Give Me More Tweets!
+                </button>
               </div>
             )}
           </div>
@@ -190,9 +197,6 @@ const Selection = () => {
             }) :
             <h1>No Tweets yet!</h1>}
           </div>
-          <button className="generate-btn" onClick={generateTweetsInit}>
-            Give Me More Tweets!
-          </button>
         </div>
       )}
     </div>
