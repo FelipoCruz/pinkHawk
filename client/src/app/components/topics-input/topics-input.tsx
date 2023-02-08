@@ -20,31 +20,6 @@ const TopicsInput = () => {
   );
   const [hoursPreference, setHoursPreference] = useState(user.postingHours);
 
-  // useEffect(() => {
-  //   const refresh = async () => {
-  //     console.log('isLoggedIn in Preferences', user.isLoggedIn);
-  //     if (!user.isLoggedIn) {
-  //       let storedString = localStorage.getItem('user');
-  //       if (storedString) {
-  //         const storedUser: IUser = JSON.parse(storedString).userData;
-  //         console.log('storedUser', storedUser);
-
-  //         if (storedUser) {
-  //           const user: IUser = await getUserById(storedUser.id);
-  //           setSelectedTopics(user.topics);
-  //           setTimesPreference(user.frequencyTweetPosting);
-  //           setHoursPreference(user.postingHours);
-  //           console.log(user);
-
-  //           dispatch(activeUser(user));
-  //           console.log('isLoggedIn after refresh', user.isLoggedIn);
-  //         }
-  //       }
-  //     }
-  //   };
-  //   refresh();
-  // }, []);
-
   useEffect(() => {
     (async () => {
       if (user.isLoggedIn) {
