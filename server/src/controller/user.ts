@@ -112,12 +112,11 @@ export const updateAvatar = async (req: Request, res: Response) => {
 export const updateUserDetails = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { email, password } = req.body;
+    const { password } = req.body;
     const hash = await bcrypt.hash(password, 10);
-    const user = await prisma.user.update({
+    await prisma.user.update({
       where: { id: Number(id) },
       data: {
-        email: email,
         password: hash,
       },
     });

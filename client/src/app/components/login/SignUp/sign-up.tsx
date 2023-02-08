@@ -6,7 +6,7 @@ import { useAppDispatch } from '../../../hooks/hooks';
 import IUser from '../../../interfaces/user.interface';
 import Button from '../../button/Button';
 import './sign-up.scss';
-import signup from '../../../../images/signup.png'
+import signup from '../../../../images/signup.png';
 
 const defaultFormFields = {
   firstname: '',
@@ -33,7 +33,7 @@ export default function SignUp() {
       dispatch(activeUser(userData));
 
       localStorage.setItem('user', JSON.stringify({ userData }));
-      navigate('/dashboard');
+      navigate('/dashboard/user-preferences');
     } catch (err) {
       console.error(err);
     }
@@ -96,7 +96,7 @@ export default function SignUp() {
         </form>
       </div>
       <div className="graphic">
-        <img src={signup} alt='signup-img' className='signup-img' />
+        <img src={signup} alt="signup-img" className="signup-img" />
       </div>
     </div>
   );

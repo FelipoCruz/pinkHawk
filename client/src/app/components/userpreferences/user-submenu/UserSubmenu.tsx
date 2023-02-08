@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getUserTweets, updateUserDetails } from '../../../../services/api.service';
+// import { useNavigate } from 'react-router-dom';
+// import { getUserTweets, updateUserDetails } from '../../../../services/api.service';
 import { updateAvatar, uploadImage } from '../../../../services/cloudinary.service';
 import { activeUser } from '../../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import ProfilePicture from '../profilepicture/ProfilePicture';
+import TweetDownload from '../tweetdownload/TweetDownload';
 import './UserSubmenu.scss';
 
 const CLOUDINARY_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
 const CLOUDINARY_CLOUD = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
 
-const formFields = {
-  email: '',
-  password: '',
-};
+// const formFields = {
+//   password: '',
+// };
 
 const RightMenuButton = () => {
   const user = useAppSelector(({ user }) => user);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const [tweets, setTweets] = useState([]);
-  const [userFileds, setUserFields] = useState(formFields);
-  const [passwordShown, setPasswordShown] = useState(false);
+  // const [tweets, setTweets] = useState([]);
+  // const [userFileds, setUserFields] = useState(formFields);
+  // const [passwordShown, setPasswordShown] = useState(false);
   const [logo, setLogo] = useState<File | null>(null);
   const [imageUpload, setImageUpload] = useState<{ image: File }>({} as { image: File });
   const [, setImg] = useState({});
@@ -30,65 +30,32 @@ const RightMenuButton = () => {
   const [imageURL, setImageURL] = useState('');
   const [showSubmit, setShowSubmit] = useState(false);
 
-  const togglePassword = () => {
-    setPasswordShown(!passwordShown);
-  };
-  //TODO:
-  // fetch tweets with status posted from server
-  const fetchTweetsFromServer = async () => {
-    const tweetsFromAPI = await getUserTweets(user.id, 'posted');
-    setTweets(tweetsFromAPI);
+  // const togglePassword = () => {
+  //   setPasswordShown(!passwordShown);
+  // };
 
-    const csvContent = tweetsFromAPI.map((tweet: any) => {
-      return `${tweet.id},${tweet.text},${tweet.createdAt}`;
-    }).join('');
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = event.target;
+  //   setUserFields({ ...userFileds, [name]: value });
+  // };
 
-    const encodedUri = encodeURI(`data:text/csv;charset=utf-8,\uFEFF${csvContent}`);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', 'tweets.csv');
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  };
-
-  const downloadTweets = async () => {
-    await fetchTweetsFromServer().then(() => {
-      const tweetData = tweets.map((tweet: any) => {
-        return `${tweet.id},${tweet.text},${tweet.createdAt}`;
-      }).join('\n');
-
-      const blob = new Blob([tweetData], { type: 'text/csv' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'tweets.csv';
-      link.click();
-    })
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setUserFields({ ...userFileds, [name]: value });
-  };
-
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const details = {
-      email: formData.get('email'),
-      password: formData.get('password'),
-    }
-    try {
-      const userDetails = await updateUserDetails(user.id, details as { email: string, password: string });
-      if (!userDetails) {
-        throw new Error('User not found');
-      } else {
-        navigate('/login');
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const handleSubmit = async (event: any) => {
+  //   event.preventDefault();
+  //   const formData = new FormData(event.target);
+  //   const details = {
+  //     password: formData.get('password'),
+  //   }
+  //   try {
+  //     const userDetails = await updateUserDetails(user.id, details as { password: string });
+  //     if (!userDetails) {
+  //       throw new Error('User not found');
+  //     } else {
+  //       navigate('/login');
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   const handleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -137,6 +104,9 @@ const RightMenuButton = () => {
       <button type='button' className='user-details-button' onClick={() => setMenuOpen(!isMenuOpen)}>USER DETAILS</button>
       {isMenuOpen && (
         <div className='menu-container' style={{ position: 'absolute', right: 50 }}>
+          <div className='user-submenu-close-button'>
+            <button type='button' className='close-menu' onClick={() => setMenuOpen(!isMenuOpen)}>X</button>
+          </div>
           <div className='user-submenu-avatar'>
             <form className='user-setting-picture'>
               <div className='user-profile-picture-circle'>
@@ -168,7 +138,7 @@ const RightMenuButton = () => {
               </div>
             </form>
           </div>
-          <form className='sumbit-new-preferences' onSubmit={(event) => handleSubmit(event)}>
+          {/* <form className='sumbit-new-preferences' onSubmit={(event) => handleSubmit(event)}>
             <label typeof='label' htmlFor='email'>Change Email</label>
             <input
               className='email-input'
@@ -189,8 +159,10 @@ const RightMenuButton = () => {
               onChange={handleChange}
             />
             <button className='submit-button-user-preferences' type='submit'>SAVE</button>
-          </form>
-          <button onClick={downloadTweets}>Download Tweets</button>
+          </form> */}
+          <div className='tweet-download-button'>
+            <TweetDownload />
+          </div>
         </div>
       )}
     </div>

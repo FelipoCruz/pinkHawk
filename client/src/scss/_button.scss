@@ -7,7 +7,7 @@
   line-height: 50px;
   padding: 0 30px;
   font-size: 15px;
-  background-color: v.$black;
+  background-color: v.$color-primary;
   color: v.$white;
   text-transform: uppercase;
   font-weight: bolder;
@@ -20,8 +20,8 @@
 
   &:hover {
     background-color:transparent;
-    color: black;
-    border: 1px solid black;
+    color: v.$white;
+    border: 1px solid v.$color-primary;
   }
 }
 
@@ -37,11 +37,11 @@
 
 .btn-inverted {
   background-color: transparent;
-  color: v.$black;
-  border: 1px solid v.$black;
+  color: v.$white;
+  border: 1px solid v.$color-primary;
 
   &:hover {
-    background-color: v.$black;
+    background-color: v.$color-primary;
     color:v.$white;
     border: none;
   }
