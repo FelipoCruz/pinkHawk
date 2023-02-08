@@ -41,9 +41,11 @@ const NavBarUser = () => {
       </a>
       <nav className="navbar-items">
         <div className="navbar-warning">
-          {(!user.twitterToken || user.frequencyTweetPosting < 1) && (
+          {(!user.twitterToken ||
+            user.frequencyTweetPosting < 1 ||
+            user.topics.length === 0) && (
             <Tooltip
-              content1="- Add your preferences !"
+              content1="- Add your preferences and tags !"
               content2="- Give access to your twitter account !"
               direction="bottom"
               type="warning"

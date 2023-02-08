@@ -19,6 +19,10 @@
     justify-content: center;
     color: v.$color-primary;
 
+    .logo {
+      color: v.$color-primary;
+    }
+
     .logo-text {
       font-size: 1.3rem;
       font-weight: 600;

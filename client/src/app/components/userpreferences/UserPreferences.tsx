@@ -34,17 +34,14 @@ const UserPreferences = () => {
           <RightMenuButton />
         </div>
         <div className="current-user-settings" onClick={handleClickNavigate}>
+          <label className="current-preferences-user" htmlFor="user-name">
+            Current Preferences
+          </label>
           <div className="frequency-tweet-posting">
-            <p>Current daily posting frequency:</p>
-        <div className='current-user-settings' onClick={handleClickNavigate}>
-        <label className='current-preferences-user' htmlFor='user-name'>Current Preferences</label>
-          <div className='frequency-tweet-posting'>
             <p>Daily posting frequency:</p>
             {user.frequencyTweetPosting}
           </div>
           <div className="selected-hours">
-            <p>Selected posting hours:</p>
-          <div className='selected-hours'>
             <p>Posting hours:</p>
             {user.postingHours.map((hour: number) => (
               <p key={hour}>{hour < 10 ? `0${hour}:00 h` : `${hour}:00 h`}</p>
@@ -52,26 +49,14 @@ const UserPreferences = () => {
           </div>
         </div>
         <div className="connection-to-twitter">
-        <div className='connection-to-twitter'>
-          <div className='connection-status'>
-          <p>Connection to Twitter:</p>
-          {user.twitterToken !== null
-            ? 'Connected to Twitter'
-            : 'Not connected to Twitter'}
-          <button onClick={handleClick} className="connect-btn">
-            {user.twitterToken !== null
-              ? 'Connected!'
-              : 'Not connected'}
+          <div className="connection-status">
+            <p>Connection to Twitter:</p>
+            {user.twitterToken !== null ? 'Connected!' : 'Not connected'}
           </div>
-          <button onClick={handleClick} className='connect-btn'>
+          <button onClick={handleClick} className="connect-btn">
             Connect to Twitter
           </button>
         </div>
-        <NavLink to=''>
-          <button className='btn btn-inverted' onClick={logoutUser}>
-            Logout
-          </button>
-        </NavLink>
       </div>
     </>
   );

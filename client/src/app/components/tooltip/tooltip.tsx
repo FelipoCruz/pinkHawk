@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { MdLogout, MdOutlineSettings } from 'react-icons/md';
+import { MdLogout } from 'react-icons/md';
+import { AiOutlineSetting } from 'react-icons/ai';
 import { Link, NavLink } from 'react-router-dom';
 import './tooltip.scss';
 
@@ -39,7 +40,7 @@ const Tooltip = (props: any) => {
     return (
       <>
         <Link className="user-link" to="/dashboard/user-settings">
-          <MdOutlineSettings className="tooltip-logo" />
+          <AiOutlineSetting className="tooltip-logo" />
           Settings
         </Link>
         <button className="user-link" onClick={logoutUser}>
