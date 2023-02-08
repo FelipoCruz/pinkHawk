@@ -104,7 +104,7 @@ const Selection = () => {
   const defineNextPostingDate = () => {
     // if there are tweets in queue => the next postingDate will be:
     // nextPostingHour in the sequence, as of the last tweet in the queue [ (lastTweetinQueue => nextPostingHour) ]
-    if (queuedTweets.length > 0) {
+    if (queuedTweets?.length > 0) {
       const lastTweetInQueue = queuedTweets[queuedTweets.length - 1];
 
       const lastTweetInQueueDate = lastTweetInQueue.postingTimestamp;
@@ -134,7 +134,7 @@ const Selection = () => {
     }
 
     // if there are no tweets in queue => the next postingDate will be: tomorrow at firstPostingHour.
-    if (queuedTweets.length === 0) {
+    if (queuedTweets?.length === 0) {
       const postingHours = user.postingHours;
       const firstPostingHour = Math.min(...postingHours);
 

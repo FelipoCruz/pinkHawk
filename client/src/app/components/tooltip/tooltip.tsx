@@ -12,7 +12,7 @@ const Tooltip = (props: any) => {
   const showTip = () => {
     timeout = setTimeout(() => {
       setActive(true);
-    }, props.delay || 400);
+    }, props.delay || 300);
   };
 
   const hideTip = () => {
@@ -29,7 +29,11 @@ const Tooltip = (props: any) => {
       <>
         <div>{props.content1}</div>
         {props.content2 && <div>{props.content2}</div>}
-        <Link className="pref-link" to="/dashboard/user-preferences">
+        <Link
+          className="pref-link"
+          to="/dashboard/user-preferences"
+          onClick={hideTip}
+        >
           Preferences
         </Link>
       </>
@@ -39,7 +43,11 @@ const Tooltip = (props: any) => {
   const userContent = () => {
     return (
       <>
-        <Link className="user-link" to="/dashboard/user-settings">
+        <Link
+          className="user-link"
+          to="/dashboard/user-settings"
+          onClick={hideTip}
+        >
           <AiOutlineSetting className="tooltip-logo" />
           Settings
         </Link>

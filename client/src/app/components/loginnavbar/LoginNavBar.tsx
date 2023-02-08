@@ -42,7 +42,7 @@ const NavBarUser = () => {
       <nav className="navbar-items">
         <div className="navbar-warning">
           {(!user.twitterToken ||
-            user.frequencyTweetPosting < 1 ||
+            user.postingHours.length === 0 ||
             user.topics.length === 0) && (
             <Tooltip
               content1="- Add your preferences and tags !"

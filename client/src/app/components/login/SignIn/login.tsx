@@ -33,10 +33,14 @@ const Login = () => {
 
       // creating the user in local storage with the information we receive from the API call
       localStorage.setItem('user', JSON.stringify(userData));
+      console.log('twitterToken', userData.twitterToken);
+      console.log('postingHours', userData.postingHours);
+      console.log('topics', userData.topics);
+
       if (
-        !user.twitterToken ||
-        user.frequencyTweetPosting < 1 ||
-        user.topics.length === 0
+        !userData.twitterToken ||
+        userData.postingHours.length === 0 ||
+        userData.topics.length === 0
       ) {
         navigate('/dashboard/user-preferences');
       } else {
