@@ -16,15 +16,6 @@ const UserPreferences = () => {
     navigate('/dashboard/co-pilot');
   };
 
-  const handleClick = async () => {
-    try {
-      const res = await getAuthUrl(user.id);
-      window.location.href = res.url;
-    } catch (error) {
-      console.log('error in handleClick in fetAuthUul', error);
-    }
-  };
-
   return (
     <>
       <div className="container-user-settings">

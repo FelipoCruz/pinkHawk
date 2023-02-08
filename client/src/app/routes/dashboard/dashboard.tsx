@@ -23,7 +23,7 @@ const Dashboard = () => {
       if (!isLoggedIn) {
         let storedString = localStorage.getItem('user');
         if (storedString) {
-          const storedUser: IUser = JSON.parse(storedString);
+          const storedUser: IUser = JSON.parse(storedString).userData;
           console.log('storedUser', storedUser);
 
           if (storedUser) {

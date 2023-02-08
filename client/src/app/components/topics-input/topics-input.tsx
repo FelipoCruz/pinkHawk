@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { TagsInput } from 'react-tag-input-component';
 import {
+  getAuthUrl,
+  getUserById,
   saveTopics,
   updateFrequencyPreference,
 } from '../../../services/api.service';
 import { activeUser } from '../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import IUser from '../../interfaces/user.interface';
 import './topics-input.scss';
 
 const TopicsInput = () => {
@@ -16,6 +19,31 @@ const TopicsInput = () => {
     user.frequencyTweetPosting || 1
   );
   const [hoursPreference, setHoursPreference] = useState(user.postingHours);
+
+  // useEffect(() => {
+  //   const refresh = async () => {
+  //     console.log('isLoggedIn in Preferences', user.isLoggedIn);
+  //     if (!user.isLoggedIn) {
+  //       let storedString = localStorage.getItem('user');
+  //       if (storedString) {
+  //         const storedUser: IUser = JSON.parse(storedString).userData;
+  //         console.log('storedUser', storedUser);
+
+  //         if (storedUser) {
+  //           const user: IUser = await getUserById(storedUser.id);
+  //           setSelectedTopics(user.topics);
+  //           setTimesPreference(user.frequencyTweetPosting);
+  //           setHoursPreference(user.postingHours);
+  //           console.log(user);
+
+  //           dispatch(activeUser(user));
+  //           console.log('isLoggedIn after refresh', user.isLoggedIn);
+  //         }
+  //       }
+  //     }
+  //   };
+  //   refresh();
+  // }, []);
 
   useEffect(() => {
     (async () => {
@@ -86,6 +114,15 @@ const TopicsInput = () => {
     return Array.from({ length: 24 }, (_, i) => i);
   };
 
+  const handleClick = async () => {
+    try {
+      const res = await getAuthUrl(user.id);
+      window.location.href = res.url;
+    } catch (error) {
+      console.log('error in handleClick in fetAuthUul', error);
+    }
+  };
+
   return (
     <div className="pref-container">
       <div className="pref-top">
@@ -96,14 +133,18 @@ const TopicsInput = () => {
           </div> */}
           <div className="card-title">
             <h3>Twitter Connection</h3>
-            <em className="prim-color">
-              {user.twitterToken !== null ? 'Connected!' : 'Not connected'}
-            </em>
           </div>
-          {!user.twitterToken && (
-            <div className="btn-container">
-              <button className="connect-btn">Connect</button>
-            </div>
+          {!user.twitterToken ? (
+            <>
+              <em className="prim-color">{'Not connected'}</em>
+              <div className="btn-container">
+                <button onClick={handleClick} className="connect-btn">
+                  Connect
+                </button>
+              </div>
+            </>
+          ) : (
+            <em className="prim-color">{'Connected!'}</em>
           )}
         </div>
         <div className="topics-input-container">
