@@ -163,9 +163,14 @@ const Selection = () => {
         <div className="selection-container">
           <div className="selection-header">
             {tweets?.length === 0 ? (
-              <h3 className="selection-header-text">
-                No generated tweets yet !
-              </h3>
+              <>
+                <h3 className="selection-header-text">
+                  No generated tweets yet !
+                </h3>
+                <button className="generate-btn" onClick={generateTweetsInit}>
+                  Give Me More Tweets!
+                </button>
+              </>
             ) : (
               <div className="header-elements">
                 <div className="next-tweet-time">
