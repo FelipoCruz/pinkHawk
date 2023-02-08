@@ -32,7 +32,7 @@ export default function SignUp() {
       );
       dispatch(activeUser(userData));
 
-      localStorage.setItem('user', JSON.stringify({ userData }));
+      localStorage.setItem('user', JSON.stringify(userData));
       navigate('/dashboard/user-preferences');
     } catch (err) {
       console.error(err);
