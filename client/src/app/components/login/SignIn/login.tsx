@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, register } from '../../../../services/api.service';
 import { activeUser } from '../../../../store/slices/user.slice';
-import { useAppDispatch } from '../../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import IUser from '../../../interfaces/user.interface';
 import Button from '../../button/Button';
 import './login.scss';
-import loginImg from '../../../../images/login.png'
+import loginImg from '../../../../images/login.png';
 
 // TESTING
 // import { useSelector, type TypedUseSelectorHook, useDispatch } from 'react-redux';
@@ -18,6 +18,7 @@ const defaultFormFields = {
 const Login = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -32,7 +33,15 @@ const Login = () => {
 
       // creating the user in local storage with the information we receive from the API call
       localStorage.setItem('user', JSON.stringify(userData));
-      navigate('/dashboard');
+      if (
+        !user.twitterToken ||
+        user.frequencyTweetPosting < 1 ||
+        user.topics.length === 0
+      ) {
+        navigate('/dashboard/user-preferences');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err) {
       console.error(err);
     }
@@ -77,7 +86,7 @@ const Login = () => {
       <div className="graphic">
         <p>@ PinkHawk</p>
         <h1>WELCOME BACK</h1>
-        <img src={loginImg} alt='login-img' className='login-img'/>
+        <img src={loginImg} alt="login-img" className="login-img" />
       </div>
     </div>
   );
