@@ -2,9 +2,10 @@
 
 .user-submenu {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  // flex-direction: column;
+  // justify-content: flex-start;
+  // align-items: flex-start;
+
 
   .user-details-button {
     display: flex;
@@ -14,19 +15,17 @@
   }
 
   .menu-container {
-    // position: fixed;
-    // top: 200px;
-    // left: 700px;
-    // width: 100%;
+    position: absolute;
+    top: -56px;
+    left: 29px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     background-color: white;
-    width: 300px;
+    width: 400px;
+    max-height: fit-content;
     padding: 20px 40px;
-    justify-content: center;
-    -webkit-animation: menu-container 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-    animation: menu-container 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: menu-container 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
     .user-submenu-close-button {
       display: flex;
@@ -48,15 +47,6 @@
         font-size: 14px;
         font-weight: 700;
         color: #000;
-      }
-
-      .email-input {
-        padding-left: 3px;
-        background-color: transparent;
-        width: 100%;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.300);
-        margin-bottom: 10px;
-        height: 35px;
       }
 
       .change-password-label {
@@ -165,18 +155,18 @@
 //   }
 // }
 
-@media screen and (min-width: 750px) and (max-width: 800px) {
-  .menu-container {
-    position: fixed;
-    top: 210px;
-    left: 400px;
-  }
-}
+// @media screen and (min-width: 750px) and (max-width: 800px) {
+//   .menu-container {
+//     position: fixed;
+//     top: 210px;
+//     left: 400px;
+//   }
+// }
 
-@media screen and (min-width: 801px) and (max-width: 850px) {
-  .menu-container {
-    position: fixed;
-    top: 210px;
-    left: 420px;
-  }
-}
+// @media screen and (min-width: 801px) and (max-width: 850px) {
+//   .menu-container {
+//     position: fixed;
+//     top: 210px;
+//     left: 420px;
+//   }
+// }

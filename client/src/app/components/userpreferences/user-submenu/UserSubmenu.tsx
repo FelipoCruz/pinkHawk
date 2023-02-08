@@ -103,7 +103,7 @@ const RightMenuButton = () => {
     <div className='user-submenu'>
       <button type='button' className='user-details-button' onClick={() => setMenuOpen(!isMenuOpen)}>USER DETAILS</button>
       {isMenuOpen && (
-        <div className='menu-container' style={{ position: 'absolute' }}>
+        <div className='menu-container'>
           <div className='user-submenu-close-button'>
             <button type='button' className='close-menu' onClick={() => setMenuOpen(!isMenuOpen)}>X</button>
           </div>
