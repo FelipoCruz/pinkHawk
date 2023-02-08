@@ -14,7 +14,7 @@ app.use(cors({ origin: 'https://pink-hawk2.vercel.app', credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(router);
-//job();
+job();
 
 app.listen(port, () =>
   console.log(`
