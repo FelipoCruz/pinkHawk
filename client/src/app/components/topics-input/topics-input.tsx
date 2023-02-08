@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TagsInput } from 'react-tag-input-component';
 import {
   saveTopics,
@@ -16,6 +16,16 @@ const TopicsInput = () => {
     user.frequencyTweetPosting || 1
   );
   const [hoursPreference, setHoursPreference] = useState(user.postingHours);
+
+  useEffect(() => {
+    (async () => {
+      if (user.isLoggedIn) {
+        setSelectedTopics(user.topics);
+        setTimesPreference(user.frequencyTweetPosting);
+        setHoursPreference(user.postingHours);
+      }
+    })();
+  }, [user]);
 
   const setTopics = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

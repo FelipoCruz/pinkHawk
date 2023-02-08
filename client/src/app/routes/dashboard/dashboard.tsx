@@ -13,9 +13,8 @@ import TopicsDefinition from '../topics-definition';
 import './dashboard.scss';
 
 const Dashboard = () => {
-  const [navbarState, setNavbarState] = useState(false);
+  const [navbarState] = useState(false);
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
-  const layout = useAppSelector((state) => state.layout);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
