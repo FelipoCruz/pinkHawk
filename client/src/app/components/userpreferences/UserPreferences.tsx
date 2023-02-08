@@ -26,31 +26,24 @@ const UserPreferences = () => {
     }
   };
 
-  const logoutUser = async () => {
-    const response = await logout();
-
-    if (response.status !== 'success') {
-      throw new Error('A problem occurred while logging out');
-    };
-
-    dispatch(deactivateUser());
-    localStorage.removeItem('user');
-    navigate('/dashboard');
-  };
-
   return (
     <>
-      <div className='container-user-settings'>
+      <div className="container-user-settings">
         <h1>User Preferences</h1>
-        <div className='right-menu-slide-right'>
+        <div className="right-menu-slide-right">
           <RightMenuButton />
         </div>
+        <div className="current-user-settings" onClick={handleClickNavigate}>
+          <div className="frequency-tweet-posting">
+            <p>Current daily posting frequency:</p>
         <div className='current-user-settings' onClick={handleClickNavigate}>
         <label className='current-preferences-user' htmlFor='user-name'>Current Preferences</label>
           <div className='frequency-tweet-posting'>
             <p>Daily posting frequency:</p>
             {user.frequencyTweetPosting}
           </div>
+          <div className="selected-hours">
+            <p>Selected posting hours:</p>
           <div className='selected-hours'>
             <p>Posting hours:</p>
             {user.postingHours.map((hour: number) => (
@@ -58,9 +51,14 @@ const UserPreferences = () => {
             ))}
           </div>
         </div>
+        <div className="connection-to-twitter">
         <div className='connection-to-twitter'>
           <div className='connection-status'>
           <p>Connection to Twitter:</p>
+          {user.twitterToken !== null
+            ? 'Connected to Twitter'
+            : 'Not connected to Twitter'}
+          <button onClick={handleClick} className="connect-btn">
             {user.twitterToken !== null
               ? 'Connected!'
               : 'Not connected'}
@@ -80,4 +78,3 @@ const UserPreferences = () => {
 };
 
 export default UserPreferences;
-

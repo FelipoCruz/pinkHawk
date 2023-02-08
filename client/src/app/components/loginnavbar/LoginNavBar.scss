@@ -29,10 +29,27 @@
   }
 
   .navbar-items {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
     .icon-button {
       height: 30px;
       margin: 3px;
       padding: 2%;
+    }
+
+    .navbar-warning {
+      svg {
+        color: v.$color-primary;
+        cursor: auto;
+      }
+    }
+
+    .navbar-user {
+      svg {
+        cursor: auto;
+      }
     }
   }
 
