@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getUserTweets, updateUserDetails } from '../../../../services/api.service';
 import { updateAvatar, uploadImage } from '../../../../services/cloudinary.service';
 import { activeUser } from '../../../../store/slices/user.slice';
@@ -17,6 +18,7 @@ const formFields = {
 const RightMenuButton = () => {
   const user = useAppSelector(({ user }) => user);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [tweets, setTweets] = useState([]);
   const [userFileds, setUserFields] = useState(formFields);
@@ -32,15 +34,40 @@ const RightMenuButton = () => {
     setPasswordShown(!passwordShown);
   };
   //TODO:
+  // fetch tweets with status posted from server
   const fetchTweetsFromServer = async () => {
-    const tweetsFromAPI = await getUserTweets(user.id, 'accepted');
+    const tweetsFromAPI = await getUserTweets(user.id, 'posted');
     setTweets(tweetsFromAPI);
-    // fetch tweets with status sent from server
+
+    const csvContent = tweetsFromAPI.map((tweet: any) => {
+      return `${tweet.id},${tweet.text},${tweet.createdAt}`;
+    }).join('');
+
+    const encodedUri = encodeURI(`data:text/csv;charset=utf-8,\uFEFF${csvContent}`);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'tweets.csv');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
+
+  const downloadTweets = async () => {
+    await fetchTweetsFromServer().then(() => {
+      const tweetData = tweets.map((tweet: any) => {
+        return `${tweet.id},${tweet.text},${tweet.createdAt}`;
+      }).join('\n');
+
+      const blob = new Blob([tweetData], { type: 'text/csv' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'tweets.csv';
+      link.click();
+    })
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    // set user.email to value
     setUserFields({ ...userFileds, [name]: value });
   };
 
@@ -52,13 +79,11 @@ const RightMenuButton = () => {
       password: formData.get('password'),
     }
     try {
-      // TODO:
-      const userDetails = await updateUserDetails(user.id, details);
+      const userDetails = await updateUserDetails(user.id, details as { email: string, password: string });
       if (!userDetails) {
-        //   throw new Error('User not found');
-        // } else {  // update user in redux store and local storage
-        //   // dispatch(activeUser(userDetails));
-        //   // localStorage.setItem('user', JSON.stringify(userDetails));
+        throw new Error('User not found');
+      } else {
+        navigate('/login');
       }
     } catch (err) {
       console.error(err);
@@ -109,9 +134,9 @@ const RightMenuButton = () => {
 
   return (
     <div className='user-submenu'>
-      <button type='button' onClick={() => setMenuOpen(!isMenuOpen)}>User Details</button>
+      <button type='button' className='user-details-button' onClick={() => setMenuOpen(!isMenuOpen)}>USER DETAILS</button>
       {isMenuOpen && (
-        <div className='menu-container' style={{ position: 'absolute', right: 30 }}>
+        <div className='menu-container' style={{ position: 'absolute', right: 50 }}>
           <div className='user-submenu-avatar'>
             <form className='user-setting-picture'>
               <div className='user-profile-picture-circle'>
@@ -143,8 +168,8 @@ const RightMenuButton = () => {
               </div>
             </form>
           </div>
-          <form className='sumit-new-preferences' onSubmit={(event) => handleSubmit(event)}>
-            <label htmlFor='email'>Change Email:</label>
+          <form className='sumbit-new-preferences' onSubmit={(event) => handleSubmit(event)}>
+            <label typeof='label' htmlFor='email'>Change Email</label>
             <input
               className='email-input'
               type='text'
@@ -152,7 +177,10 @@ const RightMenuButton = () => {
               value={userFileds.email}
               onChange={handleChange}
             />
-            <label htmlFor='password'>Change Password:</label>
+            <label className='change-password-label' typeof='label' htmlFor='password'>
+              Change Password
+              <i className='show-password' onClick={togglePassword}>{passwordShown ? 'Hide' : 'Show'}</i>
+            </label>
             <input
               className='password-input'
               type={passwordShown ? 'text' : 'password'}
@@ -160,11 +188,9 @@ const RightMenuButton = () => {
               value={userFileds.password}
               onChange={handleChange}
             />
-            <i onClick={togglePassword}>{passwordShown ? 'Hide' : 'Show'}</i>
-            <button type='button' onClick={fetchTweetsFromServer}>
-              Download Your Tweets
-            </button>
+            <button className='submit-button-user-preferences' type='submit'>SAVE</button>
           </form>
+          <button onClick={downloadTweets}>Download Tweets</button>
         </div>
       )}
     </div>
