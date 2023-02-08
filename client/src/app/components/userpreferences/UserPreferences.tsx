@@ -1,18 +1,16 @@
 
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/hooks';
 import RightMenuButton from './user-submenu/UserSubmenu';
 import './UserPreferences.scss';
 
 const UserPreferences = () => {
-  // const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // const [backgroundColor, setBackgroundColor] = useState(false);
   const user = useAppSelector(({ user }) => user);
 
   const handleClickNavigate = async () => {
-    navigate('/dashboard/co-pilot');
+    navigate('/dashboard/user-preferences');
   };
 
   // useEffect(() => {
@@ -22,7 +20,7 @@ const UserPreferences = () => {
   return (
     <div className='entire-user-preferences'>
       <div className='container-user-settings'>
-        <h1>User Preferences</h1>
+        <h1>User Details</h1>
         <button className='right-menu-slide-right' >
           <RightMenuButton />
         </button>

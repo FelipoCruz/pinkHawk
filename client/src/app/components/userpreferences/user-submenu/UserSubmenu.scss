@@ -16,13 +16,13 @@
 
   .menu-container {
     position: absolute;
-    top: -56px;
-    left: 29px;
+    top: -66px;
+    left: -14px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     background-color: white;
-    width: 400px;
+    width: 450px;
     max-height: fit-content;
     padding: 20px 40px;
     animation: menu-container 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -49,29 +49,29 @@
         color: #000;
       }
 
-      .change-password-label {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
+      // .change-password-label {
+      //   display: flex;
+      //   flex-direction: row;
+      //   justify-content: space-between;
+      //   align-items: center;
+      //   width: 100%;
 
-        .show-password {
-          padding-right: 8px;
-          font-weight: 200;
-          cursor: pointer;
-        }
-      }
+      //   .show-password {
+      //     padding-right: 8px;
+      //     font-weight: 200;
+      //     cursor: pointer;
+      //   }
+      // }
 
-      .password-input {
-        padding-left: 3px;
-        background-color: transparent;
-        width: 100%;
-        position: relative;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.300);
-        height: 35px;
-        margin-bottom: 10px;
-      }
+      // .password-input {
+      //   padding-left: 3px;
+      //   background-color: transparent;
+      //   width: 100%;
+      //   position: relative;
+      //   border-bottom: 1px solid rgba(0, 0, 0, 0.300);
+      //   height: 35px;
+      //   margin-bottom: 10px;
+      // }
 
       .download-tweets {
         width: 100%;
@@ -80,28 +80,28 @@
         cursor: not-allowed;
       }
 
-      .submit-button-user-preferences {
-        display: flex;
-        align-self: center;
-        width: 120px;
-        height: 38px;
-        border: none;
-        border-radius: 21px;
-        background-color: #000000;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        font-size: 15px;
-        font-weight: 600;
-        // box-shadow: #000;
-      }
+      // .submit-button-user-preferences {
+      //   display: flex;
+      //   align-self: center;
+      //   width: 120px;
+      //   height: 38px;
+      //   border: none;
+      //   border-radius: 21px;
+      //   background-color: #000000;
+      //   justify-content: center;
+      //   align-items: center;
+      //   color: white;
+      //   font-size: 15px;
+      //   font-weight: 600;
+      //   // box-shadow: #000;
+      // }
 
-      .submit-button-user-preferences:hover {
-        border: 1px solid black;
-        background-color: transparent;
-        color: black;
-        transition: 0.145s;
-      }
+      // .submit-button-user-preferences:hover {
+      //   border: 1px solid black;
+      //   background-color: transparent;
+      //   color: black;
+      //   transition: 0.145s;
+      // }
     }
 
     .tweet-download-button {
@@ -110,7 +110,12 @@
       justify-content: center;
       margin-top: 15px;
       font-style: oblique;
+
+      &:hover {
+        color: red;
+      }
     }
+
   }
 
   @-webkit-keyframes menu-container {

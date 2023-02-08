@@ -22,7 +22,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 20PX;
+    padding: 40px;
     background-color: white;
     border-radius: 10px;
     width: 500px;
@@ -110,6 +110,7 @@
       cursor: pointer;
 
       .current-preferences-user {
+        font-weight: 700;
         margin-bottom: 8px;
       }
 
