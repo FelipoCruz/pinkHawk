@@ -6,6 +6,7 @@ import generateTweetAIService from '../integration/gpt2.service';
 const prisma = new PrismaClient();
 const SECRET_KEY = process.env.SECRET!;
 
+
 export const generateTweet = async (req: Request, res: Response) => {
   try {
     const user = req.body;
