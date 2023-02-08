@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { getAuthUrl, logout } from '../../../services/api.service';
 import { deactivateUser } from '../../../store/slices/user.slice';
@@ -11,7 +11,7 @@ const UserPreferences = () => {
   const navigate = useNavigate();
   const user = useAppSelector(({ user }) => user);
   // TODO: make the connect to twitter button appear only when not connected
-  const [connectionTwitter, setConnectionTwitter] = useState(false);
+  // const [connectionTwitter, setConnectionTwitter] = useState(false);
 
   const handleClickNavigate = async () => {
     navigate('/dashboard/co-pilot');
