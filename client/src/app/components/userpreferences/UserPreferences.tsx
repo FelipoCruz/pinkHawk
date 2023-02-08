@@ -21,6 +21,12 @@ const UserPreferences = () => {
     <div className='entire-user-preferences'>
       <div className='container-user-settings'>
         <h1>User Details</h1>
+        <div className='details'>
+          <span>{user.firstName}</span>
+          <span>{user.lastName}</span>
+        </div>
+        <span>{user.email}</span>
+        <span>{user.twitterToken ? 'Connected to Twitter' : ''}</span>
         <button className='right-menu-slide-right' >
           <RightMenuButton />
         </button>
