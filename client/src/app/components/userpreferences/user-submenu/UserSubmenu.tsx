@@ -101,9 +101,9 @@ const RightMenuButton = () => {
 
   return (
     <div className='user-submenu'>
-      <button type='button' className='user-details-button' onClick={() => setMenuOpen(!isMenuOpen)}>USER DETAILS</button>
+      <button type='button' className='user-details-button' onClick={() => setMenuOpen(!isMenuOpen)}>PROFILE PICTURE</button>
       {isMenuOpen && (
-        <div className='menu-container' style={{ position: 'absolute' }}>
+        <div className='menu-container'>
           <div className='user-submenu-close-button'>
             <button type='button' className='close-menu' onClick={() => setMenuOpen(!isMenuOpen)}>X</button>
           </div>
@@ -160,9 +160,9 @@ const RightMenuButton = () => {
             />
             <button className='submit-button-user-preferences' type='submit'>SAVE</button>
           </form> */}
-          <div className='tweet-download-button'>
+          <button className='tweet-download-button'>
             <TweetDownload />
-          </div>
+          </button>
         </div>
       )}
     </div>

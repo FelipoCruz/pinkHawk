@@ -1,37 +1,38 @@
-// import { useState } from 'react';
+
+// import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuthUrl } from '../../../services/api.service';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import RightMenuButton from './user-submenu/UserSubmenu';
 import './UserPreferences.scss';
 
 const UserPreferences = () => {
-  // const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(({ user }) => user);
-  // TODO: make the connect to twitter button appear only when not connected
-  // const [connectionTwitter, setConnectionTwitter] = useState(false);
 
   const handleClickNavigate = async () => {
-    navigate('/dashboard/co-pilot');
+    navigate('/dashboard/user-preferences');
   };
 
+  // useEffect(() => {
+  //   console.log('backgroundColor', backgroundColor)
+  // }, [backgroundColor]);
+
   return (
-    <>
-      <div className="container-user-settings">
-        <h1>User Preferences</h1>
-        <div className="right-menu-slide-right">
+    <div className='entire-user-preferences'>
+      <div className='container-user-settings'>
+        <h1>User Details</h1>
+        <button className='right-menu-slide-right' >
           <RightMenuButton />
-        </div>
-        <div className="current-user-settings" onClick={handleClickNavigate}>
-          <label className="current-preferences-user" htmlFor="user-name">
+        </button>
+        <div className='current-user-settings' onClick={handleClickNavigate}>
+          <label className='current-preferences-user' htmlFor='user-name'>
             Current Preferences
           </label>
-          <div className="frequency-tweet-posting">
+          <div className='frequency-tweet-posting'>
             <p>Daily posting frequency:</p>
             {user.frequencyTweetPosting}
           </div>
-          <div className="selected-hours">
+          <div className='selected-hours'>
             <p>Posting hours:</p>
             {user.postingHours.map((hour: number) => (
               <p key={hour}>{hour < 10 ? `0${hour}:00 h` : `${hour}:00 h`}</p>
@@ -39,7 +40,7 @@ const UserPreferences = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
