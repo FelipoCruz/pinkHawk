@@ -1,9 +1,9 @@
 @use "./variables.scss" as v;
 
 .home-page {
-  height: 100%;
+  height: 100vh;
   width: 100%;
-  background-image: linear-gradient(-225deg, #FF057C 0%, #7C64D5 48%, #4CC3FF 100%);
+  background: linear-gradient(0deg, rgba(18,22,31,1) 0%, rgba(27,58,102,1) 64%);
 }
 
 .slogan {
@@ -88,7 +88,7 @@
   min-width: 320px;
   margin: 0 auto;
   padding: 30px;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgb(255 255 255 / 93%);
   box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(4.5px);
   -webkit-backdrop-filter: blur(4.5px);
@@ -100,18 +100,10 @@
 }
 
 @media screen and (max-width: 800px) {
-  .home-page {
-    height: 100%;
-    width: 100%;
-    background-image: linear-gradient(-225deg, #FF057C 0%, #7C64D5 48%, #4CC3FF 100%);
-  }
 
   .slogan {
-    text-align: center;
-    margin: 20px;
     font-size: 30px;
-    color: v.$color-Off-white;
-    font-family: 'Lato', sans-serif;
+    margin: 70px 30px;
   }
 
   .home-container {
@@ -120,20 +112,14 @@
     padding: 20px;
     margin: 30px;
     gap: 50px;
-    // height: 100%;
   }
 
   .banner {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     gap: 20px;
-    margin: 0;
     font-size: 10px;
   }
 
   .home-icon {
-    color: v.$color-Off-white;
     font-size: 20px;
   }
 
@@ -146,38 +132,35 @@
   }
 
   .header {
-    padding: 10px;
-    display: flex;
+    padding: 50px 20px 20px;
+    position: relative;
 
+    .logo {
+      height: 35px;
+    }
     .logo-text {
       display: none;
     }
 
     .header_items {
+      position: absolute;
+      top: 500px;
+      left: 15%;
       display: flex;
-      gap: 10px;
+      gap: 50px;
     }
 
     .btn {
-      height: 30px;
-      font-size: 13px;
-      padding: 0px;
-      background-color: #61045F;
-      color: white;
+      min-width: fit-content;
+      font-size: 16px;
+      padding: 10px 20px;
     }
   }
 
   .tweet-wrap-homepage {
-    max-width: 670px;
-    min-width: 320px;
-    margin: 0 auto;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.4);
-    box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(4.5px);
-    -webkit-backdrop-filter: blur(4.5px);
-    border-radius: 10px;
-
+    // padding: 10px;
+    // min-width: 300px;
+    display: none;
   }
 
 }

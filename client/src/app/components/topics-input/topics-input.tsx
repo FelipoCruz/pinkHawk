@@ -80,7 +80,6 @@ const TopicsInput = () => {
     <div className="pref-container">
       <div className="topics-input-container">
         <h2>Tweet Tags</h2>
-        <p>Define topics you want to tweet about.</p>
         <form onSubmit={setTopics}>
           <TagsInput
             value={selectedTopics}
@@ -96,8 +95,8 @@ const TopicsInput = () => {
       </div>
       <div className="form-container">
         <form onSubmit={handleSubmit}>
-          <h2 className="time-label">Tweet posting preferences</h2>
-          <label htmlFor="number">Times per day</label>
+          <h2 className="time-label">Posting preferences</h2>
+          <label htmlFor="number">Times per day:</label>
           <select
             id="number"
             name="number"
@@ -112,7 +111,7 @@ const TopicsInput = () => {
             ))}
           </select>
           <br />
-          <label htmlFor="hour">Hours of the day</label>
+          <label htmlFor="hour" className='hour-label'>Hours of the day:</label>
           <div className="pref-hours-list">
             {hoursADay().map((hour: number) => (
               <label
@@ -130,7 +129,7 @@ const TopicsInput = () => {
                   onChange={handleChangeHours}
                 />
                 <span className="checkmark"></span>
-                {hour < 10 ? `0${hour}h00` : `${hour}h00`}
+                {hour < 10 ? `0${hour}:00` : `${hour}:00`}
               </label>
             ))}
           </div>

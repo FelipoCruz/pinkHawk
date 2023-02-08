@@ -3,29 +3,37 @@
 .pref-container {
   display: flex;
   flex-direction: column;
-  
+  height: 100%;
+  align-items: center;
+  margin: 30px;
 }
 
 .topics-input-container {
+  width: 670px;
   margin: 20px 50px;
   border-radius: 10px;
   padding: 30px;
-  box-shadow: 0 0 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+  box-shadow: 0px 0 30px rgb(1 41 112 / 10%);
   display: flex;
   flex-direction: column;
   background: white;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+  
+  
 }
 
 
-p {
-  margin-bottom: 20px;
-}
+
 
 .rti--container {
   // width: 100%;
   max-height: 50%;
   overflow-y: scroll;
 }
+
 .rti--container::-webkit-scrollbar {
   width: 0;
   background-color: transparent;
@@ -33,22 +41,23 @@ p {
 
 .rti--input {
   // width: 100%;
- 
+
 }
 
 em {
   display: block;
-  margin-top: 10px;
+  margin: 10px 0px;
   font-size: 14px;
-  margin-bottom: 20px;
+ 
 }
 
 .form-container {
+  width: 670px;
   margin: 20px 50px;
   border-radius: 10px;
   padding: 30px;
   background: white;
-  box-shadow: 0 0 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+  box-shadow: 0px 0 30px rgb(1 41 112 / 10%);
 }
 
 
@@ -71,23 +80,23 @@ label {
   font-size: 16px;
 }
 
-  
-         
+
 .pref-btn {
   background-color: v.$color-primary;
-  padding: 15px 45px;
-  margin-top: 2rem;
+  padding: 15px 20px;
+  margin-top: 10px;
   text-align: center;
   text-transform: uppercase;
   transition: 0.5s;
   background-size: 200% auto;
-  color: white;            
+  color: white;
   border-radius: 10px;
-
+  font-size: 14px;
 }
 
 .pref-btn:hover {
-  background-position: right center; /* change the direction of the change here */
+  background-position: right center;
+  /* change the direction of the change here */
   color: #fff;
   text-decoration: none;
 }
@@ -95,7 +104,7 @@ label {
 .pref-hours-list {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 20px;
+  row-gap: 5px;
   margin-bottom: 10px;
 
   .pref-hours-item {
@@ -103,7 +112,7 @@ label {
     gap: 10px;
     flex: 1 0 14%;
     margin: 10px;
-    font-size: 22px;
+    font-size: 16px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -123,47 +132,138 @@ label {
 
 /* Create a custom checkbox */
 .checkmark {
-  // position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
+  position: relative;
+  // top: 0;
+  // left: 0;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
   cursor: pointer;
   background-color: #eee;
 }
 
 /* On mouse-over, add a grey background color */
-.pref-hours-item:hover input ~ .checkmark {
+.pref-hours-item:hover input~.checkmark {
   background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.pref-hours-item input:checked ~ .checkmark {
+.pref-hours-item input:checked~.checkmark {
   background-color: v.$color-primary;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
+// .checkmark:after {
+//   content: "";
+//   position: absolute;
+//   display: none;
+// }
 
-/* Show the checkmark when checked */
-.pref-hours-item input:checked ~ .checkmark:after {
-  display: block;
-}
+// /* Show the checkmark when checked */
+// .pref-hours-item input:checked~.checkmark:after {
+//   display: block;
+// }
 
-/* Style the checkmark/indicator */
-.pref-hours-item .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
+// /* Style the checkmark/indicator */
+// .pref-hours-item .checkmark:after {
+//   left: 5px;
+//   top: 1px;
+//   width: 5px;
+//   height: 10px;
+//   border: solid white;
+//   border-width: 0 3px 3px 0;
+//   -webkit-transform: rotate(45deg);
+//   -ms-transform: rotate(45deg);
+//   transform: rotate(45deg);
+// }
 
+
+@media screen and (max-width: 450px) {
+
+  .pref-container {
+    margin: 0px;
+  }
+  .topics-input-container {
+    width: 320px;
+    margin: 20px 20px 0px 20px;
+    padding: 20px;
+    max-height: 30%;
+    
+    form {
+      max-height: 100%;
+
+      .rti--container {
+        --rti-tag-padding: .01rem;
+      }
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    p {
+      display: none;
+    }
+  }
+
+  .pref-btn {
+    padding: 10px;
+    font-size: 12px;
+    margin-top: 15px;
+  }
+
+  .prim-color {
+    display: none;
+  }
+
+
+  .rti--input {
+    width: 100%;
+  }
+
+  .form-container {
+    width: 320px;
+    margin: 20px;
+    padding: 20px;
+
+    .time-label {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .select-box {
+      padding: 0px;
+      margin: 0px 0px 5px 10px;
+    }
+
+    .pref-hours-list {
+      font-size: 12px;
+    }
+  }
+
+  // .checkmark {
+  //   height: 15px;
+  //   width: 15px;
+  //   border-radius: 50%;
+  // }
+
+  // .pref-hours-item input:checked~.checkmark:after {
+  //   display: none;
+  // }
+
+  .pref-hours-list {
+    row-gap: 0px;
+    margin-bottom: -5px;
+
+    .pref-hours-item {
+      font-size: 14px;
+      margin: 10px;
+    }
+  }
+ 
+  .hour-label {
+    display: none;
+  }
+
+}
