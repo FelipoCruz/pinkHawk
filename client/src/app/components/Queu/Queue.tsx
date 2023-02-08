@@ -52,7 +52,9 @@ const Queue = () => {
           </li>
         ))
       ) : (
-        <h2>You have no queued tweets yet</h2>
+        <div className="queue-message">
+          <h3>No queued tweets yet</h3>
+        </div>
       )}
     </>
   );
