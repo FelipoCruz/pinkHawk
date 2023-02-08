@@ -77,5 +77,5 @@ export const getAccessToken = async (req: Request, res: Response) => {
     },
   });
 
-  res.redirect('http://localhost:3000/dashboard/user-preferences');
+  res.redirect('http://pink-hawk2.vercel.app/dashboard/user-preferences');
 };
