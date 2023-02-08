@@ -59,7 +59,7 @@ const generateTweetAIService = async (topics: []) => {
     const basePromptOutput2 = baseCompletion2.data.choices.pop();
     console.log('basePromptOutput2', basePromptOutput2)
 
-    if(!basePromptOutput2) {
+    if(basePromptOutput2 == undefined) {
       const emergencyOutput: any = {}
       emergencyOutput.text = "pinkHawk is awesome!"
       return emergencyOutput
