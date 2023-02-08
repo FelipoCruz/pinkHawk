@@ -48,6 +48,14 @@ export const fetchTweets = async (req: Request, res: Response) => {
       res.status(201);
       res.send(tweets);
     }
+    if (status === 'posted') {
+      const tweets = await prisma.tweet.findMany({
+        where: { userId: userIdReq, status: 'posted' },
+        // orderBy: { postingTimestamp: 'asc' },
+      });
+      res.status(201);
+      res.send(tweets);
+    }
   } catch (error) {
     console.log('Error in fetchTweets @ module controller/tweet.ts: ', error);
   }

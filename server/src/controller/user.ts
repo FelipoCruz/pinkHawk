@@ -109,12 +109,30 @@ export const updateAvatar = async (req: Request, res: Response) => {
   }
 };
 
+export const updateUserDetails = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { password } = req.body;
+    const hash = await bcrypt.hash(password, 10);
+    await prisma.user.update({
+      where: { id: Number(id) },
+      data: {
+        password: hash,
+      },
+    });
+    res.cookie('token', 'loggedout', {
+      expires: new Date(Date.now() + 10 * 1000),
+    });
+    res.status(200).json({ status: 'success' });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const signOutUser = (req: Request, res: Response) => {
   res.cookie('token', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
-    // httpOnly: true,
   });
   console.log('cookie: ', req.cookies.token);
-
   res.status(200).json({ status: 'success' });
 };

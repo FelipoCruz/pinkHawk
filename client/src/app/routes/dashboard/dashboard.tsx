@@ -5,17 +5,16 @@ import { activeUser } from '../../../store/slices/user.slice';
 import GrowthMenu from '../../components/growthmenu/GrowthMenu';
 import NavBarUser from '../../components/loginnavbar/LoginNavBar';
 import Sidebar from '../../components/sidebar/sidebar';
+import UserPreferences from '../../components/userpreferences/UserPreferences';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import IUser from '../../interfaces/user.interface';
 import CoPilot from '../co-pilot';
 import TopicsDefinition from '../topics-definition';
-import UserPreferences from '../user-preferences';
 import './dashboard.scss';
 
 const Dashboard = () => {
-  const [navbarState, setNavbarState] = useState(false);
+  const [navbarState] = useState(false);
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
-  const layout = useAppSelector((state) => state.layout);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
