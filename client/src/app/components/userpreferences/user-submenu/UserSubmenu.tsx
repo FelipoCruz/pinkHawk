@@ -52,8 +52,8 @@ const RightMenuButton = () => {
     link.remove();
   };
 
-  const downloadTweets = () => {
-    fetchTweetsFromServer().then(() => {
+  const downloadTweets = async () => {
+    await fetchTweetsFromServer().then(() => {
       const tweetData = tweets.map((tweet: any) => {
         return `${tweet.id},${tweet.text},${tweet.createdAt}`;
       }).join('\n');
