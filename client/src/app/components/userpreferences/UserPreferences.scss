@@ -28,6 +28,13 @@
     width: 500px;
     box-shadow: 0 0 30px 0px rgb(1 41 112 / 10%);
 
+    .details {
+      display: flex;
+      flex-direction: row;
+      margin: 7px 0;
+      gap: 5px;
+    }
+
     .right-menu-slide-right {
       display: flex;
       position: relative;
