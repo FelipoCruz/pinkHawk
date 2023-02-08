@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import './Selection.scss';
-import { useAppSelector } from '../../../../hooks/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import {
   generateTweetServiceClient,
   getSuggestedTweets,
-} from '../../../../../services/api.service';
-import ITweet from '../../../../interfaces/tweet.interface';
-import Spinner from '../../../spinner/Spinner';
+} from '../../../services/api.service';
+import ITweet from '../../interfaces/tweet.interface';
+import Spinner from '../spinner/Spinner';
 import {
   queueTweetDB,
   getUserTweets,
   deleteTweetDB,
-} from '../../../../../services/api.service';
+} from '../../../services/api.service';
 import dayjs from 'dayjs';
-import SingleTweetTest2 from '../../../tweet/Tweet2';
+import SingleTweetTest2 from '../tweet/Tweet2';
 
 const Selection = () => {
   const user = useAppSelector(({ user }) => user);
@@ -31,7 +31,7 @@ const Selection = () => {
   }, [user]);
 
   useEffect(() => {
-    // defineNextPostingDate();
+    defineNextPostingDate();
   }, [tweets]);
 
   useEffect(() => {
@@ -56,13 +56,9 @@ const Selection = () => {
 
   const generateTweetsInit = async () => {
     setSpinner(true);
-    // generateTweetServiceClient(user);
-    // generateTweetServiceClient(user);
-    // generateTweetServiceClient(user);
-    // generateTweetServiceClient(user);
-    // generateTweetServiceClient(user);
-    // await new Promise((resolve) => setTimeout(resolve, 7000));
-    // fetchSuggestedTweets();
+    generateTweetServiceClient(user);
+    await new Promise((resolve) => setTimeout(resolve, 7000));
+    fetchSuggestedTweets();
     setSpinner(false);
   };
 
@@ -121,6 +117,7 @@ const Selection = () => {
       if (postingHours[postingHours.length - 1] === hourOfDate) {
         formatDate.setDate(formatDate.getDate() + 1);
         formatDate.setHours(postingHours[0]);
+        formatDate.setSeconds(0);
 
         setNextPostingDate(formatDate.toUTCString());
       } else {
@@ -165,7 +162,7 @@ const Selection = () => {
             ) : (
               <div className="next-tweet-time">
                 <h2 className="">Next accepted tweet will be posted at: </h2>
-                <h1>{dayjs(nextPostingDate).format('DD/MM/YY [at] HH:mm')}</h1>
+                <h1>{dayjs(nextPostingDate).format('DD/MM/YY  HH:mm')}</h1>
               </div>
             )}
           </div>

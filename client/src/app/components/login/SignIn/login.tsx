@@ -47,9 +47,9 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-form-container">
-        <form className="form" onSubmit={(event) => handleSubmit(event)}>
+        <form className="login-form" onSubmit={(event) => handleSubmit(event)}>
           <h1 className="login-header">Login</h1>
-          <div className="form-input">
+          <div className="login-form-input">
             <label className="floating-label-email">Email Address</label>
             <input
               type="email"
@@ -59,7 +59,7 @@ const Login = () => {
               required
             />
           </div>
-          <div className="form-input">
+          <div className="login-form-input">
             <label className="floating-label-password">Password</label>
             <input
               type="password"
@@ -75,6 +75,8 @@ const Login = () => {
         </form>
       </div>
       <div className="graphic">
+        <p>@ PinkHawk</p>
+        <h1>WELCOME BACK</h1>
         <img src={loginImg} alt='login-img' className='login-img'/>
       </div>
     </div>

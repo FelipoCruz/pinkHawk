@@ -2,125 +2,130 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
-
-
-
+.tweet-wrap-dark,
 .tweet-wrap {
   max-width: 670px;
   min-width: 320px;
-  background: #fff;
   margin: 0 auto;
   border-radius: 10px;
   padding: 30px;
   box-shadow: 0px 0 30px rgb(1 41 112 / 10%);
+  position: relative;
+  transition: background 0.2s linear;
+}
+
+.tweet-wrap-dark {
+  background: rgba(142, 137, 137, 0.32);
+}
+
+.tweet-wrap {
+  background: #fff;
+}
+
+.date-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+  color: white;
+  background-color: v.$color-primary;
+  border-radius: 10px;
+  margin-bottom: 30px;
+
+  p {
+    margin: 0 auto;
+    padding: 10px;
+  }
+}
+
+.icon-group {
+  display: flex;
+  justify-content: flex-end;
+  color: v.$color-primary;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
 
-  .date-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-family: 'Lato', sans-serif;
-    color: white;
-    background-color: v.$color-primary;
-    border-radius: 10px;
-    margin-bottom: 30px;
+.tweet-header {
+  display: flex;
+  align-items: flex-start;
+  font-size: 14px;
+  margin-top: 5px;
 
-    p {
-      margin: 0 auto;
-      padding: 10px;
-    }
+  .avator {
+    max-width: 100%;
+    border-radius: 50%;
+    width: 50px;
+    margin-top: -5px;
   }
 
-  .icon-group {
-    display: flex;
-    justify-content: flex-end;
-    color: v.$color-primary;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+  .tweet-header-info {
+    margin-left: 20px;
+    position: relative;
+    width: 100%;
 
 
-  .tweet-header {
-    display: flex;
-    align-items: flex-start;
-    font-size: 14px;
-    margin-top: 5px;
-
-    .avator {
-      max-width: 100%;
-      border-radius: 50%;
-      width: 50px;
-      margin-top: -5px;
+    .material-symbols-outlined {
+      cursor: pointer;
+      font-size: 30px;
+      color: v.$color-primary;
+      margin-left: 5px;
     }
 
-    .tweet-header-info {
-      margin-left: 20px;
-      position: relative;
-      width: 100%;
+    .user-screen-name {
+      display: block;
+      color: #657786;
+      font-weight: normal;
+      font-family: 'Lato', sans-serif;
+      margin: 0 auto 10px;
+    }
 
+    .user-name {
+      font-weight: bold;
+      margin-top: 5px;
+      font-family: 'Lato', sans-serif;
+      margin: 0 auto 5px;
+      font-size: 16px;
+    }
 
-      .material-symbols-outlined {
-        cursor: pointer;
-        font-size: 30px;
-        color: v.$color-primary;
-        margin-left: 5px;
-      }
+    .tweet-text {
+      font-size: 18px;
+      font-family: 'Lato', sans-serif;
+      line-height: 1.5;
+      margin: 20px 0px 0px -40px;
+      word-break: break-word;
+    }
 
-      .user-screen-name {
-        display: block;
-        color: #657786;
-        font-weight: normal;
-        font-family: 'Lato', sans-serif;
-        margin: 0 auto 10px;
-      }
+    .tweet-info-counts {
+      display: flex;
+      margin-top: 20px;
+      margin-left: -40px;
+      margin-right: 5px;
+      justify-content: space-between;
 
-      .user-name {
-        font-weight: bold;
-        margin-top: 5px;
-        font-family: 'Lato', sans-serif;
-        margin: 0 auto 5px;
-        font-size: 16px;
-      }
-
-      .tweet-text {
-        font-size: 18px;
-        font-family: 'Lato', sans-serif;
-        line-height: 1.5;
-        margin: 20px 0px 0px -40px;
-        word-break: break-word;
-      }
-
-      .tweet-info-counts {
+      .comments,
+      .retweets,
+      .likes {
         display: flex;
-        margin-top: 20px;
-        margin-left: -40px;
-        margin-right: 5px;
-        justify-content: space-between;
+        font-size: 14px;
+        color: #657786;
+        font-family: 'Lato', sans-serif;
 
-        .comments,
-        .retweets,
-        .likes {
+        .tweet-icon {
+          color: gray;
+          margin-right: 7px;
+          height: 18px;
+        }
+
+        div {
           display: flex;
-          font-size: 14px;
-          color: #657786;
-          font-family: 'Lato', sans-serif;
-
-          .tweet-icon {
-            color: gray;
-            margin-right: 7px;
-            height: 18px;
-          }
-
-          div {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-          }
+          flex-direction: column;
+          justify-content: flex-end;
         }
       }
-
     }
 
   }
@@ -128,8 +133,49 @@
 }
 
 
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  max-width: 670px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0px 0 30px rgb(1 41 112 / 10%);
+  border-radius: 10px;
+  z-index: 999;
+  transition: width 0.5s linear;
+}
+
+
+.span {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+textarea.on-edit-tweet-text {
+  padding: 10px 20px;
+  border: #657786 solid 1px;
+  border-radius: 10px;
+  margin: 20px auto;
+  width: 100%;
+  height: auto;
+  min-height: 130px;
+  font-size: 18px;
+  font-family: 'Lato', sans-serif;
+  color: v.$black;
+  resize: none;
+}
+
 .save-button {
- 
+
   background-color: v.$color-primary;
   color: white;
   padding: 10px 20px;
@@ -138,38 +184,19 @@
   cursor: pointer;
 }
 
-.modal {
-  display: flex;
-  flex-direction: column;
- width: 500px;
- max-width: 670px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 30px;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
-  border-radius: 5px;
-
-  span {
-    display: block;
-    cursor: pointer;
+@media screen and (max-width: 600px) {
+  .modal {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    max-width: 670px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
   }
-
-  textarea.on-edit-tweet-text {
-    padding: 20px;
-    border: #657786 solid 1px;
-    border-radius: 10px;
-    margin: 20px auto;
-    width: 100%;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    height: auto;
-    min-height: 130px; 
-    font-size: 18px;
-  }
-
-
 }
-

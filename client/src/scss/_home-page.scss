@@ -1,82 +1,183 @@
 @use "./variables.scss" as v;
 
 .home-page {
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
   background-image: linear-gradient(-225deg, #FF057C 0%, #7C64D5 48%, #4CC3FF 100%);
+}
+
+.slogan {
+  text-align: center;
+  margin: 20px;
+  font-size: 50px;
+  color: v.$color-Off-white;
+  font-family: 'Lato', sans-serif;
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 60px;
+  gap: 150px;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 50px;
+  margin: 0;
+}
+
+.banner-icon-slogan {
+  display: flex;
+  justify-content: flex-start;
+  gap: 30px;
+  align-items: center;
+}
+
+.home-icon {
+  color: v.$color-Off-white;
+  font-size: 40px;
+}
+
+.banner-slogan {
+  color: v.$color-Off-white;
+}
+
+.h1 {
+  font-size: 50px;
+}
+
+
+.trial-btn {
+  background-image: linear-gradient(to right, #AA076B 0%, #61045F 51%, #AA076B 100%);
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+}
+
+.trial-btn:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.tweet-counter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  font-size: 25px;
+}
+
+.counter-container {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  color: v.$color-Off-white;
+}
+
+.tweet-wrap-homepage {
+  max-width: 670px;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4.5px);
+  -webkit-backdrop-filter: blur(4.5px);
+  border-radius: 10px;
+}
+
+.up-icon {
+  width: 40px;
+}
+
+@media screen and (max-width: 800px) {
+  .home-page {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(-225deg, #FF057C 0%, #7C64D5 48%, #4CC3FF 100%);
+  }
 
   .slogan {
     text-align: center;
-    margin: 30px;
-    font-size: 50px;
+    margin: 20px;
+    font-size: 30px;
     color: v.$color-Off-white;
     font-family: 'Lato', sans-serif;
   }
 
   .home-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    grid-column-gap: 80px;
-    grid-row-gap: 80px;
-    margin: 50px 80px;
+    display: flex;
+    flex-direction: column;
     padding: 20px;
+    margin: 30px;
+    gap: 50px;
+    // height: 100%;
   }
 
   .banner {
-    grid-column-start: span 1;
-    grid-row-start: span 1;
-    grid-row-end: span 1;
-    align-self: center;
-    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin: 0;
+    font-size: 10px;
   }
 
-  .banner-slogan {
-    margin-bottom: 40px;
-    font-size: 22px;
+  .home-icon {
     color: v.$color-Off-white;
+    font-size: 20px;
   }
 
   .h1 {
-    font-weight: bold;
-    font-size: 60px;
+    display: none;
   }
 
-  .banner-img-container {
-    grid-column-start: span 1;
-    grid-column-end: span 1;
-    grid-row-start: span 1;
-    grid-row-end: span 1;
-    justify-self:center;
-    align-self: center;
-    box-shadow: 0 0 20px #0c4a69;
-    padding: 20px 0px;
+  .counter-container {
+    display: none;
   }
 
-  .banner-img {
-    max-height: 300px;
+  .header {
+    padding: 10px;
+    display: flex;
+
+    .logo-text {
+      display: none;
+    }
+
+    .header_items {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      height: 30px;
+      font-size: 13px;
+      padding: 0px;
+      background-color: #61045F;
+      color: white;
+    }
   }
 
-
-  .trial-btn {
-    background-image: linear-gradient(to right, #AA076B 0%, #61045F 51%, #AA076B 100%);
-    padding: 15px 45px;
-    text-align: center;
-    text-transform: uppercase;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;
+  .tweet-wrap-homepage {
+    max-width: 670px;
+    min-width: 320px;
+    margin: 0 auto;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4.5px);
+    -webkit-backdrop-filter: blur(4.5px);
     border-radius: 10px;
-    display: block;
-  }
 
-  .trial-btn:hover {
-    background-position: right center;
-    /* change the direction of the change here */
-    color: #fff;
-    text-decoration: none;
   }
-
 
 }
-
-         
