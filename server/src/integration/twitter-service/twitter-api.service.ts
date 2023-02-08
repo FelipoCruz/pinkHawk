@@ -4,6 +4,7 @@ const prisma = new PrismaClient();
 const key = process.env.API_KEY || '';
 const secret = process.env.API_KEY_SECRET || '';
 
+
 //cronjob for DEMO DAY -- execute every minute
 var CronJob = require('cron').CronJob;
 function job() {
