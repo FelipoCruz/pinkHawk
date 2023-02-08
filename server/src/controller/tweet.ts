@@ -10,6 +10,7 @@ export const generateTweet = async (req: Request, res: Response) => {
   try {
     const user = req.body;
     const newGeneratedTweet = await generateTweetAIService(user.topics);
+    if (newGeneratedTweet !== undefined) {
     const tweetText = String(newGeneratedTweet?.text);
     const finalTweet = tweetText.replaceAll(/["]+/g, '');
     let finalTweet2 = finalTweet.replaceAll(/&amp;/g, '&');
@@ -24,6 +25,9 @@ export const generateTweet = async (req: Request, res: Response) => {
     });
     res.status(201);
     res.send(newGeneratedTweet);
+  } else{
+    res.status(404);
+  }
   } catch (error) {
     console.log('error in CreateUser:' + error);
   }
