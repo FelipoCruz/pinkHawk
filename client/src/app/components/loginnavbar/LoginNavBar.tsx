@@ -44,19 +44,22 @@ const NavBarUser = () => {
           {(!user.twitterToken ||
             user.postingHours.length === 0 ||
             user.topics.length === 0) && (
-            <Tooltip
-              content1="- Add your preferences and tags !"
-              content2="- Give access to your twitter account !"
-              direction="bottom"
-              type="warning"
-            >
+            <Tooltip user={user} direction="bottom" type="warning">
               <IoWarningOutline />
             </Tooltip>
           )}
         </div>
         <div className="navbar-user">
           <Tooltip direction="bottom" type="user-menu" logout={logoutUser}>
-            <CgProfile />
+            {user.profilePicture ? (
+              <img
+                className="profile-picture-img"
+                src={user.profilePicture}
+                alt="profile"
+              />
+            ) : (
+              <CgProfile />
+            )}
           </Tooltip>
         </div>
       </nav>
