@@ -21,12 +21,13 @@
 
   .selected-image-modal {
     aspect-ratio: 1;
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     border: 1px solid #000;
     overflow: hidden;
     margin-top: 15px;
+    object-fit: cover;
   }
 
   .profile-picture-button {
