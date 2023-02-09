@@ -7,9 +7,13 @@ const UserDetails = () => {
   const user = useAppSelector(({ user }) => user);
   const navigate = useNavigate();
   const [passwordShown, setPasswordShown] = React.useState(false);
-  const [passwordOne, setPasswordOne] = React.useState('');
-  const [passwordTwo, setPasswordTwo] = React.useState('');
-  const [userFileds, setUserFields] = React.useState({  password: '' });
+  // const [passwordOne, setPasswordOne] = React.useState('');
+  // const [passwordTwo, setPasswordTwo] = React.useState('');
+  const [userFileds, setUserFields] = React.useState({
+    currentPassword: '',
+    passwordOne: '',
+    passwordTwo: ''
+  });
 
   let password = '';
   // this function should just check if the current typed user password is correct
@@ -23,12 +27,12 @@ const UserDetails = () => {
     }
   }
   // this function should check if the first password input is the same as the second password input
-  const handlePasswordChecker = async (passwordOne: string, passwordTwo: string) => {
-    if (passwordOne === passwordTwo && password === 'valid') {
-      await
+  // const handlePasswordChecker = async (passwordOne: string, passwordTwo: string) => {
+  //   if (passwordOne === passwordTwo && password === 'valid') {
+  //     await
+  //   }
+  // }
 
-    }
-  }
   // fuction to toggle password visibility
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -43,10 +47,12 @@ const UserDetails = () => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const details = {
-      password: formData.get('password'),
+      currentPassword: formData.get('current-password'),
+      passwordOne: formData.get('password-one'),
+      passwordTwo: formData.get('password-two'),
     }
     try {
-      const userDetails = await updateUserDetails(user.id, details as { password: string });
+      const userDetails = await updateUserDetails(user.id, details as { passwordOne: string });
       if (!userDetails) {
         throw new Error('User not found');
       } else {
@@ -68,21 +74,21 @@ const UserDetails = () => {
           className='current-password-input'
           type={passwordShown ? 'text' : 'password'}
           name='current-password'
-          value={userFileds.password}
+          value={userFileds.currentPassword}
           onChange={handleChange}
         />
         <input
           className='password-input-one'
           type={passwordShown ? 'text' : 'password'}
           name='password-one'
-          value={userFileds.password}
+          value={userFileds.passwordOne}
           onChange={handleChange}
         />
         <input
           className='password-input-two'
           type={passwordShown ? 'text' : 'password'}
           name='password-one'
-          value={userFileds.password}
+          value={userFileds.passwordTwo}
           onChange={handleChange}
         />
         <button className='submit-button-user-preferences' type='submit'>SAVE</button>
