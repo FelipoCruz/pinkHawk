@@ -24,11 +24,24 @@ const Tooltip = (props: any) => {
     props.logout();
   };
 
+  /*
+              content1="- Add your preferences and tags !"
+              content2="- Give access to your twitter account !"
+  */
+
   const warningContent = () => {
     return (
       <>
-        <div>{props.content1}</div>
-        {props.content2 && <div>{props.content2}</div>}
+        <div>Please: </div>
+        {props.user.topics.length === 0 && (
+          <div> - Add your posting topics</div>
+        )}
+        {props.user.postingHours.length === 0 && (
+          <div> - Add your posting hours</div>
+        )}
+        {!props.user.twitterToken && (
+          <div> - Give access to your twitter account</div>
+        )}
         <Link
           className="pref-link"
           to="/dashboard/user-preferences"

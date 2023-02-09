@@ -6,6 +6,7 @@ import { activeUser } from '../../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import ProfilePicture from '../profilepicture/ProfilePicture';
 import TweetDownload from '../tweetdownload/TweetDownload';
+import defaultImg from '../../../../images/tom.jpg';
 import './UserSubmenu.scss';
 
 const CLOUDINARY_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
@@ -112,7 +113,7 @@ const RightMenuButton = () => {
               <div className='user-profile-picture-circle'>
                 <img
                   alt='user profile pic'
-                  src={user.profilePicture}
+                  src={!user.profilePicture ? defaultImg : user.profilePicture}
                   className='user-profile-picture'
                 />
               </div>
@@ -139,14 +140,6 @@ const RightMenuButton = () => {
             </form>
           </div>
           {/* <form className='sumbit-new-preferences' onSubmit={(event) => handleSubmit(event)}>
-            <label typeof='label' htmlFor='email'>Change Email</label>
-            <input
-              className='email-input'
-              type='text'
-              name='email'
-              value={userFileds.email}
-              onChange={handleChange}
-            />
             <label className='change-password-label' typeof='label' htmlFor='password'>
               Change Password
               <i className='show-password' onClick={togglePassword}>{passwordShown ? 'Hide' : 'Show'}</i>
