@@ -23,7 +23,7 @@ export const setTopics = async (req: Request, res: Response) => {
         topics: topics,
       },
     });
-    if (user && user?.postingHours.length > 0) {
+    if (user && user?.postingHours.length > 0 && user?.topics.length > 0) {
       const newGeneratedTweet = await generateTweetAIService(topics);
       const tweetText = String(newGeneratedTweet?.text);
       const finalTweet = tweetText.replaceAll(/["]+/g, '');
