@@ -140,14 +140,6 @@ const RightMenuButton = () => {
             </form>
           </div>
           {/* <form className='sumbit-new-preferences' onSubmit={(event) => handleSubmit(event)}>
-            <label typeof='label' htmlFor='email'>Change Email</label>
-            <input
-              className='email-input'
-              type='text'
-              name='email'
-              value={userFileds.email}
-              onChange={handleChange}
-            />
             <label className='change-password-label' typeof='label' htmlFor='password'>
               Change Password
               <i className='show-password' onClick={togglePassword}>{passwordShown ? 'Hide' : 'Show'}</i>
