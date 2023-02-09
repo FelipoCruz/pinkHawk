@@ -65,33 +65,44 @@ const UserDetails = () => {
 
   return (
     <div>
-      <form className='sumbit-new-preferences' onSubmit={(event) => handleSubmit(event)}>
-        <label className='change-password-label' typeof='label' htmlFor='password'>
+      <form
+        className="sumbit-new-preferences"
+        onSubmit={(event) => handleSubmit(event)}
+      >
+        <label
+          className="change-password-label"
+          typeof="label"
+          htmlFor="password"
+        >
           Change Password
-          <i className='show-password' onClick={togglePassword}>{passwordShown ? 'Hide' : 'Show'}</i>
+          <i className="show-password" onClick={togglePassword}>
+            {passwordShown ? 'Hide' : 'Show'}
+          </i>
         </label>
         <input
-          className='current-password-input'
+          className="current-password-input"
           type={passwordShown ? 'text' : 'password'}
           name='current-password'
           value={userFileds.currentPassword}
           onChange={handleChange}
         />
         <input
-          className='password-input-one'
+          className="password-input-one"
           type={passwordShown ? 'text' : 'password'}
           name='password-one'
           value={userFileds.passwordOne}
           onChange={handleChange}
         />
         <input
-          className='password-input-two'
+          className="password-input-two"
           type={passwordShown ? 'text' : 'password'}
           name='password-one'
           value={userFileds.passwordTwo}
           onChange={handleChange}
         />
-        <button className='submit-button-user-preferences' type='submit'>SAVE</button>
+        <button className="submit-button-user-preferences" type="submit">
+          SAVE
+        </button>
       </form>
     </div>
   );
