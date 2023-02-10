@@ -2,57 +2,40 @@ import { useEffect, useState } from 'react';
 import './Selection.scss';
 import { useAppSelector } from '../../hooks/hooks';
 import {
+  addTweetToQueue,
   generateTweetServiceClient,
-  getSuggestedTweets,
+  getNextPostingTime,
 } from '../../../services/api.service';
 import ITweet from '../../interfaces/tweet.interface';
 import Spinner from '../spinner/Spinner';
-import {
-  queueTweetDB,
-  getUserTweets,
-  deleteTweetDB,
-} from '../../../services/api.service';
-import dayjs from 'dayjs';
+import { getUserTweets, deleteTweetDB } from '../../../services/api.service';
 import SingleTweetTest2 from '../tweet/Tweet2';
+import dayjs from 'dayjs';
 
 const Selection = () => {
   const user = useAppSelector(({ user }) => user);
-  const [spinner, setSpinner] = useState(false);
   const [tweets, setTweets] = useState([]);
-  const [queuedTweets, setQueuedTweets] = useState<ITweet[]>([]);
-  const [nextPostingDate, setNextPostingDate] = useState(Date);
-  const [lastQueuedTweetDate, setLastQueuedTweetDate] = useState('');
+  const [nextPostingTime, setNextPostingTime] = useState('');
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
     (async () => {
+      await getNextTweetPostingTime();
       await fetchSuggestedTweets();
-      await fetchQueuedTweets();
     })();
   }, [user]);
 
-  useEffect(() => {
-    defineNextPostingDate();
-  }, [tweets]);
-
-  useEffect(() => {
-    (async () => {
-      console.log('user id: ', user.id);
-      console.log(tweets.length);
-      if (tweets.length < 1) fetchSuggestedTweets();
-    })();
-  }, []);
+  const getNextTweetPostingTime = async () => {
+    const nextPostingTimestamp = await getNextPostingTime(user.id);
+    setNextPostingTime(nextPostingTimestamp);
+  };
 
   const fetchSuggestedTweets = async () => {
-    const fetchedTweets = await getSuggestedTweets(user.id);
-    setTweets(fetchedTweets);
+    setSpinner(true);
+    const queuedTweets = await getUserTweets(user.id, 'suggested');
+    setTweets(queuedTweets);
+    setSpinner(false);
   };
-
-  const fetchQueuedTweets = async () => {
-    const queuedTweetsV = await getUserTweets(user.id, 'queued');
-    setQueuedTweets(queuedTweetsV);
-  };
-
-  // console.log('nextPostingDate to UTC is: ', nextPostingDate.)
 
   const generateTweetsInit = async () => {
     setSpinner(true);
@@ -62,35 +45,15 @@ const Selection = () => {
     setSpinner(false);
   };
 
-  const moveTweetQueued = async (
-    tweetToQueue: ITweet,
-    index: number,
-    postingDate: string
-  ) => {
-    tweetToQueue.postingTimestamp = postingDate;
-
-    // modify tweet status in the DB
-    await queueTweetDB(user.id, tweetToQueue.id, postingDate);
-    setLastQueuedTweetDate(postingDate);
-    // modify tweet status in state of suggested tweets
+  const moveTweetToQueue = async (tweet: ITweet, index: number) => {
+    await addTweetToQueue(user.id, tweet.id);
+    await getNextTweetPostingTime();
     deleteTweetinState(index);
-    // add the tweet in state of queued tweets
-    addTweetToQueueState(tweetToQueue);
-    // generate a new suggested tweet from GPT
-    generateTweetServiceClient(user);
   };
 
   const deleteTweet = async (tweetToDelete: ITweet, index: number) => {
-    // delete tweet from DB
     const DBdelete = await deleteTweetDB(user.id, tweetToDelete.id);
-    console.log('tweet deleted from DB', DBdelete);
-    // delete tweet from state
     deleteTweetinState(index);
-    generateTweetServiceClient(user);
-  };
-
-  const addTweetToQueueState = (tweet: ITweet) => {
-    setQueuedTweets([...queuedTweets, tweet]);
   };
 
   const deleteTweetinState = (index: number) => {
@@ -98,53 +61,6 @@ const Selection = () => {
     items.splice(index, 1);
     setTweets(items);
     console.log('tweet deleted from DB2');
-  };
-
-  // this function sets nextPostingDate
-  const defineNextPostingDate = () => {
-    // if there are tweets in queue => the next postingDate will be:
-    // nextPostingHour in the sequence, as of the last tweet in the queue [ (lastTweetinQueue => nextPostingHour) ]
-    if (queuedTweets?.length > 0) {
-      const lastTweetInQueue = queuedTweets[queuedTweets.length - 1];
-
-      const lastTweetInQueueDate = lastTweetInQueue.postingTimestamp;
-
-      const formatDate = new Date(lastTweetInQueueDate);
-      const hourOfDate = formatDate.getHours();
-
-      const postingHours = user.postingHours;
-
-      if (postingHours[postingHours.length - 1] === hourOfDate) {
-        formatDate.setDate(formatDate.getDate() + 1);
-        formatDate.setHours(postingHours[0]);
-        formatDate.setSeconds(0);
-
-        setNextPostingDate(formatDate.toUTCString());
-      } else {
-        for (let postingHour of postingHours) {
-          if (postingHour > hourOfDate) {
-            formatDate.setHours(postingHour);
-
-            setNextPostingDate(formatDate.toUTCString());
-            break;
-          }
-        }
-      }
-      //setNextPostingDate(lastTweetInQueueDate);
-    }
-
-    // if there are no tweets in queue => the next postingDate will be: tomorrow at firstPostingHour.
-    if (queuedTweets?.length === 0) {
-      const postingHours = user.postingHours;
-      const firstPostingHour = Math.min(...postingHours);
-
-      const today = new Date();
-      const tomorrow = new Date(today);
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      tomorrow.setHours(firstPostingHour, 0, 0, 0);
-
-      setNextPostingDate(tomorrow.toUTCString());
-    }
   };
 
   return (
@@ -169,7 +85,7 @@ const Selection = () => {
                 <div className="next-tweet-time">
                   <p className="">Next tweet: </p>
                   <p className="h2">
-                    {dayjs(nextPostingDate).format('DD/MM/YY  HH:mm')}
+                    {dayjs(new Date(nextPostingTime)).format('DD/MM/YY  HH:mm')}
                   </p>
                 </div>
                 <button className="generate-btn" onClick={generateTweetsInit}>
@@ -185,10 +101,10 @@ const Selection = () => {
                 <div key={tweet.id} className="tweet-li">
                   <SingleTweetTest2
                     tweet={tweet}
-                    moveTweetQueued={moveTweetQueued}
                     deleteTweet={deleteTweet}
+                    moveTweetToQueue={moveTweetToQueue}
                     index={index}
-                    nextPostingDate={nextPostingDate}
+                    // nextPostingDate={nextPostingDate}
                   />
                 </div>
               );
