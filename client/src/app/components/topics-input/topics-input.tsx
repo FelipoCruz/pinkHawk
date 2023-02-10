@@ -4,29 +4,23 @@ import React, { useEffect, useState } from 'react';
 import { TagsInput } from 'react-tag-input-component';
 import {
   getAuthUrl,
-  getUserById,
   saveTopics,
   updateFrequencyPreference,
 } from '../../../services/api.service';
 import { activeUser } from '../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import IUser from '../../interfaces/user.interface';
 import './topics-input.scss';
 
 const TopicsInput = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   const [selectedTopics, setSelectedTopics] = useState(user.topics);
-  // const [timesPreference, setTimesPreference] = useState(
-  //   user.frequencyTweetPosting || 1
-  // );
   const [hoursPreference, setHoursPreference] = useState(user.postingHours);
 
   useEffect(() => {
     (async () => {
       if (user.isLoggedIn) {
         setSelectedTopics(user.topics);
-        // setTimesPreference(user.frequencyTweetPosting);
         setHoursPreference(user.postingHours);
       }
     })();
@@ -35,28 +29,19 @@ const TopicsInput = () => {
   const setTopics = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (selectedTopics.length === 0) {
-      alert('Please select at least one topic');
+      alert('Please select at least one topic! Press comma or enter to add new topic.');
       return;
     } else {
       const savingTopics = await saveTopics(selectedTopics, user.id);
       if (savingTopics) {
         dispatch(activeUser(savingTopics));
         alert('Topics saved successfully!');
-      } else {
-        // throw new Error('Error saving topics');
-        alert('Error saving topics! Please try again.');
-      }
+      } else throw new Error('Error saving topics');
     }
   };
 
-  // const handleChangeTimes = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   setTimesPreference(Number(e.target.value));
-  //   // reset hours selected on change of frequency preference
-  //   setHoursPreference([]);
-  // };
-
   // change the state of hoursPreference when the user selects a time to tweet
-  // if the user selects more than the defined tweets per day, the last selection is not saved
+  // if the user selects more than 4 tweets per day, the last selection is not saved
   const handleChangeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       setHoursPreference((prevState) => {
@@ -66,8 +51,7 @@ const TopicsInput = () => {
           e.target.checked = false;
           return prevState;
         }
-      });
-      
+      }); 
     } else {
       setHoursPreference(
         hoursPreference.filter((hour) => hour !== Number(e.target.value))
@@ -81,13 +65,10 @@ const TopicsInput = () => {
 
     const frequencyPrefence = await updateFrequencyPreference(
       user.id,
-      // timesPreference,
       hoursPreference.length,
       hoursPreference
     );
 
-
-    // setTimesPreference(frequencyPrefence.frequencyTweetPosting);
     setHoursPreference(frequencyPrefence.postingHours);
 
     if (frequencyPrefence) {
@@ -95,10 +76,7 @@ const TopicsInput = () => {
       alert('User preferences updated successfully');
     } else throw new Error('Error updating user preferences');
   };
-  // set a maximum tweet posting frequency of 4 times per day
-  // const timesPerDay = () => {
-  //   return Array.from({ length: 4 }, (_, i) => i + 1);
-  // };
+  
   // define 24h in a day to be used as desired tweeting hours
   const hoursADay = () => {
     return Array.from({ length: 24 }, (_, i) => i);
@@ -161,22 +139,6 @@ const TopicsInput = () => {
           <div className="time-top card-title">
             <h3 className="time-label">Posting preferences</h3>
             <em className="prim-color">Please select publication time. Pick at least 1, up to 4.</em>
-            {/* <div className="tmpd">
-              <label htmlFor="number">Times per day:</label>
-              <select
-                id="number"
-                name="number"
-                className="select-box"
-                onChange={handleChangeTimes}
-                defaultValue={user.frequencyTweetPosting}
-              >
-                {timesPerDay().map((time: number) => (
-                  <option key={time} value={time} className="select-box-hour">
-                    {time}
-                  </option>
-                ))}
-              </select>
-            </div> */}
           </div>
           <p className="hour-title">Hours of the day:</p>
           <div className="pref-hours-list">
