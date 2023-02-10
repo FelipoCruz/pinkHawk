@@ -16,7 +16,7 @@ export const getPostingTime = async (userId: number) => {
       orderBy: { postingTimestamp: 'desc' },
       take: 1,
     });
-    if (lastQueuedTweet) {
+    if (lastQueuedTweet.length > 0) {
       console.log('lastQueuedTweet: ', lastQueuedTweet);
 
       const lastTweetInQueue = lastQueuedTweet[0].postingTimestamp;
