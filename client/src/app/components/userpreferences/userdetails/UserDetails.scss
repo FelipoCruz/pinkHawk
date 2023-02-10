@@ -3,9 +3,30 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  // padding: 40px;
+
+  .password-and-label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 5px;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
   .change-password-label {
+    font-size: 32px;
+    font-weight: 600;
     margin-bottom: 20px;
+  }
+
+  .show-password {
+    font-size: 15px;
+    cursor: pointer;
+
+    &:hover {
+      transition: 0.2s;
+      color: hsl(5, 85%, 63%);
+    }
   }
 
   .show-password {
@@ -16,21 +37,49 @@
     gap: 10px;
   }
 
+  .current-password-label {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+
   .current-password-input {
-    border: 1px solid green;
-    margin-bottom: 20px;
+    // margin-top: px;
+    font-size: 16px;
+    padding-left: 4px;
+    border-bottom: 1px solid rgb(120, 120, 120);
+    margin-bottom: 25px;
+    height: 29px;
     width: 100%;
+  }
+
+  .new-password-label {
+    font-size: 16px;
+    font-weight: 600;
   }
 
   .password-input-one {
-    border: 1px solid red;
-    margin-bottom: 20px;
+    // margin-top: 7px;
+    font-size: 16px;
+    padding-left: 4px;
+    border-bottom: 1px solid rgb(120, 120, 120);
+    margin-bottom: 25px;
+    height: 29px;
     width: 100%;
   }
 
+  .confirm-password-label {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
   .password-input-two {
-    border: 1px solid blue;
-    margin-bottom: 20px;
+    // margin-top: 7px;
+    font-size: 16px;
+    padding-left: 4px;
+    border-bottom: 1px solid rgb(120, 120, 120);
+    margin-bottom: 25px;
+    height: 29px;
     width: 100%;
   }
 }
