@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { userInfo } from 'os';
 import generateTweetAIService from '../integration/gpt2.service';
+import { getPostingTime } from '../utils/posting-time';
 
 const prisma = new PrismaClient();
 const SECRET_KEY = process.env.SECRET!;
@@ -30,7 +31,7 @@ export const generateTweet = async (req: Request, res: Response) => {
 
 export const fetchTweets = async (req: Request, res: Response) => {
   try {
-    console.log('fetchTweets')
+    console.log('fetchTweets');
     const userIdReq = Number(req.params.id);
     const status = req.params.status;
     if (status === 'suggested') {
@@ -58,6 +59,28 @@ export const fetchTweets = async (req: Request, res: Response) => {
     }
   } catch (error) {
     console.log('Error in fetchTweets @ module controller/tweet.ts: ', error);
+  }
+};
+
+export const modifyTweetStatusToQueue = async (req: Request, res: Response) => {
+  try {
+    const { userId, tweetId } = req.params;
+    const { status } = req.body;
+
+    const postingTimestamp = await getPostingTime(Number(userId));
+    const postingTimestampAsDate = new Date(postingTimestamp!);
+    const postingTimestampISO = postingTimestampAsDate.toISOString();
+
+    const queuedTweet = await prisma.tweet.update({
+      where: { id: Number(tweetId) },
+      data: {
+        status: status,
+        postingTimestamp: postingTimestampISO,
+      },
+    });
+    res.status(201).json(queuedTweet);
+  } catch (error) {
+    console.log('Error in queueTweet @ module controller/tweet.ts: ', error);
   }
 };
 
@@ -107,16 +130,15 @@ export const tweetStatusPosted = async (req: Request, res: Response) => {
 };
 
 export const tweetDelete = async (req: Request, res: Response) => {
-
   try {
-    console.log('server tweet delete start')
+    console.log('server tweet delete start');
     const tweetId = Number(req.body.tweetId);
     console.log('tweetId is: ' + tweetId);
     const tweetStatusPostedOK = await prisma.tweet.delete({
       where: { id: tweetId },
     });
     console.log('tweetStatusPostedOK is: ' + tweetStatusPostedOK);
-    res.status(200).json(tweetId)
+    res.status(200).json(tweetId);
     // res.send(tweetId);
   } catch (error) {
     console.log('Error in tweetDelete @ module controller/tweet.ts: ', error);
@@ -133,6 +155,22 @@ export const updateTweetText = async (req: Request, res: Response) => {
     });
     res.status(201).json(updatedTweet);
   } catch (error) {
-    console.log('Error in updateTweetText @ module controller/tweet.ts: ', error);
+    console.log(
+      'Error in updateTweetText @ module controller/tweet.ts: ',
+      error
+    );
   }
-}
+};
+
+export const getNextPostingTime = async (req: Request, res: Response) => {
+  try {
+    const userId = Number(req.params.id);
+    const postingTimestamp = await getPostingTime(userId);
+    res.status(201).json(postingTimestamp);
+  } catch (error) {
+    console.log(
+      'Error in getNextPostingTime @ module controller/tweet.ts: ',
+      error
+    );
+  }
+};
