@@ -40,9 +40,9 @@ export const login = async (email, password) => {
   }
 };
 
-export const logout = async () => {
+export const logout = async (id) => {
   try {
-    const url = BASE_URL + 'user/signout';
+    const url = BASE_URL + `user/${id}/signout`;
     const response = await fetch(url, {
       method: 'GET',
       credentials: 'include',

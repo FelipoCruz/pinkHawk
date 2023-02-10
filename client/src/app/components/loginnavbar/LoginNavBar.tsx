@@ -17,7 +17,7 @@ const NavBarUser = () => {
   const navigate = useNavigate();
 
   const logoutUser = async () => {
-    const response = await logout();
+    const response = await logout(user.id);
 
     if (response.status !== 'success') {
       throw new Error('A problem occurred while logging out');
