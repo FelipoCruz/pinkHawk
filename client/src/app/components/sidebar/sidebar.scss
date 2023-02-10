@@ -44,6 +44,13 @@
       color: #899bbd
     }
 
+    &:hover {
+      background: #f6f9ff;
+
+      svg {
+        color: v.$color-primary;
+      }
+    }
     
   }
   
@@ -82,7 +89,6 @@
 
   .active {
     background: #f6f9ff;
-    // background: #f5f7fa;
     color: v.$color-primary;
 
     svg {
