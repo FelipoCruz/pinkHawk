@@ -6,15 +6,19 @@ import '../tweet/Tweet.scss';
 import { deleteTweetDB, getUserTweets } from '../../../services/api.service';
 import './Queue.scss';
 import SingleTweetTest2 from '../tweet/Tweet2';
+import Spinner from '../spinner/Spinner';
 
 const Queue = () => {
   const user = useAppSelector(({ user }) => user);
   const [tweets, setTweets] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     (async () => {
       const queuedTweets = await getUserTweets(user.id, 'queued');
       setTweets(queuedTweets);
+      setLoading(false);
     })();
   }, [user]);
 
@@ -36,11 +40,18 @@ const Queue = () => {
 
   console.log('tweets are: ', tweets);
 
+  if (loading) {
+    return <div><Spinner /></div>;
+  }
+  if (!tweets) {
+    return <div>No data</div>;
+  }
+
   return (
     <>
       <h2>Queued tweets</h2>
-      {tweets?.length ? (
-        tweets.map((tweet: ITweet, index) => (
+      {/* {tweets?.length ? ( */}
+        {tweets.map((tweet: ITweet, index) => (
           <li key={tweet.id} className="queue-tweet-li">
             <div className="queue-tweet-wrap">
               <SingleTweetTest2
@@ -50,12 +61,12 @@ const Queue = () => {
               />
             </div>
           </li>
-        ))
-      ) : (
+        ))}
+      {/* ) : (
         <div className="queue-message">
           <h3>No queued tweets yet</h3>
         </div>
-      )}
+      )} */}
     </>
   );
 };
