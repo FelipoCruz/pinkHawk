@@ -3,6 +3,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/hooks';
 import RightMenuButton from './user-submenu/UserSubmenu';
+import UserDetails from './userdetails/UserDetails';
 import './UserPreferences.scss';
 
 const UserPreferences = () => {
@@ -45,6 +46,9 @@ const UserPreferences = () => {
             ))}
           </div>
         </div>
+      </div>
+      <div className='user-details'>
+        <UserDetails />
       </div>
     </div>
   );

@@ -1,0 +1,36 @@
+.change-user-password-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  // padding: 40px;
+  .change-password-label {
+    margin-bottom: 20px;
+  }
+
+  .show-password {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+
+  .current-password-input {
+    border: 1px solid green;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .password-input-one {
+    border: 1px solid red;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .password-input-two {
+    border: 1px solid blue;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+}

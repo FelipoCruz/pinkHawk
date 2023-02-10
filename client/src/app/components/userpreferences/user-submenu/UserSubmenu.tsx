@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { getUserTweets, updateUserDetails } from '../../../../services/api.service';
 import { updateAvatar, uploadImage } from '../../../../services/cloudinary.service';
 import { activeUser } from '../../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
@@ -12,51 +10,16 @@ import './UserSubmenu.scss';
 const CLOUDINARY_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
 const CLOUDINARY_CLOUD = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
 
-// const formFields = {
-//   password: '',
-// };
-
 const RightMenuButton = () => {
   const user = useAppSelector(({ user }) => user);
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
   const [isMenuOpen, setMenuOpen] = useState(false);
-  // const [tweets, setTweets] = useState([]);
-  // const [userFileds, setUserFields] = useState(formFields);
-  // const [passwordShown, setPasswordShown] = useState(false);
   const [logo, setLogo] = useState<File | null>(null);
   const [imageUpload, setImageUpload] = useState<{ image: File }>({} as { image: File });
   const [, setImg] = useState({});
   const [rawImage, setRawImage] = useState<File | null>(null);
   const [imageURL, setImageURL] = useState('');
   const [showSubmit, setShowSubmit] = useState(false);
-
-  // const togglePassword = () => {
-  //   setPasswordShown(!passwordShown);
-  // };
-
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = event.target;
-  //   setUserFields({ ...userFileds, [name]: value });
-  // };
-
-  // const handleSubmit = async (event: any) => {
-  //   event.preventDefault();
-  //   const formData = new FormData(event.target);
-  //   const details = {
-  //     password: formData.get('password'),
-  //   }
-  //   try {
-  //     const userDetails = await updateUserDetails(user.id, details as { password: string });
-  //     if (!userDetails) {
-  //       throw new Error('User not found');
-  //     } else {
-  //       navigate('/login');
-  //     }
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   const handleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -139,20 +102,6 @@ const RightMenuButton = () => {
               </div>
             </form>
           </div>
-          {/* <form className='sumbit-new-preferences' onSubmit={(event) => handleSubmit(event)}>
-            <label className='change-password-label' typeof='label' htmlFor='password'>
-              Change Password
-              <i className='show-password' onClick={togglePassword}>{passwordShown ? 'Hide' : 'Show'}</i>
-            </label>
-            <input
-              className='password-input'
-              type={passwordShown ? 'text' : 'password'}
-              name='password'
-              value={userFileds.password}
-              onChange={handleChange}
-            />
-            <button className='submit-button-user-preferences' type='submit'>SAVE</button>
-          </form> */}
           <button className='tweet-download-button'>
             <TweetDownload />
           </button>

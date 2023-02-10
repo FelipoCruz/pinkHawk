@@ -1,5 +1,10 @@
 {
   "javascript.preferences.quoteStyle": "single",
   "typescript.preferences.quoteStyle": "single",
-  "html.completion.attributeDefaultValue": "singlequotes"
+  "html.completion.attributeDefaultValue": "singlequotes",
+  "editor.tabCompletion": "on",
+  "editor.tabSize": 2,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "turboConsoleLog.quote": "'"
 }

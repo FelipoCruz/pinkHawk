@@ -112,12 +112,23 @@ export const updateAvatar = async (req: Request, res: Response) => {
 export const updateUserDetails = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { password } = req.body;
-    const hash = await bcrypt.hash(password, 10);
+    const { currentPassword, passwordOne, passwordTwo } = req.body;
+    if (passwordOne !== passwordTwo) {
+      return res.status(400).json({ message: 'New passwords do not match' });
+    }
+    const newHash = await bcrypt.hash(passwordOne, 10);
+    const oldHash = await bcrypt.hash(currentPassword, 10);
+    const user = await prisma.user.findUnique({
+      where: { id: Number(id) },
+      select: { password: true }
+    });
+    if (user?.password !== oldHash) {
+      return res.status(400).json({ message: 'Wrong password' });
+    }
     await prisma.user.update({
       where: { id: Number(id) },
       data: {
-        password: hash,
+        password: newHash,
       },
     });
     res.cookie('token', 'loggedout', {
