@@ -243,7 +243,9 @@ export const updateUserDetails = async (userId, details) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        password: details.password,
+        currentPassword: details.currentPassword,
+        passwordOne: details.passwordOne,
+        passwordTwo: details.passwordTwo
       }),
     });
     return response.json();

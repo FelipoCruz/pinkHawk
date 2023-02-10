@@ -33,7 +33,7 @@ router.post('/user/signin', signInUser);
 router.get('/user/:id/signout', authProtect, signOutUser);
 
 // route to modify the user details
-router.put('/user/:id/', authProtect, updateUserDetails);
+router.put('/user/:id', authProtect, updateUserDetails);
 
 // route to get user by id
 router.get('/user/:id', authProtect, getUserById);
