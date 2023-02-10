@@ -8,22 +8,12 @@ const UserDetails = () => {
   const user = useAppSelector(({ user }) => user);
   const navigate = useNavigate();
   const [passwordShown, setPasswordShown] = React.useState(false);
-  // const [passwordOne, setPasswordOne] = React.useState('');
-  // const [passwordTwo, setPasswordTwo] = React.useState('');
   const [userFileds, setUserFields] = React.useState({
     currentPassword: '',
     passwordOne: '',
     passwordTwo: ''
   });
 
-  // this function should check if the first password input is the same as the second password input
-  // const handlePasswordChecker = async (passwordOne: string, passwordTwo: string) => {
-  //   if (passwordOne === passwordTwo && password === 'valid') {
-  //     await
-  //   }
-  // }
-
-  // fuction to toggle password visibility
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
@@ -51,6 +41,7 @@ const UserDetails = () => {
         if (!userDetails) {
           throw new Error('User not found');
         } else {
+          alert('Password changed successfully, you are being redirected to the login page');
           navigate('/login');
         }
       } catch (err) {
@@ -87,7 +78,6 @@ const UserDetails = () => {
           type={passwordShown ? 'text' : 'password'}
           name='current-password'
           id='current-password'
-          // value={userFileds.currentPassword}
           onChange={handleChange}
         />
         <label className='new-password-label' htmlFor='password-one'>
@@ -98,7 +88,6 @@ const UserDetails = () => {
           type={passwordShown ? 'text' : 'password'}
           name='password-one'
           id='password-one'
-          // value={userFileds.passwordOne}
           onChange={handleChange}
         />
         <label className='confirm-password-label' htmlFor='password-two'>
@@ -109,7 +98,6 @@ const UserDetails = () => {
           type={passwordShown ? 'text' : 'password'}
           name='password-two'
           id='password-two'
-          // value={userFileds.passwordTwo}
           onChange={handleChange}
         />
         <button className='submit-button-user-preferences' type='submit'>
