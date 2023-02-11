@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
-import Tweet from '../tweet/Tweet';
 import ITweet from '../../interfaces/tweet.interface';
 import '../tweet/Tweet.scss';
 import { deleteTweetDB, getUserTweets } from '../../../services/api.service';
@@ -11,25 +10,22 @@ import Spinner from '../spinner/Spinner';
 const Queue = () => {
   const user = useAppSelector(({ user }) => user);
   const [tweets, setTweets] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     (async () => {
-      const queuedTweets = await getUserTweets(user.id, 'queued');
-      setTweets(queuedTweets);
-      setLoading(false);
+      if (user.id) {
+        const queuedTweets = await getUserTweets(user.id, 'queued');
+        setTweets(queuedTweets);
+        setLoading(false);
+      }
     })();
   }, [user]);
 
   const deleteTweet = async (tweetToDelete: ITweet, index: number) => {
-    console.log('deleting tweet');
-    console.log(tweetToDelete);
-    // delete tweet from DB
     await deleteTweetDB(user.id, tweetToDelete.id);
-    // delete tweet from state
     deleteTweetinState(index);
-    // generateTweetServiceClient(user);
   };
 
   const deleteTweetinState = (index: number) => {
@@ -38,20 +34,18 @@ const Queue = () => {
     setTweets(items);
   };
 
-  console.log('tweets are: ', tweets);
-
-  if (loading) {
-    return <div><Spinner /></div>;
-  }
-  if (!tweets) {
-    return <div>No data</div>;
-  }
-
   return (
     <>
+      {spinner ? <Spinner /> : <></>}
       <h2>Queued tweets</h2>
-      {/* {tweets?.length ? ( */}
-        {tweets.map((tweet: ITweet, index) => (
+      {!loading && tweets.length === 0 ? (
+        <div className="header-elements">
+          <div className="next-tweet-time">
+            <h4 className="no-queue-data">No queued tweets</h4>
+          </div>
+        </div>
+      ) : !loading && tweets.length > 0 ? (
+        tweets.map((tweet: ITweet, index) => (
           <li key={tweet.id} className="queue-tweet-li">
             <div className="queue-tweet-wrap">
               <SingleTweetTest2
@@ -61,12 +55,10 @@ const Queue = () => {
               />
             </div>
           </li>
-        ))}
-      {/* ) : (
-        <div className="queue-message">
-          <h3>No queued tweets yet</h3>
-        </div>
-      )} */}
+        ))
+      ) : (
+        <></>
+      )}
     </>
   );
 };

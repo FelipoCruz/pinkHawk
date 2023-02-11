@@ -16,38 +16,47 @@ const Selection = () => {
   const user = useAppSelector(({ user }) => user);
   const [tweets, setTweets] = useState([]);
   const [nextPostingTime, setNextPostingTime] = useState('');
+  const [loading, setLoading] = useState(true);
   const [spinner, setSpinner] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    setLoading(true);
     (async () => {
-      await getNextTweetPostingTime();
-      await fetchSuggestedTweets();
+      if (user.postingHours.length > 0) {
+        await getNextTweetPostingTime();
+      }
+      if (user.id) {
+        await fetchSuggestedTweets();
+      }
       setLoading(false);
     })();
   }, [user]);
 
   const getNextTweetPostingTime = async () => {
+    console.log('getting next posting time');
+
     const nextPostingTimestamp = await getNextPostingTime(user.id);
+    console.log('next posting time: ', nextPostingTimestamp);
+
     setNextPostingTime(nextPostingTimestamp);
   };
 
   const fetchSuggestedTweets = async () => {
-    setLoading(true);
     const queuedTweets = await getUserTweets(user.id, 'suggested');
     setTweets(queuedTweets);
-    setLoading(false);
   };
 
   const generateTweetsInit = async () => {
-    setLoading(true);
-    generateTweetServiceClient(user);
-    await new Promise((resolve) => setTimeout(resolve, 7000));
+    setSpinner(true);
+    await generateTweetServiceClient(user);
     fetchSuggestedTweets();
-    setLoading(false);
+    setSpinner(false);
   };
 
   const moveTweetToQueue = async (tweet: ITweet, index: number) => {
+    if (user.postingHours.length === 0) {
+      alert('Please set your posting hours first');
+      return;
+    }
     await addTweetToQueue(user.id, tweet.id);
     await getNextTweetPostingTime();
     deleteTweetinState(index);
@@ -65,69 +74,29 @@ const Selection = () => {
     console.log('tweet deleted from DB2');
   };
 
-  // if (loading) {
-  //   return <div><Spinner /></div>;
-  // }
-
-  // if (tweets.length < 1) {
-  //   return <>
-  //     <h3 className="selection-header-text">
-  //       No generated tweets yet !
-  //     </h3>
-  //     <button className="generate-btn" onClick={generateTweetsInit}>
-  //       Give Me More Tweets!
-  //     </button>
-  //   </>;
-  // }
-
-
   return (
     <div className="selection-page">
+      {spinner ? <Spinner /> : <></>}
       <h2>Suggested tweets</h2>
-      {/* {spinner ? (
-        <Spinner />
-      ) : (
-        <div className="selection-container">
-          <div className="selection-header">
-            {tweets?.length === 0 ? (
-              <>
-                <h3 className="selection-header-text">
-                  No generated tweets yet !
-                </h3>
-                <button className="generate-btn" onClick={generateTweetsInit}>
-                  Give Me More Tweets!
-                </button>
-              </>
-            ) : (
-              <div className="header-elements">
-                <div className="next-tweet-time">
-                  <p className="">Next tweet: </p>
-                  <p className="h2">
-                    {dayjs(new Date(nextPostingTime)).format('DD/MM/YY  HH:mm')}
-                  </p>
-                </div>
-                <button className="generate-btn" onClick={generateTweetsInit}>
-                  Give Me More Tweets!
-                </button>
-              </div>
-            )}
-          </div> */}
       <div className="header-elements">
         <div className="next-tweet-time">
-          <p className="">Next tweet: </p>
-          <p className="h2">
-            {dayjs(new Date(nextPostingTime)).format('DD/MM/YY  HH:mm')}
-          </p>
+          {!loading && user.postingHours.length > 0 && tweets.length > 0 ? (
+            <>
+              <p className="">Next tweet: </p>
+              <p className="h2">
+                {dayjs(new Date(nextPostingTime)).format('DD/MM/YY  HH:mm')}
+              </p>
+            </>
+          ) : !loading && tweets.length === 0 ? (
+            <h4 className="no-sugg-data">No suggested tweets</h4>
+          ) : (
+            <></>
+          )}
         </div>
-        {loading ? 
-        <Spinner />         
-        : <></>}
-        
         <button className="generate-btn" onClick={generateTweetsInit}>
-          Give Me More Tweets!
+          More Tweets!
         </button>
       </div>
-
       <div className="tweets-list">
         {tweets?.map((tweet: ITweet, index) => {
           return (
@@ -137,17 +106,13 @@ const Selection = () => {
                 deleteTweet={deleteTweet}
                 moveTweetToQueue={moveTweetToQueue}
                 index={index}
-              // nextPostingDate={nextPostingDate}
               />
             </div>
           );
         })}
       </div>
     </div>
-  )
-}
-// </div>
-// );
-// };
+  );
+};
 
 export default Selection;
