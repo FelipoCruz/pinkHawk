@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
 import ITweet from '../../interfaces/tweet.interface';
-import '../tweet/Tweet.scss';
 import { deleteTweetDB, getUserTweets } from '../../../services/api.service';
 import './Queue.scss';
 import SingleTweetTest2 from '../tweet/Tweet2';
-import Spinner from '../spinner/Spinner';
 
 const Queue = () => {
   const user = useAppSelector(({ user }) => user);
   const [tweets, setTweets] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -36,7 +33,6 @@ const Queue = () => {
 
   return (
     <>
-      {spinner ? <Spinner /> : <></>}
       <h2>Queued tweets</h2>
       {!loading && tweets.length === 0 ? (
         <div className="header-elements">

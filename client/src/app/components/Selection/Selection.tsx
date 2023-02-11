@@ -42,7 +42,7 @@ const Selection = () => {
 
   const fetchSuggestedTweets = async () => {
     const queuedTweets = await getUserTweets(user.id, 'suggested');
-    setTweets(queuedTweets);
+    setTweets(queuedTweets.reverse());
   };
 
   const generateTweetsInit = async () => {
@@ -76,7 +76,6 @@ const Selection = () => {
 
   return (
     <div className="selection-page">
-      {spinner ? <Spinner /> : <></>}
       <h2>Suggested tweets</h2>
       <div className="header-elements">
         <div className="next-tweet-time">
@@ -94,7 +93,7 @@ const Selection = () => {
           )}
         </div>
         <button className="generate-btn" onClick={generateTweetsInit}>
-          More Tweets!
+          {spinner ? <Spinner /> : <>More Tweets!</>}
         </button>
       </div>
       <div className="tweets-list">
