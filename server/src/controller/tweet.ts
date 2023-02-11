@@ -86,15 +86,10 @@ export const modifyTweetStatusToQueue = async (req: Request, res: Response) => {
 
 export const queueTweet = async (req: Request, res: Response) => {
   try {
-    const userIdReq = Number(req.body.id);
     const tweetId = Number(req.body.tweetId);
     const postingTimestamp = req.body.postingTimestamp;
-    console.log('postingTimestamp at body is: ', req.body.postingTimestamp);
     const postingTimestampAsDate = new Date(postingTimestamp);
     const postingTimestampISO = postingTimestampAsDate.toISOString();
-    //const postingTimestampISO = postingTimestamp.toISOString();
-    console.log('userIdReq is: ' + userIdReq);
-    console.log('tweetId is: ' + tweetId);
     const queuedTweetOK = await prisma.tweet.update({
       where: { id: tweetId },
       data: {
@@ -166,7 +161,9 @@ export const getNextPostingTime = async (req: Request, res: Response) => {
   try {
     const userId = Number(req.params.id);
     const postingTimestamp = await getPostingTime(userId);
-    res.status(201).json(postingTimestamp);
+    console.log('postingTimestamp is: ', postingTimestamp);
+
+    res.status(200).json(postingTimestamp);
   } catch (error) {
     console.log(
       'Error in getNextPostingTime @ module controller/tweet.ts: ',

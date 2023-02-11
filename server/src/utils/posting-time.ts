@@ -20,19 +20,23 @@ export const getPostingTime = async (userId: number) => {
       console.log('lastQueuedTweet: ', lastQueuedTweet);
 
       const lastTweetInQueue = lastQueuedTweet[0].postingTimestamp;
-      const formatDate = new Date(lastTweetInQueue!);
+      let formatDate = new Date(lastTweetInQueue!);
 
       const hourOfDate = formatDate.getHours();
       console.log('hourOfDate: ', hourOfDate);
 
+      user.postingHours.sort();
       const postingHours = user.postingHours;
       console.log('postingHours: ', postingHours);
       if (postingHours[postingHours.length - 1] === hourOfDate) {
+        console.log('last posting hour of the day', formatDate);
         formatDate.setDate(formatDate.getDate() + 1);
         formatDate.setHours(postingHours[0]);
         formatDate.setSeconds(0);
         return formatDate.toUTCString();
       } else {
+        console.log('last posting hour of the day', formatDate);
+
         for (let postingHour of postingHours) {
           if (postingHour > hourOfDate) {
             formatDate.setHours(postingHour);
