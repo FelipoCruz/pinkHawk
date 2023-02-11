@@ -4,18 +4,22 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 600px;
+  height: 100vh;
   align-items: center;
   margin-top: 30px;
 
-  // .background-fade {
-  //   display: flex;
-  //   // justify-content: center;
-  //   align-items: center;
-  //   position: fixed;
-
-  //   background-color: rgba(0, 0, 0, 0.5);
-  // }
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    background-color: white;
+    border-radius: 10px;
+    width: 500px;
+    height: fit-content;
+    box-shadow: 0 0 30px 0px rgb(1 41 112 / 10%);
+    margin-bottom: 30px;
+    margin-top: 40px;
+  }
 
   .container-user-settings {
     display: flex;

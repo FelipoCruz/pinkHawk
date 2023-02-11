@@ -50,7 +50,6 @@ const Dashboard = () => {
           <Route path="growth" element={<GrowthMenu />} />
           <Route path="user-preferences" element={<TopicsDefinition />} />
           <Route path="user-settings" element={<UserPreferences />} />
-          {/* <Route path="*" element={<Navigate to="co-pilot" />} /> */}
         </Routes>
         <Outlet />
       </main>

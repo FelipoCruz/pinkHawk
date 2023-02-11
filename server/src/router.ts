@@ -1,6 +1,5 @@
 import {
   createUser,
-  getAllUsers,
   getUserById,
   signInUser,
   updateFrequency,
@@ -12,6 +11,8 @@ import { setTopics } from './controller/topic';
 import {
   fetchTweets,
   generateTweet,
+  getNextPostingTime,
+  modifyTweetStatusToQueue,
   queueTweet,
   tweetDelete,
   tweetStatusPosted,
@@ -29,21 +30,30 @@ const router = require('express').Router();
 /* USER MANAGEMENT */
 router.post('/user/signup', createUser);
 router.post('/user/signin', signInUser);
-router.get('/user/signout', signOutUser);
+router.get('/user/:id/signout', authProtect, signOutUser);
 
 // route to modify the user details
-router.put('/user/:id/', authProtect, updateUserDetails);
+router.put('/user/:id', authProtect, updateUserDetails);
 
 // route to get user by id
 router.get('/user/:id', authProtect, getUserById);
 
 /* TOPICS MANAGEMENT */
 router.put('/user/:id/topics', authProtect, setTopics);
-router.post('/tweets/generate-tweet', authProtect, generateTweet);
 
 /* TWEETS MANAGEMENT */
 // route to fetch tweets with status 'suggested' or 'queued'
 router.get('/user/:id/tweets/:status', authProtect, fetchTweets);
+router.post('/tweets/generate-tweet', authProtect, generateTweet);
+
+router.get('/user/:id/next-posting-time', authProtect, getNextPostingTime);
+
+//
+router.put(
+  '/user/:userId/tweet/:tweetId',
+  authProtect,
+  modifyTweetStatusToQueue
+);
 
 // route to modify status of tweet from 'suggested' to 'queued'
 router.put('/tweet/queueTweet', authProtect, queueTweet);

@@ -26,59 +26,6 @@ const App: React.FC = (): JSX.Element => {
         </Routes>
       </div>
     </>
-    // <>
-    //   <div className='container'>
-    //     <Routes>
-    //       <Route path='/' element={<HomePage />} />
-    //       <Route
-    //         path='/dashboard/*'
-    //         element={
-    //           <ProtectedRoute>
-    //             <Dashboard />
-    //           </ProtectedRoute>
-    //         }
-    //       >
-    //         <Route
-    //           path='topics-definition'
-    //           element={
-    //             <ProtectedRoute>
-    //               <TopicsDefinition />
-    //             </ProtectedRoute>
-    //           }
-    //         />
-    //         <Route
-    //           path='co-pilot'
-    //           element={
-    //             <ProtectedRoute>
-    //               <CoPilot />
-    //             </ProtectedRoute>
-    //           }
-    //         />
-    //         <Route
-    //           path='growth'
-    //           element={
-    //             <ProtectedRoute>
-    //               <h1>Growth</h1>
-    //             </ProtectedRoute>
-    //           }
-    //         />
-    //         <Route
-    //           path='user/preferences'
-    //           element={
-    //             <ProtectedRoute>
-    //               <UserPreferences image={''} imageUpload={function (event: React.ChangeEvent<HTMLInputElement>): void {
-    //                 throw new Error('Function not implemented.');
-    //               } } />
-    //             </ProtectedRoute>
-    //           }
-    //         />
-    //         <Route path='*' element={<Navigate to='/dashboard/co-pilot' />} />
-    //       </Route>
-    //       <Route path='/login' element={<Login />} />
-    //       <Route path='/signup' element={<SignUp />} />
-    //     </Routes>
-    //   </div>
-    // </>
   );
 };
 
