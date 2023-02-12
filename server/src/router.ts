@@ -11,9 +11,8 @@ import { setTopics } from './controller/topic';
 import {
   fetchTweets,
   generateTweet,
-  getNextPostingTime,
+  getNextRecentQueuedTweet,
   modifyTweetStatusToQueue,
-  queueTweet,
   tweetDelete,
   tweetStatusPosted,
   updateTweetText,
@@ -46,7 +45,11 @@ router.put('/user/:id/topics', authProtect, setTopics);
 router.get('/user/:id/tweets/:status', authProtect, fetchTweets);
 router.post('/tweets/generate-tweet', authProtect, generateTweet);
 
-router.get('/user/:id/next-posting-time', authProtect, getNextPostingTime);
+router.get(
+  '/user/:id/next-recent-queued-tweet',
+  authProtect,
+  getNextRecentQueuedTweet
+);
 
 //
 router.put(
@@ -56,7 +59,7 @@ router.put(
 );
 
 // route to modify status of tweet from 'suggested' to 'queued'
-router.put('/tweet/queueTweet', authProtect, queueTweet);
+// router.put('/tweet/queueTweet', authProtect, queueTweet);
 
 // route to modify status of tweets to 'posted'
 router.put('/tweet/tweetStatusPosted', authProtect, tweetStatusPosted);

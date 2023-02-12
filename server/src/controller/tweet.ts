@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { userInfo } from 'os';
 import generateTweetAIService from '../integration/gpt2.service';
-import { getPostingTime } from '../utils/posting-time';
 
 const prisma = new PrismaClient();
 const SECRET_KEY = process.env.SECRET!;
@@ -65,10 +64,9 @@ export const fetchTweets = async (req: Request, res: Response) => {
 export const modifyTweetStatusToQueue = async (req: Request, res: Response) => {
   try {
     const { userId, tweetId } = req.params;
-    const { status } = req.body;
+    const { status, nextPostingTime } = req.body;
 
-    const postingTimestamp = await getPostingTime(Number(userId));
-    const postingTimestampAsDate = new Date(postingTimestamp!);
+    const postingTimestampAsDate = new Date(nextPostingTime);
     const postingTimestampISO = postingTimestampAsDate.toISOString();
 
     const queuedTweet = await prisma.tweet.update({
@@ -84,24 +82,24 @@ export const modifyTweetStatusToQueue = async (req: Request, res: Response) => {
   }
 };
 
-export const queueTweet = async (req: Request, res: Response) => {
-  try {
-    const tweetId = Number(req.body.tweetId);
-    const postingTimestamp = req.body.postingTimestamp;
-    const postingTimestampAsDate = new Date(postingTimestamp);
-    const postingTimestampISO = postingTimestampAsDate.toISOString();
-    const queuedTweetOK = await prisma.tweet.update({
-      where: { id: tweetId },
-      data: {
-        status: 'queued',
-        postingTimestamp: postingTimestampISO,
-      },
-    });
-    res.status(201).json(queuedTweetOK);
-  } catch (error) {
-    console.log('Error in queueTweet @ module controller/tweet.ts: ', error);
-  }
-};
+// export const queueTweet = async (req: Request, res: Response) => {
+//   try {
+//     const tweetId = Number(req.body.tweetId);
+//     const postingTimestamp = req.body.postingTimestamp;
+//     const postingTimestampAsDate = new Date(postingTimestamp);
+//     const postingTimestampISO = postingTimestampAsDate.toISOString();
+//     const queuedTweetOK = await prisma.tweet.update({
+//       where: { id: tweetId },
+//       data: {
+//         status: 'queued',
+//         postingTimestamp: postingTimestampISO,
+//       },
+//     });
+//     res.status(201).json(queuedTweetOK);
+//   } catch (error) {
+//     console.log('Error in queueTweet @ module controller/tweet.ts: ', error);
+//   }
+// };
 
 export const tweetStatusPosted = async (req: Request, res: Response) => {
   try {
@@ -157,13 +155,17 @@ export const updateTweetText = async (req: Request, res: Response) => {
   }
 };
 
-export const getNextPostingTime = async (req: Request, res: Response) => {
+export const getNextRecentQueuedTweet = async (req: Request, res: Response) => {
   try {
     const userId = Number(req.params.id);
-    const postingTimestamp = await getPostingTime(userId);
-    console.log('postingTimestamp is: ', postingTimestamp);
+    const lastQueuedTweet = await prisma.tweet.findMany({
+      where: { userId: userId, status: 'queued' },
+      orderBy: { postingTimestamp: 'desc' },
+      take: 1,
+    });
+    console.log('lastQueuedTweet is: ', lastQueuedTweet);
 
-    res.status(200).json(postingTimestamp);
+    res.status(200).json(lastQueuedTweet);
   } catch (error) {
     console.log(
       'Error in getNextPostingTime @ module controller/tweet.ts: ',

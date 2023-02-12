@@ -85,6 +85,8 @@ export const updateFrequency = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { frequency } = req.body;
     const { postingHours } = req.body;
+    console.log('postingHours: ', postingHours);
+
     const user = await prisma.user.update({
       where: { id: Number(id) },
       data: { frequencyTweetPosting: Number(frequency), postingHours },
@@ -120,12 +122,15 @@ export const updateUserDetails = async (req: Request, res: Response) => {
 
     const user = await prisma.user.findUnique({
       where: { id: Number(id) },
-      select: { password: true }
+      select: { password: true },
     });
 
     if (!user) return res.status(400).json({ message: 'User not found' });
 
-    const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
+    const isPasswordValid = await bcrypt.compare(
+      currentPassword,
+      user.password
+    );
 
     if (!isPasswordValid) {
       return res.status(400).json({ message: 'Wrong Password' });
