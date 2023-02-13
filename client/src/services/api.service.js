@@ -39,7 +39,7 @@ export const login = async (email, password) => {
   // }
 
   try {
-    const url = BASE_URL + 'user/signin';
+    const url = SERVER_URL + 'user/signin';
     const response = await fetch(url, {
       method: 'POST',
       headers: {
