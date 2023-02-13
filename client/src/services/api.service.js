@@ -182,7 +182,7 @@ export const deleteTweetDB = async (userId, tweetId) => {
   }
 };
 
-export const addTweetToQueue = async (userId, tweetId) => {
+export const addTweetToQueue = async (userId, tweetId, nextPostingTime) => {
   try {
     const response = await fetch(`${BASE_URL}user/${userId}/tweet/${tweetId}`, {
       method: 'PUT',
@@ -192,6 +192,7 @@ export const addTweetToQueue = async (userId, tweetId) => {
       },
       body: JSON.stringify({
         status: 'queued',
+        nextPostingTime,
       }),
     });
     return await response.json();
@@ -255,7 +256,7 @@ export const updateUserDetails = async (userId, details) => {
       body: JSON.stringify({
         currentPassword: details.currentPassword,
         passwordOne: details.passwordOne,
-        passwordTwo: details.passwordTwo
+        passwordTwo: details.passwordTwo,
       }),
     });
     return response.json();
@@ -264,9 +265,9 @@ export const updateUserDetails = async (userId, details) => {
   }
 };
 
-export const getNextPostingTime = async (userId) => {
+export const getMostRecentQueuedTweet = async (userId) => {
   try {
-    const url = `${BASE_URL}user/${userId}/next-posting-time`;
+    const url = `${BASE_URL}user/${userId}/next-recent-queued-tweet`;
     const response = await fetch(url, {
       method: 'GET',
       credentials: 'include',

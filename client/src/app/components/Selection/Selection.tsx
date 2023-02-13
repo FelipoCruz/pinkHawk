@@ -4,13 +4,13 @@ import { useAppSelector } from '../../hooks/hooks';
 import {
   addTweetToQueue,
   generateTweetServiceClient,
-  getNextPostingTime,
 } from '../../../services/api.service';
 import ITweet from '../../interfaces/tweet.interface';
 import Spinner from '../spinner/Spinner';
 import { getUserTweets, deleteTweetDB } from '../../../services/api.service';
 import SingleTweetTest2 from '../tweet/Tweet2';
 import dayjs from 'dayjs';
+import { getNextPostingTime } from '../../helpers/next-posting-time';
 
 const Selection = () => {
   const user = useAppSelector(({ user }) => user);
@@ -32,12 +32,8 @@ const Selection = () => {
   }, [user]);
 
   const getNextTweetPostingTime = async () => {
-    console.log('getting next posting time');
-
-    const nextPostingTimestamp = await getNextPostingTime(user.id);
-    console.log('next posting time: ', nextPostingTimestamp);
-
-    setNextPostingTime(nextPostingTimestamp);
+    const nextPostingTimestamp = await getNextPostingTime(user);
+    setNextPostingTime(nextPostingTimestamp!);
   };
 
   const fetchSuggestedTweets = async () => {
@@ -47,12 +43,10 @@ const Selection = () => {
 
   const generateTweetsInit = async () => {
     setSpinner(true);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    generateTweetServiceClient(user);
-    await new Promise((resolve) => setTimeout(resolve, 7000));
+    await generateTweetServiceClient(user);
+    await generateTweetServiceClient(user);
+    await generateTweetServiceClient(user);
+    await getNextTweetPostingTime();
     fetchSuggestedTweets();
     setSpinner(false);
   };
@@ -62,7 +56,7 @@ const Selection = () => {
       alert('Please set your posting hours first');
       return;
     }
-    await addTweetToQueue(user.id, tweet.id);
+    await addTweetToQueue(user.id, tweet.id, nextPostingTime);
     await getNextTweetPostingTime();
     deleteTweetinState(index);
   };
@@ -76,7 +70,7 @@ const Selection = () => {
     const items = [...tweets];
     items.splice(index, 1);
     setTweets(items);
-    console.log('tweet deleted from DB2');
+    console.log('tweet deleted from Local State');
   };
 
   return (
@@ -88,7 +82,7 @@ const Selection = () => {
             <>
               <p className="">Next tweet: </p>
               <p className="h2">
-                {dayjs(new Date(nextPostingTime)).format('DD/MM/YY  HH:mm')}
+                {dayjs(nextPostingTime).format('DD/MM/YY  HH:mm')}
               </p>
             </>
           ) : !loading && tweets.length === 0 ? (
