@@ -4,15 +4,12 @@
 
 dotenv.config(); */
 
-const envTest = process.env.REACT_APP_BASE_URL;
-console.log('envTest is: ', envTest);
-
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-console.log('server / base url is: ' + BASE_URL);
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+console.log('server url is: ' + SERVER_URL);
 
 export const register = async (firstname, lastname, email, password) => {
   try {
-    const url = BASE_URL + 'user/signup';
+    const url = SERVER_URL + 'user/signup';
     const response = await fetch(url, {
       method: 'POST',
       credentials: 'include',
@@ -35,7 +32,7 @@ export const register = async (firstname, lastname, email, password) => {
 
 export const login = async (email, password) => {
   try {
-    const url = BASE_URL + 'user/signin';
+    const url = SERVER_URL + 'user/signin';
     const response = await fetch(url, {
       method: 'POST',
       credentials: 'include',
@@ -52,7 +49,7 @@ export const login = async (email, password) => {
 
 export const logout = async (id) => {
   try {
-    const url = BASE_URL + `user/${id}/signout`;
+    const url = SERVER_URL + `user/${id}/signout`;
     const response = await fetch(url, {
       method: 'GET',
       credentials: 'include',
@@ -68,7 +65,7 @@ export const logout = async (id) => {
 
 export const saveTopics = async (topics, userId) => {
   try {
-    const url = `${BASE_URL}user/${userId}/topics`;
+    const url = `${SERVER_URL}user/${userId}/topics`;
     const response = await fetch(url, {
       method: 'PUT',
       credentials: 'include',
@@ -85,7 +82,7 @@ export const saveTopics = async (topics, userId) => {
 
 export const generateTweetServiceClient = async (user) => {
   try {
-    const url = BASE_URL + 'tweets/generate-tweet';
+    const url = SERVER_URL + 'tweets/generate-tweet';
     const response = await fetch(url, {
       method: 'POST',
       credentials: 'include',
@@ -103,7 +100,7 @@ export const generateTweetServiceClient = async (user) => {
 
 export const getUserById = async (id) => {
   try {
-    const url = BASE_URL + 'user/' + id;
+    const url = SERVER_URL + 'user/' + id;
     const response = await fetch(url, {
       method: 'GET',
       credentials: 'include',
@@ -119,7 +116,7 @@ export const getUserById = async (id) => {
 
 export const getAuthUrl = async (id) => {
   try {
-    const res = await fetch(`${BASE_URL}user/${id}/oauth`, {
+    const res = await fetch(`${SERVER_URL}user/${id}/oauth`, {
       method: 'GET',
       credentials: 'include',
     });
@@ -136,7 +133,7 @@ export const updateFrequencyPreference = async (
   postingHours
 ) => {
   try {
-    const res = await fetch(`${BASE_URL}user/${id}/frequency`, {
+    const res = await fetch(`${SERVER_URL}user/${id}/frequency`, {
       method: 'PUT',
       credentials: 'include',
       headers: {
@@ -152,7 +149,7 @@ export const updateFrequencyPreference = async (
 
 export const getUserTweets = async (id, status) => {
   try {
-    const response = await fetch(`${BASE_URL}user/${id}/tweets/${status}`, {
+    const response = await fetch(`${SERVER_URL}user/${id}/tweets/${status}`, {
       method: 'GET',
       credentials: 'include',
     });
@@ -164,7 +161,7 @@ export const getUserTweets = async (id, status) => {
 
 export const deleteTweetDB = async (userId, tweetId) => {
   try {
-    const url = BASE_URL + 'tweet/delete';
+    const url = SERVER_URL + 'tweet/delete';
     const response = await fetch(url, {
       method: 'DELETE',
       credentials: 'include',
@@ -184,7 +181,7 @@ export const deleteTweetDB = async (userId, tweetId) => {
 
 export const addTweetToQueue = async (userId, tweetId, nextPostingTime) => {
   try {
-    const response = await fetch(`${BASE_URL}user/${userId}/tweet/${tweetId}`, {
+    const response = await fetch(`${SERVER_URL}user/${userId}/tweet/${tweetId}`, {
       method: 'PUT',
       credentials: 'include',
       headers: {
@@ -208,7 +205,7 @@ export const queueTweetDB = async (userId, tweetId, postingDate) => {
     typeof postingDate
   );
   try {
-    const url = BASE_URL + 'tweet/queueTweet';
+    const url = SERVER_URL + 'tweet/queueTweet';
     const response = await fetch(url, {
       method: 'PUT',
       credentials: 'include',
@@ -229,7 +226,7 @@ export const queueTweetDB = async (userId, tweetId, postingDate) => {
 
 export const updateText = async (id, text) => {
   try {
-    const url = `${BASE_URL}tweet/${id}`;
+    const url = `${SERVER_URL}tweet/${id}`;
     const response = await fetch(url, {
       method: 'PUT',
       credentials: 'include',
@@ -246,7 +243,7 @@ export const updateText = async (id, text) => {
 
 export const updateUserDetails = async (userId, details) => {
   try {
-    const url = `${BASE_URL}user/${userId}`;
+    const url = `${SERVER_URL}user/${userId}`;
     const response = await fetch(url, {
       method: 'PUT',
       credentials: 'include',
@@ -267,7 +264,7 @@ export const updateUserDetails = async (userId, details) => {
 
 export const getMostRecentQueuedTweet = async (userId) => {
   try {
-    const url = `${BASE_URL}user/${userId}/next-recent-queued-tweet`;
+    const url = `${SERVER_URL}user/${userId}/next-recent-queued-tweet`;
     const response = await fetch(url, {
       method: 'GET',
       credentials: 'include',
