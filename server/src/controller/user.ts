@@ -42,7 +42,11 @@ export const createUser = async (req: Request, res: Response) => {
     const { password, ...userNoPassword } = newUser;
     const accessToken = jwt.sign({ id: newUser.id }, SECRET_KEY);
     res
-      .cookie('token', accessToken, { httpOnly: true })
+      .cookie('token', accessToken, {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
+      })
       .status(201)
       .json(userNoPassword);
   } catch (error) {
@@ -71,7 +75,11 @@ export const signInUser = async (req: Request, res: Response) => {
     console.log('accessToken: ', accessToken);
 
     res
-      .cookie('token', accessToken, { httpOnly: true })
+      .cookie('token', accessToken, {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
+      })
       .status(200)
       .json(userNoPassword);
   } catch (error) {
@@ -144,6 +152,9 @@ export const updateUserDetails = async (req: Request, res: Response) => {
       });
       res.cookie('token', 'loggedout', {
         expires: new Date(Date.now() + 10 * 1000),
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
       });
       res.status(200).json({ status: 'success' });
     }
@@ -155,6 +166,9 @@ export const updateUserDetails = async (req: Request, res: Response) => {
 export const signOutUser = (req: Request, res: Response) => {
   res.cookie('token', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+    sameSite: 'none',
+    secure: true,
   });
   console.log('cookie: ', req.cookies.token);
   res.status(200).json({ status: 'success' });

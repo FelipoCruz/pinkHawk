@@ -11,12 +11,10 @@ export const authProtect = (
   try {
     const { token } = req.cookies;
     if (!token) {
-      // console.log('No token');
       res.status(400).json({ error: 'token not found' });
     }
     const decoded = jwt.verify(token, SECRET_KEY);
     if (!decoded) {
-      // console.log('No decoded');
       res.status(400).json({ error: 'token not valid' });
     }
     next();
