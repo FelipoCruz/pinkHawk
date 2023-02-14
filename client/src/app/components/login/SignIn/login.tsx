@@ -32,11 +32,8 @@ const Login = () => {
       dispatch(activeUser(userData));
 
       // creating the user in local storage with the information we receive from the API call
-      localStorage.setItem('user', JSON.stringify(userData));
-      console.log('twitterToken', userData.twitterToken);
-      console.log('postingHours', userData.postingHours);
-      console.log('topics', userData.topics);
-
+      const user: IUser = userData;
+      localStorage.setItem('user', JSON.stringify(user));
       if (
         !userData.twitterToken ||
         userData.postingHours.length === 0 ||
@@ -90,7 +87,9 @@ const Login = () => {
           </div>
           <div className="submit-container">
             <Button text="Sign in" type="submit" />
-            <p className='redirect-signup'>Don't have an account? <a href='/signup'>Sign up</a></p>
+            <p className="redirect-signup">
+              Don't have an account? <a href="/signup">Sign up</a>
+            </p>
           </div>
         </form>
       </div>

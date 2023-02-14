@@ -1,28 +1,15 @@
-// import Axios from 'axios';
+import { fetchWrapper } from './fetch-wrapper.js';
 
-/* import dotenv from 'dotenv';
-
-dotenv.config(); */
-
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
-console.log('server url is: ' + SERVER_URL);
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export const register = async (firstname, lastname, email, password) => {
   try {
-    const url = SERVER_URL + 'user/signup';
-    const response = await fetch(url, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        firstName: firstname,
-        familyName: lastname,
-        email,
-        password,
-        twitterInfo: '',
-      }),
+    const response = await fetchWrapper('POST', `${BASE_URL}user/signup`, {
+      firstName: firstname,
+      familyName: lastname,
+      email,
+      password,
+      twitterInfo: '',
     });
     return response.json();
   } catch (err) {
@@ -32,14 +19,9 @@ export const register = async (firstname, lastname, email, password) => {
 
 export const login = async (email, password) => {
   try {
-    const url = SERVER_URL + 'user/signin';
-    const response = await fetch(url, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
+    const response = await fetchWrapper('POST', `${BASE_URL}user/signin`, {
+      email,
+      password,
     });
     return response.json();
   } catch (err) {
@@ -49,14 +31,7 @@ export const login = async (email, password) => {
 
 export const logout = async (id) => {
   try {
-    const url = SERVER_URL + `user/${id}/signout`;
-    const response = await fetch(url, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await fetchWrapper('GET', `${BASE_URL}user/${id}/signout`);
     return response.json();
   } catch (err) {
     console.log(err);
@@ -65,15 +40,13 @@ export const logout = async (id) => {
 
 export const saveTopics = async (topics, userId) => {
   try {
-    const url = `${SERVER_URL}user/${userId}/topics`;
-    const response = await fetch(url, {
-      method: 'PUT',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ topics }),
-    });
+    const response = await fetchWrapper(
+      'POST',
+      `${BASE_URL}user/${userId}/topics`,
+      {
+        topics,
+      }
+    );
     return response.json();
   } catch (err) {
     console.log(err);
@@ -82,16 +55,13 @@ export const saveTopics = async (topics, userId) => {
 
 export const generateTweetServiceClient = async (user) => {
   try {
-    const url = SERVER_URL + 'tweets/generate-tweet';
-    const response = await fetch(url, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    console.log(response);
+    const response = await fetchWrapper(
+      'POST',
+      `${BASE_URL}tweets/generate-tweet`,
+      {
+        user,
+      }
+    );
     return response.json();
   } catch (err) {
     console.log(err);
@@ -100,14 +70,7 @@ export const generateTweetServiceClient = async (user) => {
 
 export const getUserById = async (id) => {
   try {
-    const url = SERVER_URL + 'user/' + id;
-    const response = await fetch(url, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await fetchWrapper('GET', `${BASE_URL}user/${id}`);
     return response.json();
   } catch (err) {
     console.log(err);
@@ -116,12 +79,8 @@ export const getUserById = async (id) => {
 
 export const getAuthUrl = async (id) => {
   try {
-    const res = await fetch(`${SERVER_URL}user/${id}/oauth`, {
-      method: 'GET',
-      credentials: 'include',
-    });
-    console.log('res.body is: ', res.body);
-    return res.json();
+    const response = await fetchWrapper('GET', `${BASE_URL}user/${id}/oauth`);
+    return response.json();
   } catch (error) {
     console.log(error);
   }
@@ -133,13 +92,9 @@ export const updateFrequencyPreference = async (
   postingHours
 ) => {
   try {
-    const res = await fetch(`${SERVER_URL}user/${id}/frequency`, {
-      method: 'PUT',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ frequency, postingHours }),
+    const res = await fetchWrapper('PUT', `${BASE_URL}user/${id}/frequency`, {
+      frequency,
+      postingHours,
     });
     return res.json();
   } catch (error) {
@@ -149,10 +104,10 @@ export const updateFrequencyPreference = async (
 
 export const getUserTweets = async (id, status) => {
   try {
-    const response = await fetch(`${SERVER_URL}user/${id}/tweets/${status}`, {
-      method: 'GET',
-      credentials: 'include',
-    });
+    const response = await fetchWrapper(
+      'GET',
+      `${BASE_URL}user/${id}/tweets/${status}`
+    );
     return await response.json();
   } catch (err) {
     console.error(err);
@@ -161,17 +116,9 @@ export const getUserTweets = async (id, status) => {
 
 export const deleteTweetDB = async (userId, tweetId) => {
   try {
-    const url = SERVER_URL + 'tweet/delete';
-    const response = await fetch(url, {
-      method: 'DELETE',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        Id: userId,
-        tweetId: tweetId,
-      }),
+    const response = await fetchWrapper('DELETE', `${BASE_URL}tweet/delete`, {
+      Id: userId,
+      tweetId: tweetId,
     });
     return response.json();
   } catch (err) {
@@ -181,17 +128,14 @@ export const deleteTweetDB = async (userId, tweetId) => {
 
 export const addTweetToQueue = async (userId, tweetId, nextPostingTime) => {
   try {
-    const response = await fetch(`${SERVER_URL}user/${userId}/tweet/${tweetId}`, {
-      method: 'PUT',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+    const response = await fetchWrapper(
+      'PUT',
+      `${BASE_URL}user/${userId}/tweet/${tweetId}`,
+      {
         status: 'queued',
         nextPostingTime,
-      }),
-    });
+      }
+    );
     return await response.json();
   } catch (err) {
     console.error(err);
@@ -199,24 +143,11 @@ export const addTweetToQueue = async (userId, tweetId, nextPostingTime) => {
 };
 
 export const queueTweetDB = async (userId, tweetId, postingDate) => {
-  console.log('postingDate is module queueTweetDB is: ', postingDate);
-  console.log(
-    'postingDate is module queueTweetDB type is: ',
-    typeof postingDate
-  );
   try {
-    const url = SERVER_URL + 'tweet/queueTweet';
-    const response = await fetch(url, {
-      method: 'PUT',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        Id: userId,
-        tweetId: tweetId,
-        postingTimestamp: postingDate,
-      }),
+    const response = await fetchWrapper('PUT', `${BASE_URL}tweet/queueTweet`, {
+      Id: userId,
+      tweetId: tweetId,
+      postingTimestamp: postingDate,
     });
     return response.json();
   } catch (err) {
@@ -226,14 +157,8 @@ export const queueTweetDB = async (userId, tweetId, postingDate) => {
 
 export const updateText = async (id, text) => {
   try {
-    const url = `${SERVER_URL}tweet/${id}`;
-    const response = await fetch(url, {
-      method: 'PUT',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ text }),
+    const response = await fetchWrapper('PUT', `${BASE_URL}tweet/${id}`, {
+      text,
     });
     return response.json();
   } catch (err) {
@@ -243,18 +168,10 @@ export const updateText = async (id, text) => {
 
 export const updateUserDetails = async (userId, details) => {
   try {
-    const url = `${SERVER_URL}user/${userId}`;
-    const response = await fetch(url, {
-      method: 'PUT',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        currentPassword: details.currentPassword,
-        passwordOne: details.passwordOne,
-        passwordTwo: details.passwordTwo,
-      }),
+    const response = await fetchWrapper('PUT', `${BASE_URL}user/${userId}`, {
+      currentPassword: details.currentPassword,
+      passwordOne: details.passwordOne,
+      passwordTwo: details.passwordTwo,
     });
     return response.json();
   } catch (err) {
@@ -264,14 +181,10 @@ export const updateUserDetails = async (userId, details) => {
 
 export const getMostRecentQueuedTweet = async (userId) => {
   try {
-    const url = `${SERVER_URL}user/${userId}/next-recent-queued-tweet`;
-    const response = await fetch(url, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await fetchWrapper(
+      'GET',
+      `${BASE_URL}user/${userId}/next-recent-queued-tweet`
+    );
     return response.json();
   } catch (err) {
     console.log(err);
