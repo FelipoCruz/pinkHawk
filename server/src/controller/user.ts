@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { IUser } from '../interfaces/user.interface';
 
 const prisma = new PrismaClient();
 const SECRET_KEY = process.env.SECRET!;
@@ -33,22 +34,16 @@ export const getUserById = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   try {
     const hash = await bcrypt.hash(req.body.password, 10);
-    const newUser = await prisma.user.create({
+    const newUser: IUser = await prisma.user.create({
       data: {
         ...req.body,
         password: hash,
       },
     });
-    const { password, ...userNoPassword } = newUser;
     const accessToken = jwt.sign({ id: newUser.id }, SECRET_KEY);
-    res
-      .cookie('token', accessToken, {
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-      })
-      .status(201)
-      .json(userNoPassword);
+    newUser.password = undefined;
+    newUser.jwtToken = accessToken;
+    res.status(201).json(newUser);
   } catch (error) {
     console.log('error in CreateUser:' + error);
   }
@@ -69,19 +64,14 @@ export const signInUser = async (req: Request, res: Response) => {
     if (!isPasswordValid) {
       return res.status(400).send('Invalid email or password');
     }
-    // If password OK => return response wiht OK
-    const { password, ...userNoPassword } = user;
-    const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
-    console.log('accessToken: ', accessToken);
 
-    res
-      .cookie('token', accessToken, {
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-      })
-      .status(200)
-      .json(userNoPassword);
+    const foundUser: IUser = user;
+    foundUser.password = undefined;
+    // If password OK => return response wiht OK
+    const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
+    foundUser.jwtToken = accessToken;
+
+    res.status(200).json(foundUser);
   } catch (error) {
     console.log('error in CreateUser:' + error);
     res.status(500).json('server problem');
@@ -150,12 +140,6 @@ export const updateUserDetails = async (req: Request, res: Response) => {
           password: newHash,
         },
       });
-      res.cookie('token', 'loggedout', {
-        expires: new Date(Date.now() + 10 * 1000),
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-      });
       res.status(200).json({ status: 'success' });
     }
   } catch (error) {
@@ -164,12 +148,5 @@ export const updateUserDetails = async (req: Request, res: Response) => {
 };
 
 export const signOutUser = (req: Request, res: Response) => {
-  res.cookie('token', 'loggedout', {
-    expires: new Date(Date.now() + 10 * 1000),
-    httpOnly: true,
-    sameSite: 'none',
-    secure: true,
-  });
-  console.log('cookie: ', req.cookies.token);
   res.status(200).json({ status: 'success' });
 };

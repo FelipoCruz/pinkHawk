@@ -1,4 +1,3 @@
-
 import { log } from 'console';
 import React, { useEffect, useState } from 'react';
 import { TagsInput } from 'react-tag-input-component';
@@ -29,7 +28,9 @@ const TopicsInput = () => {
   const setTopics = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (selectedTopics.length === 0) {
-      alert('Please select at least one topic! Press comma or enter to add new topic.');
+      alert(
+        'Please select at least one topic! Press comma or enter to add new topic.'
+      );
       return;
     } else {
       const savingTopics = await saveTopics(selectedTopics, user.id);
@@ -44,21 +45,20 @@ const TopicsInput = () => {
   // if the user selects more than 4 tweets per day, the last selection is not saved
   const handleChangeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      setHoursPreference((prevState) => {
+      setHoursPreference((prevState: any) => {
         if (prevState.length < 4) {
           return [...prevState, Number(e.target.value)];
         } else {
           e.target.checked = false;
           return prevState;
         }
-      }); 
+      });
     } else {
       setHoursPreference(
-        hoursPreference.filter((hour) => hour !== Number(e.target.value))
+        hoursPreference.filter((hour: any) => hour !== Number(e.target.value))
       );
     }
   };
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,7 +76,7 @@ const TopicsInput = () => {
       alert('User preferences updated successfully');
     } else throw new Error('Error updating user preferences');
   };
-  
+
   // define 24h in a day to be used as desired tweeting hours
   const hoursADay = () => {
     return Array.from({ length: 24 }, (_, i) => i);
@@ -118,7 +118,9 @@ const TopicsInput = () => {
         <div className="topics-input-container">
           <div className="card-title">
             <h3>Tweet Tags</h3>
-            <em className="prim-color">(Press enter or comma to add new tag)</em>
+            <em className="prim-color">
+              (Press enter or comma to add new tag)
+            </em>
           </div>
           <form onSubmit={setTopics}>
             <TagsInput
@@ -138,7 +140,9 @@ const TopicsInput = () => {
         <form onSubmit={handleSubmit}>
           <div className="time-top card-title">
             <h3 className="time-label">Posting preferences</h3>
-            <em className="prim-color">Please select publication time. Pick at least 1, up to 4.</em>
+            <em className="prim-color">
+              Please select publication time. Pick at least 1, up to 4.
+            </em>
           </div>
           <p className="hour-title">Hours of the day:</p>
           <div className="pref-hours-list">
