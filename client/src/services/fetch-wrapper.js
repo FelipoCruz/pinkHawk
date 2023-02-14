@@ -24,7 +24,7 @@ export const fetchWrapper = async (method, url, body) => {
 function authHeader(url) {
   // return auth header with jwt if user is logged in and request is to the api url
   const storedUser = JSON.parse(localStorage.getItem('user'));
-  if (storedUser.jwtToken) {
+  if (storedUser && storedUser.jwtToken) {
     const token = storedUser.jwtToken;
     return { Authorization: `Bearer ${token}` };
   } else {
