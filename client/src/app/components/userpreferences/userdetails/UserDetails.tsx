@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateUserDetails } from '../../../../services/api.service';
 import { useAppSelector } from '../../../hooks/hooks';
-import './UserDetails.scss'
+import './UserDetails.scss';
 
 const UserDetails = () => {
   const user = useAppSelector(({ user }) => user);
@@ -11,7 +11,7 @@ const UserDetails = () => {
   const [userFileds, setUserFields] = React.useState({
     currentPassword: '',
     passwordOne: '',
-    passwordTwo: ''
+    passwordTwo: '',
   });
 
   const togglePassword = () => {
@@ -30,18 +30,24 @@ const UserDetails = () => {
       currentPassword: formData.get('current-password'),
       passwordOne: formData.get('password-one'),
       passwordTwo: formData.get('password-two'),
-    }
+    };
     if (details.passwordOne === details.passwordTwo) {
       try {
-        const userDetails = await updateUserDetails(user.id, details as {
-          currentPassword: string,
-          passwordOne: string,
-          passwordTwo: string
-        });
+        const userDetails = await updateUserDetails(
+          user.id,
+          details as {
+            currentPassword: string;
+            passwordOne: string;
+            passwordTwo: string;
+          }
+        );
         if (!userDetails) {
           throw new Error('User not found');
         } else {
-          alert('Password changed successfully, you are being redirected to the login page');
+          alert(
+            'Password changed successfully, you are being redirected to the login page'
+          );
+          localStorage.removeItem('user');
           navigate('/login');
         }
       } catch (err) {
@@ -49,58 +55,58 @@ const UserDetails = () => {
       }
     } else {
       alert('Passwords do not match');
-    };
+    }
   };
 
   return (
-    <div className='change-user-password-form'>
+    <div className="change-user-password-form">
       <form
-        className='sumbit-new-preferences'
+        className="sumbit-new-preferences"
         onSubmit={(event) => handleSubmit(event)}
       >
-        <div className='password-and-label'>
+        <div className="password-and-label">
           <label
-            className='change-password-label'
-            typeof='label'
-            htmlFor='password'
+            className="change-password-label"
+            typeof="label"
+            htmlFor="password"
           >
             Change Password
           </label>
-          <i className='show-password' onClick={togglePassword}>
+          <i className="show-password" onClick={togglePassword}>
             {passwordShown ? 'Hide' : 'Show'}
           </i>
         </div>
-        <label className='current-password-label' htmlFor='current-password'>
+        <label className="current-password-label" htmlFor="current-password">
           Current Password
         </label>
         <input
-          className='current-password-input'
+          className="current-password-input"
           type={passwordShown ? 'text' : 'password'}
-          name='current-password'
-          id='current-password'
+          name="current-password"
+          id="current-password"
           onChange={handleChange}
         />
-        <label className='new-password-label' htmlFor='password-one'>
+        <label className="new-password-label" htmlFor="password-one">
           New Password
         </label>
         <input
-          className='password-input-one'
+          className="password-input-one"
           type={passwordShown ? 'text' : 'password'}
-          name='password-one'
-          id='password-one'
+          name="password-one"
+          id="password-one"
           onChange={handleChange}
         />
-        <label className='confirm-password-label' htmlFor='password-two'>
+        <label className="confirm-password-label" htmlFor="password-two">
           Confirm Password
         </label>
         <input
-          className='password-input-two'
+          className="password-input-two"
           type={passwordShown ? 'text' : 'password'}
-          name='password-two'
-          id='password-two'
+          name="password-two"
+          id="password-two"
           onChange={handleChange}
         />
-        <button className='submit-button-user-preferences' type='submit'>
+        <button className="submit-button-user-preferences" type="submit">
           SAVE
         </button>
       </form>
