@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { IUser } from '../interfaces/user.interface';
+import { IUser } from '../interfaces/user.interface';
 
 const prisma = new PrismaClient();
 const SECRET_KEY = process.env.SECRET!;
@@ -35,12 +36,16 @@ export const createUser = async (req: Request, res: Response) => {
   try {
     const hash = await bcrypt.hash(req.body.password, 10);
     const newUser: IUser = await prisma.user.create({
+    const newUser: IUser = await prisma.user.create({
       data: {
         ...req.body,
         password: hash,
       },
     });
     const accessToken = jwt.sign({ id: newUser.id }, SECRET_KEY);
+    newUser.password = undefined;
+    newUser.jwtToken = accessToken;
+    res.status(201).json(newUser);
     newUser.password = undefined;
     newUser.jwtToken = accessToken;
     res.status(201).json(newUser);
@@ -71,11 +76,14 @@ export const signInUser = async (req: Request, res: Response) => {
 
     const foundUser: IUser = user;
     foundUser.password = undefined;
+
+    const foundUser: IUser = user;
+    foundUser.password = undefined;
     // If password OK => return response wiht OK
     const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
     foundUser.jwtToken = accessToken;
-    console.log('accessToken: ', accessToken);
 
+    res.status(200).json(foundUser);
     res.status(200).json(foundUser);
   } catch (error) {
     console.log('error in CreateUser:' + error);
