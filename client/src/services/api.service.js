@@ -43,9 +43,7 @@ export const saveTopics = async (topics, userId) => {
     const response = await fetchWrapper(
       'POST',
       `${BASE_URL}user/${userId}/topics`,
-      {
-        topics,
-      }
+      topics
     );
     return response.json();
   } catch (err) {
@@ -58,9 +56,7 @@ export const generateTweetServiceClient = async (user) => {
     const response = await fetchWrapper(
       'POST',
       `${BASE_URL}tweets/generate-tweet`,
-      {
-        user,
-      }
+      user
     );
     return response.json();
   } catch (err) {
@@ -157,9 +153,7 @@ export const queueTweetDB = async (userId, tweetId, postingDate) => {
 
 export const updateText = async (id, text) => {
   try {
-    const response = await fetchWrapper('PUT', `${BASE_URL}tweet/${id}`, {
-      text,
-    });
+    const response = await fetchWrapper('PUT', `${BASE_URL}tweet/${id}`, text);
     return response.json();
   } catch (err) {
     console.log(err);
