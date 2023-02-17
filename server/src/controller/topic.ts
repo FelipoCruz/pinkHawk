@@ -42,3 +42,6 @@ export const setTopics = async (req: Request, res: Response) => {
     console.log('error in CreateUser:' + error);
   }
 };
+
+
+
