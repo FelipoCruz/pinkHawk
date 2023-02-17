@@ -1,7 +1,7 @@
 import Header from '../components/header/Header';
 import { Outlet, useNavigate } from 'react-router-dom';
 import gif from '../../images/arrow-up-up.gif';
-import userIcon from '../../images/tom.jpg';
+import userIcon from '../../images/person.jpeg';
 import commentIcon from '../../images/Twitter_Reply.png';
 import retweetIcon from '../../images/repost.png';
 import likeHeart from '../../images/heart.png';
