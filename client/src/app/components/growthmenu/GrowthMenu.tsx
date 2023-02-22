@@ -8,13 +8,16 @@ import { useAppSelector } from '../../hooks/hooks';
 const GrowthMenu = () => {
 
   const user = useAppSelector(state => state.user);
-  const [followers, setFollowers] = useState<number[]>([]);
 
-  //define a function to get the followers data of the user
+  const [followers, setFollowers] = useState(0);
+ const [likes, setLikes] = useState(0);
   useEffect(() => {
-    getFollowers().then((data) => {
-      setFollowers(data);
+    if(user.id) {
+       getFollowers(user.id).then((data) => {
+       setFollowers(data.followersCount);
+       setLikes(data.total);
     });
+    }
   }, [user]);
 
   const data = {
@@ -51,7 +54,10 @@ const GrowthMenu = () => {
 
   return (
     <div>
-      <Doughnut data={data} />
+      <h2>Growth</h2>
+      <p>Followers: {followers}</p>
+      <p>Total Likes of past 7 days: {likes}</p>
+      {/* <Doughnut data={data} /> */}
     </div>
   );
 };
