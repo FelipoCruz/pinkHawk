@@ -15,7 +15,7 @@ export const fetchWrapper = async (method, url, body) => {
     requestOptions.headers['Content-Type'] = 'application/json';
     requestOptions.body = JSON.stringify(body);
   }
-  console.log('requestOptions', requestOptions);
+
   return await fetch(url, requestOptions);
 };
 
