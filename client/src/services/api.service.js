@@ -53,7 +53,7 @@ export const saveTopics = async (topics, userId) => {
     const response = await fetchWrapper(
       'PUT',
       `${BASE_URL}user/${userId}/topics`,
-      topics
+      { topics }
     );
     return response.json();
   } catch (err) {
