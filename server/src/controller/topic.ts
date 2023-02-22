@@ -9,12 +9,18 @@ const SECRET_KEY = process.env.SECRET!;
 export const setTopics = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    console.log('id', id);
+
     const user = await prisma.user.findUnique({
       where: {
         id: Number(id),
       },
     });
+    console.log('user', user);
+
     const { topics } = req.body;
+    console.log('topics in body', topics);
+
     const topicsSaved = await prisma.user.update({
       where: {
         id: Number(id),
@@ -23,6 +29,7 @@ export const setTopics = async (req: Request, res: Response) => {
         topics: topics,
       },
     });
+    console.log('topicsSaved', topicsSaved);
     if (user && user?.postingHours.length > 0 && user?.topics.length > 0) {
       const newGeneratedTweet = await generateTweetAIService(topics);
       const tweetText = String(newGeneratedTweet?.text);
@@ -42,6 +49,3 @@ export const setTopics = async (req: Request, res: Response) => {
     console.log('error in CreateUser:' + error);
   }
 };
-
-
-

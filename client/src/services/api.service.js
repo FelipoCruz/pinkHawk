@@ -9,7 +9,7 @@ console.log('envTest is: ', envTest);
 
 console.log(process.env.SERVER_URL);
 
-const BASE_URL = process.env.SERVER_URL || 'https://159.89.13.196/';
+const BASE_URL = process.env.SERVER_URL || 'http://159.89.13.196/';
 console.log('server / base url is: ' + BASE_URL);
 
 export const register = async (firstname, lastname, email, password) => {
@@ -28,23 +28,10 @@ export const register = async (firstname, lastname, email, password) => {
 };
 
 export const login = async (email, password) => {
-  // try {
-  //   const response = await fetchWrapper('POST', `${BASE_URL}user/signin`, {
-  //     email,
-  //     password,
-  //   });
-  //   return response.json();
-  // } catch (err) {
-  //   console.log(err);
-  // }
   try {
-    const url = BASE_URL + 'user/signin';
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
+    const response = await fetchWrapper('POST', `${BASE_URL}user/signin`, {
+      email,
+      password,
     });
     return response.json();
   } catch (err) {
@@ -64,7 +51,7 @@ export const logout = async (id) => {
 export const saveTopics = async (topics, userId) => {
   try {
     const response = await fetchWrapper(
-      'POST',
+      'PUT',
       `${BASE_URL}user/${userId}/topics`,
       topics
     );

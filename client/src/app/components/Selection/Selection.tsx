@@ -64,17 +64,6 @@ const Selection = () => {
   const deleteTweet = async (tweetToDelete: ITweet, index: number) => {
     const DBdelete = await deleteTweetDB(user.id, tweetToDelete.id);
     deleteTweetinState(index);
-<<<<<<< HEAD
-=======
-    generateTweetServiceClient(user);
-  };
-
-
-  
-
-  const addTweetToQueueState = (tweet: ITweet) => {
-    setQueuedTweets([...queuedTweets, tweet]);
->>>>>>> 879732b (deploy test 23)
   };
 
   const deleteTweetinState = (index: number) => {
