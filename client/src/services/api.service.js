@@ -28,10 +28,23 @@ export const register = async (firstname, lastname, email, password) => {
 };
 
 export const login = async (email, password) => {
+  // try {
+  //   const response = await fetchWrapper('POST', `${BASE_URL}user/signin`, {
+  //     email,
+  //     password,
+  //   });
+  //   return response.json();
+  // } catch (err) {
+  //   console.log(err);
+  // }
   try {
-    const response = await fetchWrapper('POST', `${BASE_URL}user/signin`, {
-      email,
-      password,
+    const url = BASE_URL + 'user/signin';
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
     });
     return response.json();
   } catch (err) {
