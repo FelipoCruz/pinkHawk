@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks/hooks';
 import ITweet from '../../interfaces/tweet.interface';
-import userIcon from '../../../images/tom.jpg';
+import userIcon from '../../../images/user.png';
 import commentIcon from '../../../images/Twitter_Reply.png';
 import retweetIcon from '../../../images/repost.png';
 import likeHeart from '../../../images/heart.png';

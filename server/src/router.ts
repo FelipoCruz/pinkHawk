@@ -6,6 +6,7 @@ import {
   signOutUser,
   updateAvatar,
   updateUserDetails,
+  getUserFollowers,
 } from './controller/user';
 import { setTopics } from './controller/topic';
 import {
@@ -36,6 +37,9 @@ router.put('/user/:id', authProtect, updateUserDetails);
 
 // route to get user by id
 router.get('/user/:id', authProtect, getUserById);
+
+// route to get user's followers
+router.get('/user/:id/followers', authProtect, getUserFollowers);
 
 /* TOPICS MANAGEMENT */
 router.put('/user/:id/topics', authProtect, setTopics);

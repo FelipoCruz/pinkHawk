@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { IUser } from '../interfaces/user.interface';
+import { TwitterApi } from 'twitter-api-v2';
 
 const prisma = new PrismaClient();
 const SECRET_KEY = process.env.SECRET!;
@@ -24,7 +25,6 @@ export const getUserById = async (req: Request, res: Response) => {
     if (!user) {
       res.status(400).json({ message: 'User not found' });
     }
-    console.log('user from getUserById: ', user);
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
@@ -150,3 +150,35 @@ export const updateUserDetails = async (req: Request, res: Response) => {
 export const signOutUser = (req: Request, res: Response) => {
   res.status(200).json({ status: 'success' });
 };
+
+export const getUserFollowers = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const user = await prisma.user.findUnique({
+      where: { id: Number(id) },
+      select: { twitterToken: true, twitterSecret: true, twitterAccountId: true, twitterName: true},
+    });
+
+    const realUser = new TwitterApi({
+      appKey: process.env.API_KEY!,
+      appSecret: process.env.API_KEY_SECRET!,
+      accessToken: user?.twitterToken!,
+      accessSecret: user?.twitterSecret!,
+    });
+    
+    const followers = await realUser.v2.followers(user?.twitterAccountId!);
+    const followersCount= followers.meta.result_count;
+    
+    const tweets = await realUser.v2.search({"tweet.fields": "public_metrics", "query": `from:${user?.twitterName!}`})
+    let total = 0;
+    for await (const tweet of tweets) {
+      const likes = tweet.public_metrics!.like_count;
+      // console.log(likes);
+      total += likes;
+    }
+
+    res.status(200).json({followersCount, total});
+  } catch (error) {
+    console.log(error);
+  }
+}

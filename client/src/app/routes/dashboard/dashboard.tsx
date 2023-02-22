@@ -19,19 +19,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     const refresh = async () => {
-      console.log('isLoggedIn in App', isLoggedIn);
       if (!isLoggedIn) {
         let storedString = localStorage.getItem('user');
         if (storedString) {
           const storedUser: IUser = JSON.parse(storedString);
-          console.log('storedUser', storedUser);
-
           if (storedUser) {
             const user: IUser = await getUserById(storedUser.id);
-            console.log(user);
-
             dispatch(activeUser(user));
-            console.log('isLoggedIn after refresh', isLoggedIn);
           }
         }
       }
