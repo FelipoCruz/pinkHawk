@@ -81,6 +81,7 @@ export const signInUser = async (req: Request, res: Response) => {
     // If password OK => return response wiht OK
     const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
     foundUser.jwtToken = accessToken;
+    console.log('accessToken: ', accessToken);
 
     res.status(200).json(foundUser);
     res.status(200).json(foundUser);
