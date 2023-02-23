@@ -56,11 +56,15 @@ export const signInUser = async (req: Request, res: Response) => {
     // user exists?
     console.log('accessToken: ');
     const user = await prisma.user.findUnique({ where: { email: loginEmail } });
+    console.log('user: ', user);
+
     if (!user) {
       return res.status(400).send('Invalid email or password');
     }
     // password is OK?
     const isPasswordValid = await bcrypt.compare(loginPassword, user.password);
+    console.log('isPasswordValid: ', isPasswordValid);
+
     if (!isPasswordValid) {
       return res.status(400).send('Invalid email or password');
     }
@@ -70,6 +74,7 @@ export const signInUser = async (req: Request, res: Response) => {
     // If password OK => return response wiht OK
     const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
     foundUser.jwtToken = accessToken;
+    console.log('accessToken: ', accessToken);
 
     res.status(200).json(foundUser);
   } catch (error) {
