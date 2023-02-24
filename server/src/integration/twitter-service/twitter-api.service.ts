@@ -61,7 +61,7 @@ function job() {
 function job1() {
   try {
     new CronJob(
-      '0 12 * * * *', //seconds, minutes, hours, day of month, month, day of week
+      '0 */01 * * * *', //seconds, minutes, hours, day of month, month, day of week
       async function () {
         
         const users = await prisma.user.findMany({
@@ -85,7 +85,8 @@ function job1() {
           const followers = await realUser.v2.followers(user?.twitterAccountId!);
           const followersCount = followers.meta.result_count;
 
-          const tweets = await realUser.v2.search({ "tweet.fields": "public_metrics", "query": `from:${user?.twitterName!}` })
+          //get tweets from past 7 days and get the total likes and comments count
+          const tweets = await realUser.v2.search({ "tweet.fields": "public_metrics", "query": `from:${user?.twitterName!}`})
           let totalLikes = 0;
           let totalComments = 0;
           for await (const tweet of tweets) {
@@ -105,7 +106,8 @@ function job1() {
             },
 
           });
-        }),
+
+        });
       },
       null,
       true, //with this parameter set to true, no need to call job.start()
