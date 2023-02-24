@@ -10,7 +10,7 @@ console.log('envTest is: ', envTest);
 console.log(process.env.SERVER_URL);
 
 const BASE_URL = 'https://pinkhawk.jaafarfora.com/';
-console.log('server / base url is: ' + BASE_URL);
+console.log('server and / base url is: ' + BASE_URL);
 
 export const register = async (firstname, lastname, email, password) => {
   try {
