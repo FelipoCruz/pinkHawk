@@ -8,10 +8,10 @@ datasource db {
 }
 
 model User {
-  id                    Int       @id @default(autoincrement())
+  id                    Int         @id @default(autoincrement())
   firstName             String
   familyName            String
-  email                 String    @unique
+  email                 String      @unique
   password              String
   twitterInfo           String?
   twitterAccountId      String?
@@ -20,12 +20,13 @@ model User {
   twitterSecret         String?
   tweets                Tweet[]
   topics                String[]
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
   frequencyTweetPosting Int?
   profilePicture        String?
   lastPostingAt         DateTime?
   postingHours          Int[]
+  GrowthData            GrowthData[]
 }
 
 model Tweet {
@@ -38,4 +39,14 @@ model Tweet {
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
   postingTimestamp DateTime?
+}
+
+model GrowthData {
+  id        Int      @id @default(autoincrement())
+  User      User     @relation(fields: [userId], references: [id])
+  userId    Int     
+  followers Int
+  likes     Int
+  comments  Int
+  date      DateTime
 }

@@ -198,11 +198,11 @@ export const getMostRecentQueuedTweet = async (userId) => {
   }
 };
 
-export const getFollowers = async (userId) => {
+export const getGrowth = async (userId) => {
   try {
     const response = await fetchWrapper(
       'GET',
-      `${BASE_URL}user/${userId}/followers`
+      `${BASE_URL}user/${userId}/growth`
     );
     return response.json();
   } catch (err) {

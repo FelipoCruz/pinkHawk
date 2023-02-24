@@ -56,34 +56,65 @@ function job() {
   }
 }
 
-export default job;
+//execute every day at 12pm UTC
+function job1() {
+  try {
+    new CronJob(
+      '0 */01 * * * *', //seconds, minutes, hours, day of month, month, day of week
+      async function () {
+        
+        const users = await prisma.user.findMany({
+          select: {
+            id: true,
+            twitterAccountId: true,
+            twitterToken: true,
+            twitterSecret: true,
+            twitterName: true,
+          },
+        });
 
-// //Real cronjob -- execute every hour from 0-23 hours
+        users.forEach(async (user) => {
+          const realUser = new TwitterApi({
+            appKey: key,
+            appSecret: secret!,
+            accessToken: user.twitterToken!,
+            accessSecret: user.twitterSecret!,
+          });
 
-// // var CronJob = require('cron').CronJob;
-// // var job = new CronJob(
-// //   '0 0-23 * * * *', //seconds, minutes, hours, day of month, month, day of week
-// //   async function () {
-// //     let nowDate = new Date().toISOString().split('T')[0]; //xxxx-xx-xx
-// //     let nowHour = new Date().getHours(); // number from 0-23
-// //     let tweets = await prisma.tweet.findMany({ where: { status: "queued"} })
-// //     tweets.forEach(async tweet => {
-// //       const {postingTimestamp} = tweet;
-// //      if(postingTimestamp && postingTimestamp.getHours() === nowHour && postingTimestamp.toISOString().split('T')[0] === nowDate) {
-// //         const userId = tweet.userId;
-// //         const user = await prisma.user.findUnique({where:{ id: userId}})
-// //         const { twitterToken, twitterSecret } = user!;
-// //         const realUser = new TwitterApi({
-// //               appKey: key,
-// //               appSecret: secret!,
-// //               accessToken: twitterToken!,
-// //               accessSecret: twitterSecret!
-// //             })
-// //         await realUser.v2.tweet(tweet)
-// //       }
-// //     })
-// //   },
-// //   null,
-// //   true, //with this parameter set to true, no need to call job.start()
-// //   'Europe/Madrid' //timezone!!!!!
-// // );
+          const followers = await realUser.v2.followers(user?.twitterAccountId!);
+          const followersCount = followers.meta.result_count;
+
+          //get tweets from past 7 days and get the total likes and comments count
+          const tweets = await realUser.v2.search({ "tweet.fields": "public_metrics", "query": `from:${user?.twitterName!}`})
+          let totalLikes = 0;
+          let totalComments = 0;
+          for await (const tweet of tweets) {
+            const likes = tweet.public_metrics!.like_count;
+            const comments = tweet.public_metrics!.reply_count;
+            totalComments += comments;
+            totalLikes += likes;
+          }
+
+          await prisma.growthData.update({
+            where: { userId: user.id },
+            data: {  
+              followers: followersCount,
+              likes: totalLikes,
+              comments: totalComments,
+              date: new Date()
+            },
+
+          });
+
+        });
+      },
+      null,
+      true, //with this parameter set to true, no need to call job.start()
+      'UTC' //timezone!!!!!
+    );
+  } catch (error) {
+    console.log('error in the CronJob. The error is:', error);
+  }
+}
+
+export { job, job1 };
