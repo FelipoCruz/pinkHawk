@@ -2,7 +2,7 @@ import { fetchWrapper } from './fetch-wrapper.js';
 
 /* import dotenv from 'dotenv';
 
-dotenv.config(); */
+dotenv.config(); test */
 
 const envTest = process.env.TEST;
 console.log('envTest is: ', envTest);
