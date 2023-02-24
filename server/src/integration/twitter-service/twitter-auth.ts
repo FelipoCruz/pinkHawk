@@ -96,7 +96,7 @@ export const getAccessToken = async (req: Request, res: Response) => {
   }
   await prisma.growthData.create({
     data: {
-      userId: parseInt(userId),
+      userId: Number(userId),
       followers: followersCount,
       likes: totalLikes,
       comments: totalComments,

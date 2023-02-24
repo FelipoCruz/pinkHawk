@@ -44,7 +44,7 @@ model Tweet {
 model GrowthData {
   id        Int      @id @default(autoincrement())
   User      User     @relation(fields: [userId], references: [id])
-  userId    Int      @unique
+  userId    Int     
   followers Int
   likes     Int
   comments  Int

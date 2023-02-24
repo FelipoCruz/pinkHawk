@@ -39,7 +39,7 @@ router.put('/user/:id', authProtect, updateUserDetails);
 router.get('/user/:id', authProtect, getUserById);
 
 // route to get user's followers
-router.get('/user/:id/followers', authProtect, getUserFollowers);
+router.get('/user/:id/growth', authProtect, getUserFollowers);
 
 /* TOPICS MANAGEMENT */
 router.put('/user/:id/topics', authProtect, setTopics);
