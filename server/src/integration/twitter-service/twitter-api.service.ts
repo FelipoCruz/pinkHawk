@@ -60,10 +60,12 @@ function job() {
 function job1() {
   try {
     new CronJob(
-      '0 0 9 * * 1', //seconds, minutes, hours, day of month, month, day of week
+      // '0 0 9 * * 1' 
+      '0 */01 * * * *', //runs every minute
       async function () {
 
         const users = await prisma.user.findMany({
+          where: { twitterToken: { not: null }, twitterSecret: { not: null } },
           select: {
             id: true,
             twitterAccountId: true,
@@ -75,46 +77,45 @@ function job1() {
 
         for (const user of users) {
 
-          if (user.twitterToken && user.twitterSecret) {
-            try {
-              const realUser = new TwitterApi({
-                appKey: key,
-                appSecret: secret!,
-                accessToken: user.twitterToken!,
-                accessSecret: user.twitterSecret!,
-              });
-              const followers = await realUser.v2.followers(user?.twitterAccountId!);
-              const followersCount = followers.meta.result_count;
+          try {
+            const realUser = new TwitterApi({
+              appKey: key,
+              appSecret: secret!,
+              accessToken: user.twitterToken!,
+              accessSecret: user.twitterSecret!,
+            });
+            const followers = await realUser.v2.followers(user?.twitterAccountId!);
+            const followersCount = followers.meta.result_count;
 
-              //get tweets from past 7 days and get the total likes and comments count
-              const tweets = await realUser.v2.search({ "tweet.fields": "public_metrics", "query": `from:${user?.twitterName!}` })
-              let totalLikes = 0;
-              let totalComments = 0;
-              for await (const tweet of tweets) {
-                const likes = tweet.public_metrics!.like_count;
-                const comments = tweet.public_metrics!.reply_count;
-                totalComments += comments;
-                totalLikes += likes;
-              }
-              await prisma.growthData.create({
-                data: {
-                  userId: user.id,
-                  followers: followersCount,
-                  likes: totalLikes,
-                  comments: totalComments,
-                  date: new Date()
-                },
-              });
-            } catch (error) {
-              console.log('error in the CronJob. The error is:', error);
-              continue;  //go to the next user
+            //get tweets from past 7 days and get the total likes and comments count
+            const tweets = await realUser.v2.search({ "tweet.fields": "public_metrics", "query": `from:${user?.twitterName!}` })
+            let totalLikes = 0;
+            let totalComments = 0;
+            for await (const tweet of tweets) {
+              const likes = tweet.public_metrics!.like_count;
+              const comments = tweet.public_metrics!.reply_count;
+              totalComments += comments;
+              totalLikes += likes;
             }
+            await prisma.growthData.create({
+              data: {
+                userId: user.id,
+                followers: followersCount,
+                likes: totalLikes,
+                comments: totalComments,
+                date: new Date()
+              },
+            });
+          } catch (error) {
+            console.log('error in the CronJob. The error is:', error);
+            continue;  //go to the next user
           }
         }
+
       },
       null,
-      true, 
-      'UTC' 
+      true,
+      'UTC'
     );
   } catch (error) {
     console.log('error in the CronJob. The error is:', error);
