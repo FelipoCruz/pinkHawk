@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.57ba2776.css",
-    "main.js": "/static/js/main.e8a74cea.js",
+    "main.js": "/static/js/main.8cec1392.js",
     "static/media/signup.png": "/static/media/signup.263b901df1a60a84040a.png",
     "static/media/arrow-up-up.gif": "/static/media/arrow-up-up.7345ef78a8f45d4e0c9a.gif",
     "static/media/pinkhawklogo.svg": "/static/media/pinkhawklogo.376302bbde85f046fd9049bb9ee09514.svg",
     "index.html": "/index.html",
     "main.57ba2776.css.map": "/static/css/main.57ba2776.css.map",
-    "main.e8a74cea.js.map": "/static/js/main.e8a74cea.js.map"
+    "main.8cec1392.js.map": "/static/js/main.8cec1392.js.map"
   },
   "entrypoints": [
     "static/css/main.57ba2776.css",
-    "static/js/main.e8a74cea.js"
+    "static/js/main.8cec1392.js"
   ]
 }
