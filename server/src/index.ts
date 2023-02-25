@@ -10,7 +10,7 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 const port = process.env.SERVER_PORT || 5000;
 const app = express();
 
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: 'https://pinkhawk.xyz' }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(router);
