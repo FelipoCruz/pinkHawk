@@ -4,7 +4,7 @@ deploy25
 
 ## 1- After Schema modification
 
-After a schema (model) modification, we need to generate a migration:
+After a schema (model) modification, we need to generate a migration :
 
 ```bash
 $ npx prisma migrate dev --name 'migration-name'
