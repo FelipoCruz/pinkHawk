@@ -33,6 +33,7 @@ const TopicsInput = () => {
       );
       return;
     } else {
+      log('selectedTopics', selectedTopics);
       const savingTopics = await saveTopics(selectedTopics, user.id);
       if (savingTopics) {
         dispatch(activeUser(savingTopics));
