@@ -30,6 +30,6 @@ jobs:
             echo 'Client Deployment Started'
             cd ../client
             npm install
-            react-scripts build
+            npm run build
             cp -r ./build/* /var/www/pinkhawk.xyz/html
             echo 'Client Deployment Done'
