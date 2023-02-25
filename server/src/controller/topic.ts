@@ -19,6 +19,7 @@ export const setTopics = async (req: Request, res: Response) => {
     console.log('user', user);
 
     const { topics } = req.body;
+    console.log('topics', topics);
 
     const topicsSaved = await prisma.user.update({
       where: {
