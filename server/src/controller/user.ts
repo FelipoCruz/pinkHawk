@@ -35,7 +35,6 @@ export const createUser = async (req: Request, res: Response) => {
   try {
     const hash = await bcrypt.hash(req.body.password, 10);
     const newUser: IUser = await prisma.user.create({
-    const newUser: IUser = await prisma.user.create({
       data: {
         ...req.body,
         password: hash,
@@ -72,9 +71,6 @@ export const signInUser = async (req: Request, res: Response) => {
     if (!isPasswordValid) {
       return res.status(400).send('Invalid email or password');
     }
-
-    const foundUser: IUser = user;
-    foundUser.password = undefined;
 
     const foundUser: IUser = user;
     foundUser.password = undefined;
@@ -162,22 +158,6 @@ export const updateUserDetails = async (req: Request, res: Response) => {
 
 export const signOutUser = (req: Request, res: Response) => {
   res.status(200).json({ status: 'success' });
-};
-
-export const getUserFollowers = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-
-    const data = await prisma.growthData.findMany({
-      where: {
-        userId: Number(id),
-      },
-      select: { followers: true, date: true, likes: true, comments: true },
-    });
-    res.status(200).json(data);
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 export const getUserFollowers = async (req: Request, res: Response) => {
