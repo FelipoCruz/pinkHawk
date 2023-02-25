@@ -215,15 +215,3 @@ export const getGrowth = async (userId) => {
     console.log(err);
   }
 };
-
-export const getGrowth = async (userId) => {
-  try {
-    const response = await fetchWrapper(
-      'GET',
-      `${BASE_URL}user/${userId}/growth`
-    );
-    return response.json();
-  } catch (err) {
-    console.log(err);
-  }
-};
