@@ -1,9 +1,5 @@
 import { fetchWrapper } from './fetch-wrapper.js';
 
-/* import dotenv from 'dotenv';
-
-dotenv.config(); test */
-
 const envTest = process.env.TEST;
 console.log('envTest is: ', envTest);
 
@@ -37,7 +33,6 @@ export const login = async (email, password) => {
   // } catch (err) {
   //   console.log(err);
   // }
-
   try {
     const url = BASE_URL + 'user/signin';
     const response = await fetch(url, {
@@ -65,9 +60,9 @@ export const logout = async (id) => {
 export const saveTopics = async (topics, userId) => {
   try {
     const response = await fetchWrapper(
-      'PUT',
+      'POST',
       `${BASE_URL}user/${userId}/topics`,
-      { topics }
+      topics
     );
     return response.json();
   } catch (err) {
@@ -202,6 +197,18 @@ export const getMostRecentQueuedTweet = async (userId) => {
     const response = await fetchWrapper(
       'GET',
       `${BASE_URL}user/${userId}/next-recent-queued-tweet`
+    );
+    return response.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getGrowth = async (userId) => {
+  try {
+    const response = await fetchWrapper(
+      'GET',
+      `${BASE_URL}user/${userId}/growth`
     );
     return response.json();
   } catch (err) {

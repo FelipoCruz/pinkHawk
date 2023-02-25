@@ -10,12 +10,12 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 const port = process.env.SERVER_PORT || 5000;
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(router);
 // job();
-//job1();
+job1();
 
 app.listen(port, () =>
   console.log(`
