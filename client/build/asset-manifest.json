@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.36ed74cf.css",
-    "main.js": "/static/js/main.a5fc15bc.js",
+    "main.js": "/static/js/main.10b991f0.js",
     "static/media/signup.png": "/static/media/signup.263b901df1a60a84040a.png",
     "static/media/arrow-up-up.gif": "/static/media/arrow-up-up.7345ef78a8f45d4e0c9a.gif",
     "static/media/person.jpeg": "/static/media/person.893b7a53a7496f1126e6.jpeg",
@@ -9,10 +9,10 @@
     "static/media/pinkhawklogo.svg": "/static/media/pinkhawklogo.376302bbde85f046fd9049bb9ee09514.svg",
     "index.html": "/index.html",
     "main.36ed74cf.css.map": "/static/css/main.36ed74cf.css.map",
-    "main.a5fc15bc.js.map": "/static/js/main.a5fc15bc.js.map"
+    "main.10b991f0.js.map": "/static/js/main.10b991f0.js.map"
   },
   "entrypoints": [
     "static/css/main.36ed74cf.css",
-    "static/js/main.a5fc15bc.js"
+    "static/js/main.10b991f0.js"
   ]
 }

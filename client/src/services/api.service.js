@@ -60,7 +60,7 @@ export const logout = async (id) => {
 export const saveTopics = async (topics, userId) => {
   try {
     const response = await fetchWrapper(
-      'POST',
+      'PUT',
       `${BASE_URL}user/${userId}/topics`,
       topics
     );
