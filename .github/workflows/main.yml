@@ -24,7 +24,7 @@ jobs:
             cd server
             npm install
             echo 'Apply migration'
-            npx prisma migrate deploy
+            npx prisma migrate dev
             pm2 start npm -- start
             echo 'Server Deployment Done'
             echo 'Client Deployment Started'
