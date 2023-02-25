@@ -8,7 +8,7 @@
 $ git checkout -b ＜new-branch-name＞
 ```
 
-Here we can create a new branch from an already existing branch, first we set the name of the new branch, then we add the name of the branch that we want to branch off.
+Here we can create a new branch from an already existing branch, first we set the name of the new branch, then we add the name of the branch that we want to branch off .
 
 ```bash
 $ git checkout -b <10*name-of-new-branch> <101-development>
