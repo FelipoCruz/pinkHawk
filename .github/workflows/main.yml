@@ -17,11 +17,18 @@ jobs:
             echo 'Deployment Started'
             pm2 start npm -- start
             pm2 delete all
-            cd pinkHawk/server
-            echo 'Git Pull'
+            echo 'Pull from github'
+            cd pinkHawk
             git pull origin main
+            echo 'Server Deployment Started'
+            cd server
             npm install
             echo 'Apply migration'
             npx prisma migrate
             pm2 start npm -- start
-            echo 'Deployment Done'
+            echo 'Server Deployment Done'
+            echo 'Client Deployment Started'
+            cd ../client
+            npm run build
+            cp -r ./build/* /var/www/pinkhawk.xyz/html
+            echo 'Client Deployment Done'
