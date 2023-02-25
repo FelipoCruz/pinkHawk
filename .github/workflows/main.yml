@@ -29,6 +29,7 @@ jobs:
             echo 'Server Deployment Done'
             echo 'Client Deployment Started'
             cd ../client
+            npm install
             npm run build
             cp -r ./build/* /var/www/pinkhawk.xyz/html
             echo 'Client Deployment Done'
