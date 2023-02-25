@@ -80,7 +80,6 @@ export const signInUser = async (req: Request, res: Response) => {
     console.log('accessToken: ', accessToken);
 
     res.status(200).json(foundUser);
-    res.status(200).json(foundUser);
   } catch (error) {
     console.log('error in CreateUser:' + error);
     res.status(500).json('server problem');
