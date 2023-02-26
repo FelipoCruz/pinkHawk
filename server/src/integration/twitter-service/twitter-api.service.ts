@@ -67,7 +67,6 @@ function job1() {
           where: {
             twitterToken: { not: null },
             twitterSecret: { not: null },
-            email: 'jaafarfora@gmail.com',
           },
           select: {
             id: true,
@@ -113,7 +112,7 @@ function job1() {
             }
             console.log('totalLikes is: ', totalLikes);
 
-            await prisma.growthData.create({
+            const newGrowthData = await prisma.growthData.create({
               data: {
                 userId: user.id,
                 followers: followersCount,
@@ -122,6 +121,7 @@ function job1() {
                 date: new Date(),
               },
             });
+            console.log('newGrowthData is: ', newGrowthData);
           } catch (error) {
             console.log('error in the CronJob. The error is:', error);
             continue; //go to the next user
