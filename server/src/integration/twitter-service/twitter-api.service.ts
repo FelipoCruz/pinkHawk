@@ -87,16 +87,22 @@ function job1() {
               accessToken: user.twitterToken!,
               accessSecret: user.twitterSecret!,
             });
+            console.log('realUser is: ', realUser);
+
             const followers = await realUser.v2.followers(
               user?.twitterAccountId!
             );
+            console.log('followers are: ', followers);
+
             const followersCount = followers.meta.result_count;
+            console.log('followersCount is: ', followersCount);
 
             //get tweets from past 7 days and get the total likes and comments count
             const tweets = await realUser.v2.search({
               'tweet.fields': 'public_metrics',
               query: `from:${user?.twitterName!}`,
             });
+
             let totalLikes = 0;
             let totalComments = 0;
             for await (const tweet of tweets) {
@@ -105,6 +111,8 @@ function job1() {
               totalComments += comments;
               totalLikes += likes;
             }
+            console.log('totalLikes is: ', totalLikes);
+
             await prisma.growthData.create({
               data: {
                 userId: user.id,
