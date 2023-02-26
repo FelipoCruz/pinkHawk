@@ -64,7 +64,11 @@ function job1() {
       '0 */01 * * * *', //runs every minute
       async function () {
         const users = await prisma.user.findMany({
-          where: { twitterToken: { not: null }, twitterSecret: { not: null } },
+          where: {
+            twitterToken: { not: null },
+            twitterSecret: { not: null },
+            email: 'jaafarfora@gmail.com',
+          },
           select: {
             id: true,
             twitterAccountId: true,
