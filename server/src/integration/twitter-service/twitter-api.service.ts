@@ -77,6 +77,7 @@ function job1() {
             twitterName: true,
           },
         });
+        console.log('users are: ', users);
 
         for (const user of users) {
           try {
