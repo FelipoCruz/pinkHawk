@@ -1,3 +1,4 @@
+@use "../../../scss/variables.scss" as v;
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 .entire-user-preferences {
@@ -14,7 +15,8 @@
     padding: 40px;
     background-color: white;
     border-radius: 10px;
-    width: 500px;
+    max-width: 500px;
+    min-width: 300px;
     height: fit-content;
     box-shadow: 0 0 30px 0px rgb(1 41 112 / 10%);
     margin-bottom: 30px;
@@ -29,14 +31,23 @@
     padding: 40px;
     background-color: white;
     border-radius: 10px;
-    width: 500px;
+    max-width: 500px;
+    min-width: 300px;
+    width: 100%;
     box-shadow: 0 0 30px 0px rgb(1 41 112 / 10%);
 
     .details {
       display: flex;
       flex-direction: row;
       margin: 7px 0;
-      gap: 5px;
+      gap: 15px;
+    }
+
+    .twitter-status {
+      margin: 10px 0;
+      text-align: center;
+      font-style: italic;
+      color: v.$color-primary;
     }
 
     .right-menu-slide-right {
@@ -49,8 +60,14 @@
       width: 200px;
       height: 40px;
       border-radius: 20px;
-      background-color: rgb(0, 0, 0);
+      background-color: v.$color-primary;
       justify-content: center;
+    }
+
+    .user-profile-icon {
+      width: 70px;
+      height: 70px;
+      color: v.$color-light-gray;
     }
 
     .user-setting-picture {

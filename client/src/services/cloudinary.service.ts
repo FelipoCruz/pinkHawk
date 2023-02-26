@@ -1,6 +1,6 @@
 import { fetchWrapper } from './fetch-wrapper';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+const BASE_URL = process.env.SERVER_URL;
 const CLOUDINARY = process.env.REACT_APP_CLOUDINARY_URL;
 const CLOUDINARY_CLOUD = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
 

@@ -1,4 +1,3 @@
-import { log } from 'console';
 import React, { useEffect, useState } from 'react';
 import { TagsInput } from 'react-tag-input-component';
 import {
@@ -9,6 +8,7 @@ import {
 import { activeUser } from '../../../store/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import './topics-input.scss';
+import { RiTwitterLine } from 'react-icons/ri';
 
 const TopicsInput = () => {
   const dispatch = useAppDispatch();
@@ -33,7 +33,7 @@ const TopicsInput = () => {
       );
       return;
     } else {
-      log('selectedTopics', selectedTopics);
+      console.log('selectedTopics', selectedTopics);
       const savingTopics = await saveTopics(selectedTopics, user.id);
       if (savingTopics) {
         dispatch(activeUser(savingTopics));
@@ -88,7 +88,7 @@ const TopicsInput = () => {
       const res = await getAuthUrl(user.id);
       window.location.href = res.url;
     } catch (error) {
-      console.log('error in handleClick in fetAuthUul', error);
+      // console.log('error in handleClick in fetAuthUul', error);
     }
   };
 
@@ -108,6 +108,7 @@ const TopicsInput = () => {
               <em className="prim-color">{'Not connected'}</em>
               <div className="btn-container">
                 <button onClick={handleClick} className="connect-btn">
+                  <RiTwitterLine />
                   Connect
                 </button>
               </div>

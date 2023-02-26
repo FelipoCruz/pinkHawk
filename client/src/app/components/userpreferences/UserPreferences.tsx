@@ -1,4 +1,3 @@
-
 // import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/hooks';
@@ -19,27 +18,36 @@ const UserPreferences = () => {
   // }, [backgroundColor]);
 
   return (
-    <div className='entire-user-preferences'>
-      <div className='container-user-settings'>
+    <div className="entire-user-preferences">
+      <div className="container-user-settings">
         <h1>User Details</h1>
-        <div className='details'>
-          <span>{user.firstName}</span>
-          <span>{user.lastName}</span>
+        <div className="details">
+          <label htmlFor="fullname">Name: </label>
+          <div id="fullname">
+            {user.firstName} {user.lastName}
+          </div>
         </div>
-        <span>{user.email}</span>
-        <span>{user.twitterToken ? 'Connected to Twitter' : ''}</span>
-        <button className='right-menu-slide-right' >
+        <div className="details">
+          <label htmlFor="email">Email: </label>
+          <div id="email">{user.email}</div>
+        </div>
+        <div className="twitter-status">
+          {user.twitterToken
+            ? 'Connected to Twitter'
+            : 'Not Connected to Twitter!'}
+        </div>
+        <button className="right-menu-slide-right">
           <RightMenuButton />
         </button>
-        <div className='current-user-settings' onClick={handleClickNavigate}>
-          <label className='current-preferences-user' htmlFor='user-name'>
+        <div className="current-user-settings" onClick={handleClickNavigate}>
+          <label className="current-preferences-user" htmlFor="user-name">
             Current Preferences
           </label>
-          <div className='frequency-tweet-posting'>
+          <div className="frequency-tweet-posting">
             <p>Daily posting frequency:</p>
             {user.frequencyTweetPosting}
           </div>
-          <div className='selected-hours'>
+          <div className="selected-hours">
             <p>Posting hours:</p>
             {user.postingHours.map((hour: number) => (
               <p key={hour}>{hour < 10 ? `0${hour}:00 h` : `${hour}:00 h`}</p>
@@ -47,7 +55,7 @@ const UserPreferences = () => {
           </div>
         </div>
       </div>
-      <div className='user-details'>
+      <div className="user-details">
         <UserDetails />
       </div>
     </div>

@@ -107,5 +107,5 @@ export const getAccessToken = async (req: Request, res: Response) => {
       date: new Date(),
     },
   });
-  res.redirect('http://localhost:3000/dashboard/user-preferences');
+  res.redirect(process.env.FRONT_END_URL + '/dashboard/user-preferences');
 };

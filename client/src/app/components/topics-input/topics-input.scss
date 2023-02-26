@@ -153,6 +153,7 @@ label {
     align-items: center;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
 
   .topics-input-container {
@@ -282,4 +283,14 @@ label {
   color: white;
   border-radius: 10px;
   font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    margin-right: 10px;
+    color: white;
+    width: 25px;
+    height: 25px;
+  }
 }

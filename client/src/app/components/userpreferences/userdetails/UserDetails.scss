@@ -1,3 +1,5 @@
+@use "../../../../scss/variables.scss" as v;
+
 .change-user-password-form {
   display: flex;
   justify-content: center;
@@ -81,5 +83,16 @@
     margin-bottom: 25px;
     height: 29px;
     width: 100%;
+  }
+
+  .submit-button-user-preferences {
+    margin-top: 30px;
+    margin-bottom: 35px;
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: v.$color-primary;
+    color: white;
+    font-weight: 600;
   }
 }

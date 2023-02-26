@@ -33,7 +33,8 @@
     "uuid": "^9.0.0"
   },
   "scripts": {
-    "start": "env-cmd -f .env.production react-scripts start",
+    "start": "react-scripts start",
+    "start-production": "env-cmd -f .env.production react-scripts start",
     "build": "env-cmd -f .env.production react-scripts build",
     "deploy-production": "react-scripts build && scp -r ./build/* root@159.89.13.196:/var/www/pinkhawk.xyz/html",
     "test": "react-scripts test",
