@@ -95,7 +95,7 @@ const Login = () => {
       </div>
       <div className="graphic">
         <p>@ PinkHawk</p>
-        <h1>WELCOME BACK</h1>
+        <h1>WELCOME BACK!</h1>
         {/* <img src={loginImg} alt="login-img" className="login-img" /> */}
       </div>
     </div>
