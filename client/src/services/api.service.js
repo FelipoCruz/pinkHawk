@@ -5,7 +5,7 @@ console.log('envTest is: ', envTest);
 
 console.log('Server url', process.env.REACT_APP_SERVER_URL);
 
-const BASE_URL = process.env.REACT_APP_SERVER_URL || 'https://api.pinkhawk.xyz/';
+const BASE_URL = process.env.REACT_APP_SERVER_URL;
 console.log('server and / base url is: ' + BASE_URL);
 
 export const register = async (firstname, lastname, email, password) => {
